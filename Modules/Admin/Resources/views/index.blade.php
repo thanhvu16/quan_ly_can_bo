@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="col-md-6">
                     <div class="row">
-                        <form action="{{route('tim-kiem-van-ban-den-full.index')}}" method="get">
+                        <form action="" method="get">
                         <div class="col-md-8">
                             <label for="tu_khoa" class="col-form-label">Tìm kiếm văn bản đến </label>
                             <input type="text" value="{{Request::get('tu_khoa')}}"

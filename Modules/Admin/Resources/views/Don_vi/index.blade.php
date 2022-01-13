@@ -19,17 +19,17 @@
                                            placeholder="Tên đơn vị" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nhóm đơn vị</label>
-                                    <select class="form-control select2" name="nhom_don_vi">
-                                        @foreach($nhom_don_vi as $data)
-                                        <option value="{{$data->id}}">{{$data->ten_nhom_don_vi}}</option>
-                                        @endforeach
-                                    </select>
+{{--                            <div class="col-md-3">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">Nhóm đơn vị</label>--}}
+{{--                                    <select class="form-control select2" name="nhom_don_vi">--}}
+{{--                                        @foreach($nhom_don_vi as $data)--}}
+{{--                                        <option value="{{$data->id}}">{{$data->ten_nhom_don_vi}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
 
-                                </div>
-                            </div>
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail2">Tên viết tắt</label>
@@ -65,31 +65,9 @@
                                            placeholder="Email" >
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label >Điều hành</label>
-                                    <div class="form-group">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="dieu_hanh" id="optionsRadios1" value="1">
-                                                Có
-                                            </label> &emsp;
-                                            <label>
-                                                <input type="radio" name="dieu_hanh" id="optionsRadios2"
-                                                       value="0" checked="">
-                                                Không
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="clearfix"></div>
-                            <div class="col-md-3">
-                                <label>
-                                    <input type="checkbox" name="cap_xa" value="1">
-                                    Cấp chi cục / Trung tâm
-                                </label> &emsp;
-                            </div>
+
 {{--                            <div class="col-md-3">--}}
 {{--                                <div class="form-group">--}}
 {{--                                    <label >Có phòng ban trong đơn vị</label>--}}

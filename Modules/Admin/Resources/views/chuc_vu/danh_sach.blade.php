@@ -8,14 +8,14 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách chức vụ</h3>
+                        <h3 class="box-title">Danh sách hình thức chức vụ</h3>
                     </div>
                     <div class="col-md-3 form-group mt-4">
                         <button type="button" class="btn btn-sm btn-info waves-effect waves-light mb-1"
                                 data-toggle="collapse"
                                 href="#collapseExample"
                                 aria-expanded="false" aria-controls="collapseExample">
-                            THÊM CHỨC VỤ</button>
+                            THÊM HÌNH THỨC CHỨC VỤ</button>
                     </div>
 
                     <!-- /.box-header -->
@@ -34,7 +34,7 @@
                             <form action="{{route('danhsachchucvu')}}" method="get">
 
                                 <div class="col-md-3 form-group">
-                                    <label for="exampleInputEmail1">Tìm theo tên đơn vị</label>
+                                    <label for="exampleInputEmail1">Tìm theo tên chức vụ</label>
                                     <input type="text" class="form-control" value="{{Request::get('ten_chuc_vu')}}"
                                            name="ten_chuc_vu"
                                            placeholder="Tên chức vụ">
@@ -59,7 +59,7 @@
                             <tr>
                                 <th width="5%" class="text-center">STT</th>
                                 <th width="" class="text-center">Tên chức vụ</th>
-                                <th width="15%" class="text-center">Nhóm đơn vị</th>
+{{--                                <th width="15%" class="text-center">Nhóm đơn vị</th>--}}
                                 <th width="20%" class="text-center">Tên viết tắt</th>
                                 <th width="10%" class="text-center">Trạng thái</th>
                                 <th width="10%" class="text-center">Tác Vụ</th>
@@ -70,14 +70,14 @@
                                 <tr>
                                     <td class="text-center" style="vertical-align: middle">{{$key+1}}</td>
                                     <td class="text-left" style="vertical-align: middle">{{$chucvu->ten_chuc_vu}}</td>
-                                    <td class="text-left" style="vertical-align: middle">
-                                        @if($chucvu->tenNhomDonvi($chucvu->id))
-                                            @foreach($chucvu->tenNhomDonvi($chucvu->id) as $key=>$data)
-                                                - {{tenNhom($data) ?? ''}} <br>
-                                            @endforeach
-                                        @endif
+{{--                                    <td class="text-left" style="vertical-align: middle">--}}
+{{--                                        @if($chucvu->tenNhomDonvi($chucvu->id))--}}
+{{--                                            @foreach($chucvu->tenNhomDonvi($chucvu->id) as $key=>$data)--}}
+{{--                                                - {{tenNhom($data) ?? ''}} <br>--}}
+{{--                                            @endforeach--}}
+{{--                                        @endif--}}
 {{--                                        {{$chucvu->tenNhomDonvi($chucvu->id)}}--}}
-                                    </td>
+{{--                                    </td>--}}
                                     <td class="text-center"
                                         style="vertical-align: middle">{{$chucvu->ten_viet_tat}}</td>
                                     <td class="text-center"

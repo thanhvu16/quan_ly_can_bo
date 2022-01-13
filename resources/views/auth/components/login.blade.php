@@ -75,8 +75,8 @@
             <div class="text-center" style="padding-top: 30px">
                 <img src="{{ asset('theme/image/logo-login-hanoi.svg') }}" style="vertical-align: middle" alt="" height="90">
             </div>
-            <h4 style="font-weight: bold;font-family: Arial;"  class="text-center text-uppercase">{{ TITLE_APP }}</h4>
-            <h5 style="font-weight: bold ;font-family: Arial; " >HỆ THỐNG VĂN PHÒNG ĐIỆN TỬ</h5>
+            <h4 style="font-weight: bold;font-family: Arial;"  class="text-center text-uppercase">BAN THƯỜNG VỤ THÀNH ỦY</h4>
+            <h5 style="font-weight: bold ;font-family: Arial; " >HỆ THỐNG QUẢN LÝ HỒ SƠ</h5>
         </a>
     </div>
     <!-- /.login-logo -->

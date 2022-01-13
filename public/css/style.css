@@ -380,7 +380,7 @@ img.brand-logo {
     font-size: 13px !important;
 }
 
- @media (max-width: 425px) {
+@media (max-width: 425px) {
     .logo-customize {
         display: none;
     }
@@ -521,7 +521,7 @@ a.them-van-ban-den:hover {
     position: absolute;
     display: inline-block;
     left: 5px; //changed from right:15
-    margin-top: 5px;
+margin-top: 5px;
 }
 
 a.color-black:hover {

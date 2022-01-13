@@ -10,12 +10,6 @@
                         <i class="fa fa-tasks"></i> Danh sách
                     </a>
                 </li>
-                @can('thêm người dùng')
-                    <li class="{{ Request::get('tab') == 'tab_2' ? 'active' : null }}">
-                        <a href="{{ route('don-vi.create') }}">
-                            <i class="fa fa-plus"></i> Thêm đơn vị trực thuộc đơn vị</a>
-                    </li>
-                @endcan
             </ul>
             <div class="tab-content">
                 <div
@@ -30,7 +24,7 @@
                                         href="#collapseExample"
                                         aria-expanded="false" aria-controls="collapseExample">
                                     <i class="fa fa-plus"></i>
-                                    THÊM ĐƠN VỊ
+                                    THÊM ĐƠN VỊ HÀNH CHÍNH
                                 </button>
                             </div>
                             <div class="col-md-12">
@@ -81,8 +75,8 @@
                                     <tr>
                                         <th width="5%" class="text-center">STT</th>
                                         <th width="" class="text-center">Tên đơn vị</th>
-                                        <th width="18%" class="text-center">Nhóm đơn vị</th>
-                                        <th width="10%" class="text-center">Đơn vị chủ quản</th>
+{{--                                        <th width="18%" class="text-center">Nhóm đơn vị</th>--}}
+{{--                                        <th width="10%" class="text-center">Đơn vị chủ quản</th>--}}
                                         <th width="10%" class="text-center">Mã hành chính</th>
                                         <th width="10%" class="text-center">Địa chỉ</th>
                                         <th width="10%" class="text-center">Điện thoại</th>
@@ -96,10 +90,10 @@
                                             <td class="text-center" style="vertical-align: middle">{{$key+1}}</td>
                                             <td class="text-left"
                                                 style="vertical-align: middle">{{$donvi->ten_don_vi}}</td>
-                                            <td class="text-left"
-                                                style="vertical-align: middle">{{$donvi->nhomDonVi->ten_nhom_don_vi ?? ''}}</td>
-                                            <td class="text-center"
-                                                style="vertical-align: middle">{{ $donvi->getParent->ten_don_vi ?? null }}</td>
+{{--                                            <td class="text-left"--}}
+{{--                                                style="vertical-align: middle">{{$donvi->nhomDonVi->ten_nhom_don_vi ?? ''}}</td>--}}
+{{--                                            <td class="text-center"--}}
+{{--                                                style="vertical-align: middle">{{ $donvi->getParent->ten_don_vi ?? null }}</td>--}}
                                             <td class="text-center"
                                                 style="vertical-align: middle">{{$donvi->ma_hanh_chinh}}</td>
                                             <td class="text-center"

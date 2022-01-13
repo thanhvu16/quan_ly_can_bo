@@ -8,13 +8,16 @@ use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth, DB;
+use Auth, DB, File;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Modules\Admin\Entities\CauHinh;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\LoaiVanBan;
+use Modules\Admin\Entities\LuuVetDangNhap;
 use Modules\Admin\Entities\SoVanBan;
+use Modules\Admin\Entities\TaiLieuHuongDan;
 use Modules\CongViecDonVi\Entities\ChuyenNhanCongViecDonVi;
 use Modules\CongViecDonVi\Entities\CongViecDonViGiaHan;
 use Modules\CongViecDonVi\Entities\CongViecDonViPhoiHop;
@@ -52,6 +55,76 @@ class AdminController extends Controller
 //            dd($db);
 //            return $db;
 //    }
+    public function vetDangNhap(Request $request)
+    {
+        $ten = $request->get('ten');
+        $taiKhoan = $request->get('tai_khoan');
+        $ngay = $request->get('ngay');
+
+        $duLieu = LuuVetDangNhap::where(function ($query) use ($ten) {
+                if (!empty($ten)) {
+                    return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
+                }
+            })
+            ->where(function ($query) use ($taiKhoan) {
+                if (!empty($taiKhoan)) {
+                    return $query->where(DB::raw('lower(tai_khoan)'), 'LIKE', "%" . mb_strtolower($taiKhoan) . "%");
+                }
+            })
+            ->where(function ($query) use ($ngay) {
+                if (!empty($ngay)) {
+                    return $query->wheredate('created_at',formatYMD($ngay));
+                }
+            })->paginate(PER_PAGE);
+        return view('admin::VetDangNhap',compact('duLieu'));
+    }
+    public function taiLieuHuongDan()
+    {
+        $taiLieu = TaiLieuHuongDan::paginate(PER_PAGE);
+        return view('admin::uploadFile',compact('taiLieu'));
+    }
+    public function cauHinhHeThong()
+    {
+        $cauHinh = CauHinh::first();
+        return view('admin::cauHinh',compact('cauHinh'));
+    }
+    public function postCauHinh(Request $request,$id)
+    {
+
+    }
+    public function xoafile($id)
+    {
+        $taiLieu = TaiLieuHuongDan::where('id',$id)->delete();
+        return redirect()->back()->with('xóa file thành công');
+    }
+    public function postTaiLieuThamKhao(Request $request)
+    {
+        $uploadPath = UPLOAD_FILE_TAI_LIEU;
+        $file = !empty($request['ten_file']) ? $request['ten_file'] : null;
+        if ($file && count($file) > 0) {
+            foreach ($file as $key => $getFile) {
+                $extFile = $getFile->extension();
+                $fileTaiLieu = new TaiLieuHuongDan();
+                $fileName = date('Y_m_d') . '_' . Time() . '_' . $getFile->getClientOriginalName();
+
+                $urlFile = UPLOAD_FILE_TAI_LIEU . '/' . $fileName;
+                if (!File::exists($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true, true);
+                }
+                $getFile->move($uploadPath, $fileName);
+
+                $fileTaiLieu->ten_file = $fileName;
+                $fileTaiLieu->duong_dan = $urlFile;
+                $fileTaiLieu->duoi_file = $extFile;
+                $fileTaiLieu->save();
+
+            }
+
+        }
+
+        return redirect()->back()
+            ->with('success', 'Thêm file thành công !');
+    }
     public function setDB(Request $request)
     {
         if($request->year == 2021)
@@ -68,6 +141,10 @@ class AdminController extends Controller
         }
         return redirect()->back();
 
+    }
+    public function danhMucHeThong(){
+
+        return view('admin::danhMuc');
     }
 
     public function index()

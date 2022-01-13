@@ -21,17 +21,17 @@
                                            placeholder="Tên đơn vị" required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail2">Nhóm đơn vị</label>
-                                    <select class="form-control select2" name="nhom_don_vi">
-                                        @foreach($nhom_don_vi as $data)
-                                            <option value="{{$data->id}}"  {{$donvi && $data->id == $donvi->nhom_don_vi ? 'selected' : ''}}>{{$data->ten_nhom_don_vi}}</option>
-                                        @endforeach
-                                    </select>
+{{--                            <div class="col-md-3">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail2">Nhóm đơn vị</label>--}}
+{{--                                    <select class="form-control select2" name="nhom_don_vi">--}}
+{{--                                        @foreach($nhom_don_vi as $data)--}}
+{{--                                            <option value="{{$data->id}}"  {{$donvi && $data->id == $donvi->nhom_don_vi ? 'selected' : ''}}>{{$data->ten_nhom_don_vi}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
 
-                                </div>
-                            </div>
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Tên viết tắt</label>
@@ -72,34 +72,34 @@
                                            placeholder="Email" >
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail4">Điều hành</label>
-                                    <div class="form-group">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="dieu_hanh" id="optionsRadios1"
-                                                       {{isset($donvi) && $donvi->dieu_hanh ==1 ? 'checked':''}} value="1"
-                                                       checked="">
-                                                Có
-                                            </label> &emsp;
-                                            <label>
-                                                <input type="radio" name="dieu_hanh"
-                                                       {{isset($donvi) && $donvi->dieu_hanh == 0 ? 'checked':''}} id="optionsRadios2"
-                                                       value="0">
-                                                Không
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="col-md-3">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail4">Điều hành</label>--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <div class="radio">--}}
+{{--                                            <label>--}}
+{{--                                                <input type="radio" name="dieu_hanh" id="optionsRadios1"--}}
+{{--                                                       {{isset($donvi) && $donvi->dieu_hanh ==1 ? 'checked':''}} value="1"--}}
+{{--                                                       checked="">--}}
+{{--                                                Có--}}
+{{--                                            </label> &emsp;--}}
+{{--                                            <label>--}}
+{{--                                                <input type="radio" name="dieu_hanh"--}}
+{{--                                                       {{isset($donvi) && $donvi->dieu_hanh == 0 ? 'checked':''}} id="optionsRadios2"--}}
+{{--                                                       value="0">--}}
+{{--                                                Không--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="clearfix"></div>
-                            <div class="col-md-3">
-                                <label>
-                                    <input type="checkbox" name="cap_xa" value="1" {{ isset($donvi) && $donvi->cap_xa == 1 ? "checked" : null }}>
-                                   Cấp chi cục / Trung tâm
-                                </label> &emsp;
-                            </div>
+{{--                            <div class="col-md-3">--}}
+{{--                                <label>--}}
+{{--                                    <input type="checkbox" name="cap_xa" value="1" {{ isset($donvi) && $donvi->cap_xa == 1 ? "checked" : null }}>--}}
+{{--                                   Cấp chi cục / Trung tâm--}}
+{{--                                </label> &emsp;--}}
+{{--                            </div>--}}
 
 {{--                            <div class="col-md-3">--}}
 {{--                                <div class="form-group">--}}

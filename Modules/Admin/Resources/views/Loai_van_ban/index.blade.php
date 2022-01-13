@@ -14,9 +14,9 @@
                         <div class="box-body">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Tên loai văn bản</label>
+                                    <label for="exampleInputEmail1">Tên loai văn bằng</label>
                                     <input type="text" class="form-control" name="ten_loai_van_ban" id="exampleInputEmail1"
-                                           placeholder="Tên loại văn bản" required>
+                                           placeholder="Tên loại văn bằng" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -33,67 +33,8 @@
                                            placeholder="Mô tả" >
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Loại văn bản</label>
-                                    <select name="loai_so" class="form-control lay-so" required>
-                                        <option value="">Chọn loại văn bản</option>
-                                        <option value="1">Áp dụng cho vb đến</option>
-                                        <option value="2">Áp dụng cho vb đi</option>
-                                        <option value="3">Dùng chung</option>
-                                        <option value="4">Dùng riêng</option>
-                                    </select>
 
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group hidden don-vi">
-                                    <label>Đơn vị riêng</label>
-                                    <select name="don_vi" class="form-control ">
-                                        @foreach($donvi as $ds_dv)
-                                            <option value="{{$ds_dv->id}}">{{$ds_dv->ten_don_vi}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row clearfix"></div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Năm trước SKH</label>
-                                    <select name="nam_truoc_skh" class="form-control" required>
-                                        <option value="1">Có</option>
-                                        <option value="2">Không</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Mã VB trong SKH</label>
-                                    <select name="ma_van_ban" class="form-control" required>
-                                        <option value="1">Có</option>
-                                        <option value="2">Không</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Mã PB trong SKH</label>
-                                    <select name="ma_phong_ban" class="form-control" required>
-                                        <option value="1">Có</option>
-                                        <option value="2">Không</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Mã ĐV trong SKH</label>
-                                    <select name="ma_don_vi" class="form-control" required>
-                                        <option value="1">Có</option>
-                                        <option value="2">Không</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-right">
+                            <div class="col-md-2 ">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Thêm mới</button>
                                 </div>
