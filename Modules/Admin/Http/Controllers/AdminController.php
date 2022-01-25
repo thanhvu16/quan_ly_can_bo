@@ -90,7 +90,21 @@ class AdminController extends Controller
     }
     public function postCauHinh(Request $request,$id)
     {
-
+        $cauHinh = CauHinh::first();
+        $cauHinh->ten_don_vi = $request->ten_don_vi;
+        $cauHinh->dia_chi = $request->dia_chi;
+        $cauHinh->dien_thoai = $request->dien_thoai;
+        $cauHinh->Fax = $request->Fax;
+        $cauHinh->thu_dien_tu = $request->thu_dien_tu;
+        $cauHinh->mat_khau_dien_tu = $request->mat_khau_dien_tu;
+        $cauHinh->host = $request->host;
+        $cauHinh->port_smtp = $request->port_smtp;
+        $cauHinh->port_pop3 = $request->port_pop3;
+        $cauHinh->bao_mat = $request->bao_mat;
+        $cauHinh->licht7 = $request->licht7;
+        $cauHinh->lichcn = $request->lichcn;
+        $cauHinh->save();
+        return redirect()->back()->with('cập nhật thành công');
     }
     public function xoafile($id)
     {

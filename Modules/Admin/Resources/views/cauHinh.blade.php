@@ -116,22 +116,22 @@
                                 </label>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="col-form-label" for="gioi_tinh">Lịch chủ nhật</label>
+                                <label class="col-form-label" for="lichcn">Lịch chủ nhật</label>
                                 <br>
                                 <label>
-                                    <input type="radio" name="licht7" class="flat-red" value="1"
+                                    <input type="radio" name="lichcn" class="flat-red" value="1"
                                            {{ isset($cauHinh) && $cauHinh->lichcn == 1 ? 'checked' : '' }}
                                            checked> Làm cả ngày
                                 </label>
                                 &nbsp;
                                 <label>
-                                    <input type="radio" name="licht7" class="flat-red"
+                                    <input type="radio" name="lichcn" class="flat-red"
                                            value="2"
                                         {{ isset($cauHinh) && $cauHinh->lichcn == 2 ? 'checked' : '' }}
                                     > Làm nửa ngày
                                 </label>
                                 <label>
-                                    <input type="radio" name="licht7" class="flat-red"
+                                    <input type="radio" name="lichcn" class="flat-red"
                                            value="3"
                                         {{ isset($cauHinh) && $cauHinh->lichcn == 3 ? 'checked' : '' }}
                                     > Nghỉ

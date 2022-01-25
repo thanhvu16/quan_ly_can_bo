@@ -13,6 +13,7 @@ use Modules\Admin\Entities\ChucVu;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\NhomDonVi;
 use Modules\Admin\Entities\NhomDonVi_chucVu;
+use Modules\Admin\Entities\ToChuc;
 use Modules\VanBanDen\Entities\VanBanDenDonVi;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -36,7 +37,7 @@ class NguoiDungController extends Controller
         $phonBanId = $request->get('phong_ban_id') ?? null;
 
         if ($donViId) {
-            $danhSachPhongBan = DonVi::where('parent_id', $donViId)->whereNull('deleted_at')->get();
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->get();
         }
 
         $users = User::with(['chucVu' => function ($query) {
@@ -91,10 +92,9 @@ class NguoiDungController extends Controller
             ->whereNull('deleted_at')
             ->orderBy('ten_chuc_vu', 'asc')
             ->get();
-        $danhSachDonVi = DonVi::select('id', 'ten_don_vi')
+        $danhSachDonVi = ToChuc::select('id', 'ten_don_vi')
             ->where('parent_id', DonVi::NO_PARENT_ID)
             ->orderBy('ten_don_vi', 'asc')
-            ->whereNull('deleted_at')
             ->get();
 
         $viTriUuTien = User::max('uu_tien');
@@ -113,7 +113,7 @@ class NguoiDungController extends Controller
 
         $roles = Role::all();
         $danhSachChucVu = ChucVu::orderBy('ten_chuc_vu', 'asc')->whereNull('deleted_at')->get();
-        $danhSachDonVi = DonVi::orderBy('ten_don_vi', 'asc')->whereNull('deleted_at')->get();
+        $danhSachDonVi = ToChuc::orderBy('ten_don_vi', 'asc')->get();
 
         $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
 
@@ -184,7 +184,7 @@ class NguoiDungController extends Controller
 
 
         $user = new User();
-        $donVi = DonVi::where('id', $data['don_vi_id'])->whereNull('deleted_at')->first();
+        $donVi = ToChuc::where('id', $data['don_vi_id'])->first();
         if ($donVi) {
             $data['cap_xa'] = $donVi->cap_xa ?? null;
         }
@@ -227,7 +227,7 @@ class NguoiDungController extends Controller
             $donViId = $user->donVi->parent_id;
         }
 
-        $donVi = DonVi::findOrFail($donViId);
+        $donVi = ToChuc::findOrFail($donViId);
 
         return view('admin::Don_vi.cau_hinh_email', compact('donVi'));
     }
@@ -247,7 +247,7 @@ class NguoiDungController extends Controller
             $donViId = $user->donVi->parent_id;
         }
 
-        $donVi = DonVi::findOrFail($donViId);
+        $donVi = ToChuc::findOrFail($donViId);
         if ($donVi) {
             $donVi->email = $request->email;
             if ($request->update_password) {
@@ -296,12 +296,12 @@ class NguoiDungController extends Controller
 
         $roles = Role::all();
         $danhSachChucVu = ChucVu::select('id', 'ten_chuc_vu')->get();
-        $danhSachDonVi = DonVi::select('id', 'ten_don_vi')->get();
+        $danhSachDonVi = ToChuc::select('id', 'ten_don_vi')->get();
         $viTriUuTien = User::max('uu_tien');
 
         $danhSachPhongBan = null;
         if (isset($donVi) && $donVi->parent_id != 0) {
-            $danhSachPhongBan = DonVi::where('parent_id', $donVi->parent_id)->select('id', 'ten_don_vi')->get();
+            $danhSachPhongBan = ToChuc::where('parent_id', $donVi->parent_id)->select('id', 'ten_don_vi')->get();
         }
 
         $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
@@ -362,7 +362,7 @@ class NguoiDungController extends Controller
             $data['chu_ky_nhay'] = $url;
         }
 
-        $donVi = DonVi::where('id', $data['don_vi_id'])->whereNull('deleted_at')->first();
+        $donVi = ToChuc::where('id', $data['don_vi_id'])->whereNull('deleted_at')->first();
         if ($donVi) {
             $data['cap_xa'] = $donVi->cap_xa ?? null;
         }
@@ -441,14 +441,14 @@ class NguoiDungController extends Controller
             }
         } else {
             $ds_chucvu = [];
-            $don_vi = DonVi::where('id', $id)->first();
+            $don_vi = ToChuc::where('id', $id)->first();
             $nhom_don_vi = $don_vi->nhom_don_vi;
             $lay_chuc_vu = NhomDonVi_chucVu::where('id_nhom_don_vi', $nhom_don_vi)->get();
             foreach ($lay_chuc_vu as $data) {
                 $chucvu = ChucVu::where('id', $data->id_chuc_vu)->first();
                 array_push($ds_chucvu, $chucvu);
             }
-            $phongBan = DonVi::where('parent_id', $id)->select('id', 'ten_don_vi', 'parent_id')->get();
+            $phongBan = ToChuc::where('parent_id', $id)->select('id', 'ten_don_vi', 'parent_id')->get();
 
             if ($request->ajax()) {
                 return response()->json([
@@ -464,7 +464,7 @@ class NguoiDungController extends Controller
     public function getDonVi(Request $request, $id)
     {
         $nhom_don_vi = NhomDonVi::where('id', $id)->first();
-        $lay_don_vi = DonVi::where('nhom_don_vi', $nhom_don_vi->id)->get();
+        $lay_don_vi = ToChuc::where('nhom_don_vi', $nhom_don_vi->id)->get();
 
         if ($request->ajax()) {
             return response()->json([

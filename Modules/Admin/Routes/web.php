@@ -99,6 +99,7 @@ Route::resource('loai-phu-cap', 'LoaiPhuCapController');
 Route::resource('binh-bau-phan-loai-can-bo', 'PhanLoaiCanBoController');
 Route::resource('khen-thuong-ky-luat', 'KhenThuongKyLuatController');
 Route::resource('ly-do-di-nuoc-ngoai', 'LyDoNuocNgoaiController');
+Route::resource('don-vi-to-chuc', 'CoCauToChucController');
 //xóa
 Route::post('cap-to-chuc/delete/{id}', array('as' => 'xoacaptochuc', 'uses' => 'CapToChucController@destroy'));
 Route::post('khoi-co-quan/delete/{id}', array('as' => 'xoakhoicoquan', 'uses' => 'KhoiCoQuanController@destroy'));

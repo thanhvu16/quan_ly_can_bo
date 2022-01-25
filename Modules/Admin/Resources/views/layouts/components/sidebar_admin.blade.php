@@ -1,5 +1,5 @@
 <li class="treeview {{  Route::is('chuc-nang.index')
-|| Route::is('vai-tro.index') || Route::is('ngay-nghi.index') || Route::is('sao-luu-du-lieu.index') || Route::is('nhat-ky-truy-cap.index')
+|| Route::is('vai-tro.index') || Route::is('ngay-nghi.index') || Route::is('don-vi-to-chuc.index') || Route::is('sao-luu-du-lieu.index') || Route::is('nhat-ky-truy-cap.index')
  || Route::is('email-don-vi-ngoai-he-thong.index')|| Route::is('taiLieuHuongDan')|| Route::is('vetDangNhap')|| Route::is('cauHinh') ? 'active menu-open' : '' }} }} ">
 
 
@@ -10,7 +10,7 @@
             </span>
     </a>
     <ul class="treeview-menu">
-{{--        <li class="{{ Route::is('nguoi-dung.index') ? 'active' : '' }}"><a href="{{ route('nguoi-dung.index') }}"><i class="fa fa-circle-o"></i> Người dùng</a></li>--}}
+        <li class="{{ Route::is('don-vi-to-chuc.index') ? 'active' : '' }}"><a href="{{ route('don-vi-to-chuc.index') }}"><i class="fa fa-circle-o"></i> Quản lý đơn vị chính quyền</a></li>
         <li class="{{ Route::is('vai-tro.index') ? 'active' : '' }}"><a href="{{ route('vai-tro.index') }}"><i class="fa fa-circle-o"></i>Quyền hạn</a></li>
         <li class="{{ Route::is('ngay-nghi.index') ? 'active' : '' }}"><a href="{{ route('ngay-nghi.index') }}"><i class="fa fa-circle-o"></i>Ngày nghỉ</a></li>
         <li class="{{ Route::is('cauHinh') ? 'active' : '' }}"><a href="{{ route('cauHinh') }}"><i class="fa fa-circle-o"></i>Cấu hình hệ thống</a></li>
