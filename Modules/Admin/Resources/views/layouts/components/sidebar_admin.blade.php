@@ -76,6 +76,20 @@
         <li class="{{ Route::is('quan-he-gia-dinh.index') ? 'active' : '' }}"><a href="{{ route('quan-he-gia-dinh.index') }}"><i class="fa fa-circle-o"></i>Quan hệ gia đình</a></li>
     </ul>
 </li>
+<li class="treeview {{ Route::is('danh-gia-can-bo.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
+    <a href="#">
+        <i class="fa fa-users"></i> <span>Đánh giá cán bộ</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a
+                href="{{ route('danh-gia-can-bo.index') }}"><i class="fa fa-circle-o"></i>Cá nhân tự đánh giá</a></li>
+        {{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
+        {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
+    </ul>
+</li>
 
 {{--<li class="{{ Route::is('chuc-vu.index') || Route::is('danhsachchucvu') ? 'active' : '' }}  ">--}}
 {{--    <a href="{{route('danhsachchucvu')}}">--}}

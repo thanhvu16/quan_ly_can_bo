@@ -1,0 +1,13 @@
+{
+    "name": "CanBo",
+    "alias": "canbo",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\CanBo\\Providers\\CanBoServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

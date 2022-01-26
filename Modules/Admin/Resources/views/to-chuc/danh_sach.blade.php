@@ -87,6 +87,7 @@
                                         <th width="10%" class="text-center">Địa chỉ</th>
                                         <th width="10%" class="text-center">Điện thoại</th>
                                         <th width="10%" class="text-center">Email</th>
+                                        <th width="10%" class="text-center">Xem</th>
                                         <th width="10%" class="text-center">Tác Vụ</th>
                                     </tr>
                                     </thead>
@@ -108,6 +109,8 @@
                                                 style="vertical-align: middle">{{$donvi->so_dien_thoai}}</td>
                                             <td class="text-center"
                                                 style="vertical-align: middle">{{$donvi->email}}</td>
+                                            <td class="text-center"
+                                                style="vertical-align: middle"><a href="{{route('canBoDs',$donvi->id)}}">Xem chi tiết</a></td>
                                             <td class="text-center">
                                                 <form method="POST" action="{{route('xoadonvi',$donvi->id)}}">
                                                     @csrf

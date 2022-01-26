@@ -12,5 +12,6 @@
     "LichCongTac": true,
     "BaoCaoThongKe": true,
     "TimKiemVanBan": true,
-    "TraCuuVanBanCu": true
+    "TraCuuVanBanCu": true,
+    "CanBo": true
 }
