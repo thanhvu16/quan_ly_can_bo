@@ -119,6 +119,20 @@ class CoCauToChucController extends Controller
 
         return view('admin::to-chuc.edit', compact('donvi','nhom_don_vi', 'donViCapXa'));
     }
+    public function sua($id)
+    {
+        $donvi = ToChuc::where('id', $id)->first();
+        $nhom_don_vi = NhomDonVi::wherenull('deleted_at')->get();
+        $donViCapXa = ToChuc::whereNotNull('cap_xa')->select('id', 'ten_don_vi')->get();
+
+        if ($donvi->parent_id != 0) {
+
+            return view('admin::to-chuc.edit_cap_phong_ban', compact('donvi','nhom_don_vi', 'donViCapXa'));
+
+        }
+
+        return view('admin::to-chuc.edit', compact('donvi','nhom_don_vi', 'donViCapXa'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -159,6 +173,6 @@ class CoCauToChucController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $donvi = ToChuc::where('id', $id)->delete();
     }
 }

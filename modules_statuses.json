@@ -13,5 +13,6 @@
     "BaoCaoThongKe": true,
     "TimKiemVanBan": true,
     "TraCuuVanBanCu": true,
-    "CanBo": true
+    "CanBo": true,
+    "TraCuu": true
 }

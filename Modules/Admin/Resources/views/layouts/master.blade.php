@@ -102,58 +102,23 @@
 
 <script src="{{ url('theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ url('theme/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ url('assets/css/tree-table.css')}}">
+
+<link href="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css" rel="stylesheet">
+<link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/treegrid/bootstrap-table-treegrid.min.js"></script>
+<style>
+    html,* { font-family: 'Open Sans'; }
+    .container { margin: 150px auto; max-width: 1280px; }
+</style>
 {{--<script src=" http://14.177.182.250:10603/sso/js/sso.min.js "></script>--}}
 <script type="text/javascript">
     var APP_URL = {!! json_encode(url('/')) !!}
-    $(document).ready(function(){
-        var host = window.location.host;
-        debugger;
-        if(host == '14.177.182.250:6080')
-        {
 
-            const script = document.createElement("script");
-            script.src = 'http://14.177.182.250:10603/sso/js/sso.min.js';
-            script.type = 'text/javascript';
-            script.addEventListener('load', () => {
-                console.log(`jQuery ${$.fn.jquery} has been loaded successfully!`);
-            });
-            document.head.appendChild(script);
-
-        }else {
-
-            {{--<script src=" http://200.200.200.11/sso/js/sso.min.js "></script>--}}
-            const script = document.createElement("script");
-            script.src = 'http://200.200.200.11/sso/js/sso.min.js';
-            script.type = 'text/javascript';
-            script.addEventListener('load', () => {
-                console.log(`jQuery ${$.fn.jquery} has been loaded successfully!`);
-            });
-            document.head.appendChild(script);
-
-
-        }
-        SSO.isAuthen();
-    })
-
-    function doiMatKhau()
-    {
-        SSO.changePass();
-    }
-
-
-    $("#sso-logout").off('click').on('click', function () {
-        $.ajax({
-            url: APP_URL + '/logout',
-            type:'get',
-            dataType:'json',
-        }).done(function (res){
-            console.log(2);
-            SSO.logout();
-        }).fail(function (error) {
-            console.log(1);
-            SSO.logout();
-        });
-    })
 
     $.ajaxSetup({
         headers: {
@@ -194,7 +159,22 @@
         "hideMethod": "fadeOut"
     }
 </script>
-<script src="{{ url('js/script.js') }}"></script>
+<script>
+
+
+</script>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{ url('assets/css/tree-table.css')}}">
+<script type="text/javascript" src="{{ url('assets/tree-table.js')}}"></script><script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+
+
+</script>
 
 
 @yield('script')

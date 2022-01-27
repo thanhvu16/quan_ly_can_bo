@@ -13,4 +13,5 @@
 
 Route::resource('can-bo', 'CanBoController');
 Route::get('danh-sach-don-vi/{id}', 'CanBoController@canBo')->name('canBoDs');
+Route::get('lay-du-lieu', 'CanBoController@getlistcb')->name('getlistcb');
 Route::get('chi-tiet-can-bo/{id}', 'CanBoController@canBoDetail')->name('canBoDetail');

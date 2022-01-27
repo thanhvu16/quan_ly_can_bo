@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\CanBo;
+use Modules\Admin\Entities\ToChuc;
 
 class CanBoController extends Controller
 {
@@ -20,9 +21,29 @@ class CanBoController extends Controller
 
     public function canBo($id)
     {
-        $danhSach = CanBo::paginate();
+        $danhSach = CanBo::paginate(20);
         return view('canbo::danh-sach-can-bo',compact('danhSach'));
 
+    }
+    public function getlistcb()
+    {
+        $donVi = ToChuc::get();
+        $arayEcabinet = array();
+
+        foreach ($donVi as $key=>$data)
+        {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['STT'] = $key+1;
+            $arayEcabinet[$key]['pid'] = $data->parent_id;
+            $arayEcabinet[$key]['Email'] = $data->email;
+//            $arayEcabinet[$key]['status'] = 1;
+            $arayEcabinet[$key]['name'] ="<b style='color: black'>$data->ten_don_vi</b>";
+            $arayEcabinet[$key]['permissionValue'] = '<a href="danh-sach-don-vi/'.$data->id.'">Xem chi tiết</a>';
+            $arayEcabinet[$key]['tacvu'] = '<a href="sua-don-vi-to-chuc/'.$data->id.'"'.'><i class="'.'fa fa-edit'.'"></i></a> &emsp; <a href="xoa-don-vi-to-chuc/'.$data->id.'"'.'><i style="color: red"class="'.'fa fa-trash'.'"></i></a> ';
+        }
+
+
+        return $arayEcabinet;
     }
     public function canBoDetail($id)
     {

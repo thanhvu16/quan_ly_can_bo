@@ -1,0 +1,13 @@
+{
+    "name": "TraCuu",
+    "alias": "tracuu",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\TraCuu\\Providers\\TraCuuServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -29,6 +29,14 @@
             </span>
     </a>
 </li>
+<li class="{{  Route::is('tra-cuu.index') ? 'active' : '' }} ">
+    <a href="{{route('tra-cuu.index')}}">
+        <i class="fa fa-search" ></i> <span>Tra cứu</span>
+        <span class="pull-right-container">
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+            </span>
+    </a>
+</li>
 {{--<li class="{{ Route::is('danhMucHeThong')  ? 'active' : '' }} ">--}}
 {{--    <a href="{{route('danhMucHeThong')}}">--}}
 {{--        <i class="fa fa-user-plus"></i> <span>Quản lý danh mục hệ thống</span>--}}

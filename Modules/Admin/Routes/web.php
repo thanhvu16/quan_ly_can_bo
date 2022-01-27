@@ -101,6 +101,8 @@ Route::resource('khen-thuong-ky-luat', 'KhenThuongKyLuatController');
 Route::resource('ly-do-di-nuoc-ngoai', 'LyDoNuocNgoaiController');
 Route::resource('don-vi-to-chuc', 'CoCauToChucController');
 //xóa
+Route::get('sua-don-vi-to-chuc/{id}', array('as' => 'suadvtc', 'uses' => 'CoCauToChucController@edit'));
+Route::get('xoa-don-vi-to-chuc/{id}', array('as' => 'suadvtc', 'uses' => 'CoCauToChucController@destroy'));
 Route::post('cap-to-chuc/delete/{id}', array('as' => 'xoacaptochuc', 'uses' => 'CapToChucController@destroy'));
 Route::post('khoi-co-quan/delete/{id}', array('as' => 'xoakhoicoquan', 'uses' => 'KhoiCoQuanController@destroy'));
 Route::post('chuyen-nganh-dao-tao/delete/{id}', array('as' => 'xoachuyennganhdaotao', 'uses' => 'ChuyenNganhDaoTaoController@destroy'));
