@@ -96,7 +96,7 @@
                                     <td class="text-left" style="vertical-align: middle">{{$data->ten}}</td>
                                     <td class="text-center" style="vertical-align: middle">{{$data->mo_ta}}</td>
                                     <td class="text-center">
-                                        <form method="POST" action="{{route('xoaxuatthan',$data->id)}}">
+                                        <form method="POST" action="{{route('xoaquanhe',$data->id)}}">
                                             @csrf
                                             <a class="btn-action btn btn-color-blue btn-icon btn-light btn-sm"
                                                href="{{route('quan-he-gia-dinh.edit',$data->id)}}" role="button" title="Sửa">

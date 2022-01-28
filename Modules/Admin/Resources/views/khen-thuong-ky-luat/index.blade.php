@@ -8,14 +8,14 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách khen thưởng kỷ luật</h3>
+                        <h3 class="box-title">Danh sách khen thưởng</h3>
                     </div>
                     <div class="col-md-3 form-group mt-4">
                         <button type="button" class="btn btn-sm btn-info waves-effect waves-light mb-1"
                                 data-toggle="collapse"
                                 href="#collapseExample"
                                 aria-expanded="false" aria-controls="collapseExample">
-                            THÊM KHEN THƯỞNG KỶ LUẬT</button>
+                            THÊM KHEN THƯỞNG </button>
                     </div>
 
                     <!-- /.box-header -->
@@ -29,9 +29,9 @@
                                         <div class="box-body">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Tên khen thưởng kỷ luật</label>
+                                                    <label for="exampleInputEmail1">Tên khen thưởng</label>
                                                     <input type="text" class="form-control" name="ten" id="exampleInputEmail1"
-                                                           placeholder="Tên khen thưởng kỷ luật" required>
+                                                           placeholder="Tên khen thưởng " required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -60,7 +60,7 @@
                             <form action="{{route('khen-thuong-ky-luat.index')}}" method="get">
 
                                 <div class="col-md-3 form-group">
-                                    <label for="exampleInputEmail1">Tìm theo tên khen thưởng kỷ luật</label>
+                                    <label for="exampleInputEmail1">Tìm theo tên khen thưởng</label>
                                     <input type="text" class="form-control" value="{{Request::get('ten')}}"
                                            name="ten"
                                            placeholder="Tên..">
@@ -84,7 +84,7 @@
                             <thead>
                             <tr>
                                 <th width="5%" class="text-center">STT</th>
-                                <th width="" class="text-center">Tên khen thưởng kỷ luật</th>
+                                <th width="" class="text-center">Tên khen thưởng </th>
                                 <th width="20%" class="text-center">Mô tả</th>
                                 <th width="10%" class="text-center">Tác Vụ</th>
                             </tr>

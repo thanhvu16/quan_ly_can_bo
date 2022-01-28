@@ -67,8 +67,10 @@
 
     </style>
 </head>
+<script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-dao-roi.js"></script>
 <body class="hold-transition login-page" style="margin-top: -40px">
 <div class="login-box">
+
 
     <div class="logo">
         <a href="javascript:void(0);" class="text-center" style="margin-bottom: 11px">
@@ -180,69 +182,7 @@
 {{--<script src=" http://200.200.200.11/sso/js/sso.min.js "></script>--}}
 <script>
     var APP_URL = <?php echo json_encode(url('/')); ?>;
- var urlHref='';
- var urlSSO='';
-    $(document).ready(function(){
-        var host = window.location.host;
-        if(host == '14.177.182.250:6080')
-        {
-            urlHref = "http://14.177.182.250:6080/";
-            urlSSO = 'http://14.177.182.250:10603/sso/js/sso.min.js';
-        }else{
-            urlHref = "http://14.177.182.250:6080/";
-            urlSSO = 'http://200.200.200.11/sso/js/sso.min.js';
-        }
-            const script = document.createElement("script");
-            script.src = urlSSO;
-            script.type = 'text/javascript';
-            document.head.appendChild(script);
-            script.addEventListener('load', () => {
-                console.log(`jQuery ${$.fn.jquery} has been loaded successfully!`);
-                SSO.init();
-                if (!SSO.isAuthen(login)) {
-                    $("#loginSSO").off('click').on('click', function () {
-                        SSO.login();
-                    })
-                }
-            });
-    })
 
-
-
-     function login() {
-         $.ajax({
-             url: APP_URL + '/thong-tin-dang-nhap',
-             type:'POST',
-             dataType:'json',
-             data:{
-                 username: SSO.data.userName,
-                 _token: $('meta[name="csrf-token"]').attr('content'),
-             },
-
-         }).done(function (res){
-             dangnhap(res.username,res.pass)
-         })
-
-     }
-     function dangnhap(username,pass)
-     {
-         $.ajax({
-             url: APP_URL + '/login',
-             type:'POST',
-             dataType:'json',
-             data:{
-                 username: username,
-                 password: pass,
-                 _token: $('meta[name="csrf-token"]').attr('content'),
-             },
-
-         }).done(function (res){
-                 window.location.href = urlHref;
-         }).fail(function (error) {
-             console.log(1);
-             window.location.href = urlHref;
-         });
-     }
 </script>
 
 <script type="text/javascript">
@@ -293,4 +233,6 @@
 
 </script>
 </body>
+
+
 </html>

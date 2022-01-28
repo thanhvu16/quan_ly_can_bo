@@ -1,5 +1,5 @@
 @extends('admin::layouts.master')
-@section('page_title', 'ngạch chức danh')
+@section('page_title', 'tỉnh, thành phố')
 @section('content')
     <section class="content">
         <div class="row">
@@ -8,14 +8,14 @@
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách ngạch chức danh</h3>
+                        <h3 class="box-title">Danh sách tỉnh, thành phố</h3>
                     </div>
                     <div class="col-md-3 form-group mt-4">
                         <button type="button" class="btn btn-sm btn-info waves-effect waves-light mb-1"
                                 data-toggle="collapse"
                                 href="#collapseExample"
                                 aria-expanded="false" aria-controls="collapseExample">
-                            THÊM NGẠCH CHỨC DANH</button>
+                            THÊM TỈNH, THÀNH PHỐ</button>
                     </div>
 
                     <!-- /.box-header -->
@@ -23,15 +23,15 @@
                         <div class="row">
                             <div class="collapse " id="collapseExample">
                                 <div class="row">
-                                    <form role="form" action="{{route('ngach-chuc-danh.store')}}" method="post" enctype="multipart/form-data"
+                                    <form role="form" action="{{route('thanh-pho.store')}}" method="post" enctype="multipart/form-data"
                                           id="myform">
                                         @csrf
                                         <div class="box-body">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Tên ngạch chức danh</label>
+                                                    <label for="exampleInputEmail1">Tên tỉnh, thành phố</label>
                                                     <input type="text" class="form-control" name="ten" id="exampleInputEmail1"
-                                                           placeholder="Tên ngạch chức danh" required>
+                                                           placeholder="Tên tỉnh, thành phố" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -57,10 +57,10 @@
                     </div>
                     <div class="col-md-12" style="margin-top: 20px">
                         <div class="row">
-                            <form action="{{route('ngach-chuc-danh.index')}}" method="get">
+                            <form action="{{route('thanh-pho.index')}}" method="get">
 
                                 <div class="col-md-3 form-group">
-                                    <label for="exampleInputEmail1">Tìm theo tên ngạch chức danh</label>
+                                    <label for="exampleInputEmail1">Tìm theo tên tỉnh, thành phố</label>
                                     <input type="text" class="form-control" value="{{Request::get('ten')}}"
                                            name="ten"
                                            placeholder="Tên..">
@@ -84,7 +84,7 @@
                             <thead>
                             <tr>
                                 <th width="5%" class="text-center">STT</th>
-                                <th width="" class="text-center">Tên ngạch chức danh</th>
+                                <th width="" class="text-center">Tên tỉnh, thành phố</th>
                                 <th width="20%" class="text-center">Mô tả</th>
                                 <th width="10%" class="text-center">Tác Vụ</th>
                             </tr>
@@ -96,10 +96,10 @@
                                     <td class="text-left" style="vertical-align: middle">{{$data->ten}}</td>
                                     <td class="text-center" style="vertical-align: middle">{{$data->mo_ta}}</td>
                                     <td class="text-center">
-                                        <form method="POST" action="{{route('xoangach',$data->id)}}">
+                                        <form method="POST" action="{{route('xoatp',$data->id)}}">
                                             @csrf
                                             <a class="btn-action btn btn-color-blue btn-icon btn-light btn-sm"
-                                               href="{{route('ngach-chuc-danh.edit',$data->id)}}" role="button" title="Sửa">
+                                               href="{{route('thanh-pho.edit',$data->id)}}" role="button" title="Sửa">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <button class="btn btn-action btn-color-red btn-icon btn-ligh btn-sm btn-remove-item" role="button"

@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -34,32 +34,38 @@
     <link href="{{ url('theme/bower_components/morris.js/morris.css') }}" rel="stylesheet" />
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ url('theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css" rel="stylesheet">
+    <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('css')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+@yield('css')
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
     <![endif]-->
 </head>
+{{--<script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-dao-roi.js"></script>--}}
 <body class="hold-transition skin-blue sidebar-mini">
 {{--<body class="skin-blue sidebar-mini sidebar-collapse">--}}
 <div class="wrapper">
 
-   @include('admin::layouts.components.header')
-    <!-- Left side column. contains the logo and sidebar -->
-   @include('admin::layouts.components.sidebar')
+@include('admin::layouts.components.header')
+<!-- Left side column. contains the logo and sidebar -->
+@include('admin::layouts.components.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
-        @yield('content')
-        <!-- /.content -->
+    @yield('content')
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     @include('admin::layouts.components.footer')
+
 
 </div>
 <!-- ./wrapper -->
@@ -102,19 +108,6 @@
 
 <script src="{{ url('theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ url('theme/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="{{ url('assets/css/tree-table.css')}}">
-
-<link href="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css" rel="stylesheet">
-<link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/treegrid/bootstrap-table-treegrid.min.js"></script>
-<style>
-    html,* { font-family: 'Open Sans'; }
-    .container { margin: 150px auto; max-width: 1280px; }
-</style>
 {{--<script src=" http://14.177.182.250:10603/sso/js/sso.min.js "></script>--}}
 <script type="text/javascript">
     var APP_URL = {!! json_encode(url('/')) !!}
@@ -159,22 +152,10 @@
         "hideMethod": "fadeOut"
     }
 </script>
-<script>
-
-
-</script>
-<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="{{ url('assets/css/tree-table.css')}}">
-<script type="text/javascript" src="{{ url('assets/tree-table.js')}}"></script><script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
-
-
-
-</script>
+<script src="{{ url('js/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/treegrid/bootstrap-table-treegrid.min.js"></script>
 
 
 @yield('script')
