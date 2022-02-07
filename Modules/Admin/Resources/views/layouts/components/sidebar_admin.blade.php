@@ -93,7 +93,7 @@
         <li class="{{ Route::is('tin-hoc.index') ? 'active' : '' }}"><a href="{{ route('tin-hoc.index') }}"><i class="fa fa-circle-o"></i>Tin Học</a></li>
         <li class="{{ Route::is('thanh-pho.index') ? 'active' : '' }}"><a href="{{ route('thanh-pho.index') }}"><i class="fa fa-circle-o"></i>Thành phố</a></li>
         <li class="{{ Route::is('trang-thai.index') ? 'active' : '' }}"><a href="{{ route('trang-thai.index') }}"><i class="fa fa-circle-o"></i>Trạng thái cán bộ</a></li>
-        <li class="{{ Route::is('thanh-phan-xuat-than.index') ? 'active' : '' }}"><a href="{{ route('thanh-phan-xuat-than.index') }}"><i class="fa fa-circle-o"></i>Trình độ phổ thông</a></li>
+        <li class="{{ Route::is('pho-thong.index') ? 'active' : '' }}"><a href="{{ route('pho-thong.index') }}"><i class="fa fa-circle-o"></i>Trình độ phổ thông</a></li>
         <li class="{{ Route::is('thanh-phan-xuat-than.index') ? 'active' : '' }}"><a href="{{ route('thanh-phan-xuat-than.index') }}"><i class="fa fa-circle-o"></i>Thành phần xuất thân</a></li>
         <li class="{{ Route::is('tinh-trang-hon-nhan.index') ? 'active' : '' }}"><a href="{{ route('tinh-trang-hon-nhan.index') }}"><i class="fa fa-circle-o"></i>Tình trạng hôn nhân</a></li>
         <li class="{{ Route::is('quan-he-gia-dinh.index') ? 'active' : '' }}"><a href="{{ route('quan-he-gia-dinh.index') }}"><i class="fa fa-circle-o"></i>Quan hệ gia đình</a></li>

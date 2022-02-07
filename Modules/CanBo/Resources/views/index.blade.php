@@ -18,7 +18,7 @@
                         <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>
                         <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>
                         <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
-                        <li><a href="#timeline" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
+                        <li><a href="#timeline" data-toggle="tab">Lương - Chức vụ - Quy hoạch(5)</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
@@ -51,7 +51,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc3')
+                                    @include('canbo::components.soluoc3a')
                                 </div>
                             </div>
                             <div class="post clearfix">

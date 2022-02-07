@@ -15,7 +15,7 @@
                                 data-toggle="collapse"
                                 href="#collapseExample"
                                 aria-expanded="false" aria-controls="collapseExample">
-                            THÊM trình độ giáo dục phổ thông</button>
+                            THÊM TRÌNH ĐỘ GIÁO DỤC PHỔ THÔNG</button>
                     </div>
 
                     <!-- /.box-header -->

@@ -69,21 +69,21 @@
                                     <div class="row">
                                         <div class="form-group col-md-3" >
                                             <label for="loai_van_ban_id" class="col-form-label">Tên cán bộ</label>
-                                            <input type="text" name="ten_cb" class="form-control" placeholder="Nhập tên cán bộ..">
+                                            <input type="text" name="ten_cb" value="{{Request::get('ten_cb')}}" class="form-control" placeholder="Nhập tên cán bộ..">
                                         </div>
                                         <div class="form-group col-md-3" >
                                             <label for="loai_van_ban_id" class="col-form-label">Chứng minh thư</label>
-                                            <input type="text" name="cmt" class="form-control" placeholder="Nhập chứng minh thư..">
+                                            <input type="text" name="cmt" value="{{Request::get('cmt')}}" class="form-control" placeholder="Nhập chứng minh thư..">
                                         </div>
                                         <div class="form-group col-md-3" >
                                             <label for="loai_van_ban_id" class="col-form-label">Mã thẻ Đảng</label>
-                                            <input type="text" name="the_dang" class="form-control" placeholder="Nhập mã thẻ đảng..">
+                                            <input type="text" name="the_dang" class="form-control" value="{{Request::get('the_dang')}}" placeholder="Nhập mã thẻ đảng..">
                                         </div>
 
 
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail4">Ngày vào đảng</label>
+                                                <label for="exampleInputEmail4">Ngày vào đảng chính thức</label>
                                                 <div class="input-group date">
                                                     <input type="text" class="form-control  datepicker"
                                                            name="start_date" id="start_date" value="{{Request::get('start_date')}}"
@@ -94,75 +94,64 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-3" >
-                                            <label for="loai_van_ban_id" class="col-form-label">Tuổi Đảng</label>
-                                            <input type="text" class="form-control" placeholder="Nhập tuổi Đảng..">
-                                        </div>
+{{--                                        <div class="form-group col-md-3" >--}}
+{{--                                            <label for="loai_van_ban_id" class="col-form-label">Tuổi Đảng</label>--}}
+{{--                                            <input type="text" class="form-control" placeholder="Nhập tuổi Đảng..">--}}
+{{--                                        </div>--}}
 
                                         <div class="form-group col-md-3" >
                                             <label for="loai_van_ban_id" class="col-form-label">Chức vụ Đảng</label>
-                                            <select class="form-control " name="loai_van_ban_id" id="loai_van_ban_id">
-                                                <option value="">Bí thư Đảng uỷ cơ quan</option>
-{{--                                                @foreach ($ds_loaiVanBan as $loaiVanBan)--}}
-{{--                                                    <option value="{{ $loaiVanBan->id }}" {{ Request::get('loai_van_ban_id') == $loaiVanBan->id ? 'selected' : '' }}--}}
-{{--                                                    >{{ $loaiVanBan->ten_loai_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
+                                            <select class="form-control " name="chuc_vu_dang" id="chuc_vu_dang">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($chucVuDang as $dschucVuDang)
+                                                    <option value="{{$dschucVuDang->id}}"  {{Request::get('chuc_vu_dang') == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="sokyhieu" class="col-form-label">Trình độ chuyên môn</label>
                                             <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="so_van_ban_id" id="so_van_ban_id">
-                                                <option value="">Đại học</option>
-{{--                                                @foreach ($ds_soVanBan as $soVanBan)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{ $soVanBan->id }}" {{ Request::get('so_van_ban_id') == $soVanBan->id ? 'selected' : '' }}>{{ $soVanBan->ten_so_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
+                                                    name="trinh_do_chuyen_mon" id="trinh_do_chuyen_mon">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($congViecChuyenMon as $dscongViecChuyenMon)
+                                                    <option value="{{$dscongViecChuyenMon->id}}"  {{Request::get('trinh_do_chuyen_mon') == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>
+                                                @endforeach
+
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="sokyhieu" class="col-form-label">Học hàm</label>
-                                            <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="so_van_ban_id" id="so_van_ban_id">
-                                                <option value="">Giáo sư</option>
-{{--                                                @foreach ($ds_soVanBan as $soVanBan)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{ $soVanBan->id }}" {{ Request::get('so_van_ban_id') == $soVanBan->id ? 'selected' : '' }}>{{ $soVanBan->ten_so_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
-                                            </select>
-                                        </div>
+
                                         <div class="form-group col-md-3">
                                             <label for="sokyhieu" class="col-form-label">Tôn giáo</label>
                                             <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="so_van_ban_id" id="so_van_ban_id">
-                                                <option value="">Không</option>
-{{--                                                @foreach ($ds_soVanBan as $soVanBan)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{ $soVanBan->id }}" {{ Request::get('so_van_ban_id') == $soVanBan->id ? 'selected' : '' }}>{{ $soVanBan->ten_so_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
+                                                    name="ton_giao" id="ton_giao">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($tonGiao as $dsTonGiao)
+                                                    <option value="{{$dsTonGiao->id}}" {{Request::get('ton_giao') == $dsTonGiao->id ? 'selected' : ''}}>{{$dsTonGiao->ten}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="sokyhieu" class="col-form-label">Tình trạng</label>
                                             <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="so_van_ban_id" id="so_van_ban_id">
-                                                <option value="">Hiện đang có mặt</option>
-{{--                                                @foreach ($ds_soVanBan as $soVanBan)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{ $soVanBan->id }}" {{ Request::get('so_van_ban_id') == $soVanBan->id ? 'selected' : '' }}>{{ $soVanBan->ten_so_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
+                                                    name="tinh_trang" id="tinh_trang">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($trangThai as $dstrangThai)
+                                                    <option value="{{$dstrangThai->id}}"  {{Request::get('tinh_trang') == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="sokyhieu" class="col-form-label">Chức vụ chính quyền</label>
                                             <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="so_van_ban_id" id="so_van_ban_id">
-                                                <option value="">Tổng Kiểm toán Nhà nước</option>
-{{--                                                @foreach ($ds_soVanBan as $soVanBan)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{ $soVanBan->id }}" {{ Request::get('so_van_ban_id') == $soVanBan->id ? 'selected' : '' }}>{{ $soVanBan->ten_so_van_ban }}</option>--}}
-{{--                                                @endforeach--}}
+                                                    name="chuc_vu_chinh" id="chuc_vu_chinh">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($chucVuHienTai as $hientai)
+                                                    <option value="{{$hientai->id}}"  {{Request::get('chuc_vu_chinh') == $hientai->id ? 'selected' : ''}}>{{$hientai->ten}}</option>
+                                                @endforeach
                                             </select>
+                                        </div>
+                                        <div class="form-group col-md-3 mt-4">
+                                            <button class="btn btn-primary" type="submit"> <i class="fa fa-search"></i> Tìm kiếm</button>
                                         </div>
 
                                     </div>
