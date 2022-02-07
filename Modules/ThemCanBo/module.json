@@ -1,0 +1,13 @@
+{
+    "name": "ThemCanBo",
+    "alias": "themcanbo",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\ThemCanBo\\Providers\\ThemCanBoServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

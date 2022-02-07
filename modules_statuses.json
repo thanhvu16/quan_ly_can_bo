@@ -14,5 +14,6 @@
     "TimKiemVanBan": true,
     "TraCuuVanBanCu": true,
     "CanBo": true,
-    "TraCuu": true
+    "TraCuu": true,
+    "ThemCanBo": true
 }

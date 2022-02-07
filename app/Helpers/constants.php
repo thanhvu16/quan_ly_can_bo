@@ -5,6 +5,7 @@ define('PER_PAGE_10', 10);
 define('LOAI_VAN_BAN_DI', 1000);
 define('UPLOAD_USER', 'uploads/nguoi-dung');
 define('UPLOAD_FILE_VAN_BAN_DEN', 'uploads/van-ban-den-' . date('Y'));
+define('UPLOAD_ANH', 'uploads/anh-' . date('Y'));
 define('UPLOAD_FILE_VAN_BAN_DI', 'uploads/van-ban-di-' . date('Y'));
 define('UPLOAD_FILE_GIAY_MOI_DI', 'uploads/giay-moi-di-' . date('Y'));
 define('UPLOAD_FILE_TAI_LIEU', 'uploads/tai-lieu-huong-dan');

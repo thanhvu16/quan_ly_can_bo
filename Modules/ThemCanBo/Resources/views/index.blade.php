@@ -1,31 +1,30 @@
-
 @extends('admin::layouts.master')
-@section('page_title', 'Cán bộ')
+@section('page_title', 'Thêm cán bộ')
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-md-3">
+{{--            <div class="col-md-3">--}}
 
-                <!-- Profile Image -->
-            @include('canbo::components.thong-tin')
-                <!-- /.box -->
-            </div>
+{{--                <!-- Profile Image -->--}}
+{{--            @include('themcanbo::components.thong-tin')--}}
+{{--                <!-- /.box -->--}}
+{{--            </div>--}}
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Sơ lược (1)</a></li>
-                        <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>
-                        <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>
-                        <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
-                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch(5)</a></li>
+                        <li class="active"><a href="#activity" data-toggle="tab">Thêm mới cán bộ</a></li>
+{{--                        <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>--}}
+{{--                        <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>--}}
+{{--                        <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>--}}
+{{--                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch(5)</a></li>--}}
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc1')
+                                    @include('themcanbo::components.soluoc1')
                                 </div>
                             </div>
                             <div class="post clearfix">
@@ -38,7 +37,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc2')
+{{--                                    @include('canbo::components.soluoc2')--}}
                                 </div>
                             </div>
                             <div class="post clearfix">
@@ -51,7 +50,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc3a')
+{{--                                    @include('canbo::components.soluoc3a')--}}
                                 </div>
                             </div>
                             <div class="post clearfix">
@@ -64,7 +63,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc4')
+{{--                                    @include('canbo::components.soluoc4')--}}
                                 </div>
                             </div>
                             <div class="post clearfix">
@@ -77,7 +76,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
-                                    @include('canbo::components.soluoc5')
+{{--                                    @include('canbo::components.soluoc5')--}}
                                 </div>
                             </div>
                             <div class="post clearfix">
@@ -91,7 +90,7 @@
                             <!-- The timeline -->
                             @include('canbo::components.time')
                         </div>
-                        @include('canbo::components.upload')
+                        @include('themcanbo::components.upload')
                     </div>
                     <!-- /.tab-content -->
                 </div>

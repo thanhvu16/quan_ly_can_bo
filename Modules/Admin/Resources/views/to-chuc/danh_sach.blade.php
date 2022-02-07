@@ -32,7 +32,12 @@
                                     <i class="fa fa-plus"></i>
                                     THÊM ĐƠN VỊ
                                 </button>
+                                <a type="button" href="{{route('them-can-bo.index')}}" class="btn btn-sm btn-success waves-effect waves-light mb-1">
+                                    <i class="fa fa-group"></i>
+                                    TẠO TÀI KHOẢN
+                                </a>
                             </div>
+
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="collapse " id="collapseExample">
