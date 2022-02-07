@@ -64,7 +64,7 @@
     <ul class="treeview-menu">
         <li class="{{ Route::is('bac-he-so-luong.index') ? 'active' : '' }}"><a href="{{ route('bac-he-so-luong.index') }}"><i class="fa fa-circle-o"></i>Bậc hệ số lương</a></li>
         <li class="{{ Route::is('danhsachchucvu') ? 'active' : '' }}"><a href="{{ route('danhsachchucvu') }}"><i class="fa fa-circle-o"></i> Chức vụ đảng</a></li>
-        <li class="{{ Route::is('danhsachchucvu') ? 'active' : '' }}"><a href="{{ route('danhsachchucvu') }}"><i class="fa fa-circle-o"></i> Chức vụ hiện tại</a></li>
+        <li class="{{ Route::is('chuc-vu-hien-tai.index') ? 'active' : '' }}"><a href="{{ route('chuc-vu-hien-tai.index') }}"><i class="fa fa-circle-o"></i> Chức vụ hiện tại</a></li>
         <li class="{{ Route::is('cap-to-chuc.index') ? 'active' : '' }}"><a href="{{ route('cap-to-chuc.index') }}"><i class="fa fa-circle-o"></i> Cấp tổ chức</a></li>
         <li class="{{ Route::is('chinh-tri.index') ? 'active' : '' }}"><a href="{{ route('chinh-tri.index') }}"><i class="fa fa-circle-o"></i> Lý luận chính trị</a></li>
         <li class="{{ Route::is('cong-viec-chuyen-mon.index') ? 'active' : '' }}"><a href="{{ route('cong-viec-chuyen-mon.index') }}"><i class="fa fa-circle-o"></i>Công việc chuyên môn</a></li>

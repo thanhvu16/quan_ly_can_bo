@@ -5,8 +5,16 @@ namespace Modules\CanBo\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Entities\BacHeSoLuong;
 use Modules\Admin\Entities\CanBo;
+use Modules\Admin\Entities\ChucVuHienTai;
+use Modules\Admin\Entities\DanToc;
+use Modules\Admin\Entities\DonVi;
+use Modules\Admin\Entities\LoaiPhuCap;
+use Modules\Admin\Entities\NgachChucDanh;
+use Modules\Admin\Entities\ThanhPho;
 use Modules\Admin\Entities\ToChuc;
+use Modules\Admin\Entities\TonGiao;
 
 class CanBoController extends Controller
 {
@@ -48,8 +56,63 @@ class CanBoController extends Controller
     public function canBoDetail($id)
     {
         $canBo = CanBo:: where('id',$id)->first();
-        return view('canbo::index',compact('canBo'));
 
+        $danToc = DanToc::orderBy('ten','asc')->get();
+        $tonGiao = TonGiao::orderBy('ten','asc')->get();
+        $thanhPho = ThanhPho::orderBy('ten','asc')->get();
+        $chucVuHienTai = ChucVuHienTai::orderBy('ten','asc')->get();
+        $donVi = ToChuc::orderBy('ten_don_vi','asc')->get();
+        $ngach = NgachChucDanh::orderBy('ten','asc')->get();
+        $bacLuong = BacHeSoLuong::orderBy('ten','asc')->get();
+        $phuCap = LoaiPhuCap::orderBy('ten','asc')->get();
+
+
+        return view('canbo::index',compact('canBo','danToc','tonGiao','thanhPho','chucVuHienTai'
+            ,'donVi','ngach','bacLuong','phuCap'));
+
+    }
+
+    public function postSoLuoc1(Request $request)
+    {
+        dd($request->all());
+        $canBo = CanBo::first();
+        $canBo->ho_ten = $request->ten;
+        $canBo->gioi_tinh = $request->gioi_tinh;
+        $canBo->ngay_sinh = !empty($request->ngay_sinh) ? formatYMD($request->ngay_sinh) : null;
+        $canBo->dan_toc = $request->dan_toc;
+        $canBo->ton_giao = $request->ton_giao;
+
+//        $canBo->ngay_vao_don_vi = !empty($request->ngay_vao_don_vi) ? formatYMD($request->ngay_vao_don_vi) : null;
+
+        $canBo->co_quan_tuyen = $request->co_quan_tuyen;
+        $canBo->noi_sinh = $request->noi_sinh_xa;
+        $canBo->huyen_noi_sinh = $request->noi_sinh_huyen;
+        $canBo-> thanh_pho_noi_sinh= $request->noi_sinh_tp;
+        $canBo->que_quan = $request->que_quan_xa;
+        $canBo->huyen_que_quan = $request->que_quan_huyen;
+        $canBo->thanh_pho_que_quan = $request->que_quan_tp;
+        $canBo->ho_khau = $request->ho_khau;
+        $canBo->noi_o_hien_nay = $request->noi_o_hien_nay;
+        $canBo->nghe_nghiep_khi_duoc_tuyen = $request->nghe_nghiep_khi_tuyen;
+        $canBo->ngay_bat_dau_di_lam = !empty($request->ngay_bat_dau_di_lam) ? formatYMD($request->ngay_bat_dau_di_lam) : null;
+
+        $canBo->chuc_danh = $request->chuc_danh;
+        $canBo->don_vi_id = $request->don_vi;
+        $canBo->ngach_cong_chuc = $request->ngach_cong_chuc;
+        $canBo->ma_ngach = $request->ma_ngach;
+        $canBo->bac_luong = $request->bac_luong;
+        $canBo->he_so_luong = $request->he_so_luong;
+        $canBo->ngay_huong = !empty($request->ngay_huong) ? formatYMD($request->ngay_huong) : null;
+        $canBo->som = $request->som;
+        $canBo->phu_cap_cv = $request->phu_cap;
+        $canBo->phu_cap_khac = $request->phu_cap_khac;
+        $canBo->phan_tram_huong = $request->phan_tram_huong;
+        $canBo->phan_tram_khung = $request->khung;
+        $canBo->BHXH = $request->bhxh;
+        $canBo->BHYT = $request->bhyt;
+
+        $canBo->save();
+        return redirect()->back()->with('cập nhật thành công !');
     }
 
     /**
