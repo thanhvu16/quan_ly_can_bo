@@ -19,5 +19,20 @@ class CanBo extends Model
         return $this->belongsTo(ThanhPho::class, 'thanh_pho_que_quan', 'id');
     }
 
+    public function toChuc()
+    {
+        return $this->belongsTo(ToChuc::class, 'don_vi', 'id');
+    }
+
+    public function danToc()
+    {
+        return $this->belongsTo(danToc::class, 'dan_toc', 'id');
+    }
+
+    public function tonGiao()
+    {
+        return $this->belongsTo(TonGiao::class, 'ton_giao', 'id');
+    }
+
 }
 
