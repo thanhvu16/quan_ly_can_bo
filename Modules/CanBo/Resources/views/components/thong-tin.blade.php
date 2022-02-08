@@ -80,6 +80,11 @@
         <strong><i class="fa fa-file-text-o margin-r-5"></i> Khen thưởng</strong><br>
 
         <i>( Chưa có khen thưởng nào được cập nhật ).</i>
+        <hr>
+
+        <strong><i class="fa fa-files-o margin-r-5"></i> Phiếu cán bộ công chức, viên chức</strong><br>
+        <p>- <i class="fa fa-file-word-o" style="color: #205ad4"></i> <a href="{{ asset('uploads/phieu-can-bo/'.$canBo->id.'_phieu_can_bo.docx') }}">phiếu cán bộ.docx</a></p>
+{{--        <p>- <i class="fa fa-file-pdf-o" style="color: red;"></i> <a href="">phiếu cán bộ.pdf</a></p>--}}
     </div>
     <!-- /.box-body -->
 </div>

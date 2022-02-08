@@ -74,6 +74,9 @@ define('COLOR_PINTEREST', '#cb2027');
 define('COLOR_YELLOW', '#f1df07');
 define('COLOR_GREEN_LIGHT', '#0fd0b5');
 
+define('PHIEU_CAN_BO', 'uploads/phieu-can-bo');
+
+
 //api code
 define('TOKEN_TYPE', 'Bearer');
 define('SUCCESS', 200);

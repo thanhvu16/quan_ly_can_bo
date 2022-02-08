@@ -15,7 +15,6 @@ use Modules\Admin\Entities\CongViecChuyenMon;
 use Modules\Admin\Entities\DanhHieu;
 use Modules\Admin\Entities\DanToc;
 use Modules\Admin\Entities\DoiTuongQuanLy;
-use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\HinhThucDaoTao;
 use Modules\Admin\Entities\HinhThucThiTuyen;
 use Modules\Admin\Entities\KhenThuongKyLuat;
@@ -43,6 +42,8 @@ use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
 use Modules\Admin\Http\Controllers\LyLuanChinhTri;
+use File;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class CanBoController extends Controller
 {
@@ -128,6 +129,8 @@ class CanBoController extends Controller
         $truongHoc = TruongHoc::orderBy('ten','asc')->get();
         $nhiemKy = NhiemKy::orderBy('ten','asc')->get();
 
+        //tao phieu can bo
+        $this->taoPhieuCanBo($canBo);
 
         return view('canbo::index',compact('canBo','danToc','tonGiao','thanhPho','chucVuHienTai'
             ,'donVi','ngach','bacLuong','phuCap','chuyenNganhDT','congViecChuyenMon','phoThong','lyluanChinhTri','quanLyHanhChinh'
@@ -415,5 +418,51 @@ class CanBoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function taoPhieuCanBo($canBo)
+    {
+        $file = public_path('template_phieu_can_bo/phieu_cbcc.docx');
+        $uploadPhieuChuyen = public_path(PHIEU_CAN_BO);
+
+        $fileDoc = $canBo->id. "_phieu_can_bo.docx";
+
+        if (!File::exists($uploadPhieuChuyen)) {
+            File::makeDirectory($uploadPhieuChuyen, 0775, true, true);
+        }
+
+        $dateOrBirth = !empty($canBo->ngay_sinh) ? explode('-', $canBo->ngay_sinh) : null;
+        $noiSinh = $canBo->noi_sinh. ', '.$canBo->noi_sinh_huyen.', '.($canBo->queQuan->ten ?? null);
+        $gioiTinh = !empty($canBo->gioi_tinh) ? ($canBo->gioi_tinh == 1 ? 'Nam' : 'Nữ') : null;
+
+        $wordTemplate = new TemplateProcessor($file);
+        $wordTemplate->setImageValue('image', ['path' => public_path('images/default-user.png'), 'width' => 119, 'height' => 160]);
+        $wordTemplate->setValue('donViQuanLy', 'BAN TỔ CHỨC QUẬN ỦY');
+        $wordTemplate->setValue('donViChuQuan', 'QUẬN ỦY NAM TỪ LIÊM');
+        $wordTemplate->setValue('donViCongTac', $canBo->toChuc->ten_don_vi ?? null);
+        $wordTemplate->setValue('maSoHoSo', '123');
+        $wordTemplate->setValue('soHieuCongChucVienChuc', $canBo->ma_ngach ?? null);
+        $wordTemplate->setValue('hoTen', $canBo->ho_ten ?? null);
+        $wordTemplate->setValue('tenGoiKhac', $canBo->ten_khac ?? null);
+        $wordTemplate->setValue('gioiTinh', $gioiTinh);
+        $wordTemplate->setValue('biDanh', $canBo->ten_khac ?? null);
+        $wordTemplate->setValue('ngaySinh', $dateOrBirth[2] ?? null);
+        $wordTemplate->setValue('thangSinh', $dateOrBirth[1] ?? null);
+        $wordTemplate->setValue('namSinh', $dateOrBirth[0] ?? null);
+        $wordTemplate->setValue('noiSinh', $noiSinh ?? null);
+        $wordTemplate->setValue('danToc', $canBo->danToc->ten ?? null);
+        $wordTemplate->setValue('tonGiao', $canBo->tonGiao->ten ?? null);
+        $wordTemplate->setValue('queQuanGoc', $noiSinh ?? null);
+        $wordTemplate->setValue('queQuanTheoDonViHanhChinh', $noiSinh ?? null);
+        $wordTemplate->setValue('hoKhauThuongTru', $canBo->ho_khau ?? null);
+        $wordTemplate->setValue('noiOHienNay', $canBo->noi_o_hien_nay ?? null);
+        $wordTemplate->setValue('dtCoQuan', '……………');
+        $wordTemplate->setValue('dtNhaRieng', '……………');
+        $wordTemplate->setValue('dtDiDong', $canBo->so_dien_thoai ?? '……………');
+        $wordTemplate->setValue('email', $canBo->email ?? null);
+        $wordTemplate->setValue('soCMND', $canBo->cmnd ?? null);
+        $wordTemplate->setValue('noiCap',  null);
+        $wordTemplate->setValue('ngayCap', $canBo->ngay_cap_cmt ?? null);
+        $wordTemplate->saveAs($uploadPhieuChuyen . "/" . $fileDoc);
     }
 }
