@@ -2,12 +2,12 @@
     @csrf
     <div class="col-md-12" style="background: white">
         <div class="row">
-            <div class="col-md-12 "  style="margin-bottom: 20px">
-                <a onclick="showModal()" style="cursor: pointer">
-                            <span style="color: white;font-size: 14px"><i class="fa fa-folder-open-o"></i>
-                                <img class="profile-user-img img-responsive img-circle" src="{{asset('logobo.jpg')}}" alt="User profile picture">
-                            </span></a>
-            </div>
+{{--            <div class="col-md-12 "  style="margin-bottom: 20px">--}}
+{{--                <a onclick="showModal()" style="cursor: pointer">--}}
+{{--                            <span style="color: white;font-size: 14px"><i class="fa fa-folder-open-o"></i>--}}
+{{--                                <img class="profile-user-img img-responsive img-circle" src="{{asset('logobo.jpg')}}" alt="User profile picture">--}}
+{{--                            </span></a>--}}
+{{--            </div>--}}
             <div class="col-md-3 " >
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Họ tên</label>

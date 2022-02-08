@@ -25,5 +25,10 @@ Route::post('qua-trinh-luong/{id}', 'CanBoController@quaTrinhluong')->name('quaT
 Route::post('qua-trinh-chuc-vu/{id}', 'CanBoController@quaTrinhChucVu')->name('quaTrinhChucVu');
 Route::post('qua-trinh-chuc-vu-dang/{id}', 'CanBoController@quaTrinhChucVuDang')->name('quaTrinhChucVuDang');
 Route::post('qua-trinh-can-bo/{id}', 'CanBoController@quaTrinhCanBo')->name('quaTrinhCanBo');
+Route::post('qua-trinh-kiem_nhiem/{id}', 'CanBoController@quaTrinhKiemNhiem')->name('quaTrinhKiemNhiem');
+Route::post('qua-trinh-bien-che/{id}', 'CanBoController@quaTrinhBienChe')->name('quaTrinhBienChe');
+Route::post('qua-trinh-khen-ky/{id}', 'CanBoController@quaTrinhKhenKy')->name('quaTrinhKhenKy');
+Route::post('qua-trinh-bao-hiem/{id}', 'CanBoController@quaTrinhBaoHiem')->name('quaTrinhBaoHiem');
+Route::post('qua-trinh-ve-huu/{id}', 'CanBoController@quaTrinhVeHuu')->name('quaTrinhVeHuu');
 Route::get('chi-tiet-can-bo/{id}', 'CanBoController@canBoDetail')->name('canBoDetail');
 

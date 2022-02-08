@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- /.box-header -->
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <button type="button" class="btn btn-sm btn-info waves-effect waves-light mb-1"
                                         data-toggle="collapse"
                                         href="#collapseExample"

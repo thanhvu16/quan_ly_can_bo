@@ -14,3 +14,4 @@
 
 Route::resource('them-can-bo', 'ThemCanBoController');
 Route::post('them-can-bo', 'ThemCanBoController@postSoLuoc1')->name('themCanBoSL');
+Route::get('ho-so-can-bo', 'ThemCanBoController@allCanBo')->name('allCanBo');

@@ -18,7 +18,10 @@
                         <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>
                         <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>
                         <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
-                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch(5)</a></li>
+                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch (5)</a></li>
+                        <li><a href="#activity6" data-toggle="tab">Biên chế, hợp đồng - Kiêm nhiệm, biệt phái (6)</a></li>
+                        <li><a href="#activity7" data-toggle="tab">Khen thưởng (7)</a></li>
+                        <li><a href="#activity8" data-toggle="tab">Thông tin thêm (8)</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
@@ -86,6 +89,45 @@
                                 </div>
                             </div>
                         </div>
+                        <div class=" tab-pane" id="activity6">
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="tab-pane" >
+                                    @include('canbo::components.soluoc6')
+                                </div>
+                            </div>
+                            <div class="post clearfix">
+                                <div class="user-block">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" tab-pane" id="activity7">
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="tab-pane" >
+                                    @include('canbo::components.soluoc7')
+                                </div>
+                            </div>
+                            <div class="post clearfix">
+                                <div class="user-block">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" tab-pane" id="activity8">
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="tab-pane" >
+                                    @include('canbo::components.soluoc8')
+                                </div>
+                            </div>
+                            <div class="post clearfix">
+                                <div class="user-block">
+
+                                </div>
+                            </div>
+                        </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="timeline">
                             <!-- The timeline -->
@@ -129,6 +171,30 @@
         function showModal7() {
             console.log(1);
             $("#myModal7").modal('show');
+        }
+        function showModal8() {
+            console.log(1);
+            $("#myModal8").modal('show');
+        }
+        function showModal9() {
+            console.log(1);
+            $("#myModal9").modal('show');
+        }
+        function showModal10() {
+            console.log(1);
+            $("#myModal10").modal('show');
+        }
+        function showModal11() {
+            console.log(1);
+            $("#myModal11").modal('show');
+        }
+        function showModal12() {
+            console.log(1);
+            $("#myModal12").modal('show');
+        }
+        function showModal13() {
+            console.log(1);
+            $("#myModal13").modal('show');
         }
     </script>
 

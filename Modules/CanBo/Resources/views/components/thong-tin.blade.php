@@ -16,7 +16,7 @@
                     <b>Đơn vị chủ quản</b> <a class="pull-right">QUẬN ỦY NAM TỪ LIÊM</a>
                 </li>
                 <li class="list-group-item">
-                    <b>Đơn vị quản lý</b> <a class="pull-right">BAN TỔ CHỨC QUẬN ỦY</a>
+                    <b>Đơn vị quản lý</b> <a class="pull-right">{{$canBo->donVi->ten_don_vi ?? ''}}</a>
                 </li>
                 <li class="list-group-item">
                     <b>Số thẻ Đảng</b> <a class="pull-right">29 123456</a>

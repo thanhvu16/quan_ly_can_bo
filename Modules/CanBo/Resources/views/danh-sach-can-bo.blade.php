@@ -64,11 +64,11 @@
 
                         <address>
                             <strong>Đơn vị quản lý:</strong>&emsp;
-                            QUẬN ỦY NAM TỪ LIÊM
+                            {{$donVi->ten_don_vi ?? ''}}
                         </address>
                         <address>
                             <strong>Tên viết tắt:    </strong> &emsp;
-                            VPQU
+                            {{$donVi->ten_don_vi ?? 'ABC'}}
                         </address>
                         <address>
                             <strong>Phó chủ tịch:    </strong> &emsp;
@@ -104,13 +104,13 @@
                             @forelse($danhSach as $key=>$data)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td style="text-transform: uppercase"><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa  fa-wheelchair"></i> @endif {{$data->ho_ten}}</a></td>
+                                <td style="text-transform: uppercase;font-weight: bold"><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa  fa-wheelchair"></i> @endif {{$data->ho_ten}}</a></td>
                                 <td class="text-center">{{$data->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                 <td class="text-center">{{date("d/m/Y", strtotime($data->ngay_sinh))}}</td>
-                                <td class="text-center">Kinh</td>
-                                <td class="text-center"><i class="fa fa-map-marker margin-r-5"></i> Hà Nội</td>
-                                <td>Phó chủ tịch</td>
-                                <td>Văn phòng Quận ủy</td>
+                                <td class="text-center">{{$data->danToc->ten ?? ''}}</td>
+                                <td class="text-center"><i class="fa fa-map-marker margin-r-5"></i> {{$data->thanhPho->ten ?? ''}}</td>
+                                <td>{{$data->chucVuHienTai->ten ?? ''}}</td>
+                                <td>{{$data->donVi->ten_don_vi ?? ''}}</td>
                             </tr>
                             @empty
                             @endforelse

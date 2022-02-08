@@ -57,6 +57,12 @@ class ThemCanBoController extends Controller
 
     }
 
+    public function allCanBo()
+    {
+        $danhSach = CanBo::paginate(20);
+        return view('themcanbo::danh-sach-can-bo', compact('danhSach'));
+    }
+
     public function index()
     {
 

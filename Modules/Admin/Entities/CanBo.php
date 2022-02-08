@@ -18,16 +18,30 @@ class CanBo extends Model
     {
         return $this->belongsTo(ThanhPho::class, 'thanh_pho_que_quan', 'id');
     }
+    public function chucVuHienTai()
+    {
+        return $this->belongsTo(ChucVuHienTai::class, 'chuc_vu_hien_tai', 'id');
+    }
+
+    public function thanhPho()
+    {
+        return $this->belongsTo(ThanhPho::class, 'thanh_pho_que_quan', 'id');
+    }
+    public function danToc()
+    {
+        return $this->belongsTo(DanToc::class, 'dan_toc', 'id');
+    }
+    public function donVi()
+    {
+        return $this->belongsTo(ToChuc::class, 'don_vi', 'id');
+    }
 
     public function toChuc()
     {
         return $this->belongsTo(ToChuc::class, 'don_vi', 'id');
     }
 
-    public function danToc()
-    {
-        return $this->belongsTo(danToc::class, 'dan_toc', 'id');
-    }
+
 
     public function tonGiao()
     {

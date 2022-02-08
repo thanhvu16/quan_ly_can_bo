@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\BacHeSoLuong;
+use Modules\Admin\Entities\BinhBauPhanLoaiCanBo;
 use Modules\Admin\Entities\CanBo;
 use Modules\Admin\Entities\ChinhTri;
 use Modules\Admin\Entities\ChucVu;
@@ -18,6 +19,7 @@ use Modules\Admin\Entities\DoiTuongQuanLy;
 use Modules\Admin\Entities\HinhThucDaoTao;
 use Modules\Admin\Entities\HinhThucThiTuyen;
 use Modules\Admin\Entities\KhenThuongKyLuat;
+use Modules\Admin\Entities\KiemNhiemBietPhai;
 use Modules\Admin\Entities\KyLuat;
 use Modules\Admin\Entities\LoaiPhuCap;
 use Modules\Admin\Entities\NgachChucDanh;
@@ -27,12 +29,17 @@ use Modules\Admin\Entities\PhoThong;
 use Modules\Admin\Entities\QuaChucVu;
 use Modules\Admin\Entities\QuanHam;
 use Modules\Admin\Entities\QuanLyHanhChinh;
+use Modules\Admin\Entities\QuaTrinhBaoHiem;
+use Modules\Admin\Entities\QuaTrinhBienCheHopDong;
 use Modules\Admin\Entities\QuaTrinhChucVuDang;
 use Modules\Admin\Entities\QuaTrinhCongTac;
 use Modules\Admin\Entities\QuaTrinhDaoTao;
+use Modules\Admin\Entities\QuaTrinhKhenThuong;
+use Modules\Admin\Entities\QuaTrinhKiemNhiemBietPhai;
 use Modules\Admin\Entities\QuaTrinhLuong;
 use Modules\Admin\Entities\QuaTrinhNuocNgoai;
 use Modules\Admin\Entities\QuaTrinhQuyHoachCanBo;
+use Modules\Admin\Entities\QuaTrinhVeHuu;
 use Modules\Admin\Entities\ThanhPhanXuatThan;
 use Modules\Admin\Entities\ThanhPho;
 use Modules\Admin\Entities\TiengAnh;
@@ -58,8 +65,9 @@ class CanBoController extends Controller
 
     public function canBo($id)
     {
-        $danhSach = CanBo::paginate(20);
-        return view('canbo::danh-sach-can-bo',compact('danhSach'));
+        $donVi = ToChuc::where('id',$id)->first();
+        $danhSach = CanBo::where('don_vi',$id)->paginate(20);
+        return view('canbo::danh-sach-can-bo',compact('danhSach','donVi'));
 
     }
     public function getlistcb()
@@ -116,15 +124,23 @@ class CanBoController extends Controller
         $khenThuong =KhenThuongKyLuat::orderBy('ten','asc')->get();
         $kyLuat =KyLuat::orderBy('ten','asc')->get();
         $xuatThan =ThanhPhanXuatThan::orderBy('ten','asc')->get();
+        $loaiCanBo =BinhBauPhanLoaiCanBo::orderBy('ten','asc')->get();
 
         $quaTrinhNuocNgoai = QuaTrinhNuocNgoai::where('users',$id)->get();
         $quaTrinhDaoTao = QuaTrinhDaoTao::where('users',$id)->get();
         $quaTrinhCongTac = QuaTrinhCongTac::where('users',$id)->get();
+        $kiemNhiem = KiemNhiemBietPhai::orderBy('ten','asc')->get();
 
         $quaTrinhLuong = QuaTrinhLuong::where('users',$id)->get();
         $quaTrinhChucVuDang = QuaTrinhChucVuDang::where('users',$id)->get();
         $quaTrinhChucVu = QuaChucVu::where('users',$id)->get();
         $quaTrinhQuyHoachCanBo = QuaTrinhQuyHoachCanBo::where('users',$id)->get();
+        $quaTrinhKiemNhiemBietphai = QuaTrinhKiemNhiemBietPhai::where('users',$id)->get();
+        $quaTrinhBienCheHopDong = QuaTrinhBienCheHopDong::where('users',$id)->get();
+        $quaTrinhKhenThuong = QuaTrinhKhenThuong::where('users',$id)->where('type',2)->get();
+        $quaTrinhKyLuat = QuaTrinhKhenThuong::where('users',$id)->where('type',1)->get();
+        $quaTrinhVeHuu = QuaTrinhVeHuu::where('users',$id)->get();
+        $quaTrinhBaoHiem = QuaTrinhBaoHiem::where('users',$id)->get();
 
         $truongHoc = TruongHoc::orderBy('ten','asc')->get();
         $nhiemKy = NhiemKy::orderBy('ten','asc')->get();
@@ -136,8 +152,79 @@ class CanBoController extends Controller
             ,'donVi','ngach','bacLuong','phuCap','chuyenNganhDT','congViecChuyenMon','phoThong','lyluanChinhTri','quanLyHanhChinh'
             ,'tiengAnh','ngoaiNgu','chucVuDang','quanHam','danhHieu','doiTuongQuanLy','hinhThucDaoTao','hinhThucTuyen','trangThai'
             ,'kyLuat','khenThuong','xuatThan','quaTrinhCongTac','quaTrinhDaoTao','quaTrinhNuocNgoai','truongHoc'
-            ,'quaTrinhLuong','quaTrinhChucVu','quaTrinhChucVuDang','quaTrinhQuyHoachCanBo','nhiemKy'
+            ,'quaTrinhLuong','quaTrinhChucVu','quaTrinhChucVuDang','quaTrinhQuyHoachCanBo','nhiemKy','quaTrinhBienCheHopDong','quaTrinhKiemNhiemBietphai'
+            ,'kiemNhiem','loaiCanBo','quaTrinhKhenThuong','quaTrinhKyLuat','quaTrinhBaoHiem','quaTrinhVeHuu'
             ,'tinHoc'));
+
+    }
+    public function quaTrinhKiemNhiem(Request $request,$id)
+    {
+        $canBo = CanBo::where('id',$id)->first();
+        $daoTao = new QuaTrinhKiemNhiemBietPhai();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->biet_phai = $request->biet_phai;
+        $daoTao->ly_do = $request->ly_do;
+        $daoTao->save();
+
+        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+    }
+    public function quaTrinhBaoHiem(Request $request,$id)
+    {
+        $canBo = CanBo::where('id',$id)->first();
+        $daoTao = new QuaTrinhBaoHiem();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->thanh_pho = $request->thanh_pho;
+        $daoTao->save();
+
+        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+    }
+    public function quaTrinhVeHuu(Request $request,$id)
+    {
+        $canBo = CanBo::where('id',$id)->first();
+        $daoTao = new QuaTrinhVeHuu();
+        $daoTao->ngay_ve_huu = !empty($request->ngay_ve_huu) ? formatYMD($request->ngay_ve_huu) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->tuoi_dang = $request->tuoi_dang;
+        $daoTao->save();
+
+        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+    }
+
+
+    public function quaTrinhKhenKy(Request $request,$id)
+    {
+        $canBo = CanBo::where('id',$id)->first();
+        $daoTao = new QuaTrinhKhenThuong();
+        $daoTao->ngay_quyet_dinh = !empty($request->ngay_quyet_dinh) ? formatYMD($request->ngay_quyet_dinh) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->so_quyet_dinh = $request->so_quyet_dinh;
+        $daoTao->ly_do = $request->ly_do;
+        $daoTao->co_quan = $request->co_quan;
+        $daoTao->noi_dung = $request->noi_dung;
+        $daoTao->type = $request->type;
+        $daoTao->save();
+
+        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+    }
+    public function quaTrinhBienChe(Request $request,$id)
+    {
+        $canBo = CanBo::where('id',$id)->first();
+        $daoTao = new QuaTrinhBienCheHopDong();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->bien_che = $request->bien_che;
+        $daoTao->save();
+
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhluong(Request $request,$id)
@@ -155,7 +242,7 @@ class CanBoController extends Controller
         $daoTao->tong_luong = $request->tong_luong;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhChucVu(Request $request,$id)
@@ -169,7 +256,7 @@ class CanBoController extends Controller
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhChucVuDang(Request $request,$id)
@@ -184,7 +271,7 @@ class CanBoController extends Controller
         $daoTao->nhiem_ky = $request->nhiem_ky;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhCanBo(Request $request,$id)
@@ -196,7 +283,7 @@ class CanBoController extends Controller
         $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
 
@@ -214,7 +301,7 @@ class CanBoController extends Controller
         $daoTao->truong = $request->truong;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhCongTac(Request $request,$id)
@@ -227,7 +314,7 @@ class CanBoController extends Controller
         $daoTao->chuc_danh = $request->chuc_danh;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhNuocNgoai(Request $request,$id)
@@ -242,7 +329,7 @@ class CanBoController extends Controller
         $daoTao->ly_do = $request->ly_do;
         $daoTao->save();
 
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
 
     }
     public function canBoDanhGiatt(Request $request,$id)
@@ -253,7 +340,7 @@ class CanBoController extends Controller
         $canBo->trung_uong_quan_ly = $request->trung_uong_quan_ly;
         $canBo->lam_cong_tac_quan_ly = $request->lam_cong_tac_quan_ly;
         $canBo->save();
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
     }
     public function canBoDanhGiac3(Request $request,$id)
     {
@@ -270,7 +357,7 @@ class CanBoController extends Controller
         $canBo->ngay_khai = !empty($request->ngay_khai) ? formatYMD($request->ngay_khai) : null;
         $canBo->ngay_xac_nhan = !empty($request->ngay_xac_nhan) ? formatYMD($request->ngay_xac_nhan) : null;
         $canBo->save();
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
     }
 
     public function canBoDanhGia(Request $request,$id)
@@ -311,7 +398,7 @@ class CanBoController extends Controller
         $canBo->trinh_do_2 = $request->trinh_do_2;
         $canBo->doi_tuong_chinh_sach = $request->doi_tuong_chinh_sach;
         $canBo->save();
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
     }
 
     public function postSoLuoc1(Request $request,$id)
@@ -357,7 +444,7 @@ class CanBoController extends Controller
         $canBo->BHYT = $request->bhyt;
 
         $canBo->save();
-        return redirect()->back()->with('cập nhật thành công !');
+        return redirect()->back()->with('success', 'cập nhật thành công !');
     }
 
     /**

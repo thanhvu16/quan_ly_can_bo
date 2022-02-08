@@ -1,5 +1,5 @@
 <li class="treeview {{  Route::is('chuc-nang.index')
-|| Route::is('vai-tro.index') || Route::is('ngay-nghi.index') || Route::is('don-vi-to-chuc.index') || Route::is('sao-luu-du-lieu.index') || Route::is('nhat-ky-truy-cap.index')
+|| Route::is('vai-tro.index') || Route::is('ngay-nghi.index')  || Route::is('sao-luu-du-lieu.index') || Route::is('nhat-ky-truy-cap.index')
  || Route::is('email-don-vi-ngoai-he-thong.index')|| Route::is('taiLieuHuongDan')|| Route::is('vetDangNhap')|| Route::is('cauHinh') ? 'active menu-open' : '' }} }} ">
 
 
@@ -10,7 +10,6 @@
             </span>
     </a>
     <ul class="treeview-menu">
-        <li class="{{ Route::is('don-vi-to-chuc.index') ? 'active' : '' }}"><a href="{{ route('don-vi-to-chuc.index') }}"><i class="fa fa-circle-o"></i> Quản lý đơn vị chính quyền</a></li>
         <li class="{{ Route::is('vai-tro.index') ? 'active' : '' }}"><a href="{{ route('vai-tro.index') }}"><i class="fa fa-circle-o"></i>Quyền hạn</a></li>
         <li class="{{ Route::is('ngay-nghi.index') ? 'active' : '' }}"><a href="{{ route('ngay-nghi.index') }}"><i class="fa fa-circle-o"></i>Ngày nghỉ</a></li>
         <li class="{{ Route::is('cauHinh') ? 'active' : '' }}"><a href="{{ route('cauHinh') }}"><i class="fa fa-circle-o"></i>Cấu hình hệ thống</a></li>
@@ -29,22 +28,7 @@
             </span>
     </a>
 </li>
-<li class="{{  Route::is('tra-cuu.index') ? 'active' : '' }} ">
-    <a href="{{route('tra-cuu.index')}}">
-        <i class="fa fa-search" ></i> <span>Tra cứu</span>
-        <span class="pull-right-container">
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-            </span>
-    </a>
-</li>
-{{--<li class="{{ Route::is('danhMucHeThong')  ? 'active' : '' }} ">--}}
-{{--    <a href="{{route('danhMucHeThong')}}">--}}
-{{--        <i class="fa fa-user-plus"></i> <span>Quản lý danh mục hệ thống</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
+
 <li class="treeview {{ Route::is('cap-to-chuc.index') || Route::is('khoi-co-quan.index') || Route::is('chuyen-nganh-dao-tao.index')
 || Route::is('linh-vuc-nghien-cuu.index') || Route::is('dan-toc.index') || Route::is('doi-tuong-quan-ly.index') || Route::is('ton-giao.index')
 || Route::is('tinh-trang-hon-nhan.index') || Route::is('hang-thuong-binh.index') || Route::is('danh-hieu.index') || Route::is('quan-he-gia-dinh.index')|| Route::is('hoc-ham.index')
@@ -100,20 +84,66 @@
         <li class="{{ Route::is('quan-ly-hc.index') ? 'active' : '' }}"><a href="{{ route('quan-ly-hc.index') }}"><i class="fa fa-circle-o"></i>Quản lý hành chính</a></li>
     </ul>
 </li>
+<li class="{{  Route::is('allCanBo') ? 'active' : '' }} ">
+    <a href="{{route('allCanBo')}}">
+        <i class="fa  fa-user" ></i> <span>Thông tin hồ sơ cán bộ</span>
+        <span class="pull-right-container"></span>
+    </a>
+</li>
+<li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
+    <a href="{{route('don-vi-to-chuc.index')}}">
+        <i class="fa  fa-users" ></i> <span>Quản lý Cán bộ</span>
+        <span class="pull-right-container"></span>
+    </a>
+</li>
+
 <li class="treeview {{ Route::is('danh-gia-can-bo.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
     <a href="#">
-        <i class="fa fa-users"></i> <span>Đánh giá cán bộ</span>
+        <i class="fa fa-book"></i> <span>Chế độ chính sách</span>
         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
     </a>
     <ul class="treeview-menu">
-        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a
-                href="{{ route('danh-gia-can-bo.index') }}"><i class="fa fa-circle-o"></i>Cá nhân tự đánh giá</a></li>
+        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Văn bản quy định</a></li>
+        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Các chính sách</a></li>
+        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Quản lý chi trả chính sách</a></li>
         {{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
     </ul>
 </li>
+<li class="{{  Route::is('tra-cuu.index') ? 'active' : '' }} ">
+    <a href="{{route('tra-cuu.index')}}">
+        <i class="fa fa-search" ></i> <span>Tra cứu - Tìm kiếm</span>
+        <span class="pull-right-container">
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+            </span>
+    </a>
+</li>
+{{--<li class="{{ Route::is('danhMucHeThong')  ? 'active' : '' }} ">--}}
+{{--    <a href="{{route('danhMucHeThong')}}">--}}
+{{--        <i class="fa fa-user-plus"></i> <span>Quản lý danh mục hệ thống</span>--}}
+{{--        <span class="pull-right-container">--}}
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+{{--            </span>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+{{--<li class="treeview {{ Route::is('danh-gia-can-bo.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">--}}
+{{--    <a href="#">--}}
+{{--        <i class="fa fa-users"></i> <span>Đánh giá cán bộ</span>--}}
+{{--        <span class="pull-right-container">--}}
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+{{--            </span>--}}
+{{--    </a>--}}
+{{--    <ul class="treeview-menu">--}}
+{{--        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a--}}
+{{--                href="{{ route('danh-gia-can-bo.index') }}"><i class="fa fa-circle-o"></i>Cá nhân tự đánh giá</a></li>--}}
+{{--        --}}{{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
+{{--        --}}{{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
+{{--    </ul>--}}
+{{--</li>--}}
+
 
 {{--<li class="{{ Route::is('chuc-vu.index') || Route::is('danhsachchucvu') ? 'active' : '' }}  ">--}}
 {{--    <a href="{{route('danhsachchucvu')}}">--}}
