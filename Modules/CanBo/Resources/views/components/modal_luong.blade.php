@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <select class="form-control select2" name="bac_luong">
                                         @foreach($bacLuong as $dsbacLuong)
-                                            <option value="{{$dsbacLuong->id}}" {{$canBo->bac_luong == $dsbacLuong->id ? 'selected' : ''}}>{{$dsbacLuong->bac_luong}}</option>
+                                            <option value="{{$dsbacLuong->id}}" >{{$dsbacLuong->bac_luong}}</option>
                                         @endforeach
                                     </select>
 

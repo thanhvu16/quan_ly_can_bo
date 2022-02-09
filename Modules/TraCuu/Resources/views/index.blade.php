@@ -8,7 +8,7 @@
                     <div class="box-header with-border">
                         <div class="col-md-6">
                             <div class="row">
-                                <h3 class="box-title">Danh sách cán bộ</h3>
+                                <h3 class="box-title">Tìm kiếm nhanh</h3>
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
@@ -22,27 +22,15 @@
                                 <a class=" btn btn-primary" data-toggle="collapse"
                                    href="#collapseExample"
                                    aria-expanded="false" aria-controls="collapseExample"> <i class="fa  fa-search"></i> <span
-                                        style="font-size: 14px">Tìm kiếm cán bộ</span>
+                                        style="font-size: 14px"></span>
                                 </a>
                             </div>
                             <div class="col-md-6 text-right">
-                                    <form action method="GET" action="{{ route('tra-cuu.index') }}" class="form-export">
+                                    <form method="GET" action="{{ route('tra-cuu.index') }}" class="form-export">
                                         <input type="hidden" name="type"  value="">
-                                        <input type="hidden" name="loai_van_ban_id"  value="{{Request::get('loai_van_ban_id') }}">
-                                        <input type="hidden" name="so_van_ban_id"  value="{{Request::get('so_van_ban_id') }}">
-                                        <input type="hidden" name="vb_so_den" value="{{Request::get('vb_so_den') }}">
-                                        <input type="hidden" name="vb_so_den" value="{{Request::get('vb_so_den_end') }}">
-                                        <input type="hidden" name="vb_so_ky_hieu"  value="{{Request::get('vb_so_ky_hieu') }}">
-                                        <input type="hidden" name="don_vi_phoi_hop_id" value="{{Request::get('don_vi_phoi_hop_id') }}">
-                                        <input type="hidden" name="start_date"  value="{{Request::get('start_date') }}">
-                                        <input type="hidden" name="end_date" value="{{Request::get('end_date') }}">
-                                        <input type="hidden" name="cap_ban_hanh_id"  value="{{Request::get('cap_ban_hanh_id') }}">
-                                        <input type="hidden" name="co_quan_ban_hanh_id" value="{{Request::get('co_quan_ban_hanh_id') }}">
-                                        <input type="hidden" name="nguoi_ky_id"  value="{{Request::get('nguoi_ky_id') }}">
-                                        <input type="hidden" name="vb_trich_yeu"  value="{{Request::get('vb_trich_yeu') }}">
-                                        <input type="hidden" name="year"  value="{{Request::get('year') }}">
-                                        <input type="hidden" name="don_vi_id" value="{{Request::get('don_vi_id') }}">
-                                        <input type="hidden" name="trinh_tu_nhan_van_ban" value="{{Request::get('trinh_tu_nhan_van_ban') }}">
+                                        <input type="hidden" name="ten_cb"  value="{{Request::get('ten_cb') }}">
+                                        <input type="hidden" name="don_vi"  value="{{Request::get('don_vi') }}">
+                                        <input type="hidden" name="chuc_vu_chinh" value="{{Request::get('chuc_vu_chinh') }}">
                                         <input type="hidden" name="page" value="{{Request::get('page') }}">
 
                                         <button type="button" data-type="excel"
@@ -51,6 +39,7 @@
                                         </button>
                                     </form>
                             </div>
+
 
                             {{--                            @can('in sổ văn bản đơn vị')--}}
                             {{--                           --}}
@@ -71,78 +60,20 @@
                                             <label for="loai_van_ban_id" class="col-form-label">Tên cán bộ</label>
                                             <input type="text" name="ten_cb" value="{{Request::get('ten_cb')}}" class="form-control" placeholder="Nhập tên cán bộ..">
                                         </div>
-                                        <div class="form-group col-md-3" >
-                                            <label for="loai_van_ban_id" class="col-form-label">Chứng minh thư</label>
-                                            <input type="text" name="cmt" value="{{Request::get('cmt')}}" class="form-control" placeholder="Nhập chứng minh thư..">
-                                        </div>
-                                        <div class="form-group col-md-3" >
-                                            <label for="loai_van_ban_id" class="col-form-label">Mã thẻ Đảng</label>
-                                            <input type="text" name="the_dang" class="form-control" value="{{Request::get('the_dang')}}" placeholder="Nhập mã thẻ đảng..">
-                                        </div>
-
-
-                                        <div class="form-group col-md-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail4">Ngày vào đảng chính thức</label>
-                                                <div class="input-group date">
-                                                    <input type="text" class="form-control  datepicker"
-                                                           name="start_date" id="start_date" value="{{Request::get('start_date')}}"
-                                                           placeholder="dd/mm/yyyy" >
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-{{--                                        <div class="form-group col-md-3" >--}}
-{{--                                            <label for="loai_van_ban_id" class="col-form-label">Tuổi Đảng</label>--}}
-{{--                                            <input type="text" class="form-control" placeholder="Nhập tuổi Đảng..">--}}
-{{--                                        </div>--}}
 
                                         <div class="form-group col-md-3" >
-                                            <label for="loai_van_ban_id" class="col-form-label">Chức vụ Đảng</label>
-                                            <select class="form-control " name="chuc_vu_dang" id="chuc_vu_dang">
-                                                <option value="">--Lựa chọn--</option>
-                                                @foreach($chucVuDang as $dschucVuDang)
-                                                    <option value="{{$dschucVuDang->id}}"  {{Request::get('chuc_vu_dang') == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="sokyhieu" class="col-form-label">Trình độ chuyên môn</label>
-                                            <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="trinh_do_chuyen_mon" id="trinh_do_chuyen_mon">
-                                                <option value="">--Lựa chọn--</option>
-                                                @foreach($congViecChuyenMon as $dscongViecChuyenMon)
-                                                    <option value="{{$dscongViecChuyenMon->id}}"  {{Request::get('trinh_do_chuyen_mon') == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-md-3">
-                                            <label for="sokyhieu" class="col-form-label">Tôn giáo</label>
-                                            <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="ton_giao" id="ton_giao">
-                                                <option value="">--Lựa chọn--</option>
-                                                @foreach($tonGiao as $dsTonGiao)
-                                                    <option value="{{$dsTonGiao->id}}" {{Request::get('ton_giao') == $dsTonGiao->id ? 'selected' : ''}}>{{$dsTonGiao->ten}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="sokyhieu" class="col-form-label">Tình trạng</label>
-                                            <select class="form-control  select-so-van-ban check-so-den-vb"
-                                                    name="tinh_trang" id="tinh_trang">
-                                                <option value="">--Lựa chọn--</option>
-                                                @foreach($trangThai as $dstrangThai)
-                                                    <option value="{{$dstrangThai->id}}"  {{Request::get('tinh_trang') == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>
-                                                @endforeach
+                                            <label for="don_vi" class="col-form-label">Đơn vị</label>
+                                            <select class="form-control  select2 "
+                                                    name="don_vi" id="don_vi">
+                                            <option value="">--Lựa chọn--</option>
+                                            @foreach($donVi as $dsdv)
+                                                <option value="{{$dsdv->id}}"  {{Request::get('don_vi') == $dsdv->id ? 'selected' : ''}}>{{$dsdv->ten_don_vi}}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="sokyhieu" class="col-form-label">Chức vụ chính quyền</label>
-                                            <select class="form-control  select-so-van-ban check-so-den-vb"
+                                            <select class="form-control  select2 "
                                                     name="chuc_vu_chinh" id="chuc_vu_chinh">
                                                 <option value="">--Lựa chọn--</option>
                                                 @foreach($chucVuHienTai as $hientai)
@@ -170,12 +101,12 @@
                                 <th width="7%"  style="vertical-align: middle"class="text-center">Năm sinh</th>
                                 <th width="5%" style="vertical-align: middle" class="text-center">Dân tộc</th>
                                 <th width="8%" style="vertical-align: middle" class="text-center">Quê quán</th>
-                                <th width="8%" style="vertical-align: middle" class="text-center">Chức vụ</th>
+                                <th width="15%" style="vertical-align: middle" class="text-center">Chức vụ</th>
                                 <th width="13%" style="vertical-align: middle" class="text-center">Đơn vị</th>
                                 <th width="8%" style="vertical-align: middle" class="text-center">Mã thẻ Đảng</th>
                                 <th width="10%" style="vertical-align: middle" class="text-center">Ngày vào Đảng CT</th>
-                                <th width="13%" style="vertical-align: middle" class="text-center">Chức vụ Đảng</th>
-                                <th width="8%" style="vertical-align: middle" class="text-center">Đơn vị đảng</th>
+{{--                                <th width="13%" style="vertical-align: middle" class="text-center">Chức vụ Đảng</th>--}}
+{{--                                <th width="8%" style="vertical-align: middle" class="text-center">Đơn vị đảng</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -186,13 +117,11 @@
                                     <td class="text-center">{{$data->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                     <td class="text-center">{{date("d/m/Y", strtotime($data->ngay_sinh))}}</td>
                                     <td class="text-center">Kinh</td>
-                                    <td class="text-center"><i class="fa fa-map-marker margin-r-5"></i> Hà Nội</td>
-                                    <td>Phó chủ tịch</td>
-                                    <td>Văn phòng Quận ủy</td>
+                                    <td class="text-center"><i class="fa fa-map-marker margin-r-5"></i>  {{$data->thanhPho->ten ?? ''}}</td>
+                                    <td>{{$data->chucVuHienTai->ten ?? ''}}</td>
+                                    <td>{{$data->donVi->ten_don_vi ?? ''}}</td>
                                     <td class="text-center" style="vertical-align: middle">{{$data->so_the_dang}}</td>
                                     <td class="text-center" style="vertical-align: middle">@if($data->ngay_vao_dang_chinh_thuc){{date("d/m/Y", strtotime($data->ngay_vao_dang_chinh_thuc))}}@endif</td>
-                                    <td class="text-center" style="vertical-align: middle">Bí thư Đảng uỷ cơ quan</td>
-                                    <td class="text-center" style="vertical-align: middle">Hội phụ nữ</td>
 
                                 </tr>
 
@@ -208,12 +137,7 @@
 
                             </div>
                             <div class="col-md-6 text-right">
-                                {!! $danhSach->appends(['so_van_ban_id' => Request::get('so_van_ban_id'),'loai_van_ban_id' => Request::get('loai_van_ban_id'),'ngay_ban_hanh_date' => Request::get('ngay_ban_hanh_date'),'end_ngay_ban_hanh' => Request::get('end_ngay_ban_hanh'), 'vb_so_den' => Request::get('vb_so_den')
-                       ,'vb_so_ky_hieu' => Request::get('vb_so_ky_hieu'),'don_vi_phoi_hop_id' => Request::get('don_vi_phoi_hop_id'),
-                       'end_date' => Request::get('end_date'),'start_date' => Request::get('start_date'),
-                       'cap_ban_hanh_id' => Request::get('cap_ban_hanh_id'),'co_quan_ban_hanh_id' => Request::get('co_quan_ban_hanh_id'),'nguoi_ky_id' => Request::get('nguoi_ky_id'),
-                       'vb_trich_yeu' => Request::get('vb_trich_yeu'), 'search' =>Request::get('search'), 'year' => Request::get('year'),
-                       'don_vi_id' => Request::get('don_vi_id'), 'trinh_tu_nhan_van_ban' => Request::get('trinh_tu_nhan_van_ban')])->render() !!}
+                                {!! $danhSach->appends(['ten_cb' => Request::get('ten_cb'),'don_vi' => Request::get('don_vi'),'chuc_vu_chinh' => Request::get('chuc_vu_chinh')])->render() !!}
                             </div>
                         </div>
                     </div>
@@ -227,39 +151,9 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        if ($.browser.webkit) {
-            $("input").attr('autocomplete','off');
-        }
-        if (BrowserDetect.browser == "Chrome") {
-            jQuery('form').attr('autocomplete','off');
-        };
-        function showModal() {
-            console.log(1);
-            $("#myModal").modal('show');
-        }
-        $(document).ready(function() {
-            // show the alert
-            console.log(1);
-            // setTimeout(function() {
-            //     $(".alert").alert('close');
-            // }, 2000);
-        });
         $('.btn-export-data').on('click', function () {
+            console.log(123);
             let type = $(this).data('type');
-            // let loai_van_ban= $('[name=loai_van_ban_id]').val();
-            // let so_van_ban_id= $('[name=so_van_ban_id]').val();
-            // let vb_so_den= $('[name=vb_so_den]').val();
-            // let vb_so_ky_hieu= $('[name=vb_so_ky_hieu]').val();
-            // let don_vi_phoi_hop_id= $('[name=don_vi_phoi_hop_id]').val();
-            // let start_date= $('[name=start_date]').val();
-            // let end_date= $('[name=end_date]').val();
-            // let cap_ban_hanh_id= $('[name=cap_ban_hanh_id]').val();
-            // let co_quan_ban_hanh_id= $('[name=co_quan_ban_hanh_id]').val();
-            // let nguoi_ky_id= $('[name=nguoi_ky_id]').val();
-            // let vb_trich_yeu= $('[name=vb_trich_yeu]').val();
-            // let year= $('[name=year]').val();
-            // let don_vi_id= $('[name=don_vi_id]').val();
-            // let trinh_tu_nhan_van_ban= $('[name=trinh_tu_nhan_van_ban]').val();
             $('input[name="type"]').val(type);
             $('.form-export').submit();
             hideLoading();

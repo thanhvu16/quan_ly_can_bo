@@ -8,6 +8,7 @@
                     <label for="exampleInputEmail6">Xuất thân</label>
                     <div class="form-group">
                         <select class="form-control select2" name="xuat_than">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($xuatThan as $dsxuatThan)
                                 <option value="{{$dsxuatThan->id}}"  {{$canBo->xuat_than == $dsxuatThan->id ? 'selected' : ''}}>{{$dsxuatThan->ten}}</option>
                             @endforeach
@@ -21,6 +22,7 @@
                     <label for="exampleInputEmail6">Khen thưởng cao nhất</label>
                     <div class="form-group">
                         <select class="form-control select2" name="khen_thuong_cao_nhat">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($khenThuong as $dschuyenNganhDT)
                                 <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->khen_thuong_cao_nhat == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
                             @endforeach
@@ -35,6 +37,7 @@
                     <label for="exampleInputEmail6">Học hàm cao nhất</label>
                     <div class="form-group">
                         <select class="form-control select2" name="hoc_ham">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($chuyenNganhDT as $dschuyenNganhDT)
                                 <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->hoc_ham == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
                             @endforeach
@@ -43,12 +46,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Kỷ luật cao nhất</label>
                     <div class="form-group">
                         <select class="form-control select2" name="ky_luat_cao_nhat">
-                            <@foreach($kyLuat as $dskyLuat)
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($kyLuat as $dskyLuat)
                                 <option value="{{$dskyLuat->id}}"  {{$canBo->ky_luat_cao_nhat == $dskyLuat->id ? 'selected' : ''}}>{{$dskyLuat->ten}}</option>
                             @endforeach
                         </select>
@@ -56,7 +61,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 " >
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Phân loại cán bộ</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="phan_loai_cb">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($loaiCanBo as $dscb)
+                                <option value="{{$dscb->id}}" {{$canBo->phan_loai_cb == $dscb->id ? 'selected' : ''}}>{{$dscb->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-4" >
                     <label for="bi_dich_bat"><input type="checkbox" value="1"  {{$canBo->bi_dich_bat == 1 ? 'checked' : ''}} id="bi_dich_bat" name="bi_dich_bat"> Bị địch bắt, tù đày hoặc làm việc cho chế độ cũ</label>
             </div>
             <div class="col-md-12" >

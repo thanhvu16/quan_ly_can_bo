@@ -67,7 +67,7 @@
 
     </style>
 </head>
-<script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-dao-roi.js"></script>
+{{--<script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-dao-roi.js"></script>--}}
 <body class="hold-transition login-page" style="margin-top: -40px">
 <div class="login-box">
 
@@ -107,18 +107,7 @@
                                     </span>
                 @enderror
             </div>
-            <div class="row">
-                <div class="col-xs-5">
-                </div>
-                    <div class="col-xs-7 text-right">
-                            <select name="year" id="year" class="form-control select2" >
-                                @for($i = 2021; $i <= 2022; $i++)
-                                    <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>
-                                        Năm làm việc {{ $i }}</option>
-                                @endfor
-                            </select>
-                    </div>
-            </div>
+
             <div class="row mt-2">
                 <div class="col-xs-5">
 {{--                    <div class="checkbox icheck">--}}
@@ -147,7 +136,7 @@
 {{--                </div>--}}
                 <!-- /.col -->
             </div>
-            <div class="row mt-2">
+            <div class="row mt-4">
                 <div class="col-xs-6" style="float:none;margin: auto">
                     <button class="btn btn-block bg-light-blue waves-effect" type="submit">
                         {{--                            <i class="fa fa-arrow-circle-right"></i>--}}

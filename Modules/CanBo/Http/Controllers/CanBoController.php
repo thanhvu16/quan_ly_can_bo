@@ -353,6 +353,7 @@ class CanBoController extends Controller
         $canBo->dac_diem_lich_su_ban_than = $request->dac_diem_lich_su_ban_than;
         $canBo->dac_diem_lich_su_ban_than_tai_san = $request->dac_diem_lich_su_ban_than_tai_san;
         $canBo->danh_gia_cua_can_bo = $request->danh_gia_cua_can_bo;
+        $canBo->phan_loai_cb = $request->phan_loai_cb;
         $canBo->tu_nhan_xet_ban_than = $request->tu_nhan_xet_ban_than;
         $canBo->ngay_khai = !empty($request->ngay_khai) ? formatYMD($request->ngay_khai) : null;
         $canBo->ngay_xac_nhan = !empty($request->ngay_xac_nhan) ? formatYMD($request->ngay_xac_nhan) : null;

@@ -11,8 +11,7 @@
 |
 */
 
-Route::prefix('tracuu')->group(function() {
-    Route::get('/', 'TraCuuController@index');
-});
-Route::resource('tra-cuu', 'TraCuuController');
-Route::get('tra-cuu-nang-cao', 'TraCuuController@nangCao')->name('nangCao');
+
+Route::resource('chinh-sach', 'ChinhSachController');
+Route::resource('van-ban-quy-dinh', 'VanBanController');
+Route::post('xoa-van-ban/{id}', array('as' => 'xoavb', 'uses' => 'VanBanController@destroy'));

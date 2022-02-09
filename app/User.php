@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Modules\Admin\Entities\ChucVu;
 use Modules\Admin\Entities\DonVi;
+use Modules\Admin\Entities\ToChuc;
 use Modules\DieuHanhVanBanDen\Entities\XuLyVanBanDen;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -86,6 +87,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DonVi::class, 'don_vi_id', 'id')
             ->select('id', 'ten_don_vi', 'ten_viet_tat', 'dieu_hanh', 'nhom_don_vi', 'cap_xa', 'ma_hanh_chinh', 'parent_id', 'type');
+    }
+    public function donVi2()
+    {
+        return $this->belongsTo(ToChuc::class, 'don_vi_id', 'id')
+            ->select('id', 'ten_don_vi', 'ten_viet_tat', 'dieu_hanh', 'nhom_don_vi', 'cap_xa', 'ma_hanh_chinh', 'parent_id');
     }
     public function donViKhacXa()
     {

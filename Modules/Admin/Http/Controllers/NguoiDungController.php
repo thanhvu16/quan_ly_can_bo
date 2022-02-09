@@ -291,7 +291,8 @@ class NguoiDungController extends Controller
 //        canPermission(AllPermission::suaNguoiDung());
 
         $user = User::findOrFail($id);
-        $donVi = $user->donVi;
+        $donVi1 = $user->donVi;
+        $donVi = $user->donVi2;
         $donViId = isset($donVi) && $donVi->parent_id != 0 ? $donVi->parent_id : $donVi->id ?? null;
 
         $roles = Role::all();

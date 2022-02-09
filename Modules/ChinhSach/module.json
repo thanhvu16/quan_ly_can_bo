@@ -1,0 +1,13 @@
+{
+    "name": "ChinhSach",
+    "alias": "chinhsach",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\ChinhSach\\Providers\\ChinhSachServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

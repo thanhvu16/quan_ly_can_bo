@@ -97,7 +97,7 @@
     </a>
 </li>
 
-<li class="treeview {{ Route::is('danh-gia-can-bo.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
+<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
     <a href="#">
         <i class="fa fa-book"></i> <span>Chế độ chính sách</span>
         <span class="pull-right-container">
@@ -105,92 +105,25 @@
             </span>
     </a>
     <ul class="treeview-menu">
-        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Văn bản quy định</a></li>
-        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Các chính sách</a></li>
+        <li class="{{ Route::is('van-ban-quy-dinh.index') ? 'active' : '' }}"><a href="{{route('van-ban-quy-dinh.index')}}"><i class="fa fa-circle-o"></i>Văn bản quy định</a></li>
+        <li class="{{ Route::is('chinh-sach.index') ? 'active' : '' }}"><a href="{{route('chinh-sach.index')}}"><i class="fa fa-circle-o"></i>Các chính sách</a></li>
         <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Quản lý chi trả chính sách</a></li>
         {{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
     </ul>
 </li>
-<li class="{{  Route::is('tra-cuu.index') ? 'active' : '' }} ">
-    <a href="{{route('tra-cuu.index')}}">
-        <i class="fa fa-search" ></i> <span>Tra cứu - Tìm kiếm</span>
+<li class="treeview {{ Route::is('tra-cuu.index') || Route::is('nangCao') ? 'active menu-open' : '' }} }} ">
+    <a href="#">
+        <i class="fa fa-search"></i> <span>Tìm kiếm</span>
         <span class="pull-right-container">
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
     </a>
+    <ul class="treeview-menu">
+        <li class="{{ Route::is('tra-cuu.index') ? 'active' : '' }}"><a href="{{route('tra-cuu.index')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nhanh</a></li>
+        <li class="{{ Route::is('nangCao') ? 'active' : '' }}"><a href="{{route('nangCao')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nâng cao</a></li>
+    </ul>
 </li>
-{{--<li class="{{ Route::is('danhMucHeThong')  ? 'active' : '' }} ">--}}
-{{--    <a href="{{route('danhMucHeThong')}}">--}}
-{{--        <i class="fa fa-user-plus"></i> <span>Quản lý danh mục hệ thống</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-
-{{--<li class="treeview {{ Route::is('danh-gia-can-bo.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">--}}
-{{--    <a href="#">--}}
-{{--        <i class="fa fa-users"></i> <span>Đánh giá cán bộ</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--    <ul class="treeview-menu">--}}
-{{--        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a--}}
-{{--                href="{{ route('danh-gia-can-bo.index') }}"><i class="fa fa-circle-o"></i>Cá nhân tự đánh giá</a></li>--}}
-{{--        --}}{{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
-{{--        --}}{{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
-{{--    </ul>--}}
-{{--</li>--}}
 
 
-{{--<li class="{{ Route::is('chuc-vu.index') || Route::is('danhsachchucvu') ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('danhsachchucvu')}}">--}}
-{{--        <i class="fa fa-user-circle-o" aria-hidden="true"></i> <span>Chức vụ</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-
-{{--<li class="{{ Route::is('so-van-ban.index') || Route::is('danhsachsovanban') ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('danhsachsovanban')}}">--}}
-{{--        <i class="fa fa-book" aria-hidden="true"></i> <span>Sổ văn bản</span>--}}
-{{--        <span class="pull-right-container">--}}
-
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-{{--<li class="{{ Route::is('loai-van-ban.index') || Route::is('danhsachloaivanban') ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('danhsachloaivanban')}}">--}}
-{{--        <i class="fa fa-database" aria-hidden="true"></i> <span>Loại văn bản</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-{{--<li class="{{ Route::is('do-bao-mat.index') || Route::is('danhsachdobaomat') ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('danhsachdobaomat')}}">--}}
-{{--        <i class="fa fa-shield" aria-hidden="true"></i> <span>Độ bảo mật</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-{{--<li class="{{ Route::is('do-khan-cap.index') || Route::is('danhsachdokhancap') ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('danhsachdokhancap')}}">--}}
-{{--        <i class="fa fa-bolt" aria-hidden="true"></i> <span>Độ khẩn cấp</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
-{{--<li class="{{ Route::is('tieu-chuan.index')  ? 'active' : '' }}  ">--}}
-{{--    <a href="{{route('tieu-chuan.index')}}">--}}
-{{--        <i class="fa  fa-warning" aria-hidden="true"></i> <span>Tiêu chuẩn</span>--}}
-{{--        <span class="pull-right-container">--}}
-{{--            </span>--}}
-{{--    </a>--}}
-{{--</li>--}}
 
