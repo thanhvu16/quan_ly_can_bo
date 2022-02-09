@@ -2,6 +2,7 @@
 
 namespace Modules\CanBo\Http\Controllers;
 
+use App\Models\HoSoTraLai;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -49,7 +50,7 @@ use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
 use Modules\Admin\Http\Controllers\LyLuanChinhTri;
-use File;
+use File, Auth;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class CanBoController extends Controller
@@ -445,6 +446,20 @@ class CanBoController extends Controller
         $canBo->BHYT = $request->bhyt;
 
         $canBo->save();
+
+        /** Cập nhật trạng thái hồ sơ trả lại **/
+        $checkHoSoTraLai = HoSoTraLai::where('can_bo_id', $canBo->id)
+            ->where('can_bo_nhan_id', auth::user()->id)->whereNull('status')
+            ->first();
+
+        if ($checkHoSoTraLai) {
+            $checkHoSoTraLai->status = 1;
+            $checkHoSoTraLai->save();
+
+            $canBo->trang_thai_duyet_ho_so = null;
+            $canBo->save();
+        }
+
         return redirect()->back()->with('success', 'cập nhật thành công !');
     }
 

@@ -2,13 +2,19 @@
 
 namespace Modules\Admin\Entities;
 
+use App\Models\HoSoTraLai;
+use App\Models\TrinhTuGuiDuyetHoSo;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class CanBo extends Model
 {
 
     protected $table = 'can_bo';
+
+    const TRANG_THAI_DA_GUI_DUYET = 1;
+    const TRANG_THAI_DA_GUI_DUYET_TRA_LAI = 2;
+    const TRANG_THAI_DA_GUI_DUYET_DA_DUYET = 3;
 
     public function hinhThucTuyen()
     {
@@ -48,5 +54,34 @@ class CanBo extends Model
         return $this->belongsTo(TonGiao::class, 'ton_giao', 'id');
     }
 
+    public static function updateTrangThaiGuiDuyet($canBoId, $trangThai)
+    {
+        $canBo = CanBo::find($canBoId);
+        if ($canBoId) {
+            $canBo->trang_thai_duyet_ho_so = $trangThai;
+            $canBo->save();
+        }
+    }
+
+    public function trinhTuChoDuyetHoSo()
+    {
+        return $this->belongsTo(TrinhTuGuiDuyetHoSo::class, 'id', 'can_bo_id')
+            ->where('can_bo_nhan_id', auth::user()->id)->whereNull('status')
+            ->orderBy('id', 'DESC');
+    }
+
+    public function trinhTuTraLaiHoSo()
+    {
+        return $this->belongsTo(HoSoTraLai::class, 'id', 'can_bo_id')
+            ->where('can_bo_chuyen_id', auth::user()->id)->whereNull('status')
+            ->orderBy('id', 'DESC');
+    }
+
+    public function trinhTuTraLaiHoSoCanBoNhap()
+    {
+        return $this->belongsTo(HoSoTraLai::class, 'id', 'can_bo_id')
+            ->where('can_bo_nhan_id', auth::user()->id)->whereNull('status')
+            ->orderBy('id', 'DESC');
+    }
 }
 

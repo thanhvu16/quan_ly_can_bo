@@ -1,5 +1,5 @@
 @extends('admin::layouts.master')
-@section('page_title', 'Danh sách hồ sơ')
+@section('page_title', 'Thông tin hồ sơ cán bộ')
 @section('content')
     <section class="content">
         <div class="row">
@@ -8,7 +8,7 @@
                     <div class="box-header with-border">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="header-title pt-2">Danh sách &nbsp;
+                                <h4 class="header-title pt-2">Hồ sơ cán bộ &nbsp;
                                     <a class="btn btn-default btn-sm" data-toggle="collapse"
                                        href="#collapse-tim-kiem-can-bo"
                                        aria-expanded="false" aria-controls="collapse-tim-kiem-can-bo"> <i
@@ -74,13 +74,14 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center" width="2%">STT</th>
-                                        <th class="text-center" width="15%">Họ tên</th>
+                                        <th class="text-center">Họ tên</th>
                                         <th class="text-center" width="7%">Giới tính</th>
                                         <th class="text-center" width="10%">Năm sinh</th>
-                                        <th class="text-center" width="7%">Dân tộc</th>
+                                        <th class="text-center" width="5%">Dân tộc</th>
                                         <th class="text-center" width="10%">Quê quán</th>
                                         <th class="text-center" width="13%">Chức vụ hiện tại</th>
                                         <th class="text-center" width="20%">Đơn vị</th>
+                                        <th class="text-center" width="10%">Trạng thái</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -91,7 +92,7 @@
                                                     href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1)
                                                         <i style="color: brown" class="fa fa-user-secret"></i>  @else <i
                                                             style="color: hotpink"
-                                                            class="fa  fa-female"></i> @endif {{$data->ho_ten}}</a>
+                                                            class="fa  fa-wheelchair"></i> @endif {{$data->ho_ten}}</a>
                                             </td>
                                             <td class="text-center">{{$data->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                             <td class="text-center">{{date("d/m/Y", strtotime($data->ngay_sinh))}}</td>
@@ -101,6 +102,15 @@
                                             </td>
                                             <td>{{$data->chucVuHienTai->ten ?? ''}}</td>
                                             <td>{{$data->donVi->ten_don_vi ?? ''}}</td>
+                                            <td class="text-center">
+                                                @if ($data->trang_thai_duyet_ho_so == 1)
+                                                    <label for="" class="label label-warning">Chờ duyệt</label>
+                                                @elseif($data->trang_thai_duyet_ho_so == 2)
+                                                    <label for="" class="label label-danger">Trả lại</label>
+                                                @else
+                                                    <label for="" class="label label-success">Đã duyệt</label>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>

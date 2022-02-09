@@ -84,18 +84,6 @@
         <li class="{{ Route::is('quan-ly-hc.index') ? 'active' : '' }}"><a href="{{ route('quan-ly-hc.index') }}"><i class="fa fa-circle-o"></i>Quản lý hành chính</a></li>
     </ul>
 </li>
-<li class="{{  Route::is('allCanBo') ? 'active' : '' }} ">
-    <a href="{{route('allCanBo')}}">
-        <i class="fa  fa-user" ></i> <span>Thông tin hồ sơ cán bộ</span>
-        <span class="pull-right-container"></span>
-    </a>
-</li>
-<li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
-    <a href="{{route('don-vi-to-chuc.index')}}">
-        <i class="fa  fa-users" ></i> <span>Quản lý Cán bộ</span>
-        <span class="pull-right-container"></span>
-    </a>
-</li>
 
 <li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
     <a href="#">

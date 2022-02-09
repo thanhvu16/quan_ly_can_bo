@@ -106,6 +106,7 @@
                                         <th class="text-center">Tài khoản</th>
                                         <th class="text-center">Họ tên</th>
                                         <th class="text-center">Chức vụ</th>
+                                        <th class="text-center">Quyền hạn</th>
                                         <th class="text-center">Đơn vị</th>
                                         <th class="text-center">Giới tính</th>
                                         <th class="text-center">Trạng thái</th>
@@ -119,6 +120,7 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->ho_ten }}</td>
                                         <td>{{ $user->chucVu->ten_chuc_vu ?? null }}</td>
+                                        <td>{{ $user->roles[0]->name ?? null }}</td>
                                         <td>{{ $user->donVi->ten_don_vi ?? null }}</td>
                                         <td>{{ $user->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                         <td class="text-center">{!! getStatusLabel($user->trang_thai) !!}</td>
@@ -142,7 +144,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center">Không có dữ liệu</td>
+                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
