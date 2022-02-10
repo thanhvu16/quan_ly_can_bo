@@ -9,9 +9,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="header-title pt-2">Hồ sơ cán bộ &nbsp;
-                                <a type="button" href="{{route('ho_so_can_bo.create')}}" class="btn btn-sm btn-default waves-effect waves-light mb-1">
-                                    <i class="fa fa-plus"></i>TẠO HỒ SƠ CÁN BỘ
-                                </a>
+                                    @can(\App\Common\AllPermission::themCanBo())
+                                        <a type="button" href="{{route('ho_so_can_bo.create')}}" class="btn btn-sm btn-default waves-effect waves-light mb-1">
+                                            <i class="fa fa-plus"></i>TẠO HỒ SƠ CÁN BỘ
+                                        </a>
+                                    @endcan
                                 </h4>
                             </div>
                             <div class="col-md-6">

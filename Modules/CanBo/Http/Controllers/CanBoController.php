@@ -2,6 +2,7 @@
 
 namespace Modules\CanBo\Http\Controllers;
 
+use App\Common\AllPermission;
 use App\Models\HoSoTraLai;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -93,6 +94,8 @@ class CanBoController extends Controller
     }
     public function canBoDetail($id)
     {
+        canPermission(AllPermission::xemCanBo());
+
         $canBo = CanBo:: where('id',$id)->first();
 
         $danToc = DanToc::orderBy('ten','asc')->get();

@@ -43,7 +43,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px">
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình chức vụ</h4>
-                <a style="cursor: pointer" onclick="showModal5()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal5()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
                 <table class="table table-bordered table-striped dataTable mb-0">
@@ -74,7 +76,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px" >
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình chức vụ Đảng</h4>
-                <a style="cursor: pointer" onclick="showModal6()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal6()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12"  style="margin-bottom: 30px;margin-top: 10px">
                 <table class="table table-bordered table-striped dataTable mb-0">
@@ -107,7 +111,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px" >
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình quy hoạch cán bộ</h4>
-                <a style="cursor: pointer" onclick="showModal7()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal7()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12">
                 <table class="table table-bordered table-striped dataTable mb-0">

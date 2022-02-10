@@ -3,8 +3,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Khen Thưởng</h4>
-
-                <a style="cursor: pointer" onclick="showModal10()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal10()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
                 <table class="table table-bordered table-striped dataTable mb-0">
@@ -37,7 +38,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px">
                 <h4 style="color: #0a0a0a;font-weight: bold"> Kỷ luật</h4>
-                <a style="cursor: pointer" onclick="showModal11()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal11()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
                 <table class="table table-bordered table-striped dataTable mb-0">

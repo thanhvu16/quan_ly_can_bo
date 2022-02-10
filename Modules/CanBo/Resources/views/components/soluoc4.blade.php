@@ -3,8 +3,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình đào tạo (Đào tạo, Bồi dưỡng nghiệp vụ,Chính trị,Tin học..)</h4>
-
-                <a style="cursor: pointer" onclick="showModal()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
                 <table class="table table-bordered table-striped dataTable mb-0">
@@ -41,7 +42,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px">
                 <h4 style="color: #0a0a0a;font-weight: bold">Lịch sử bản thân và Quá trình công tác</h4>
-                <a style="cursor: pointer" onclick="showModal3()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal3()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
                 <table class="table table-bordered table-striped dataTable mb-0">
@@ -70,7 +73,9 @@
             </div>
             <div class="col-md-12" style="margin-bottom: 10px" >
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình hoạt động tại nước ngoài</h4>
-                <a style="cursor: pointer" onclick="showModal2()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal2()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
             </div>
             <div class="col-md-12">
                 <table class="table table-bordered table-striped dataTable mb-0">

@@ -341,10 +341,11 @@
 
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-3 col-sm">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Cập nhật</button>
+    @can(\App\Common\AllPermission::suaCanBo())
+        <div class="form-group">
+            <div class="col-md-3 col-sm">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Cập nhật</button>
+            </div>
         </div>
-    </div>
+    @endcan
 </form>

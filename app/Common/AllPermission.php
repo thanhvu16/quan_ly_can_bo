@@ -22,4 +22,29 @@ class AllPermission
     {
         return 'xoá người dùng';
     }
+
+    public static function canBo()
+    {
+        return 'Cán bộ';
+    }
+
+    public static function themCanBo()
+    {
+        return 'thêm cán bộ';
+    }
+
+    public static function suaCanBo()
+    {
+        return 'sửa cán bộ';
+    }
+
+    public static function xoaCanBo()
+    {
+        return 'xoá cán bộ';
+    }
+
+    public static function xemCanBo()
+    {
+        return 'xem cán bộ';
+    }
 }

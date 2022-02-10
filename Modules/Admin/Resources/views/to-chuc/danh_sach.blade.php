@@ -34,10 +34,12 @@
                                     THÊM ĐƠN VỊ
                                 </button>
                                 @endrole
-                                <a type="button" href="{{route('ho_so_can_bo.create')}}" class="btn btn-sm btn-success waves-effect waves-light mb-1">
-                                    <i class="fa fa-plus"></i>
-                                    TẠO CÁN BỘ
-                                </a>
+                                @can(\App\Common\AllPermission::themCanBo())
+                                    <a type="button" href="{{route('ho_so_can_bo.create')}}" class="btn btn-sm btn-success waves-effect waves-light mb-1">
+                                        <i class="fa fa-plus"></i>
+                                        TẠO CÁN BỘ
+                                    </a>
+                                @endcan
                             </div>
 
                             <div class="col-md-12">

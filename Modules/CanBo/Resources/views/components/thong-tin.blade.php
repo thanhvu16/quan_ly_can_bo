@@ -48,8 +48,9 @@
                     <b>Làm công tác quản lý</b> <a class="pull-right"><input {{$canBo->lam_cong_tac_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" name="lam_cong_tac_quan_ly"></a>
                 </li>
             </ul>
-
-            <button  class="btn btn-primary btn-block"><b><i class="fa fa-check-square-o"></i> Cập nhật</b></button>
+            @can(\App\Common\AllPermission::suaCanBo())
+                <button  class="btn btn-primary btn-block"><b><i class="fa fa-check-square-o"></i> Cập nhật</b></button>
+            @endcan
         </div>
 
     </form>
