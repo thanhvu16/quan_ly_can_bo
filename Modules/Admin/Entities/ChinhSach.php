@@ -6,10 +6,10 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class VanBan extends Model
+class ChinhSach extends Model
 {
 
-    protected $table = 'van_ban_quy_dinh';
+    protected $table = 'chinh_sach';
 
 
     public function getUrlFile()

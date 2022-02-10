@@ -85,7 +85,7 @@
     </ul>
 </li>
 
-<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('danh-gia-can-bo.create') || Route::is('danh-gia-can-bo.edit') ? 'active menu-open' : '' }} }} ">
+<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('chi-tra-chinh-sach.index') || Route::is('chinh-sach.index') ? 'active menu-open' : '' }} }} ">
     <a href="#">
         <i class="fa fa-book"></i> <span>Chế độ chính sách</span>
         <span class="pull-right-container">
@@ -95,7 +95,7 @@
     <ul class="treeview-menu">
         <li class="{{ Route::is('van-ban-quy-dinh.index') ? 'active' : '' }}"><a href="{{route('van-ban-quy-dinh.index')}}"><i class="fa fa-circle-o"></i>Văn bản quy định</a></li>
         <li class="{{ Route::is('chinh-sach.index') ? 'active' : '' }}"><a href="{{route('chinh-sach.index')}}"><i class="fa fa-circle-o"></i>Các chính sách</a></li>
-        <li class="{{ Route::is('danh-gia-can-bo.index') ? 'active' : '' }}"><a href=""><i class="fa fa-circle-o"></i>Quản lý chi trả chính sách</a></li>
+        <li class="{{ Route::is('chi-tra-chinh-sach.index') ? 'active' : '' }}"><a href="{{route('chi-tra-chinh-sach.index')}}"><i class="fa fa-circle-o"></i>Quản lý chi trả chính sách</a></li>
         {{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
     </ul>

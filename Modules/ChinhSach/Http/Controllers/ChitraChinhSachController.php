@@ -5,12 +5,12 @@ namespace Modules\ChinhSach\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
 use Modules\Admin\Entities\ChinhSach;
-use Modules\Admin\Entities\VanBan;
+use Modules\Admin\Entities\ChiTra;
+use Modules\Admin\Entities\DoiTuongQuanLy;
 use DB,File, auth;
 
-class ChinhSachController extends Controller
+class ChitraChinhSachController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,15 @@ class ChinhSachController extends Controller
      */
     public function index(Request $request)
     {
-        $chinhSach = ChinhSach::all();
+        $doiTuongChinhSach = DoiTuongQuanLy::orderBy('ten','asc')->get();
+        $chinhSach = ChiTra::all();
         $id = $request->id;
         $chinhSachfisst=null;
         if($id)
         {
-            $chinhSachfisst = ChinhSach::where('id',$id)->first();
+            $chinhSachfisst = ChiTra::where('id',$id)->first();
         }
-        return view('chinhsach::chinh-sach.index',compact('chinhSach','chinhSachfisst'));
+        return view('chinhsach::chi-tra.index',compact('doiTuongChinhSach','chinhSachfisst','chinhSach'));
     }
 
     /**
@@ -47,11 +48,9 @@ class ChinhSachController extends Controller
         $filevanban = !empty($request['File']) ? $request['File'] : null;
         try {
             DB::beginTransaction();
-            $vanbandv = new ChinhSach();
-            $vanbandv->ten_chinh_sach = $request->ten_chinh_sach;
-            $vanbandv->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
-            $vanbandv->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
-            $vanbandv->nguoi_tao = auth::user()->id;
+            $vanbandv = new ChiTra();
+            $vanbandv->noi_dung_chi_tra = $request->noi_dung_chi_tra;
+            $vanbandv->doi_tuong = $request->doi_tuong;
             $vanbandv->save();
 
             $uploadPath = UPLOAD_FILE_CHINH_SACH;
@@ -69,13 +68,12 @@ class ChinhSachController extends Controller
             }
 
             DB::commit();
-            return redirect()->back()->with('success', 'Thêm văn bản thành công !');
+            return redirect()->back()->with('success', 'Thêm chính sách thành công !');
 
         } catch (\Exception $e) {
             DB::rollback();
             dd($e);
         }
-
     }
 
     /**
@@ -106,12 +104,11 @@ class ChinhSachController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $vanbandv =  ChinhSach::where('id',$id)->first();
-        $vanbandv->ten_chinh_sach = $request->ten_chinh_sach;
-        $vanbandv->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
-        $vanbandv->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $vanbandv =  ChiTra::where('id',$id)->first();
+        $vanbandv->noi_dung_chi_tra = $request->noi_dung_chi_tra;
+        $vanbandv->doi_tuong = $request->doi_tuong;
         $vanbandv->save();
-        return redirect()->route('chinh-sach.index')->with('success', 'Cập nhật chính sách thành công !');
+        return redirect()->route('chi-tra-chinh-sach.index')->with('success', 'Cập nhật thành công !');
     }
 
     /**
@@ -121,7 +118,7 @@ class ChinhSachController extends Controller
      */
     public function destroy($id)
     {
-        ChinhSach::where('id',$id)->delete();
-        return redirect()->back()->with('success', 'Xóa văn bản thành công !');
+        ChiTra::where('id',$id)->delete();
+        return redirect()->back()->with('success', 'Xóa thành công !');
     }
 }

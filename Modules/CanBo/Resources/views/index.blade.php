@@ -196,6 +196,9 @@
             console.log(1);
             $("#myModal13").modal('show');
         }
+        function showModal14() {
+            $("#myModal14").modal('show');
+        }
     </script>
 
 @endsection
