@@ -27,16 +27,24 @@ class PermissionSeeder extends Seeder
 
         //nguoi dung
         $nguoiDung = Permission::findOrCreate(AllPermission::nguoiDung());
-        Permission::findOrCreate(AllPermission::themNguoiDung(), $nguoiDung->id);
-        Permission::findOrCreate(AllPermission::suaNguoiDung(), $nguoiDung->id);
-        Permission::findOrCreate(AllPermission::xoaNguoiDung(), $nguoiDung->id);
+        Permission::findOrCreate(AllPermission::themNguoiDung());
+        Permission::findOrCreate(AllPermission::suaNguoiDung());
+        Permission::findOrCreate(AllPermission::xoaNguoiDung());
+        Permission::where('name', 'LIKE', "%".AllPermission::nguoiDung()."%")
+            ->update([
+                'parent_id' => $nguoiDung->id
+            ]);
 
         // can bo
         $canBo = Permission::findOrCreate(AllPermission::canBo());
-        Permission::findOrCreate(AllPermission::xemCanBo(), $canBo->id);
-        Permission::findOrCreate(AllPermission::themCanBo(), $canBo->id);
-        Permission::findOrCreate(AllPermission::suaCanBo(), $canBo->id);
-        Permission::findOrCreate(AllPermission::xoaCanBo(), $canBo->id);
+        Permission::findOrCreate(AllPermission::xemCanBo());
+        Permission::findOrCreate(AllPermission::themCanBo());
+        Permission::findOrCreate(AllPermission::suaCanBo());
+        Permission::findOrCreate(AllPermission::xoaCanBo());
+        Permission::where('name', 'LIKE', "%".AllPermission::canBo()."%")
+            ->update([
+                'parent_id' => $canBo->id
+            ]);
 
         if ($role) {
             $permissions = Permission::all();
