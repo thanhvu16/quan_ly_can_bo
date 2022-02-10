@@ -31,6 +31,7 @@ class PermissionSeeder extends Seeder
         Permission::findOrCreate(AllPermission::suaNguoiDung());
         Permission::findOrCreate(AllPermission::xoaNguoiDung());
         Permission::where('name', 'LIKE', "%".AllPermission::nguoiDung()."%")
+            ->where('id', '!=', $nguoiDung->id)
             ->update([
                 'parent_id' => $nguoiDung->id
             ]);
@@ -42,6 +43,7 @@ class PermissionSeeder extends Seeder
         Permission::findOrCreate(AllPermission::suaCanBo());
         Permission::findOrCreate(AllPermission::xoaCanBo());
         Permission::where('name', 'LIKE', "%".AllPermission::canBo()."%")
+            ->where('id', '!=', $canBo->id)
             ->update([
                 'parent_id' => $canBo->id
             ]);
