@@ -26,7 +26,7 @@ class NguoiDungController extends Controller
      */
     public function index(Request $request)
     {
-        canPermission(AllPermission::themNguoiDung());
+        hasRole(QUAN_TRI_HT);
         $donViId = $request->get('don_vi_id') ?? null;
         $chucVuId = $request->get('chuc_vu_id') ?? null;
         $hoTen = $request->get('ho_ten') ?? null;
@@ -109,16 +109,16 @@ class NguoiDungController extends Controller
      */
     public function create()
     {
-        canPermission(AllPermission::themNguoiDung());
+        hasRole(QUAN_TRI_HT);
 
         $roles = Role::all();
         $danhSachChucVu = ChucVu::orderBy('ten_chuc_vu', 'asc')->whereNull('deleted_at')->get();
         $danhSachDonVi = ToChuc::orderBy('ten_don_vi', 'asc')->get();
 
-        $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
+//        $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
 
         return view('admin::nguoi-dung.create',
-            compact('roles', 'danhSachDonVi', 'danhSachChucVu', 'permissions'));
+            compact('roles', 'danhSachDonVi', 'danhSachChucVu'));
     }
 
     /**
@@ -128,12 +128,12 @@ class NguoiDungController extends Controller
      */
     public function store(Request $request)
     {
-        canPermission(AllPermission::themNguoiDung());
+        hasRole(QUAN_TRI_HT);
 
         $this->validate($request,
             [
                 'username' => 'required|unique:users,username',
-                'password' => 'required|min:6',
+                'password' => 'required|min:1',
                 'email' => 'required|unique:users,email'
             ],
             [
@@ -142,9 +142,7 @@ class NguoiDungController extends Controller
                 'email.required' => 'Vui lòng nhập email.',
                 'email.unique' => 'Email đã tồn tại vui lòng nhập email khác.',
                 'password.required' => 'Vui lòng nhập mật khẩu.',
-                'password.min' => 'Mật khẩu tối thiểu 6 kí tự.',
-
-
+                'password.min' => 'Mật khẩu tối thiểu 1 kí tự.',
             ]);
         $phongBanId = $request->get('phong_ban_id') ?? null;
         $donViId = $request->get('don_vi_id') ?? null;
@@ -305,13 +303,13 @@ class NguoiDungController extends Controller
             $danhSachPhongBan = ToChuc::where('parent_id', $donVi->parent_id)->select('id', 'ten_don_vi')->get();
         }
 
-        $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
-        $permissionUser = $user->permissions;
-        $arrPermissionId = $permissionUser->pluck('id')->toArray();
+//        $permissions = Permission::whereIn('name', [AllPermission::thamMuu(), AllPermission::VanThuChuyenTrach()])->get();
+//        $permissionUser = $user->permissions;
+//        $arrPermissionId = $permissionUser->pluck('id')->toArray();
 
 
-        return view('admin::nguoi-dung.edit', compact('user', 'donViId', 'permissions',
-            'roles', 'danhSachChucVu', 'danhSachDonVi', 'viTriUuTien', 'danhSachPhongBan', 'donVi', 'arrPermissionId'));
+        return view('admin::nguoi-dung.edit', compact('user', 'donViId',
+            'roles', 'danhSachChucVu', 'danhSachDonVi', 'viTriUuTien', 'danhSachPhongBan', 'donVi'));
     }
 
     /**
@@ -363,7 +361,7 @@ class NguoiDungController extends Controller
             $data['chu_ky_nhay'] = $url;
         }
 
-        $donVi = ToChuc::where('id', $data['don_vi_id'])->whereNull('deleted_at')->first();
+        $donVi = ToChuc::where('id', $data['don_vi_id'])->first();
         if ($donVi) {
             $data['cap_xa'] = $donVi->cap_xa ?? null;
         }

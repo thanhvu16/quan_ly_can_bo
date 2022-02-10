@@ -85,8 +85,8 @@ class User extends Authenticatable
 
     public function donVi()
     {
-        return $this->belongsTo(DonVi::class, 'don_vi_id', 'id')
-            ->select('id', 'ten_don_vi', 'ten_viet_tat', 'dieu_hanh', 'nhom_don_vi', 'cap_xa', 'ma_hanh_chinh', 'parent_id', 'type');
+        return $this->belongsTo(ToChuc::class, 'don_vi_id', 'id')
+            ->select('id', 'ten_don_vi', 'ten_viet_tat', 'dieu_hanh', 'nhom_don_vi', 'cap_xa', 'ma_hanh_chinh', 'parent_id');
     }
     public function donVi2()
     {
@@ -95,7 +95,7 @@ class User extends Authenticatable
     }
     public function donViKhacXa()
     {
-        return $this->belongsTo(DonVi::class, 'don_vi_id', 'id')->whereNull('cap_xa');
+        return $this->belongsTo(ToChuc::class, 'don_vi_id', 'id')->whereNull('cap_xa');
     }
 
     public function getAvatar()

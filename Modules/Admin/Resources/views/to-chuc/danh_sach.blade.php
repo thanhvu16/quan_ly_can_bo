@@ -25,6 +25,7 @@
                         <div class="col-md-12">
                             <!-- /.box-header -->
                             <div class="col-md-6">
+                                @role(QUAN_TRI_HT)
                                 <button type="button" class="btn btn-sm btn-info waves-effect waves-light mb-1"
                                         data-toggle="collapse"
                                         href="#collapseExample"
@@ -32,9 +33,10 @@
                                     <i class="fa fa-plus"></i>
                                     THÊM ĐƠN VỊ
                                 </button>
-                                <a type="button" href="{{route('them-can-bo.index')}}" class="btn btn-sm btn-success waves-effect waves-light mb-1">
-                                    <i class="fa fa-group"></i>
-                                    TẠO TÀI KHOẢN
+                                @endrole
+                                <a type="button" href="{{route('ho_so_can_bo.create')}}" class="btn btn-sm btn-success waves-effect waves-light mb-1">
+                                    <i class="fa fa-plus"></i>
+                                    TẠO CÁN BỘ
                                 </a>
                             </div>
 

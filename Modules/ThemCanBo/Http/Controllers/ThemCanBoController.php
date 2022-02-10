@@ -2,6 +2,7 @@
 
 namespace Modules\ThemCanBo\Http\Controllers;
 
+use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -41,6 +42,7 @@ use Modules\Admin\Entities\ToChuc;
 use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
+use Auth;
 
 class ThemCanBoController extends Controller
 {
@@ -57,15 +59,134 @@ class ThemCanBoController extends Controller
 
     }
 
-    public function allCanBo()
+    public function choGuiDuyet()
     {
-        $danhSach = CanBo::paginate(20);
-        return view('themcanbo::danh-sach-can-bo', compact('danhSach'));
+        $danhSach = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+            ->whereNull('trang_thai_duyet_ho_so')
+            ->paginate(20);
+
+        $danhSachLanhDaoDuyet = User::role([LANH_DAO])
+            ->where('don_vi_id', auth::user()->don_vi_id)
+            ->where('trang_thai', ACTIVE)->whereNull('deleted_at')->get();
+
+        return view('themcanbo::danh-sach-can-bo', compact('danhSach', 'danhSachLanhDaoDuyet'));
     }
 
-    public function index()
+    public function daGuiDuyet(Request $request)
     {
+        $hoTen = $request->get('ho_ten') ?? null;
+        $queQuan = $request->get('que_quan') ?? null;
+        $gioiTinh = $request->get('gioi_tinh') ?? null;
+        $donViId = $request->get('don_vi_id') ?? null;
 
+        $danhSach = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+            ->where(function ($query) use ($hoTen) {
+                if (!empty($hoTen)) {
+                    return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+                }
+            })
+            ->where(function ($query) use ($queQuan) {
+                if (!empty($queQuan)) {
+                    return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
+                }
+            })
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET)
+            ->paginate(20);
+
+        $danhSachToChuc = ToChuc::all();
+
+        return view('themcanbo::danh-sach-can-bo-da-gui-duyet',
+            compact('danhSach', 'danhSachToChuc'));
+    }
+
+    public function guiDuyetBiTraLai(Request $request)
+    {
+        $hoTen = $request->get('ho_ten') ?? null;
+        $queQuan = $request->get('que_quan') ?? null;
+        $gioiTinh = $request->get('gioi_tinh') ?? null;
+        $donViId = $request->get('don_vi_id') ?? null;
+
+        $danhSach = CanBo::with('trinhTuTraLaiHoSoCanBoNhap')
+            ->whereHas('trinhTuTraLaiHoSoCanBoNhap')
+            ->where('don_vi_tao_id', auth::user()->don_vi_id)
+            ->where(function ($query) use ($hoTen) {
+                if (!empty($hoTen)) {
+                    return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+                }
+            })
+            ->where(function ($query) use ($queQuan) {
+                if (!empty($queQuan)) {
+                    return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
+                }
+            })
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI)
+            ->paginate(20);
+
+        $danhSachToChuc = ToChuc::all();
+
+        return view('themcanbo::danh_sach_ho_so_bi_tra_lai',
+            compact('danhSach', 'danhSachToChuc'));
+    }
+
+    public function index(Request $request)
+    {
+        $hoTen = $request->get('ho_ten') ?? null;
+        $queQuan = $request->get('que_quan') ?? null;
+        $gioiTinh = $request->get('gioi_tinh') ?? null;
+        $donViId = $request->get('don_vi_id') ?? null;
+
+        $danhSach = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+            ->where(function ($query) use ($hoTen) {
+                if (!empty($hoTen)) {
+                    return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+                }
+            })
+            ->where(function ($query) use ($queQuan) {
+                if (!empty($queQuan)) {
+                    return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
+                }
+            })
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+            ->paginate(20);
+
+        $danhSachToChuc = ToChuc::all();
+
+        return view('themcanbo::index',
+            compact('danhSach', 'danhSachToChuc'));
+    }
+
+    public function create()
+    {
         $danToc = DanToc::orderBy('ten', 'asc')->get();
         $tonGiao = TonGiao::orderBy('ten', 'asc')->get();
         $thanhPho = ThanhPho::orderBy('ten', 'asc')->get();
@@ -109,13 +230,12 @@ class ThemCanBoController extends Controller
         $truongHoc = TruongHoc::orderBy('ten', 'asc')->get();
         $nhiemKy = NhiemKy::orderBy('ten', 'asc')->get();
 
-        return view('themcanbo::index', compact('danToc', 'tonGiao', 'thanhPho', 'chucVuHienTai'
+        return view('themcanbo::create', compact('danToc', 'tonGiao', 'thanhPho', 'chucVuHienTai'
             , 'donVi', 'ngach', 'bacLuong', 'phuCap', 'chuyenNganhDT', 'congViecChuyenMon', 'phoThong', 'lyluanChinhTri', 'quanLyHanhChinh'
             , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai'
             , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc'
             , 'quaTrinhLuong', 'quaTrinhChucVu', 'quaTrinhChucVuDang', 'quaTrinhQuyHoachCanBo', 'nhiemKy'
             , 'tinHoc'));
-
     }
 
 
@@ -160,6 +280,8 @@ class ThemCanBoController extends Controller
         $canBo->phan_tram_khung = $request->khung;
         $canBo->BHXH = $request->bhxh;
         $canBo->BHYT = $request->bhyt;
+        $canBo->don_vi_tao_id = auth::user()->don_vi_id;
+        $canBo->user_id = auth::user()->id;
 
         $canBo->save();
         return redirect()->route('canBoDetail', $canBo->id)->with('Thêm mới thành công !');

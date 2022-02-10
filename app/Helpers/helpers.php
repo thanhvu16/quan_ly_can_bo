@@ -69,6 +69,15 @@ if (!function_exists('canPermission')) {
     }
 }
 
+if (!function_exists('hasRole')) {
+    function hasRole($role)
+    {
+        if (!Auth::user()->hasRole($role)) {
+            return abort(403);
+        }
+    }
+}
+
 function tenNhom($idnhom)
 {
     $chucvu = NhomDonVi::where('id',$idnhom)->first();

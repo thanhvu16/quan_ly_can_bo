@@ -207,33 +207,6 @@
                     </label>
                 </div>
                 @endif
-                @if (auth::user()->hasRole(QUAN_TRI_HT))
-                    <div class="clearfix"></div>
-                    <div class="form-group col-md-12 mt-2">
-                        <p>
-                            <a class="" data-toggle="collapse" href="#collapse-permission" role="button" aria-expanded="false" aria-controls="collapse-permission">
-                                Chức năng của người dùng <i class="fa fa-plus"></i>
-                            </a>
-                        </p>
-                        <div class="collapse" id="collapse-permission">
-                            @if (count($permissions) > 0)
-                                @foreach($permissions as $key => $permission)
-                                    <div class="col-md-4 col-sm-6">
-                                        <label>
-                                            <input type="checkbox" class="flat-red" name="permission[]" value="{{ $permission->name }}"
-                                                {{ isset($user) && in_array($permission->id, $arrPermissionId) ? 'checked' : '' }}
-                                            >
-                                            {{ ucfirst($permission->name) }}
-                                        </label>
-                                    </div>
-                                    @if (($key+1) % 3 == 0)
-                                        <div class="clearfix"></div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
         <div class="col-md-12 text-center">
