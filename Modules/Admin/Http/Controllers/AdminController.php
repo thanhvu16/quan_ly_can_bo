@@ -12,6 +12,7 @@ use Auth, DB, File;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Modules\Admin\Entities\CanBo;
 use Modules\Admin\Entities\CauHinh;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\LoaiVanBan;
@@ -163,19 +164,71 @@ class AdminController extends Controller
 
     public function index()
     {
+        $hoSoCanBoPiceCharts = [];
+        $hoSoCanBoCoLors = [];
+        $hoSocanBoChoGuiDuyet = 0;
+        $hoSoGuiDuyetBiTraLai = 0;
+
+        array_push($hoSoCanBoPiceCharts, array('Task', 'Danh sách'));
+
+
         if (auth::user()->hasRole([CAN_BO])) {
-             return redirect()->route('ho_so_can_bo.cho_gui_duyet');
-        }
 
+            $hoSocanBoChoGuiDuyet = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->whereNull('trang_thai_duyet_ho_so')
+                ->count();
+
+            array_push($hoSoCanBoPiceCharts, array('Hồ sơ chờ gửi duyệt lãnh đạo', $hoSocanBoChoGuiDuyet));
+            array_push($hoSoCanBoCoLors, COLOR_WARNING);
+
+            $hoSoGuiDuyetBiTraLai = CanBo::with('trinhTuTraLaiHoSoCanBoNhap')
+                ->whereHas('trinhTuTraLaiHoSoCanBoNhap')
+                ->where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI)
+                ->count();
+
+            array_push($hoSoCanBoPiceCharts, array('Hồ sơ gửi duyệt bị trả lại', $hoSoGuiDuyetBiTraLai));
+            array_push($hoSoCanBoCoLors, COLOR_RED);
+
+
+
+//             return redirect()->route('ho_so_can_bo.cho_gui_duyet');
+        }
+//
         if (auth::user()->hasRole([LANH_DAO])) {
-            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
-        }
 
-        if (auth::user()->hasRole([QUAN_TRI_HT])) {
-            return redirect()->route('nguoi-dung.index');
-        }
+            $hoSocanBoChoGuiDuyet = CanBo::whereHas('trinhTuChoDuyetHoSo')
+                ->where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET)
+                ->count();
 
-        return view('admin::index');
+            array_push($hoSoCanBoPiceCharts, array('Hồ sơ chờ duyệt', $hoSocanBoChoGuiDuyet));
+            array_push($hoSoCanBoCoLors, COLOR_WARNING);
+
+            $hoSoGuiDuyetBiTraLai = CanBo::with('trinhTuTraLaiHoSo')
+                ->whereHas('trinhTuTraLaiHoSo')
+                ->where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI)
+                ->count();
+
+            array_push($hoSoCanBoPiceCharts, array('Hồ sơ gửi trả lại', $hoSoGuiDuyetBiTraLai));
+            array_push($hoSoCanBoCoLors, COLOR_RED);
+
+//            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
+        }
+//
+//        if (auth::user()->hasRole([QUAN_TRI_HT])) {
+//            return redirect()->route('nguoi-dung.index');
+//        }
+
+        return view('admin::index',
+                [
+                    'hoSoCanBoPiceCharts' => $hoSoCanBoPiceCharts,
+                    'hoSoCanBoCoLors' => $hoSoCanBoCoLors,
+                    'hoSocanBoChoGuiDuyet' => $hoSocanBoChoGuiDuyet,
+                    'hoSoGuiDuyetBiTraLai' => $hoSoGuiDuyetBiTraLai,
+                ]
+            );
     }
 
     /**
