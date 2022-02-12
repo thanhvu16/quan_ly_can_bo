@@ -70,15 +70,20 @@
 {{--                    <span class="pull-right-container"></span>--}}
 {{--                </a>--}}
 {{--            </li>--}}
+            @endunlessrole
             <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
                 <a href="{{route('don-vi-to-chuc.index')}}">
-                    <i class="fa fa-bar-chart" ></i> <span>Quản lý đơn vị - tổ chức</span>
+                    <i class="fa fa-bank" ></i> <span>Quản lý đơn vị - tổ chức</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
-            @endunlessrole
 
-
+            <li class="{{  Route::is('thong_ke_ho_so_don_vi.index') ? 'active' : '' }} ">
+                <a href="{{route('thong_ke_ho_so_don_vi.index')}}">
+                    <i class="fa fa-bar-chart" ></i> <span>Thống kê</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
             @if(auth::user()->hasRole([VAN_THU_DON_VI, VAN_THU_HUYEN]))
                 <li class="{{ Route::is('cau_hinh_emai_don_vi') ? 'active menu-open' : '' }}">
                     <a  href="{{route('cau_hinh_emai_don_vi')}}">

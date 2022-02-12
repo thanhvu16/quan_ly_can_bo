@@ -103,7 +103,7 @@ class CanBoController extends Controller
         $tonGiao = TonGiao::orderBy('ten','asc')->get();
         $thanhPho = ThanhPho::orderBy('ten','asc')->get();
         $chucVuHienTai = ChucVuHienTai::orderBy('ten','asc')->get();
-        $donVi = ToChuc::orderBy('ten_don_vi','asc')->get();
+        $donVi = ToChuc::where('parent_id', auth::user()->don_vi_id)->orderBy('ten_don_vi','asc')->get();
         $ngach = NgachChucDanh::orderBy('ten','asc')->get();
         $bacLuong = BacHeSoLuong::orderBy('ten','asc')->get();
         $phuCap = LoaiPhuCap::orderBy('ten','asc')->get();
@@ -174,7 +174,7 @@ class CanBoController extends Controller
         $daoTao->ly_do = $request->ly_do;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity6')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhDiChuyen(Request $request,$id)
@@ -194,7 +194,7 @@ class CanBoController extends Controller
         $daoTao->nguoi_ky = $request->nguoi_ky;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity6')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhBaoHiem(Request $request,$id)
@@ -207,7 +207,7 @@ class CanBoController extends Controller
         $daoTao->thanh_pho = $request->thanh_pho;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity8')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhVeHuu(Request $request,$id)
@@ -219,7 +219,7 @@ class CanBoController extends Controller
         $daoTao->tuoi_dang = $request->tuoi_dang;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity8')->with('success', 'cập nhật thành công !');
 
     }
 
@@ -237,8 +237,7 @@ class CanBoController extends Controller
         $daoTao->type = $request->type;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
-
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity7')->with('success', 'cập nhật thành công !');
     }
     public function quaTrinhBienChe(Request $request,$id)
     {
@@ -250,7 +249,7 @@ class CanBoController extends Controller
         $daoTao->bien_che = $request->bien_che;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity6')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhluong(Request $request,$id)
@@ -268,8 +267,7 @@ class CanBoController extends Controller
         $daoTao->tong_luong = $request->tong_luong;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
-
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity5')->with('success', 'cập nhật thành công !');
     }
     public function quaTrinhChucVu(Request $request,$id)
     {
@@ -282,8 +280,7 @@ class CanBoController extends Controller
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
-
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity5')->with('success', 'cập nhật thành công !');
     }
     public function quaTrinhChucVuDang(Request $request,$id)
     {
@@ -297,7 +294,7 @@ class CanBoController extends Controller
         $daoTao->nhiem_ky = $request->nhiem_ky;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity5')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhCanBo(Request $request,$id)
@@ -309,7 +306,7 @@ class CanBoController extends Controller
         $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity5')->with('success', 'cập nhật thành công !');
 
     }
 
@@ -327,7 +324,7 @@ class CanBoController extends Controller
         $daoTao->truong = $request->truong;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity4')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhCongTac(Request $request,$id)
@@ -340,7 +337,7 @@ class CanBoController extends Controller
         $daoTao->chuc_danh = $request->chuc_danh;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity4')->with('success', 'cập nhật thành công !');
 
     }
     public function quaTrinhNuocNgoai(Request $request,$id)
@@ -355,7 +352,7 @@ class CanBoController extends Controller
         $daoTao->ly_do = $request->ly_do;
         $daoTao->save();
 
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity4')->with('success', 'cập nhật thành công !');
 
     }
     public function canBoDanhGiatt(Request $request,$id)
@@ -384,12 +381,12 @@ class CanBoController extends Controller
         $canBo->ngay_khai = !empty($request->ngay_khai) ? formatYMD($request->ngay_khai) : null;
         $canBo->ngay_xac_nhan = !empty($request->ngay_xac_nhan) ? formatYMD($request->ngay_xac_nhan) : null;
         $canBo->save();
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity3')->with('success', 'cập nhật thành công !');
     }
 
     public function canBoDanhGia(Request $request,$id)
     {
-//        dd($request->all());
         $canBo = CanBo::where( 'id',$id)->first();
         $canBo->chuyen_nganh_id = $request->chuyen_nganh_id;
         $canBo->trinh_do_pho_thong_id = $request->trinh_do_pho_thong_id;
@@ -425,7 +422,8 @@ class CanBoController extends Controller
         $canBo->trinh_do_2 = $request->trinh_do_2;
         $canBo->doi_tuong_chinh_sach = $request->doi_tuong_chinh_sach;
         $canBo->save();
-        return redirect()->back()->with('success', 'cập nhật thành công !');
+
+        return redirect()->route('canBoDetail', $canBo->id.'?activity=activity2')->with('success', 'cập nhật thành công !');
     }
 
     public function postSoLuoc1(Request $request,$id)

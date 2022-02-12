@@ -11,7 +11,7 @@ define('UPLOAD_FILE_CHINH_SACH', 'uploads/chinh-sach-' . date('Y'));
 define('ACTIVE', 1);
 define('INACTIVE', 2);
 
-define('TITLE_APP', 'SỞ TÀI NGUYÊN VÀ MÔI TRƯỜNG HÀ NỘI');
+define('TITLE_APP', 'QUẢN LÝ CÁN BỘ');
 define('LANH_DAO_UY_BAN', '%Ban giám đốc sở%');
 
 

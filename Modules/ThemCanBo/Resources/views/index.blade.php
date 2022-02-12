@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <div class="box-body">
+                        <h4 class="text-uppercase">Quản lý hồ sơ cán bộ tại {{ $tenDonVi ?? null }}</h4>
                         <div class="row">
                             <div class="col-md-12 table-responsive">
                                 <table class="table table-bordered table-striped table-hover">
@@ -121,6 +122,12 @@
                                    'que_quan' => Request::get('que_quan'),
                                    'gioi_tinh' => Request::get('gioi_tinh'),
                                    'don_vi_id' => Request::get('don_vi_id'),
+                                   'thong_ke' => Request::get('thong_ke'),
+                                   'dang_vien' => Request::get('dang_vien'),
+                                   'khen_thuong' => Request::get('khen_thuong'),
+                                   'ky_luat' => Request::get('ky_luat'),
+                                   'chuyen_cong_tac' => Request::get('chuyen_cong_tac'),
+                                   've_huu' => Request::get('ve_huu'),
                                    'search' =>Request::get('search') ])->render() !!}
                             </div>
                         </div>

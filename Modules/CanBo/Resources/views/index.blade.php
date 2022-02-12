@@ -4,27 +4,27 @@
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <!-- Profile Image -->
             @include('canbo::components.thong-tin')
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Sơ lược (1)</a></li>
-                        <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>
-                        <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>
-                        <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
-                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch (5)</a></li>
-                        <li><a href="#activity6" data-toggle="tab">Biên chế, hợp đồng - Kiêm nhiệm, biệt phái (6)</a></li>
-                        <li><a href="#activity7" data-toggle="tab">Khen thưởng (7)</a></li>
-                        <li><a href="#activity8" data-toggle="tab">Thông tin thêm (8)</a></li>
+                        <li class="{{ empty(Request::get('activity')) || Request::get('activity') == 'activity' ? 'active' : null }}"><a href="#activity" data-toggle="tab">Sơ lược (1)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity2' ? 'active' : null }}"><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity3' ? 'active' : null }}"><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity4' ? 'active' : null }}"><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity5' ? 'active' : null }}"><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch (5)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity6' ? 'active' : null }}"><a href="#activity6" data-toggle="tab">Biên chế, hợp đồng - Kiêm nhiệm, biệt phái (6)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity7' ? 'active' : null }}"><a href="#activity7" data-toggle="tab">Khen thưởng (7)</a></li>
+                        <li class="{{ Request::get('activity') == 'activity8' ? 'active' : null }}"><a href="#activity8" data-toggle="tab">Thông tin thêm (8)</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="active tab-pane" id="activity">
+                        <div class="tab-pane {{ empty(Request::get('activity')) || Request::get('activity') == 'activity' ? 'active in' : null }}" id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity2">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity2' ? 'active in' : null }}" id="activity2">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity3">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity3' ? 'active in' : null }}" id="activity3">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity4">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity4' ? 'active in' : null }}" id="activity4">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity5">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity5' ? 'active in' : null }}" id="activity5">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity6">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity6' ? 'active in' : null }}" id="activity6">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity7">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity7' ? 'active in' : null }}" id="activity7">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" tab-pane" id="activity8">
+                        <div class=" tab-pane {{ Request::get('activity') == 'activity8' ? 'active in' : null }}" id="activity8">
                             <!-- Post -->
                             <div class="post">
                                 <div class="tab-pane" >

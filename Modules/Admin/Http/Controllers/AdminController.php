@@ -216,10 +216,42 @@ class AdminController extends Controller
 
 //            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
         }
+        if (!auth::user()->hasRole([QUAN_TRI_HT])) {
+            $thongKeCanBoPiceCharts = [];
+            $thongKeCanBoCoLors = [];
+
+            array_push($thongKeCanBoPiceCharts, array('Task', 'Danh sách'));
+
+            $tongCanBoTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->count();
+
+            $tongSoNamTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('gioi_tinh', CanBo::GIOI_TINH_NAM)->count();
+
+            $tongSoNuTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('gioi_tinh', CanBo::GIOI_TINH_NU)->count();
+
+            $tongSoHoSoVeHuu = CanBo::whereHas('veHuu')->where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->count();
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nam', $tongSoNamTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_INFO);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nữ', $tongSoNuTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_ORANGE);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ về hưu', $tongSoHoSoVeHuu));
+            array_push($thongKeCanBoCoLors, COLOR_PURPLE);
+        }
+
 //
-//        if (auth::user()->hasRole([QUAN_TRI_HT])) {
-//            return redirect()->route('nguoi-dung.index');
-//        }
+        if (auth::user()->hasRole([QUAN_TRI_HT])) {
+            return redirect()->route('nguoi-dung.index');
+        }
 
         return view('admin::index',
                 [
@@ -227,6 +259,12 @@ class AdminController extends Controller
                     'hoSoCanBoCoLors' => $hoSoCanBoCoLors,
                     'hoSocanBoChoGuiDuyet' => $hoSocanBoChoGuiDuyet,
                     'hoSoGuiDuyetBiTraLai' => $hoSoGuiDuyetBiTraLai,
+                    'thongKeCanBoPiceCharts' => $thongKeCanBoPiceCharts,
+                    'thongKeCanBoCoLors' => $thongKeCanBoCoLors,
+                    'tongCanBoTrongDonVi' => $tongCanBoTrongDonVi,
+                    'tongSoNamTrongDonVi' => $tongSoNamTrongDonVi,
+                    'tongSoNuTrongDonVi' => $tongSoNuTrongDonVi,
+                    'tongSoHoSoVeHuu' => $tongSoHoSoVeHuu
                 ]
             );
     }
