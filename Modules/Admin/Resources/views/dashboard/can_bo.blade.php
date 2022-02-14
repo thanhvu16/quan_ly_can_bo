@@ -3,7 +3,7 @@
         <div class="panel-heading col-md-12 pl-1" style="background:#3c8dbc;color:white;font-weight: bold" >
                 <div class="col-md-7">
                     <i class="fa fa-hourglass-3"></i>
-                    <span>&ensp;Quản lý hồ sơ cán bộ</span>
+                    <span>&ensp;Hồ sơ cán bộ chờ xử lý</span>
                 </div>
                 <div class="col-md-5 text-center panel-bieu-do">
                     <span class="text-center">Biểu đồ</span>
@@ -17,7 +17,7 @@
                             <p>Nhập hồ sơ cán bộ</p>
                         </a>
                     @endif
-                    <a class="text-title-item">
+                    <a href="{{ route('allCanBo') }}" class="text-title-item">
                         <p>Danh sách hồ sơ cán bộ</p>
                     </a>
                     @if (auth::user()->hasRole(LANH_DAO))

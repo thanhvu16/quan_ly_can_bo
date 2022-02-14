@@ -543,3 +543,12 @@ table tbody td a:hover{
     color: #413cea !important;
     background-size:100% 1px;
 }
+
+.nav-tabs-custom .nav-tabs li.active a, .nav-tabs-custom .nav-tabs li.active:hover>a {
+    background-color: #ddd !important;
+    color: #444;
+}
+.nav-tabs-custom>.nav-tabs>li:not(.active)>a:hover {
+    background: #ddd;
+    color: black !important;
+}

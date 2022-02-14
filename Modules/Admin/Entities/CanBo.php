@@ -15,6 +15,8 @@ class CanBo extends Model
     const TRANG_THAI_DA_GUI_DUYET = 1;
     const TRANG_THAI_DA_GUI_DUYET_TRA_LAI = 2;
     const TRANG_THAI_DA_GUI_DUYET_DA_DUYET = 3;
+    const GIOI_TINH_NAM = 1;
+    const GIOI_TINH_NU = 2;
 
     public function hinhThucTuyen()
     {
@@ -82,6 +84,36 @@ class CanBo extends Model
         return $this->belongsTo(HoSoTraLai::class, 'id', 'can_bo_id')
             ->where('can_bo_nhan_id', auth::user()->id)->whereNull('status')
             ->orderBy('id', 'DESC');
+    }
+
+    public function khenThuong()
+    {
+        return $this->belongsTo(QuaTrinhKhenThuong::class, 'id', 'users')
+            ->where('type', 2)
+            ->orderBy('id', 'DESC')
+            ->whereYear('created_at', date('Y'));
+    }
+
+    public function kiLuat()
+    {
+        return $this->belongsTo(QuaTrinhKhenThuong::class, 'id', 'users')
+            ->where('type', 1)
+            ->orderBy('id', 'DESC')
+            ->whereYear('created_at', date('Y'));
+    }
+
+    public function chuyenCongTac()
+    {
+        return $this->belongsTo(QuaTrinhChuyenDonVi::class, 'id', 'users')
+            ->orderBy('id', 'DESC')
+            ->whereYear('created_at', date('Y'));
+    }
+
+    public function veHuu()
+    {
+        return $this->belongsTo(QuaTrinhVeHuu::class, 'id', 'users')
+            ->orderBy('id', 'DESC')
+            ->whereYear('created_at', date('Y'));
     }
 }
 
