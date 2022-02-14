@@ -9,17 +9,17 @@
 
             <h3 class="profile-username text-center">{{$canBo->ho_ten}}</h3>
 
-            <p class="text-muted text-center">Phó chủ tịch</p>
+            <p class="text-muted text-center">{{ $canBo->chu_danh }}</p>
 
             <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                    <b>Đơn vị chủ quản</b> <a class="pull-right">QUẬN ỦY NAM TỪ LIÊM</a>
+                    <b>Đơn vị chủ quản</b> <a class="pull-right">{{ $canBo->donVi->ten_don_vi }}</a>
                 </li>
                 <li class="list-group-item">
-                    <b>Đơn vị quản lý</b> <a class="pull-right">{{$canBo->donVi->ten_don_vi ?? ''}}</a>
+                    <b>Đơn vị quản lý</b> <a class="pull-right">{{ $donViChuQuan->ten_don_vi ?? ''}}</a>
                 </li>
                 <li class="list-group-item">
-                    <b>Số thẻ Đảng</b> <a class="pull-right">29 123456</a>
+                    <b>Số thẻ Đảng</b> <a class="pull-right">{{ $canBo->so_the_dang }}</a>
                 </li>
                 <li class="list-group-item">
                     <b>Hình thức tuyển</b>

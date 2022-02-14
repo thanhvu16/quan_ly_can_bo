@@ -99,6 +99,8 @@ class CanBoController extends Controller
 
         $canBo = CanBo:: where('id',$id)->first();
 
+        $donViChuQuan = ToChuc::where('id', $canBo->donVi->parent_id)->select('id', 'ten_don_vi')->first();
+
         $danToc = DanToc::orderBy('ten','asc')->get();
         $tonGiao = TonGiao::orderBy('ten','asc')->get();
         $thanhPho = ThanhPho::orderBy('ten','asc')->get();
@@ -160,7 +162,7 @@ class CanBoController extends Controller
             ,'kyLuat','khenThuong','xuatThan','quaTrinhCongTac','quaTrinhDaoTao','quaTrinhNuocNgoai','truongHoc'
             ,'quaTrinhLuong','quaTrinhChucVu','quaTrinhChucVuDang','quaTrinhQuyHoachCanBo','nhiemKy','quaTrinhBienCheHopDong','quaTrinhKiemNhiemBietphai'
             ,'kiemNhiem','loaiCanBo','quaTrinhKhenThuong','quaTrinhKyLuat','quaTrinhBaoHiem','quaTrinhVeHuu','quaTrinhChuyenDonVi'
-            ,'tinHoc'));
+            ,'tinHoc', 'donViChuQuan'));
 
     }
     public function quaTrinhKiemNhiem(Request $request,$id)
