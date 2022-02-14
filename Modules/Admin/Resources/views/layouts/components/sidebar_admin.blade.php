@@ -100,18 +100,6 @@
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
     </ul>
 </li>
-<li class="treeview {{ Route::is('tra-cuu.index') || Route::is('nangCao') ? 'active menu-open' : '' }} }} ">
-    <a href="#">
-        <i class="fa fa-search"></i> <span>Tìm kiếm</span>
-        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-    </a>
-    <ul class="treeview-menu">
-        <li class="{{ Route::is('tra-cuu.index') ? 'active' : '' }}"><a href="{{route('tra-cuu.index')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nhanh</a></li>
-        <li class="{{ Route::is('nangCao') ? 'active' : '' }}"><a href="{{route('nangCao')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nâng cao</a></li>
-    </ul>
-</li>
 
 
 

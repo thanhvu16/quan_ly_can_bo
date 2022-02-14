@@ -23,6 +23,7 @@ use Modules\Admin\Entities\QuaTrinhDaoTao;
 use Modules\Admin\Entities\ToChuc;
 use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
+use Auth;
 
 class TraCuuController extends Controller
 {
@@ -34,19 +35,41 @@ class TraCuuController extends Controller
     {
         $ten = $request->ten_cb;
         $cmt = $request->cmt;
-        $don_vi = $request->don_vi;
+        $donViId = $request->don_vi;
+        $phongBanId = $request->phong_ban_id ?? null;
         $chuc_vu_chinh = $request->chuc_vu_chinh;
         $chucVuHienTai = ChucVuHienTai::orderBy('ten', 'asc')->get();
         $page = $request->get('page');
-        $donVi = ToChuc::orderBy('ten_don_vi', 'asc')->get();
+        $search = $request->search;
+
+        $danhSachPhongBan = null;
+        if ($search && !empty($donViId)) {
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+        }
+
+        $cap2 = false;
+        if (auth::user()->hasRole(QUAN_TRI_HT) || auth::user()->donVi->parent_id == 0) {
+            $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+            $donVi = ToChuc::where('parent_id', $donViCap1->id)->select('id', 'ten_don_vi')->get();
+        } else {
+            $donVi = ToChuc::where('id', auth::user()->don_vi_id)->select('id', 'ten_don_vi')->get();
+            $donViId = auth::user()->don_vi_id;
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+            $cap2 = true;
+        }
 
 
-        $danhSach = CanBo::
-        where(function ($query) use ($ten) {
-            if (!empty($ten)) {
-                return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
-            }
-        })
+        $danhSach = CanBo::where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_tao_id', $donViId);
+                }
+            })
+            ->where(function ($query) use ($ten) {
+                if (!empty($ten)) {
+                    return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
+                }
+            })
             ->where(function ($query) use ($cmt) {
                 if (!empty($cmt)) {
                     return $query->where(DB::raw('lower(cmnd)'), 'LIKE', "%" . mb_strtolower($cmt) . "%");
@@ -57,9 +80,9 @@ class TraCuuController extends Controller
                     return $query->where(DB::raw('lower(chuc_vu_hien_tai)'), 'LIKE', "%" . mb_strtolower($chuc_vu_chinh) . "%");
                 }
             })
-            ->where(function ($query) use ($don_vi) {
-                if (!empty($don_vi)) {
-                    return $query->where(DB::raw('lower(don_vi)'), 'LIKE', "%" . mb_strtolower($don_vi) . "%");
+            ->where(function ($query) use ($phongBanId) {
+                if (!empty($phongBanId)) {
+                    return $query->where('don_vi_id', $phongBanId);
                 }
             })
             ->paginate(PER_PAGE, ['*'], 'page', $page);
@@ -71,7 +94,8 @@ class TraCuuController extends Controller
             return Excel::download(new CanBoExort($danhSach, $totalRecord),
                 $fileName);
         }
-        return view('tracuu::index', compact('danhSach', 'donVi', 'chucVuHienTai'));
+        return view('tracuu::index',
+            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2'));
     }
 
     public function nangCao(Request $request)
@@ -92,8 +116,7 @@ class TraCuuController extends Controller
         $loai_dao_tao = $request->loai_dao_tao;
         $phan_loai = $request->phan_loai;
         $kiem_nhiem = $request->kiem_nhiem;
-        $phonBanId = $request->phong_ban_id;
-        $don_vi_id = $request->don_vi_id;
+        $phongBanId = $request->phong_ban_id;
         $ton_giao = $request->ton_giao;
         $tinh_trang = $request->tinh_trang;
         $chuc_vu_chinh = $request->chuc_vu_chinh;
@@ -111,17 +134,26 @@ class TraCuuController extends Controller
         $donVi = DonVi::orderBy('ten_don_vi', 'asc')->get();
         $bacLuong = BacHeSoLuong::orderBy('ten', 'asc')->get();
         $phuCap = LoaiPhuCap::orderBy('ten', 'asc')->get();
-        $danhSachPhongBan = null;
-
-        if ($donViId) {
-            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->get();
-        }
-        $danhSachDonVi = ToChuc::select('id', 'ten_don_vi')
-            ->where('parent_id', DonVi::NO_PARENT_ID)
-            ->orderBy('ten_don_vi', 'asc')
-            ->get();
+        $search = $request->search ?? null;
         $quaTrinh = null;
         $user = null;
+
+        $danhSachPhongBan = null;
+        if ($search && !empty($donViId)) {
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+        }
+
+        $cap2 = false;
+        if (auth::user()->hasRole(QUAN_TRI_HT) || auth::user()->donVi->parent_id == 0) {
+            $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+            $donVi = ToChuc::where('parent_id', $donViCap1->id)->select('id', 'ten_don_vi')->get();
+        } else {
+            $donVi = ToChuc::where('id', auth::user()->don_vi_id)->select('id', 'ten_don_vi')->get();
+            $donViId = auth::user()->don_vi_id;
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+            $cap2 = true;
+        }
 
         if ($hinh_thuc || $loai_dao_tao) {
             if ($hinh_thuc && $loai_dao_tao) {
@@ -135,12 +167,16 @@ class TraCuuController extends Controller
                 $user = $quaTrinh->pluck('users');
             }
         }
-        $danhSach = CanBo::
-        where(function ($query) use ($ten) {
-            if (!empty($ten)) {
-                return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
-            }
-        })
+        $danhSach = CanBo::where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_tao_id', $donViId);
+                }
+            })
+            ->where(function ($query) use ($ten) {
+                if (!empty($ten)) {
+                    return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
+                }
+            })
             ->where(function ($query) use ($cmt) {
                 if (!empty($cmt)) {
                     return $query->where(DB::raw('lower(cmnd)'), 'LIKE', "%" . mb_strtolower($cmt) . "%");
@@ -216,12 +252,9 @@ class TraCuuController extends Controller
                     return $query->whereIN('id',$user);
                 }
             })
-            ->where(function ($query) use ($don_vi_id, $phonBanId, $danhSachPhongBan) {
-                if (!empty($don_vi_id) && empty($phonBanId)) {
-                    return $query->where('don_vi', $don_vi_id)
-                        ->orWhereIn('don_vi', $danhSachPhongBan->pluck('id')->toArray());
-                } else if (!empty($don_vi_id) && !empty($phonBanId)) {
-                    return $query->where('don_vi', $phonBanId);
+            ->where(function ($query) use ($phongBanId) {
+                if (!empty($phongBanId)) {
+                    return $query->where('don_vi_id', $phongBanId);
                 }
             })
             ->paginate(PER_PAGE, ['*'], 'page', $page);
@@ -234,7 +267,8 @@ class TraCuuController extends Controller
                 $fileName);
         }
         return view('tracuu::tim-kiem-nang-cao', compact('danhSach', 'chucVuDang', 'congViecChuyenMon', 'chucVuHienTai', 'phuCap',
-            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachDonVi', 'danhSachPhongBan', 'donVi', 'trangThai', 'tonGiao', 'chuyenNganhDT', 'hinhThucDaoTao', 'bacLuong'));
+            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachPhongBan', 'donVi',
+            'trangThai', 'tonGiao', 'chuyenNganhDT', 'hinhThucDaoTao', 'bacLuong', 'cap2'));
     }
 
     /**

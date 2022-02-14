@@ -145,25 +145,28 @@
                                             </select>
                                         </div>
                                         <div class="row clearfix"></div>
-                                        <div class="col-md-3 form-group">
-                                            <label for="exampleInputEmail1">Tìm theo đơn vị</label>
-                                            <select name="don_vi_id" id="don-vi" class="form-control select-don-vi-id select2">
-                                                <option value="">-- Tất cả --</option>
-                                                @if (count($danhSachDonVi) > 0)
-                                                    @foreach($danhSachDonVi as $donVi)
-                                                        <option value="{{ $donVi->id }}" {{ Request::get('don_vi_id') == $donVi->id ? 'selected' : '' }}>{{ $donVi->ten_don_vi }}</option>
-                                                    @endforeach
-                                                @endif
+                                        <div class="form-group col-md-3">
+                                            <label for="don_vi" class="col-form-label">Đơn vị</label>
+                                            <select class="form-control  select2 select-don-vi-id"
+                                                    name="don_vi" id="don_vi">
+                                                <option value="">--Lựa chọn--</option>
+                                                @foreach($donVi as $dsdv)
+                                                    <option
+                                                        value="{{$dsdv->id}}" {{Request::get('don_vi') == $dsdv->id || $cap2 == true ? 'selected' : ''}}>{{$dsdv->ten_don_vi}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-3 show-phong-ban {{ isset($danhSachPhongBan) && count($danhSachPhongBan) > 0 ? 'show' : 'hide' }}">
 
-                                            <label class="col-form-label" for="phong-ban">Phòng ban</label>
+                                        <div
+                                            class="form-group col-md-3 show-phong-ban {{ isset($danhSachPhongBan) && count($danhSachPhongBan) > 0
+                                        ? 'show' : 'hide' }}">
+                                            <label class="col-form-label" for="phong-ban">Phòng ban trực thuộc</label>
                                             <select class="form-control select2 select-phong-ban" name="phong_ban_id">
-                                                <option value="">-- Chọn phòng ban --</option>
+                                                <option value="">-- Chọn phòng --</option>
                                                 @if (isset($danhSachPhongBan) && count($danhSachPhongBan) > 0)
                                                     @foreach($danhSachPhongBan as $donVi)
-                                                        <option value="{{ $donVi->id }}" {{ Request::get('phong_ban_id') == $donVi->id ? 'selected' : '' }}>{{ $donVi->ten_don_vi }}</option>
+                                                        <option
+                                                            value="{{ $donVi->id }}" {{ Request::get('phong_ban_id') == $donVi->id ? 'selected' : '' }}>{{ $donVi->ten_don_vi }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -305,7 +308,7 @@
                             @forelse ($danhSach as $key=>$data)
                                 <tr>
                                     <td class="text-center">{{$key+1}} </td>
-                                    <td style="text-transform: uppercase;font-weight: bold" ><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown;" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa  fa-wheelchair"></i> @endif {{$data->ho_ten}}</a></td>
+                                    <td style="text-transform: uppercase;font-weight: bold" ><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown;" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa  fa-female"></i> @endif {{$data->ho_ten}}</a></td>
                                     <td class="text-center">{{$data->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                     <td class="text-center">{{date("d/m/Y", strtotime($data->ngay_sinh))}}</td>
                                     <td class="text-center">Kinh</td>
@@ -368,8 +371,10 @@
                 $.ajax({
                     url: APP_URL + '/get-chuc-vu/' + id,
                     type: 'GET',
+                    beforeSend: showLoading()
                 })
                     .done(function (response) {
+                        hideLoading()
                         var html = '<option value="">--Tất cả--</option>';
                         if (response.success) {
                             let selectAttributes = response.data.map((function (attribute) {
@@ -381,6 +386,7 @@
 
                     })
                     .fail(function (error) {
+                        hideLoading()
                         toastr['error'](error.message, 'Thông báo hệ thống');
                     });
             }

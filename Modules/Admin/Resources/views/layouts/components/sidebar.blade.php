@@ -77,6 +77,18 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            <li class="treeview {{ Route::is('tra-cuu.index') || Route::is('nangCao') ? 'active menu-open' : '' }} }} ">
+                <a href="#">
+                    <i class="fa fa-search"></i> <span>Tìm kiếm</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Route::is('tra-cuu.index') ? 'active' : '' }}"><a href="{{route('tra-cuu.index')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nhanh</a></li>
+                    <li class="{{ Route::is('nangCao') ? 'active' : '' }}"><a href="{{route('nangCao')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nâng cao</a></li>
+                </ul>
+            </li>
 
             <li class="{{  Route::is('thong_ke_ho_so_don_vi.index') ? 'active' : '' }} ">
                 <a href="{{route('thong_ke_ho_so_don_vi.index')}}">
