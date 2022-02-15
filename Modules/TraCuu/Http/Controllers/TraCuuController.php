@@ -100,6 +100,7 @@ class TraCuuController extends Controller
 
     public function nangCao(Request $request)
     {
+//        dd($request->all());
         $ten = $request->ten_cb;
         $page = $request->get('page');
         $donViId = $request->get('don_vi_id') ?? null;
@@ -131,7 +132,6 @@ class TraCuuController extends Controller
         $hopDongBienChe = BinhBauPhanLoaiCanBo::orderBy('ten', 'asc')->get();
         $hinhThucDaoTao = HinhThucDaoTao::orderBy('ten', 'asc')->get();
         $chuyenNganhDT = ChuyenNganhDaoTao::orderBy('ten', 'asc')->get();
-        $donVi = DonVi::orderBy('ten_don_vi', 'asc')->get();
         $bacLuong = BacHeSoLuong::orderBy('ten', 'asc')->get();
         $phuCap = LoaiPhuCap::orderBy('ten', 'asc')->get();
         $search = $request->search ?? null;
@@ -167,6 +167,7 @@ class TraCuuController extends Controller
                 $user = $quaTrinh->pluck('users');
             }
         }
+
         $danhSach = CanBo::where(function ($query) use ($donViId) {
                 if (!empty($donViId)) {
                     return $query->where('don_vi_tao_id', $donViId);

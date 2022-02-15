@@ -21,7 +21,7 @@
             @include('admin::layouts.components.sidebar_admin')
             @endrole
 
-            @unlessrole(QUAN_TRI_HT)
+            @if(!auth::user()->hasRole(QUAN_TRI_HT) && auth::user()->donVi->parent_id != 0)
             <li class="treeview {{  Route::is('allCanBo') || Route::is('ho_so_can_bo.cho_gui_duyet')
                 || Route::is('ho_so_can_bo.da_gui_duyet') || Route::is('ho_so_can_bo.create') ||
                 Route::is('ho_so_can_bo.gui_duyet_bi_tra_lai') || Route::is('ho_so_can_bo.lanh_dao_cho_duyet')
@@ -70,7 +70,7 @@
 {{--                    <span class="pull-right-container"></span>--}}
 {{--                </a>--}}
 {{--            </li>--}}
-            @endunlessrole
+            @endif
             <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
                 <a href="{{route('don-vi-to-chuc.index')}}">
                     <i class="fa fa-bank" ></i> <span>Quản lý đơn vị - tổ chức</span>

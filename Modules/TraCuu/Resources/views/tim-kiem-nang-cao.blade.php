@@ -148,11 +148,11 @@
                                         <div class="form-group col-md-3">
                                             <label for="don_vi" class="col-form-label">Đơn vị</label>
                                             <select class="form-control  select2 select-don-vi-id"
-                                                    name="don_vi" id="don_vi">
+                                                    name="don_vi_id" id="don_vi">
                                                 <option value="">--Lựa chọn--</option>
                                                 @foreach($donVi as $dsdv)
                                                     <option
-                                                        value="{{$dsdv->id}}" {{Request::get('don_vi') == $dsdv->id || $cap2 == true ? 'selected' : ''}}>{{$dsdv->ten_don_vi}}</option>
+                                                        value="{{$dsdv->id}}" {{Request::get('don_vi_id') == $dsdv->id || $cap2 == true ? 'selected' : ''}}>{{$dsdv->ten_don_vi}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -279,7 +279,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-3 mt-4">
-                                            <button class="btn btn-primary" type="submit"> <i class="fa fa-search"></i> Tìm kiếm</button>
+                                            <button class="btn btn-primary" type="submit" name="search" value="1"> <i class="fa fa-search"></i> Tìm kiếm</button>
+                                            @if (Request::get('search'))
+                                                <a href="{{ route('nangCao') }}" class="btn btn-success"><i class="fa fa-refresh"></i></a>
+                                            @endif
                                         </div>
 
                                     </div>

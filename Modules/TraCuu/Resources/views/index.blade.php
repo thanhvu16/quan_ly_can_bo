@@ -109,6 +109,9 @@
                                             <button class="btn btn-primary" type="submit" name="search" value="1"><i class="fa fa-search"></i>
                                                 Tìm kiếm
                                             </button>
+                                            @if (Request::get('search'))
+                                                <a href="{{ route('tra-cuu.index') }}" class="btn btn-success"><i class="fa fa-refresh"></i></a>
+                                            @endif
                                         </div>
 
                                     </div>

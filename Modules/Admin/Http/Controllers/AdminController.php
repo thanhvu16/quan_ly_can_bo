@@ -164,6 +164,11 @@ class AdminController extends Controller
 
     public function index()
     {
+
+        if (auth::user()->hasRole(LANH_DAO) && auth::user()->donVi->parent_id == 0) {
+            return redirect()->route('nangCao');
+        }
+
         $hoSoCanBoPiceCharts = [];
         $hoSoCanBoCoLors = [];
         $hoSocanBoChoGuiDuyet = 0;
