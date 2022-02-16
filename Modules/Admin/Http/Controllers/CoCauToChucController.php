@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\NhomDonVi;
 use Modules\Admin\Entities\ToChuc;
+use Auth;
 
 class CoCauToChucController extends Controller
 {
@@ -20,24 +21,16 @@ class CoCauToChucController extends Controller
         $tendonvi = $request->get('ten_don_vi');
         $tenviettat = $request->get('ten_viet_tat');
         $mahanhchinh = $request->get('ma_hanh_chinh');
-        $donVi = ToChuc::where('ten_don_vi', 'LIKE', "%$tendonvi%")->first();
+//        $donVi = ToChuc::where('ten_don_vi', 'LIKE', "%$tendonvi%")->first();
 
-        $ds_donvi = ToChuc::orderBy('ten_don_vi', 'asc')
-            ->where(function ($query) use ($tendonvi, $donVi) {
-                if (!empty($tendonvi)) {
-                    return $query->where('ten_don_vi', 'LIKE', "%$tendonvi%")
-                        ->orWhere('parent_id', $donVi->id ?? 0);
-                }
-            })->where(function ($query) use ($tenviettat) {
-                if (!empty($tenviettat)) {
-                    return $query->where('ten_viet_tat', 'LIKE', "%$tenviettat%");
-                }
-            })
-            ->where(function ($query) use ($mahanhchinh) {
-                if (!empty($mahanhchinh)) {
-                    return $query->where('ma_hanh_chinh', 'LIKE', "%$mahanhchinh%");
-                }
-            })->paginate(PER_PAGE);
+        $ds_donvi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id);
+            } else {
+                $query->where('parent_id', auth::user()->don_vi_id);
+            }
+        })->paginate(PER_PAGE);
+
         $nhom_don_vi = NhomDonVi::wherenull('deleted_at')->get();
 
         $donViCapXa = ToChuc::whereNotNull('cap_xa')->select('id', 'ten_don_vi')->get();
