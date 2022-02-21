@@ -31,5 +31,6 @@ Route::post('qua-trinh-khen-ky/{id}', 'CanBoController@quaTrinhKhenKy')->name('q
 Route::post('qua-trinh-bao-hiem/{id}', 'CanBoController@quaTrinhBaoHiem')->name('quaTrinhBaoHiem');
 Route::post('qua-trinh-ve-huu/{id}', 'CanBoController@quaTrinhVeHuu')->name('quaTrinhVeHuu');
 Route::post('qua-trinh-di-chuyen/{id}', 'CanBoController@quaTrinhDiChuyen')->name('quaTrinhDiChuyen');
+Route::post('upload-anh/{id}', 'CanBoController@uploadAnh')->name('uploadAnh');
 Route::get('chi-tiet-can-bo/{id}', 'CanBoController@canBoDetail')->name('canBoDetail');
 

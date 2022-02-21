@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\NhomDonVi;
+use Modules\Admin\Entities\ToChuc;
 
 class DonViController extends Controller
 {
@@ -177,7 +178,7 @@ class DonViController extends Controller
 
     public function getListPhongBan(Request $request, $id)
     {
-        $phongBan = DonVi::where('parent_id', $id)->select('id', 'ten_don_vi', 'parent_id')->get();
+        $phongBan = ToChuc::where('parent_id', $id)->select('id', 'ten_don_vi', 'parent_id')->get();
 
         return response()->json([
             'success' => true,

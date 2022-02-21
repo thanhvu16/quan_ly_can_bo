@@ -8,6 +8,7 @@ define('UPLOAD_FILE_VAN_BAN', 'uploads/van-ban-' . date('Y'));
 define('PHIEU_CAN_BO', 'uploads/phieu-can-bo');
 
 define('UPLOAD_FILE_CHINH_SACH', 'uploads/chinh-sach-' . date('Y'));
+define('UPLOAD_ANH', 'uploads/anh-' . date('Y'));
 define('ACTIVE', 1);
 define('INACTIVE', 2);
 

@@ -4,7 +4,7 @@
         <div class="box-body box-profile">
             <a onclick="showModal()" style="cursor: pointer">
                             <span style="color: white;font-size: 14px"><i class="fa fa-folder-open-o"></i>
-                                <img class="profile-user-img img-responsive img-circle" src="{{asset('logobo.jpg')}}" alt="User profile picture">
+                                <img class="profile-user-img img-responsive img-circle" src="@if($canBo->anh_dai_dien) {{asset($canBo->anh_dai_dien)}} @else{{asset('logobo.jpg')}}@endif" alt="User profile picture">
                             </span></a>
 
             <h3 class="profile-username text-center">{{$canBo->ho_ten}}</h3>
@@ -88,4 +88,40 @@
 {{--        <p>- <i class="fa fa-file-pdf-o" style="color: red;"></i> <a href="">phiếu cán bộ.pdf</a></p>--}}
     </div>
     <!-- /.box-body -->
+</div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form action="{{ route('uploadAnh',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"><i
+                            class="fa fa-refresh"></i> Cập nhật ảnh đại diện</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-9" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail4">File ảnh <span
+                                        style="color: red">*</span></label>
+                                <div class="input-group date">
+                                    <input type="file" class="form-control "
+                                           name="ten_file" id="ten_file" value=""
+                                            required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4 " >
+                            <button class="btn btn-primary"><i class="fa fa-check-square-o"></i> Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

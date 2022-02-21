@@ -75,7 +75,7 @@ class CanBoController extends Controller
     }
     public function getlistcb()
     {
-        $donVi = ToChuc::get();
+        $donVi = ToChuc::where('id',1)->orwhere('parent_id',1)->get();
         $arayEcabinet = array();
 
         foreach ($donVi as $key=>$data)
@@ -93,6 +93,28 @@ class CanBoController extends Controller
 
         return $arayEcabinet;
     }
+
+    public function uploadAnh(Request $request,$id)
+    {
+        $multiFiles = !empty($request['ten_file']) ? $request['ten_file'] : null;
+        $uploadPath = UPLOAD_ANH;
+        if (!File::exists($uploadPath)) {
+            File::makeDirectory($uploadPath, 0777, true, true);
+        }
+
+        $fileName = date('Y_m_d') . '_' . Time() . '_' . $multiFiles->getClientOriginalName();
+        $urlFile = UPLOAD_ANH . '/' . $fileName;
+        $canBo = CanBo:: where('id', $id)->first();
+
+        $multiFiles->move($uploadPath, $fileName);
+        $canBo->anh_dai_dien = $urlFile;
+        $canBo->save();
+        return redirect()->route('canBoDetail', $canBo->id)->with('Thêm mới thành công !');
+
+
+    }
+
+
     public function canBoDetail($id)
     {
         canPermission(AllPermission::xemCanBo());
