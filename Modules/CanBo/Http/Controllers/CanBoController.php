@@ -75,14 +75,19 @@ class CanBoController extends Controller
     }
     public function getlistcb()
     {
-        $donVi = ToChuc::where('id',1)->orwhere('parent_id',1)->get();
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
         $arayEcabinet = array();
 
         foreach ($donVi as $key=>$data)
         {
             $arayEcabinet[$key]['id'] = $data->id;
             $arayEcabinet[$key]['STT'] = $key+1;
-            $arayEcabinet[$key]['pid'] = $data->parent_id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
             $arayEcabinet[$key]['Email'] = $data->email;
 //            $arayEcabinet[$key]['status'] = 1;
             $arayEcabinet[$key]['name'] ="<b style='color: black'>$data->ten_don_vi</b>";
@@ -119,7 +124,7 @@ class CanBoController extends Controller
     {
         canPermission(AllPermission::xemCanBo());
 
-        $canBo = CanBo:: where('id',$id)->first();
+        $canBo = CanBo::with('hinhThucTuyen')->where('id',$id)->first();
 
         $donViChuQuan = ToChuc::where('id', $canBo->donVi->parent_id)->select('id', 'ten_don_vi')->first();
 
@@ -584,6 +589,7 @@ class CanBoController extends Controller
         $dateOrBirth = !empty($canBo->ngay_sinh) ? explode('-', $canBo->ngay_sinh) : null;
         $noiSinh = $canBo->noi_sinh. ', '.$canBo->noi_sinh_huyen.', '.($canBo->queQuan->ten ?? null);
         $gioiTinh = !empty($canBo->gioi_tinh) ? ($canBo->gioi_tinh == 1 ? 'Nam' : 'Nữ') : null;
+        $ngayDiLam = !empty($canBo->ngay_bat_dau_di_lam) ? explode('-', $canBo->ngay_bat_dau_di_lam) : null;
 
         $wordTemplate = new TemplateProcessor($file);
         $wordTemplate->setImageValue('image', ['path' => public_path('images/default-user.png'), 'width' => 119, 'height' => 160]);
@@ -612,7 +618,12 @@ class CanBoController extends Controller
         $wordTemplate->setValue('email', $canBo->email ?? null);
         $wordTemplate->setValue('soCMND', $canBo->cmnd ?? null);
         $wordTemplate->setValue('noiCap',  null);
-        $wordTemplate->setValue('ngayCap', $canBo->ngay_cap_cmt ?? null);
+        $wordTemplate->setValue('ngayDiLam', $ngayDiLam[2] ?? null);
+        $wordTemplate->setValue('thangDiLam', $ngayDiLam[1] ?? null);
+        $wordTemplate->setValue('namDiLam', $ngayDiLam[0] ?? null);
+        $wordTemplate->setValue('coQuanTuyenDungDauTien', $canBo->co_quan_tuyen ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('hinhThucTuyen', $canBo->hinhThucTuyen->ten ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_khi_tuyen ?? '.............................................................................');
         $wordTemplate->saveAs($uploadPhieuChuyen . "/" . $fileDoc);
     }
 }

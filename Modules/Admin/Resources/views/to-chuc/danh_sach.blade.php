@@ -218,7 +218,7 @@
             parentIdField: 'pid',
             onPostBody: function() {
                 var columns = $table.bootstrapTable('getOptions').columns
-
+                console.log(columns)
                 if (columns && columns[0][1].visible) {
                     $table.treegrid({
                         treeColumn: 1,
