@@ -2,19 +2,46 @@
 
 namespace Modules\BaoCaoThongKe\Http\Controllers;
 
+use App\Exports\ExportBaoCaoTheoMau;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Entities\ToChuc;
+use Auth, Excel;
 
 class BaoCaoThongKeController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @param Request $request
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('baocaothongke::index');
+        $id = $request->get('id');
+        $donViBaoCao = null;
+
+        $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+        $danhSachToChuc = ToChuc::with('toChucCon')->where(function ($query) use ($donViCap1) {
+                if (!empty(auth::user()->donVi) && auth::user()->donVi->parent_id != 0) {
+
+                    return $query->Where('id', auth::user()->don_vi_id);
+                } else {
+
+                    return $query->Where('parent_id', $donViCap1->id);
+                }
+            })
+            ->orderBy('parent_id', 'ASC')
+            ->whereNull('deleted_at')
+            ->select('id', 'parent_id', 'ten_don_vi', 'thu_tu', 'created_at')
+            ->get();
+
+        if ($id) {
+            $donViBaoCao = ToChuc::with('parentToChuc')->where('id', $id)->first();
+        }
+
+        return view('baocaothongke::index', compact('danhSachToChuc', 'donViBaoCao'));
     }
 
     /**
@@ -75,5 +102,16 @@ class BaoCaoThongKeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function XuatBaoCaoThongKe(Request $request)
+    {
+        $type = $request->type;
+        $fileName = $type .'-TINH' .'.xlsx';
+
+        return Excel::download(new ExportBaoCaoTheoMau($type),
+            $fileName);
+
+//        return view('baocaothongke::mau-bao-cao-excel.1');
     }
 }

@@ -90,12 +90,23 @@
                 </ul>
             </li>
 
-            <li class="{{  Route::is('thong_ke_ho_so_don_vi.index') ? 'active' : '' }} ">
-                <a href="{{route('thong_ke_ho_so_don_vi.index')}}">
+            <li class="treeview {{ Route::is('thong_ke_ho_so_don_vi.index') || Route::is('bao_cao_thong_ke.index') ? 'active menu-open' : '' }} }} ">
+                <a href="#">
                     <i class="fa fa-bar-chart" ></i> <span>Thống kê</span>
-                    <span class="pull-right-container"></span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="{{ Route::is('thong_ke_ho_so_don_vi.index') ? 'active' : '' }}">
+                        <a href="{{ route('thong_ke_ho_so_don_vi.index') }}"><i class="fa fa-circle-o"></i>Thông kê chung</a>
+                    </li>
+                    <li class="{{ Route::is('bao_cao_thong_ke.index') ? 'active' : '' }}">
+                        <a href="{{ route('bao_cao_thong_ke.index') }}"><i class="fa fa-circle-o"></i>Báo cáo thống kê</a>
+                    </li>
+                </ul>
             </li>
+
             @if(auth::user()->hasRole([VAN_THU_DON_VI, VAN_THU_HUYEN]))
                 <li class="{{ Route::is('cau_hinh_emai_don_vi') ? 'active menu-open' : '' }}">
                     <a  href="{{route('cau_hinh_emai_don_vi')}}">
