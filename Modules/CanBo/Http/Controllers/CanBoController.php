@@ -61,6 +61,7 @@ class CanBoController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+
     public function index()
     {
         return view('canbo::them-moi-can-bo');
@@ -401,6 +402,7 @@ class CanBoController extends Controller
         $canBo->xuat_than = $request->xuat_than;
         $canBo->hoc_ham = $request->hoc_ham;
         $canBo->ky_luat_cao_nhat = $request->ky_luat_cao_nhat;
+        $canBo->nhan_than_nuoc_ngoai = $request->nhan_than_nuoc_ngoai;
         $canBo->bi_dich_bat = $request->bi_dich_bat;
         $canBo->dac_diem_lich_su_ban_than = $request->dac_diem_lich_su_ban_than;
         $canBo->dac_diem_lich_su_ban_than_tai_san = $request->dac_diem_lich_su_ban_than_tai_san;
@@ -433,10 +435,21 @@ class CanBoController extends Controller
         $canBo->chuc_vu_cao_nhat = $request->chuc_vu_cao_nhat;
         $canBo->cong_viec_chinh = $request->cong_viec_chinh;
         $canBo->da_di_bo_doi = $request->da_di_bo_doi;
+        $canBo->benh_binh = $request->benh_binh;
 
         $canBo->nhap_ngu = !empty($request->nhap_ngu) ? formatYMD($request->nhap_ngu) : null;
         $canBo->xuat_ngu = !empty($request->xuat_ngu) ? formatYMD($request->xuat_ngu) : null;
+        $canBo->ngay_vao_doan = !empty($request->ngay_vao_doan) ? formatYMD($request->ngay_vao_doan) : null;
+        $canBo->ngay_giai_ngu = !empty($request->ngay_giai_ngu) ? formatYMD($request->ngay_giai_ngu) : null;
 
+        $canBo->chuc_vu_dang_hien_nay = $request->chuc_vu_dang_hien_nay;
+        $canBo->nam_phong_tang_nn_pt = $request->nam_phong_tang_nn_pt;
+        $canBo->noi_vao_doan = $request->noi_vao_doan;
+        $canBo->chuc_vu_doan = $request->chuc_vu_doan;
+        $canBo->chuc_danh_kh = $request->chuc_danh_kh;
+        $canBo->nam_phong_cd_kh = $request->nam_phong_cd_kh;
+        $canBo->tieng_dan_toc = $request->tieng_dan_toc;
+        $canBo->trinh_do_quan_ly_kinh_te = $request->trinh_do_quan_ly_kinh_te;
         $canBo->quan_ham_cao_nhat = $request->quan_ham_cao_nhat;
         $canBo->danh_hieu_phong_tang_cao_nhat = $request->danh_hieu_phong_tang_cao_nhat;
         $canBo->suc_khoe = $request->suc_khoe;
@@ -450,6 +463,8 @@ class CanBoController extends Controller
         $canBo->trinh_do_1 = $request->trinh_do_1;
         $canBo->trinh_do_2 = $request->trinh_do_2;
         $canBo->doi_tuong_chinh_sach = $request->doi_tuong_chinh_sach;
+        $canBo->nam_tot_nghiep = $request->nam_tot_nghiep;
+        $canBo->ket_qua_xep_loai = $request->ket_qua_xep_loai;
         $canBo->save();
 
         return redirect()->route('canBoDetail', $canBo->id.'?activity=activity2')->with('success', 'cập nhật thành công !');
@@ -463,11 +478,34 @@ class CanBoController extends Controller
         $canBo->ten_khac = $request->ten_khac;
         $canBo->gioi_tinh = $request->gioi_tinh;
         $canBo->ngay_sinh = !empty($request->ngay_sinh) ? formatYMD($request->ngay_sinh) : null;
+        $canBo->ngay_cap_cmt = !empty($request->ngay_cap_cmt) ? formatYMD($request->ngay_cap_cmt) : null;
+        $canBo->tuyen_dung_chinh_thuc = !empty($request->tuyen_dung_chinh_thuc) ? formatYMD($request->tuyen_dung_chinh_thuc) : null;
+        $canBo->tuyen_dung_dau_tien = !empty($request->tuyen_dung_dau_tien) ? formatYMD($request->tuyen_dung_dau_tien) : null;
+        $canBo->cmnd = $request->cmnd;
+        $canBo->email = $request->email;
+        $canBo->so_dien_thoai = $request->so_dien_thoai;
+        $canBo->noi_cap = $request->noi_cap;
+        $canBo->so_so_bao_hiem = $request->so_so_bao_hiem;
+        $canBo->linh_vuc_theo_doi = $request->linh_vuc_theo_doi;
+        $canBo->bi_danh = $request->bi_danh;
+        $canBo->nghe_nghiep_truoc_khi_tuyen = $request->nghe_nghiep_truoc_khi_tuyen;
         $canBo->dan_toc = $request->dan_toc;
         $canBo->ton_giao = $request->ton_giao;
 
         $canBo->ngay_vao_don_vi = !empty($request->ngay_vao_don_vi) ? formatYMD($request->ngay_vao_don_vi) : null;
+        $canBo->ngay_bo_nhiem_ngach = !empty($request->ngay_bo_nhiem_ngach) ? formatYMD($request->ngay_bo_nhiem_ngach) : null;
+        $canBo->ngay_huong_vuot_khung = !empty($request->ngay_huong_vuot_khung) ? formatYMD($request->ngay_huong_vuot_khung) : null;
+        $canBo->ngay_cap_bao_hiem = !empty($request->ngay_cap_bao_hiem) ? formatYMD($request->ngay_cap_bao_hiem) : null;
+        $canBo->moc_xet_tang_luong = !empty($request->moc_xet_tang_luong) ? formatYMD($request->moc_xet_tang_luong) : null;
+        $canBo->ngay_bo_nhiem_chuc_vu_hien_tai = !empty($request->ngay_bo_nhiem_chuc_vu_hien_tai) ? formatYMD($request->ngay_bo_nhiem_chuc_vu_hien_tai) : null;
+        $canBo->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem = !empty($request->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) ? formatYMD($request->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) : null;
 
+        $canBo->he_so_phu_cap_chuc_vu_hien_tai = $request->he_so_phu_cap_chuc_vu_hien_tai;
+        $canBo->chuc_vu_kiem_nhiem = $request->chuc_vu_kiem_nhiem;
+        $canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem = $request->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem;
+        $canBo->vi_tri_cong_chuc = $request->vi_tri_cong_chuc;
+        $canBo->vi_tri_vien_chuc = $request->vi_tri_vien_chuc;
+        $canBo->vi_tri_nhan_vien = $request->vi_tri_nhan_vien;
         $canBo->co_quan_tuyen = $request->co_quan_tuyen;
         $canBo->noi_sinh = $request->noi_sinh_xa;
         $canBo->huyen_noi_sinh = $request->noi_sinh_huyen;
@@ -577,6 +615,7 @@ class CanBoController extends Controller
 
     public function taoPhieuCanBo($canBo)
     {
+
         $file = public_path('template_phieu_can_bo/phieu_cbcc.docx');
         $uploadPhieuChuyen = public_path(PHIEU_CAN_BO);
 
@@ -590,9 +629,30 @@ class CanBoController extends Controller
         $noiSinh = $canBo->noi_sinh. ', '.$canBo->noi_sinh_huyen.', '.($canBo->queQuan->ten ?? null);
         $gioiTinh = !empty($canBo->gioi_tinh) ? ($canBo->gioi_tinh == 1 ? 'Nam' : 'Nữ') : null;
         $ngayDiLam = !empty($canBo->ngay_bat_dau_di_lam) ? explode('-', $canBo->ngay_bat_dau_di_lam) : null;
+        $tuyenDungDauTien = !empty($canBo->tuyen_dung_dau_tien) ? explode('-', $canBo->tuyen_dung_dau_tien) : null;
+        $tuyenDungChinhThuc = !empty($canBo->tuyen_dung_chinh_thuc) ? explode('-', $canBo->tuyen_dung_chinh_thuc) : null;
+        $ngayCapBH = !empty($canBo->ngay_cap_bao_hiem) ? explode('-', $canBo->ngay_cap_bao_hiem) : null;
+        $mocXet = !empty($canBo->moc_xet_tang_luong) ? explode('-', $canBo->moc_xet_tang_luong) : null;
+        $phoThong = !empty($canBo->trinhDoPhoThong->ten) ? explode('/', $canBo->trinhDoPhoThong->ten) : null;
+        $ngayBoNhiemKiemNhiemNgach = !empty($canBo->ngay_bo_nhiem_ngach) ? explode('-', $canBo->ngay_bo_nhiem_ngach) : null;
+        $ngayCap = !empty($canBo->ngay_cap_cmt) ? formatDMY($canBo->ngay_cap_cmt) : null;
+        $ngayHuong = !empty($canBo->ngay_huong) ? formatDMY($canBo->ngay_huong) : null;
+        $ngayBoNhiemHienTai = !empty($canBo->ngay_bo_nhiem_chuc_vu_hien_tai) ? formatDMY($canBo->ngay_bo_nhiem_chuc_vu_hien_tai) : null;
+        $ngayBoNhiemKiemNhiem = !empty($canBo->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) ? formatDMY($canBo->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) : null;
+        $ngay_huong_vuot_khung = !empty($canBo->ngay_huong_vuot_khung) ? formatDMY($canBo->ngay_huong_vuot_khung) : null;
+        $ngayVaoDang = !empty($canBo->ngay_vao_dang) ? formatDMY($canBo->ngay_vao_dang) : null;
+        $ngayVaoDangCT = !empty($canBo->ngay_vao_dang_chinh_thuc) ? formatDMY($canBo->ngay_vao_dang_chinh_thuc) : null;
+        $ngayLLVT = !empty($canBo->ngay_tham_gia_to_chuc) ? formatDMY($canBo->ngay_tham_gia_to_chuc) : null;
+        $ngayGiaiN = !empty($canBo->ngay_giai_ngu) ? formatDMY($canBo->ngay_giai_ngu) : null;
+        $ngayVaoDoan = !empty($canBo->ngay_vao_doan) ? formatDMY($canBo->ngay_vao_doan) : null;
+
+        if($phoThong)
+        {
+            $lop10 =   !empty($phoThong[0]) ? explode(' ', $phoThong[0]) : null;
+        }
 
         $wordTemplate = new TemplateProcessor($file);
-        $wordTemplate->setImageValue('image', ['path' => public_path('images/default-user.png'), 'width' => 119, 'height' => 160]);
+        $wordTemplate->setImageValue('image', ['path' => public_path($canBo->anh_dai_dien), 'width' => 119, 'height' => 160]);
         $wordTemplate->setValue('donViQuanLy', 'BAN TỔ CHỨC QUẬN ỦY');
         $wordTemplate->setValue('donViChuQuan', 'QUẬN ỦY NAM TỪ LIÊM');
         $wordTemplate->setValue('donViCongTac', $canBo->toChuc->ten_don_vi ?? null);
@@ -601,7 +661,7 @@ class CanBoController extends Controller
         $wordTemplate->setValue('hoTen', $canBo->ho_ten ?? null);
         $wordTemplate->setValue('tenGoiKhac', $canBo->ten_khac ?? null);
         $wordTemplate->setValue('gioiTinh', $gioiTinh);
-        $wordTemplate->setValue('biDanh', $canBo->ten_khac ?? null);
+        $wordTemplate->setValue('biDanh', $canBo->bi_danh ?? null);
         $wordTemplate->setValue('ngaySinh', $dateOrBirth[2] ?? null);
         $wordTemplate->setValue('thangSinh', $dateOrBirth[1] ?? null);
         $wordTemplate->setValue('namSinh', $dateOrBirth[0] ?? null);
@@ -617,13 +677,91 @@ class CanBoController extends Controller
         $wordTemplate->setValue('dtDiDong', $canBo->so_dien_thoai ?? '……………');
         $wordTemplate->setValue('email', $canBo->email ?? null);
         $wordTemplate->setValue('soCMND', $canBo->cmnd ?? null);
-        $wordTemplate->setValue('noiCap',  null);
+        $wordTemplate->setValue('ngayCap', $ngayCap ?? null);
+        $wordTemplate->setValue('noiCap',  $canBo->noi_cap);
         $wordTemplate->setValue('ngayDiLam', $ngayDiLam[2] ?? null);
         $wordTemplate->setValue('thangDiLam', $ngayDiLam[1] ?? null);
         $wordTemplate->setValue('namDiLam', $ngayDiLam[0] ?? null);
+        $wordTemplate->setValue('ngayDauTien', $tuyenDungDauTien[2] ?? null);
+        $wordTemplate->setValue('thangDauTien', $tuyenDungDauTien[1] ?? null);
+        $wordTemplate->setValue('namDauTien', $tuyenDungDauTien[0] ?? null);
+        $wordTemplate->setValue('ngayTuyen', $tuyenDungChinhThuc[2] ?? null);
+        $wordTemplate->setValue('thangTuyen', $tuyenDungChinhThuc[1] ?? null);
+        $wordTemplate->setValue('namTuyen', $tuyenDungChinhThuc[0] ?? null);
+        $wordTemplate->setValue('coQuanChinhThuc', $canBo->donVi->ten_don_vi ?? '………..………………………………………………………..');
         $wordTemplate->setValue('coQuanTuyenDungDauTien', $canBo->co_quan_tuyen ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('hinhThucTuyen', $canBo->hinhThucTuyen->ten ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_khi_tuyen ?? '.............................................................................');
+        $wordTemplate->setValue('congViecHienNay', $canBo->nghe_nghiep_khi_duoc_tuyen ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('linhVucTheoDoi', $canBo->linh_vuc_theo_doi ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('hinhThucTuyen', $canBo->hinhThucTuyenDung->ten ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_truoc_khi_tuyen ?? '.............................................................................');
+        $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_truoc_khi_tuyen ?? '.............................................................................');
+        $wordTemplate->setValue('congChuc', $canBo->vi_tri_cong_chuc ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('vienChuc', $canBo->vi_tri_vien_chuc ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('nhanVienThuaHanh', $canBo->vi_tri_nhan_vien ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('ngach', $canBo->Ngach->ten ?? null);
+        $wordTemplate->setValue('maNgach', $canBo->Ngach->ma_ngach ?? null);
+        $wordTemplate->setValue('bac', $canBo->Bac->bac ?? null);
+        $wordTemplate->setValue('heSo', $canBo->Bac->he_so_luong ?? null);
+        $wordTemplate->setValue('ngayHuong', $ngayHuong ?? null);
+        $wordTemplate->setValue('huong', $canBo->phan_tram_huong ?? null);
+        $wordTemplate->setValue('Khung', $canBo->khung ?? null);
+        $wordTemplate->setValue('dateHuongk', $ngay_huong_vuot_khung ?? null);
+        $wordTemplate->setValue('chucVuHienNay', $canBo->chucVuHienTai->ten ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('tongMucHuongPhuCapKhac', $canBo->phu_cap_khac ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('soBaoHiem', $canBo->so_so_bao_hiem ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('bh', $ngayCapBH[2] ?? null);
+        $wordTemplate->setValue('th', $ngayCapBH[1] ?? null);
+        $wordTemplate->setValue('nh', $ngayCapBH[0] ?? null);
+        $wordTemplate->setValue('chucVuKiemNhiem', $canBo->chucVuKiemNhiem->ten ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('pccv', $canBo->he_so_phu_cap_chuc_vu_hien_tai ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('pccvkn', $canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('nbht', $ngayBoNhiemHienTai ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('nbhtkn', $ngayBoNhiemKiemNhiem ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('mX', $mocXet[2] ?? null);
+        $wordTemplate->setValue('tX', $mocXet[1] ?? null);
+        $wordTemplate->setValue('nX', $mocXet[0] ?? null);
+        $wordTemplate->setValue('iN', $ngayBoNhiemKiemNhiemNgach[2] ?? null);
+        $wordTemplate->setValue('iCX', $ngayBoNhiemKiemNhiemNgach[1] ?? null);
+        $wordTemplate->setValue('nCY', $ngayBoNhiemKiemNhiemNgach[0] ?? null);
+        $wordTemplate->setValue('phoThong1', $lop10[1] ?? null);
+        $wordTemplate->setValue('phoThong2', $lop10[1] ?? null);
+        $wordTemplate->setValue('chuyenMon', $canBo->hinhThucTuyen->ten ?? null);
+        $wordTemplate->setValue('hoc2', $canBo->chuyenNganh->ten ?? null);
+        $wordTemplate->setValue('chuyenNganh', $canBo->chuyenNganh->ten ?? null);
+        $wordTemplate->setValue('namTotNgiep', $canBo->nam_tot_nghiep ?? null);
+        $wordTemplate->setValue('ketQuaTNLoai', $canBo->ketQuaTNLoai ?? null);
+        $wordTemplate->setValue('quanLyKinhTe', $canBo->trinh_do_quan_ly_kinh_te ?? null);
+        $wordTemplate->setValue('ngoaiNgu', $canBo->ngoaiNgu->ten ?? null);
+        $wordTemplate->setValue('tinHoc', $canBo->tinHoc->ten ?? null);
+        $wordTemplate->setValue('tiengDT', $canBo->tieng_dan_toc ?? null);
+        $wordTemplate->setValue('chucDanhKH', $canBo->chuc_danh_kh ?? null);
+        $wordTemplate->setValue('namPhongcD', $canBo->nam_phong_cd_kh ?? null);
+        $wordTemplate->setValue('noiVaoDoan', $canBo->noi_vao_doan ?? null);
+        $wordTemplate->setValue('chucVuDoanHN', $canBo->chuc_vu_doan ?? null);
+        $wordTemplate->setValue('ngayVDang', $ngayVaoDang ?? null);
+        $wordTemplate->setValue('ngayVCT', $ngayVaoDangCT ?? null);
+        $wordTemplate->setValue('noiKetNap', $canBo->noi_vao_dang ?? null);
+        $wordTemplate->setValue('chucVuDangHN', $canBo->chucVuDangHienTai->ten_chuc_vu ?? null);
+        $wordTemplate->setValue('ngayLLTV', $ngayLLVT ?? null);
+        $wordTemplate->setValue('ngayGiaiN', $ngayGiaiN ?? null);
+        $wordTemplate->setValue('quanHam', $canBo->quanHam->ten ?? null);
+        $wordTemplate->setValue('chucVuDCN', $canBo->chucVuDCaoNhat->ten_chuc_vu ?? null);
+        $wordTemplate->setValue('dhieupt', $canBo->danhHieuPT->ten ?? null);
+        $wordTemplate->setValue('pTan', $canBo->nam_phong_tang_nn_pt ?? null);
+        $wordTemplate->setValue('sucKhoe', $canBo->suc_khoe ?? null);
+        $wordTemplate->setValue('nhomMau', $canBo->nhom_mau ?? null);
+        $wordTemplate->setValue('chieuCao', $canBo->chieu_cao ?? null);
+        $wordTemplate->setValue('canNang', $canBo->can_nang ?? null);
+        $wordTemplate->setValue('hangtb', $canBo->thuong_binh ?? null);
+        $wordTemplate->setValue('benhb', $canBo->benh_binh ?? null);
+        $wordTemplate->setValue('doiTuongcs', $canBo->doiTuongCS->ten ?? null);
+        $wordTemplate->setValue('doann', $ngayVaoDoan ?? null);
+        $wordTemplate->setValue('khenThuong', $canBo->khenThuongCaoNhat->ten ?? null);
+        $wordTemplate->setValue('kyLuat', $canBo->kyLuatCaoNhat->ten ?? null);
+        $wordTemplate->setValue('banThan', $canBo->dac_diem_lich_su_ban_than ?? null);
+        $wordTemplate->setValue('banThan1', $canBo->dac_diem_lich_su_ban_than_tai_san ?? null);
+        $wordTemplate->setValue('nhanThanGD', $canBo->nhan_than_nuoc_ngoai ?? null);
+
         $wordTemplate->saveAs($uploadPhieuChuyen . "/" . $fileDoc);
     }
 }

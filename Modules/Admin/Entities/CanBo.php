@@ -18,9 +18,49 @@ class CanBo extends Model
     const GIOI_TINH_NAM = 1;
     const GIOI_TINH_NU = 2;
 
+    public function khenThuongCaoNhat()
+    {
+        return $this->belongsTo(KhenThuongKyLuat::class, 'khen_thuong_cao_nhat', 'id');
+    }
+    public function kyLuatCaoNhat()
+    {
+        return $this->belongsTo(KyLuat::class, 'ky_luat_cao_nhat', 'id');
+    }
+    public function doiTuongCS()
+    {
+        return $this->belongsTo(DoiTuongQuanLy::class, 'doi_tuong_chinh_sach', 'id');
+    }
+    public function danhHieuPT()
+    {
+        return $this->belongsTo(DanhHieu::class, 'danh_hieu_phong_tang_cao_nhat', 'id');
+    }
+    public function quanHam()
+    {
+        return $this->belongsTo(QuanHam::class, 'quan_ham_cao_nhat', 'id');
+    }
+    public function chucVuDCaoNhat()
+    {
+        return $this->belongsTo(ChucVu::class, 'chuc_vu_cao_nhat', 'id');
+    }
+    public function tinHoc()
+    {
+        return $this->belongsTo(TinHoc::class, 'tin_hoc', 'id');
+    }
+    public function ngoaiNgu()
+    {
+        return $this->belongsTo(TiengAnh::class, 'tieng_anh', 'id');
+    }
+    public function chuyenNganh()
+    {
+        return $this->belongsTo(ChuyenNganhDaoTao::class, 'chuyen_nganh_id', 'id');
+    }
     public function hinhThucTuyen()
     {
         return $this->belongsTo(CongViecChuyenMon::class, 'trinh_do_1', 'id');
+    }
+    public function hinhThucTuyenDung()
+    {
+        return $this->belongsTo(HinhThucThiTuyen::class, 'hinh_thuc_tuyen', 'id');
     }
     public function queQuan()
     {
@@ -30,10 +70,22 @@ class CanBo extends Model
     {
         return $this->belongsTo(ChucVuHienTai::class, 'chuc_vu_hien_tai', 'id');
     }
+    public function chucVuDangHienTai()
+    {
+        return $this->belongsTo(ChucVu::class, 'chuc_vu_dang_hien_nay', 'id');
+    }
+    public function chucVuKiemNhiem()
+    {
+        return $this->belongsTo(ChucVuHienTai::class, 'chuc_vu_kiem_nhiem', 'id');
+    }
 
     public function thanhPho()
     {
         return $this->belongsTo(ThanhPho::class, 'thanh_pho_que_quan', 'id');
+    }
+    public function trinhDoPhoThong()
+    {
+        return $this->belongsTo(PhoThong::class, 'trinh_do_pho_thong_id', 'id');
     }
     public function danToc()
     {
@@ -47,6 +99,15 @@ class CanBo extends Model
     public function toChuc()
     {
         return $this->belongsTo(ToChuc::class, 'don_vi', 'id');
+    }
+
+    public function Ngach()
+    {
+        return $this->belongsTo(NgachChucDanh::class, 'ngach_cong_chuc', 'id');
+    }
+    public function Bac()
+    {
+        return $this->belongsTo(BacHeSoLuong::class, 'bac_luong', 'id');
     }
 
 
