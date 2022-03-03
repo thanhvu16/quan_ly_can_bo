@@ -650,8 +650,7 @@ class CanBoController extends Controller
         {
             $lop10 =   !empty($phoThong[0]) ? explode(' ', $phoThong[0]) : null;
         }
-
-        if($canBo->anh_dai_dien)
+        if($canBo->anh_dai_dien == null)
         {
             $anh = 'images/default-user.png';
         }else{
