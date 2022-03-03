@@ -651,8 +651,14 @@ class CanBoController extends Controller
             $lop10 =   !empty($phoThong[0]) ? explode(' ', $phoThong[0]) : null;
         }
 
+        if($canBo->anh_dai_dien)
+        {
+            $anh = 'images/default-user.png';
+        }else{
+            $anh = $canBo->anh_dai_dien;
+        }
         $wordTemplate = new TemplateProcessor($file);
-        $wordTemplate->setImageValue('image', ['path' => public_path($canBo->anh_dai_dien), 'width' => 119, 'height' => 160]);
+        $wordTemplate->setImageValue('image', ['path' => public_path($anh), 'width' => 119, 'height' => 160]);
         $wordTemplate->setValue('donViQuanLy', 'BAN TỔ CHỨC QUẬN ỦY');
         $wordTemplate->setValue('donViChuQuan', 'QUẬN ỦY NAM TỪ LIÊM');
         $wordTemplate->setValue('donViCongTac', $canBo->toChuc->ten_don_vi ?? null);
