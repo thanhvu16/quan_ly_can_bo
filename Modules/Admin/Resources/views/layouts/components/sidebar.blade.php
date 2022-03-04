@@ -62,6 +62,12 @@
                         </li>
                 </ul>
             </li>
+                <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
+                    <a href="{{route('don-vi-to-chuc.index')}}">
+                        <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
+                        <span class="pull-right-container"></span>
+                    </a>
+                </li>
 
 
 {{--            <li class="{{  Route::is('allCanBo') ? 'active' : '' }} ">--}}
@@ -71,12 +77,12 @@
 {{--                </a>--}}
 {{--            </li>--}}
             @endif
-            <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
-                <a href="{{route('don-vi-to-chuc.index')}}">
-                    <i class="fa fa-bank" ></i> <span>Quản lý đơn vị - tổ chức</span>
-                    <span class="pull-right-container"></span>
-                </a>
-            </li>
+{{--            <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">--}}
+{{--                <a href="{{route('don-vi-to-chuc.index')}}">--}}
+{{--                    <i class="fa fa-bank" ></i> <span>Nghiệp vụ quản lý cán bộ</span>--}}
+{{--                    <span class="pull-right-container"></span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="treeview {{ Route::is('tra-cuu.index') || Route::is('nangCao') ? 'active menu-open' : '' }} }} ">
                 <a href="#">
                     <i class="fa fa-search"></i> <span>Tìm kiếm</span>
@@ -92,7 +98,7 @@
 
             <li class="treeview {{ Route::is('thong_ke_ho_so_don_vi.index') || Route::is('bao_cao_thong_ke.index') ? 'active menu-open' : '' }} }} ">
                 <a href="#">
-                    <i class="fa fa-bar-chart" ></i> <span>Thống kê</span>
+                    <i class="fa fa-bar-chart" ></i> <span>Tổng hợp, báo cáo</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>

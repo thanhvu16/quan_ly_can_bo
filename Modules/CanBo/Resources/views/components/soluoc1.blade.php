@@ -51,6 +51,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Dân tộc <span style="color: red">(*)</span></label>
                     <select class="form-control select2" name="dan_toc" required>
+                        <option value="">--Lựa chọn--</option>
                         @foreach($danToc as $dsDanToc)
                         <option value="{{$dsDanToc->id}}"  {{$canBo->dan_toc == $dsDanToc->id ? 'selected' : ''}}>{{$dsDanToc->ten}}</option>
                         @endforeach
@@ -62,6 +63,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tôn giáo <span style="color: red">(*)</span></label>
                     <select class="form-control select2" name="ton_giao" required>
+                        <option value="">--Lựa chọn--</option>
                         @foreach($tonGiao as $dsTonGiao)
                             <option value="{{$dsTonGiao->id}}" {{$canBo->ton_giao == $dsTonGiao->id ? 'selected' : ''}}>{{$dsTonGiao->ten}}</option>
                         @endforeach
@@ -135,6 +137,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail6">Thành phố</label>
                                 <select class="form-control select2" name="noi_sinh_tp" required>
+                                    <option value="">--Lựa chọn--</option>
                                     @foreach($thanhPho as $dsThanhPho1)
                                         <option value="{{$dsThanhPho1->id}}"  {{$canBo->thanh_pho_noi_sinh == $dsThanhPho1->id ? 'selected' : ''}}>{{$dsThanhPho1->ten}}</option>
                                     @endforeach
@@ -167,6 +170,7 @@
                                 <label for="exampleInputEmail6">Thành phố</label>
                                 <div class="form-group">
                                     <select class="form-control select2" name="que_quan_tp" required>
+                                        <option value="">--Lựa chọn--</option>
                                         @foreach($thanhPho as $dsThanhPho)
                                             <option value="{{$dsThanhPho->id}}" {{$canBo->thanh_pho_que_quan == $dsThanhPho->id ? 'selected' : ''}}>{{$dsThanhPho->ten}}</option>
                                         @endforeach
@@ -237,7 +241,7 @@
                         <div class="col-md-3" >
                             <div class="form-group">
                                 <label for="exampleInputEmail6">Công chức </label>
-                                <select class="form-control select2" name="vi_tri_cong_chuc" required>
+                                <select class="form-control select2" name="vi_tri_cong_chuc" >
                                     <option value="">--Lựa chọn--</option>
                                     <option value="Dự bị" {{$canBo->vi_tri_cong_chuc == 'Dự bị' ? 'selected' : ''}}>Dự bị</option>
                                     <option value="Tập sự" {{$canBo->vi_tri_cong_chuc == 'Tập sự' ? 'selected' : ''}}>Tập sự</option>
@@ -247,7 +251,7 @@
                         <div class="col-md-6" >
                             <div class="form-group">
                                 <label for="exampleInputEmail6">Viên chức </label>
-                                <select class="form-control select2" name="vi_tri_vien_chuc" required>
+                                <select class="form-control select2" name="vi_tri_vien_chuc" >
                                     <option value="">--Lựa chọn--</option>
                                     <option value="Viên chức tuyển dụng chính thức trước tháng 7/2003" {{$canBo->vi_tri_vien_chuc == 'Viên chức tuyển dụng chính thức trước tháng 7/2003' ? 'selected' : ''}}>Viên chức tuyển dụng chính thức trước tháng 7/2003</option>
                                     <option value="Viên chức tuyển dụng chính thức từ tháng 7/2003 đến nay - Hợp đồng có thời hạn" {{$canBo->vi_tri_vien_chuc == 'Viên chức tuyển dụng chính thức từ tháng 7/2003 đến nay - Hợp đồng có thời hạn' ? 'selected' : ''}}>Viên chức tuyển dụng chính thức từ tháng 7/2003 đến nay - Hợp đồng có thời hạn</option>
@@ -260,7 +264,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail6">Nhân viên thừa hành, phục vụ </label>
                                 <div class="form-group">
-                                    <select class="form-control select2" name="vi_tri_nhan_vien" required>
+                                    <select class="form-control select2" name="vi_tri_nhan_vien" >
                                         <option value="">--Lựa chọn--</option>
                                         <option value="Tuyển dụng chính thức" {{$canBo->vi_tri_nhan_vien == 'Tuyển dụng chính thức' ? 'selected' : ''}}>Tuyển dụng chính thức</option>
                                         <option value="Hợp đồng không xác định thời hạn" {{$canBo->vi_tri_nhan_vien == 'Hợp đồng không xác định thời hạn' ? 'selected' : ''}}>Hợp đồng không xác định thời hạn</option>
@@ -282,10 +286,10 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày tuyển dụng đầu tiên<span style="color: red">*</span></label>
+                    <label for="exampleInputEmail4">Ngày tuyển dụng đầu tiên<span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->tuyen_dung_dau_tien ? formatDMY($canBo->tuyen_dung_dau_tien) : ''}}"
-                               name="tuyen_dung_dau_tien"
+                               name="tuyen_dung_dau_tien" required
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -295,10 +299,10 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày tuyển dụng chính thức<span style="color: red">*</span></label>
+                    <label for="exampleInputEmail4">Ngày tuyển dụng chính thức<span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->tuyen_dung_chinh_thuc ? formatDMY($canBo->tuyen_dung_chinh_thuc) : ''}}"
-                               name="tuyen_dung_chinh_thuc"
+                               name="tuyen_dung_chinh_thuc" required
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -308,10 +312,10 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày vào cơ quan hiện nay <span style="color: red">*</span></label>
+                    <label for="exampleInputEmail4">Ngày vào cơ quan hiện nay <span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->ngay_bat_dau_di_lam ? formatDMY($canBo->ngay_bat_dau_di_lam) : ''}}"
-                               name="ngay_bat_dau_di_lam"
+                               name="ngay_bat_dau_di_lam" required
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -325,6 +329,7 @@
                     <label for="exampleInputEmail6">Đơn vị <span style="color: red">(*)</span></label>
                     <div class="form-group">
                         <select class="form-control select2" name="don_vi" required>
+                            <option value="">--Lựa chọn--</option>
                             @foreach($donVi as $dsdonVi)
                                 <option value="{{$dsdonVi->id}}" {{$canBo->don_vi == $dsdonVi->id ? 'selected' : ''}}>{{$dsdonVi->ten_don_vi}}</option>
                             @endforeach
@@ -338,6 +343,7 @@
                     <label for="exampleInputEmail6">Chức vụ hiện tại <span style="color: red">(*)</span></label>
                     <div class="form-group">
                         <select class="form-control select2" name="chuc_vu_hien_tai" required>
+                            <option value="">--Lựa chọn--</option>
                             @foreach($chucVuHienTai as $dschucVuHienTai)
                                 <option value="{{$dschucVuHienTai->id}}" {{$canBo->chuc_vu_hien_tai == $dschucVuHienTai->id ? 'selected' : ''}}>{{$dschucVuHienTai->ten}}</option>
                             @endforeach
@@ -373,6 +379,7 @@
                     <label for="exampleInputEmail6">Chức vụ, chức danh kiêm nhiệm </label>
                     <div class="form-group">
                         <select class="form-control select2" name="chuc_vu_kiem_nhiem" >
+                            <option value="">--Lựa chọn--</option>
                             @foreach($chucVuHienTai as $dschucVuHienTai)
                                 <option value="{{$dschucVuHienTai->id}}" {{$canBo->chuc_vu_kiem_nhiem == $dschucVuHienTai->id ? 'selected' : ''}}>{{$dschucVuHienTai->ten}}</option>
                             @endforeach
@@ -415,6 +422,7 @@
                     <label for="exampleInputEmail6">Ngạch công chức</label>
                     <div class="form-group">
                         <select class="form-control select2" name="ngach_cong_chuc">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($ngach as $dsngach)
                                 <option value="{{$dsngach->id}}" {{$canBo->ngach_cong_chuc == $dsngach->id ? 'selected' : ''}}>{{$dsngach->ten}}</option>
                             @endforeach
@@ -448,6 +456,7 @@
                     <label for="exampleInputEmail6">Bậc lương</label>
                     <div class="form-group">
                         <select class="form-control select2" name="bac_luong">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($bacLuong as $dsbacLuong)
                                 <option value="{{$dsbacLuong->id}}" {{$canBo->bac_luong == $dsbacLuong->id ? 'selected' : ''}}>{{$dsbacLuong->bac_luong}}</option>
                             @endforeach
@@ -461,6 +470,7 @@
                     <label for="exampleInputEmail6">Hệ số lương</label>
                     <div class="form-group">
                         <select class="form-control select2" name="he_so_luong">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($bacLuong as $dsbacLuong)
                                 <option value="{{$dsbacLuong->id}}" {{$canBo->he_so_luong == $dsbacLuong->id ? 'selected' : ''}}>{{$dsbacLuong->he_so_luong}}</option>
                             @endforeach
@@ -515,6 +525,7 @@
                     <label for="exampleInputEmail6">Phụ cấp cv</label>
                     <div class="form-group">
                         <select class="form-control select2" name="phu_cap">
+                            <option value="">--Lựa chọn--</option>
                             @foreach($phuCap as $dsphuCap)
                                 <option value="{{$dsphuCap->id}}" {{$canBo->phu_cap_cv == $dsphuCap->id ? 'selected' : ''}}>{{$dsphuCap->ten}}</option>
                             @endforeach

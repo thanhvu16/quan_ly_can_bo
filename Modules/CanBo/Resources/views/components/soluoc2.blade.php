@@ -66,6 +66,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Trình độ phổ thông</label>
                     <select class="form-control select2" name="trinh_do_pho_thong_id">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($phoThong as $dsphoThong)
                             <option value="{{$dsphoThong->id}}"  {{$canBo->trinh_do_pho_thong_id == $dsphoThong->id ? 'selected' : ''}}>{{$dsphoThong->ten}}</option>
                         @endforeach
@@ -77,6 +78,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">TĐCM cao nhất</label>
                     <select class="form-control select2" name="trinh_do_chuyen_mon_cao_nhat_id">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($congViecChuyenMon as $dscongViecChuyenMon)
                             <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->trinh_do_chuyen_mon_cao_nhat_id == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>
                         @endforeach
@@ -89,6 +91,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Ngành CM chính</label>
                     <select class="form-control select2" name="chuyen_nganh_id">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($chuyenNganhDT as $dschuyenNganhDT)
                             <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->chuyen_nganh_id == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
                         @endforeach
@@ -122,6 +125,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Lý luận Chính trị</label>
                     <select class="form-control select2" name="ly_luan_chinh_tri">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($lyluanChinhTri as $dslyLuan)
                             <option value="{{$dslyLuan->id}}"  {{$canBo->ly_luan_chinh_tri == $dslyLuan->id ? 'selected' : ''}}>{{$dslyLuan->ten}}</option>
                         @endforeach
@@ -134,6 +138,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Quản lý hành chính</label>
                     <select class="form-control select2" name="quan_ly_hanh_chinh">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($quanLyHanhChinh as $dsHC)
                             <option value="{{$dsHC->id}}"  {{$canBo->quan_ly_hanh_chinh == $dsHC->id ? 'selected' : ''}}>{{$dsHC->ten}}</option>
                         @endforeach
@@ -145,6 +150,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tin Học</label>
                     <select class="form-control select2" name="tin_hoc">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($tinHoc as $dstinHoc)
                             <option value="{{$dstinHoc->id}}"  {{$canBo->tin_hoc == $dstinHoc->id ? 'selected' : ''}}>{{$dstinHoc->ten}}</option>
                         @endforeach
@@ -156,6 +162,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Ngoại Ngữ</label>
                     <select class="form-control select2" name="tieng_anh">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($tiengAnh as $dstiengAnh)
                             <option value="{{$dstiengAnh->id}}"  {{$canBo->tieng_anh == $dstiengAnh->id ? 'selected' : ''}}>{{$dstiengAnh->ten}}</option>
                         @endforeach
@@ -283,6 +290,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Chức vụ đảng hiện nay</label>
                     <select class="form-control select2" name="chuc_vu_dang_hien_nay">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($chucVuDang as $dschucVuDang)
                             <option value="{{$dschucVuDang->id}}"  {{$canBo->chuc_vu_dang_hien_nay == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
                         @endforeach
@@ -295,6 +303,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Chức vụ đảng cao nhất</label>
                     <select class="form-control select2" name="chuc_vu_cao_nhat">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($chucVuDang as $dschucVuDang)
                             <option value="{{$dschucVuDang->id}}"  {{$canBo->chuc_vu_cao_nhat == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
                         @endforeach
@@ -355,12 +364,11 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày nhập ngũ<span
-                            style="color: red">*</span></label>
+                    <label for="exampleInputEmail4">Ngày nhập ngũ</label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker"
                                name="nhap_ngu" id="nhap_ngu" value="{{ isset($canBo) && $canBo->nhap_ngu ? formatDMY($canBo->nhap_ngu) : ''}}"
-                               placeholder="dd/mm/yyyy" required>
+                               placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
                         </div>
@@ -369,12 +377,11 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày xuất ngũ <span
-                            style="color: red">*</span></label>
+                    <label for="exampleInputEmail4">Ngày xuất ngũ </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker"
                                name="xuat_ngu" id="xuat_ngu" value="{{ isset($canBo) && $canBo->xuat_ngu ? formatDMY($canBo->xuat_ngu) : ''}}"
-                               placeholder="dd/mm/yyyy" required>
+                               placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
                         </div>
@@ -386,6 +393,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Quân hàm cao nhất</label>
                     <select class="form-control select2" name="quan_ham_cao_nhat">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($quanHam as $dsQuanHam)
                             <option value="{{$dsQuanHam->id}}"  {{$canBo->quan_ham_cao_nhat == $dsQuanHam->id ? 'selected' : ''}}>{{$dsQuanHam->ten}}</option>
                         @endforeach
@@ -397,6 +405,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Danh hiệu phong tặng cao nhất</label>
                     <select class="form-control select2" name="danh_hieu_phong_tang_cao_nhat">
+                        <option value="">--Lựa chọn--</option>
                         @foreach($danhHieu as $dsDanHieu)
                             <option value="{{$dsDanHieu->id}}"  {{$canBo->danh_hieu_phong_tang_cao_nhat == $dsDanHieu->id ? 'selected' : ''}}>{{$dsDanHieu->ten}}</option>
                         @endforeach

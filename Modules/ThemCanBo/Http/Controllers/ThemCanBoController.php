@@ -2,6 +2,7 @@
 
 namespace Modules\ThemCanBo\Http\Controllers;
 
+use App\Models\HoSoTraLai;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -155,6 +156,17 @@ class ThemCanBoController extends Controller
         $gioiTinh = $request->get('gioi_tinh') ?? null;
         $donViId = $request->get('don_vi_id') ?? null;
 
+        $viTri = $request->get('vi_tri') ?? null;
+        $all = $request->get('all') ?? null;
+        $dangVienC = $request->get('dang_vienC') == 1 ?? null;
+        $doanVien = $request->get('doan_vien') == 1 ?? null;
+        $boDoi = $request->get('bo_doi') == 1 ?? null;
+        $giaiNgu = $request->get('cho_duyet') == 1 ?? null;
+        $choDuyet = $request->get('cho_duyet') == 1 ?? null;
+        $daDuyet = $request->get('da_duyet') == 1 ?? null;
+        $traLai = $request->get('tra_lai') == 1 ?? null;
+        $guiDuyet = $request->get('gui_duyet') == 1 ?? null;
+
         $thongKe = $request->get('thong_ke') ?? null;
         $dangVien = $request->get('dang_vien') ?? null;
         $khenThuong = $request->get('khen_thuong') ?? null;
@@ -168,18 +180,79 @@ class ThemCanBoController extends Controller
         }
 
         $danhSach = CanBo::where(function ($query) use ($thongKe) {
-                if (empty($thongKe)) {
+            if (empty($thongKe)) {
+                if (!auth::user()->hasRole([QUAN_TRI_HT])) {
                     return $query->where('don_vi_tao_id', auth::user()->don_vi_id);
                 }
-            })
+            }
+        })
             ->where(function ($query) use ($hoTen) {
                 if (!empty($hoTen)) {
                     return $query->where('ho_ten', 'LIKE', "%$hoTen%");
                 }
             })
+            ->where(function ($query) use ($choDuyet) {
+                if (!empty($choDuyet)) {
+                    return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET);
+                }
+            })
+            ->where(function ($query) use ($daDuyet) {
+                if (!empty($daDuyet)) {
+                    return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET);
+                }
+            })
+            ->where(function ($query) use ($traLai) {
+                if (!empty($traLai)) {
+                    return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI);
+                }
+            })
+            ->where(function ($query) use ($guiDuyet) {
+                if (!empty($guiDuyet)) {
+                    return $query->where('trang_thai_duyet_ho_so', null);
+                }
+            })
             ->where(function ($query) use ($queQuan) {
                 if (!empty($queQuan)) {
                     return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($dangVienC) {
+                if (!empty($dangVienC)) {
+                    return $query->where('la_dang_vien',1);
+                }
+            })
+            ->where(function ($query) use ($doanVien) {
+                if (!empty($doanVien)) {
+                    return $query->wherenotNull('ngay_vao_doan');
+                }
+            })
+            ->where(function ($query) use ($boDoi) {
+                if (!empty($boDoi)) {
+                    return $query->where('da_di_bo_doi',1);
+                }
+            })
+            ->where(function ($query) use ($giaiNgu) {
+                if (!empty($giaiNgu)) {
+                    return $query->wherenotNull('ngay_giai_ngu');
+                }
+            })
+            ->where(function ($query) use ($viTri) {
+                if (!empty($viTri)) {
+                    if ($viTri == 1) {
+                        return $query->wherenotNull('vi_tri_cong_chuc');
+                    } elseif ($viTri == 2) {
+                        return $query->wherenotNull('vi_tri_vien_chuc');
+                    } elseif ($viTri == 3) {
+                        return $query->wherenotNull('vi_tri_nhan_vien');
+                    }
+
+                }
+            })
+            ->where(function ($query) use ($all) {
+                if (!empty($all)) {
+                    if ($all == 1 && !auth::user()->hasRole([QUAN_TRI_HT])) {
+                        return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET);
+                    }
                 }
             })
             ->where(function ($query) use ($gioiTinh) {
@@ -219,7 +292,9 @@ class ThemCanBoController extends Controller
             })
             ->where(function ($query) use ($thongKe) {
                 if (empty($thongKe)) {
-                    return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET);
+                    if (!auth::user()->hasRole([QUAN_TRI_HT])) {
+                        return $query->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET);
+                    }
                 }
             })
             ->paginate(20);
@@ -292,11 +367,34 @@ class ThemCanBoController extends Controller
         $canBo->ten_khac = $request->ten_khac;
         $canBo->gioi_tinh = $request->gioi_tinh;
         $canBo->ngay_sinh = !empty($request->ngay_sinh) ? formatYMD($request->ngay_sinh) : null;
+        $canBo->ngay_cap_cmt = !empty($request->ngay_cap_cmt) ? formatYMD($request->ngay_cap_cmt) : null;
+        $canBo->tuyen_dung_chinh_thuc = !empty($request->tuyen_dung_chinh_thuc) ? formatYMD($request->tuyen_dung_chinh_thuc) : null;
+        $canBo->tuyen_dung_dau_tien = !empty($request->tuyen_dung_dau_tien) ? formatYMD($request->tuyen_dung_dau_tien) : null;
+        $canBo->cmnd = $request->cmnd;
+        $canBo->email = $request->email;
+        $canBo->so_dien_thoai = $request->so_dien_thoai;
+        $canBo->noi_cap = $request->noi_cap;
+        $canBo->so_so_bao_hiem = $request->so_so_bao_hiem;
+        $canBo->linh_vuc_theo_doi = $request->linh_vuc_theo_doi;
+        $canBo->bi_danh = $request->bi_danh;
+        $canBo->nghe_nghiep_truoc_khi_tuyen = $request->nghe_nghiep_truoc_khi_tuyen;
         $canBo->dan_toc = $request->dan_toc;
         $canBo->ton_giao = $request->ton_giao;
 
         $canBo->ngay_vao_don_vi = !empty($request->ngay_vao_don_vi) ? formatYMD($request->ngay_vao_don_vi) : null;
+        $canBo->ngay_bo_nhiem_ngach = !empty($request->ngay_bo_nhiem_ngach) ? formatYMD($request->ngay_bo_nhiem_ngach) : null;
+        $canBo->ngay_huong_vuot_khung = !empty($request->ngay_huong_vuot_khung) ? formatYMD($request->ngay_huong_vuot_khung) : null;
+        $canBo->ngay_cap_bao_hiem = !empty($request->ngay_cap_bao_hiem) ? formatYMD($request->ngay_cap_bao_hiem) : null;
+        $canBo->moc_xet_tang_luong = !empty($request->moc_xet_tang_luong) ? formatYMD($request->moc_xet_tang_luong) : null;
+        $canBo->ngay_bo_nhiem_chuc_vu_hien_tai = !empty($request->ngay_bo_nhiem_chuc_vu_hien_tai) ? formatYMD($request->ngay_bo_nhiem_chuc_vu_hien_tai) : null;
+        $canBo->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem = !empty($request->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) ? formatYMD($request->ngay_bo_nhiem_chuc_vu_chuc_vu_kiem_nhiem) : null;
 
+        $canBo->he_so_phu_cap_chuc_vu_hien_tai = $request->he_so_phu_cap_chuc_vu_hien_tai;
+        $canBo->chuc_vu_kiem_nhiem = $request->chuc_vu_kiem_nhiem;
+        $canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem = $request->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem;
+        $canBo->vi_tri_cong_chuc = $request->vi_tri_cong_chuc;
+        $canBo->vi_tri_vien_chuc = $request->vi_tri_vien_chuc;
+        $canBo->vi_tri_nhan_vien = $request->vi_tri_nhan_vien;
         $canBo->co_quan_tuyen = $request->co_quan_tuyen;
         $canBo->noi_sinh = $request->noi_sinh_xa;
         $canBo->huyen_noi_sinh = $request->noi_sinh_huyen;
@@ -329,9 +427,10 @@ class ThemCanBoController extends Controller
         $canBo->user_id = auth::user()->id;
 
         $canBo->save();
+
+
         return redirect()->route('canBoDetail', $canBo->id)->with('Thêm mới thành công !');
     }
-
 
 
     /**

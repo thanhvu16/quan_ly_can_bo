@@ -13,7 +13,7 @@
         <div class="panel-body">
                 <div class="col-md-7 pl-1">
                     @if (auth::user()->hasRole(CAN_BO))
-                        <a class="text-title-item">
+                        <a href="{{route('ho_so_can_bo.create')}}" class="text-title-item">
                             <p>Nhập hồ sơ cán bộ</p>
                         </a>
                     @endif

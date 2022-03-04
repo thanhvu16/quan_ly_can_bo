@@ -16,3 +16,4 @@ Route::prefix('tracuu')->group(function() {
 });
 Route::resource('tra-cuu', 'TraCuuController');
 Route::get('tra-cuu-nang-cao', 'TraCuuController@nangCao')->name('nangCao');
+Route::get('thong-tin-ho-so', 'TraCuuController@index')->name('thongtinhs');

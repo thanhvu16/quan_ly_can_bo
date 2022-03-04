@@ -12,7 +12,7 @@
         <div class="clearfix"></div>
         <div class="panel-body">
             <div class="col-md-7 pl-1">
-                <a class="text-title-item" href="{{ route('allCanBo') }}">
+                <a class="text-title-item" href="{{ route('allCanBo', 'all=1') }}">
                     <p>Tổng số hồ sơ cán bộ
                         <button
                             class="btn br-10 btn-success btn-circle waves-effect waves-light btn-sm pull-right count-item">{{  $tongCanBoTrongDonVi }}</button>
@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="col-md-5 ">
-                <div id="pie-chart-thong-ke-can-bo">
+                <div id="pie-chart-thong-ke-can-bo-gioi_tinh">
 
                 </div>
             </div>

@@ -63,10 +63,10 @@ class AdminController extends Controller
         $ngay = $request->get('ngay');
 
         $duLieu = LuuVetDangNhap::where(function ($query) use ($ten) {
-                if (!empty($ten)) {
-                    return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
-                }
-            })
+            if (!empty($ten)) {
+                return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
+            }
+        })
             ->where(function ($query) use ($taiKhoan) {
                 if (!empty($taiKhoan)) {
                     return $query->where(DB::raw('lower(tai_khoan)'), 'LIKE', "%" . mb_strtolower($taiKhoan) . "%");
@@ -74,22 +74,25 @@ class AdminController extends Controller
             })
             ->where(function ($query) use ($ngay) {
                 if (!empty($ngay)) {
-                    return $query->wheredate('created_at',formatYMD($ngay));
+                    return $query->wheredate('created_at', formatYMD($ngay));
                 }
             })->paginate(PER_PAGE);
-        return view('admin::VetDangNhap',compact('duLieu'));
+        return view('admin::VetDangNhap', compact('duLieu'));
     }
+
     public function taiLieuHuongDan()
     {
         $taiLieu = TaiLieuHuongDan::paginate(PER_PAGE);
-        return view('admin::uploadFile',compact('taiLieu'));
+        return view('admin::uploadFile', compact('taiLieu'));
     }
+
     public function cauHinhHeThong()
     {
         $cauHinh = CauHinh::first();
-        return view('admin::cauHinh',compact('cauHinh'));
+        return view('admin::cauHinh', compact('cauHinh'));
     }
-    public function postCauHinh(Request $request,$id)
+
+    public function postCauHinh(Request $request, $id)
     {
         $cauHinh = CauHinh::first();
         $cauHinh->ten_don_vi = $request->ten_don_vi;
@@ -107,11 +110,13 @@ class AdminController extends Controller
         $cauHinh->save();
         return redirect()->back()->with('cập nhật thành công');
     }
+
     public function xoafile($id)
     {
-        $taiLieu = TaiLieuHuongDan::where('id',$id)->delete();
+        $taiLieu = TaiLieuHuongDan::where('id', $id)->delete();
         return redirect()->back()->with('xóa file thành công');
     }
+
     public function postTaiLieuThamKhao(Request $request)
     {
         $uploadPath = UPLOAD_FILE_TAI_LIEU;
@@ -140,24 +145,26 @@ class AdminController extends Controller
         return redirect()->back()
             ->with('success', 'Thêm file thành công !');
     }
+
     public function setDB(Request $request)
     {
-        if($request->year == 2021)
-        {
+        if ($request->year == 2021) {
             \Config::set('database.connections.sqlsrv.database', 'so_tai_nguyen_moi_truong');
-            \Session::put('tenDB',  'so_tai_nguyen_moi_truong');
-            \Session::put('nam',  $request->year);
+            \Session::put('tenDB', 'so_tai_nguyen_moi_truong');
+            \Session::put('nam', $request->year);
 
-        }else{
-            \Config::set('database.connections.sqlsrv.database', 'so_tai_nguyen_moi_truong'.$request->get('year'));
-            \Session::put('tenDB',  'so_tai_nguyen_moi_truong_'.$request->get('year'));
-            \Session::put('nam',  $request->year);
+        } else {
+            \Config::set('database.connections.sqlsrv.database', 'so_tai_nguyen_moi_truong' . $request->get('year'));
+            \Session::put('tenDB', 'so_tai_nguyen_moi_truong_' . $request->get('year'));
+            \Session::put('nam', $request->year);
 
         }
         return redirect()->back();
 
     }
-    public function danhMucHeThong(){
+
+    public function danhMucHeThong()
+    {
 
         return view('admin::danhMuc');
     }
@@ -171,20 +178,142 @@ class AdminController extends Controller
 
         $hoSoCanBoPiceCharts = [];
         $hoSoCanBoCoLors = [];
+
+        $thongKeDangPiceCharts = [];
+        $thongKeDangCoLors = [];
+
+        $quanLyPiceCharts = [];
+        $quanLyCoLors = [];
+
+        $thongKeCanBoPiceCharts = [];
+        $thongKeCanBoCoLors = [];
+
         $hoSocanBoChoGuiDuyet = 0;
         $hoSoGuiDuyetBiTraLai = 0;
 
+//        vị trí tuyển dung
+        $tongSoCongChuc = 0;
+        $tongSoVienChuc = 0;
+        $tongSoNhanVien = 0;
+        $viTriPiceCharts = [];
+        $viTriCoLors = [];
+
+        $tongCanBoTrongDonVi = 0;
+        $tongSoNamTrongDonVi = 0;
+        $tongSoNuTrongDonVi = 0;
+        $tongSoHoSoVeHuu = 0;
+
+        //đảng
+        $tongSoDangVien = 0;
+        $tongSoDoanVien = 0;
+        $tongSoDiBoDoi = 0;
+        $tongSoGiaiNgu = 0;
+
+        //quản lý cán bộ
+        $tonghoSoChoDuyet = 0;
+        $tongSoDaDuyet = 0;
+        $tongSoBiTraLai = 0;
+        $tongSoChoGuiDuyet = 0;
+
         array_push($hoSoCanBoPiceCharts, array('Task', 'Danh sách'));
+        array_push($viTriPiceCharts, array('Task', 'Danh sách'));
+        array_push($thongKeCanBoPiceCharts, array('Task', 'Danh sách'));
+        array_push($thongKeDangPiceCharts, array('Task', 'Danh sách'));
+        array_push($quanLyPiceCharts, array('Task', 'Danh sách'));
+
 
 
         if (auth::user()->hasRole([CAN_BO])) {
-
             $hoSocanBoChoGuiDuyet = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->whereNull('trang_thai_duyet_ho_so')
                 ->count();
-
             array_push($hoSoCanBoPiceCharts, array('Hồ sơ chờ gửi duyệt lãnh đạo', $hoSocanBoChoGuiDuyet));
             array_push($hoSoCanBoCoLors, COLOR_WARNING);
+
+
+            //cán bộ đơn vị
+            $tongCanBoTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->count();
+
+            $tongSoNamTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('gioi_tinh', CanBo::GIOI_TINH_NAM)->count();
+
+            $tongSoNuTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('gioi_tinh', CanBo::GIOI_TINH_NU)->count();
+
+            $tongSoHoSoVeHuu = CanBo::whereHas('veHuu')->where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->count();
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng số', $tongCanBoTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_GREEN);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nam', $tongSoNamTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_INFO);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nữ', $tongSoNuTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_ORANGE);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ về hưu', $tongSoHoSoVeHuu));
+            array_push($thongKeCanBoCoLors, COLOR_PURPLE);
+            //end cán bộ đơn vị
+
+
+            //start vị trí
+            $tongSoCongChuc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('vi_tri_cong_chuc')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ công chức', $tongSoCongChuc));
+            array_push($viTriCoLors, COLOR_INFO);
+            $tongSoVienChuc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('vi_tri_vien_chuc')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ viên chức', $tongSoVienChuc));
+            array_push($viTriCoLors, COLOR_ORANGE);
+            $tongSoNhanVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('vi_tri_nhan_vien')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ nhân viên', $tongSoNhanVien));
+            array_push($viTriCoLors, COLOR_PURPLE);
+            //end vị trí
+
+
+
+            //start đảng viên
+            $tongSoDangVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('la_dang_vien',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đảng viên', $tongSoDangVien));
+            array_push($thongKeDangCoLors, COLOR_GREEN);
+
+            $tongSoDoanVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('ngay_vao_doan')
+                ->count();
+
+            array_push($thongKeDangPiceCharts, array('Tổng số đoàn viên', $tongSoDoanVien));
+            array_push($thongKeDangCoLors, COLOR_INFO);
+            $tongSoDiBoDoi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('da_di_bo_doi',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đã đi bộ đội', $tongSoDiBoDoi));
+            array_push($thongKeDangCoLors, COLOR_ORANGE);
+            $tongSoGiaiNgu = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('ngay_giai_ngu')
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số giải ngũ', $tongSoGiaiNgu));
+            array_push($thongKeDangCoLors, COLOR_PURPLE);
+            //end đảng viên
+
 
             $hoSoGuiDuyetBiTraLai = CanBo::with('trinhTuTraLaiHoSoCanBoNhap')
                 ->whereHas('trinhTuTraLaiHoSoCanBoNhap')
@@ -192,9 +321,8 @@ class AdminController extends Controller
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI)
                 ->count();
 
-            array_push($hoSoCanBoPiceCharts, array('Hồ sơ gửi duyệt bị trả lại', $hoSoGuiDuyetBiTraLai));
-            array_push($hoSoCanBoCoLors, COLOR_RED);
-
+            array_push($thongKeDangPiceCharts, array('Hồ sơ gửi duyệt bị trả lại', $hoSoGuiDuyetBiTraLai));
+            array_push($thongKeDangCoLors, COLOR_RED);
 
 
 //             return redirect()->route('ho_so_can_bo.cho_gui_duyet');
@@ -219,14 +347,7 @@ class AdminController extends Controller
             array_push($hoSoCanBoPiceCharts, array('Hồ sơ gửi trả lại', $hoSoGuiDuyetBiTraLai));
             array_push($hoSoCanBoCoLors, COLOR_RED);
 
-//            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
-        }
-        if (!auth::user()->hasRole([QUAN_TRI_HT])) {
-            $thongKeCanBoPiceCharts = [];
-            $thongKeCanBoCoLors = [];
-
-            array_push($thongKeCanBoPiceCharts, array('Task', 'Danh sách'));
-
+            //cán bộ đơn vị
             $tongCanBoTrongDonVi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
                 ->count();
@@ -243,6 +364,9 @@ class AdminController extends Controller
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
                 ->count();
 
+            array_push($thongKeCanBoPiceCharts, array('Tổng số', $tongCanBoTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_GREEN);
+
             array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nam', $tongSoNamTrongDonVi));
             array_push($thongKeCanBoCoLors, COLOR_INFO);
 
@@ -251,27 +375,185 @@ class AdminController extends Controller
 
             array_push($thongKeCanBoPiceCharts, array('Tổng hồ về hưu', $tongSoHoSoVeHuu));
             array_push($thongKeCanBoCoLors, COLOR_PURPLE);
+            //end cán bộ đơn vị
+
+
+            //start vị trí
+            $tongSoCongChuc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->wherenotNull('vi_tri_cong_chuc')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ công chức', $tongSoCongChuc));
+            array_push($viTriCoLors, COLOR_INFO);
+            $tongSoVienChuc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('vi_tri_vien_chuc')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ viên chức', $tongSoVienChuc));
+            array_push($viTriCoLors, COLOR_ORANGE);
+            $tongSoNhanVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('vi_tri_nhan_vien')
+                ->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ nhân viên', $tongSoNhanVien));
+            array_push($viTriCoLors, COLOR_PURPLE);
+            //end vị trí
+
+            //start đảng viên
+            $tongSoDangVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('la_dang_vien',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đảng viên', $tongSoDangVien));
+            array_push($thongKeDangCoLors, COLOR_GREEN);
+
+            $tongSoDoanVien = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('ngay_vao_doan')
+                ->count();
+
+            array_push($thongKeDangPiceCharts, array('Tổng số đoàn viên', $tongSoDoanVien));
+            array_push($thongKeDangCoLors, COLOR_INFO);
+            $tongSoDiBoDoi = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('da_di_bo_doi',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đã đi bộ đội', $tongSoDiBoDoi));
+            array_push($thongKeDangCoLors, COLOR_ORANGE);
+            $tongSoGiaiNgu = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->wherenotNull('ngay_giai_ngu')
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số giải ngũ', $tongSoGiaiNgu));
+            array_push($thongKeDangCoLors, COLOR_PURPLE);
+            //end đảng viên
+
+
+
+//            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
         }
+//        if (!auth::user()->hasRole([QUAN_TRI_HT])) {
+        if (auth::user()->hasRole([QUAN_TRI_HT]) ) {
+
+            //cán bộ đơn vị
+            $tongCanBoTrongDonVi = CanBo::count();
+
+            $tongSoNamTrongDonVi = CanBo::where('gioi_tinh', CanBo::GIOI_TINH_NAM)->count();
+
+            $tongSoNuTrongDonVi = CanBo::where('gioi_tinh', CanBo::GIOI_TINH_NU)->count();
+
+            $tongSoHoSoVeHuu = CanBo::whereHas('veHuu')->count();
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng số', $tongCanBoTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_GREEN);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nam', $tongSoNamTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_INFO);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ sơ nữ', $tongSoNuTrongDonVi));
+            array_push($thongKeCanBoCoLors, COLOR_ORANGE);
+
+            array_push($thongKeCanBoPiceCharts, array('Tổng hồ về hưu', $tongSoHoSoVeHuu));
+            array_push($thongKeCanBoCoLors, COLOR_PURPLE);
+            //end cán bộ đơn vị
+
+            //start vị trí
+            $tongSoCongChuc = CanBo::wherenotNull('vi_tri_cong_chuc')->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ công chức', $tongSoCongChuc));
+            array_push($viTriCoLors, COLOR_INFO);
+            $tongSoVienChuc = CanBo::wherenotNull('vi_tri_vien_chuc')->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ viên chức', $tongSoVienChuc));
+            array_push($viTriCoLors, COLOR_ORANGE);
+            $tongSoNhanVien = CanBo::wherenotNull('vi_tri_nhan_vien')->count();
+            array_push($viTriPiceCharts, array('Tổng số hồ sơ nhân viên', $tongSoNhanVien));
+            array_push($viTriCoLors, COLOR_PURPLE);
+            //end vị trí
+
+            //start đảng viên
+            $tongSoDangVien = CanBo::where('la_dang_vien',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đảng viên', $tongSoDangVien));
+            array_push($thongKeDangCoLors, COLOR_GREEN);
+
+            $tongSoDoanVien = CanBo::wherenotNull('ngay_vao_doan')
+                ->count();
+
+            array_push($thongKeDangPiceCharts, array('Tổng số đoàn viên', $tongSoDoanVien));
+            array_push($thongKeDangCoLors, COLOR_INFO);
+            $tongSoDiBoDoi = CanBo::where('da_di_bo_doi',1)
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số đã đi bộ đội', $tongSoDiBoDoi));
+            array_push($thongKeDangCoLors, COLOR_ORANGE);
+            $tongSoGiaiNgu = CanBo::wherenotNull('ngay_giai_ngu')
+                ->count();
+            array_push($thongKeDangPiceCharts, array('Tổng số giải ngũ', $tongSoGiaiNgu));
+            array_push($thongKeDangCoLors, COLOR_PURPLE);
+            //end đảng viên
+
+            //quản lý
+            $tonghoSoChoDuyet = CanBo::where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET)
+                ->count();
+
+
+            $tongSoDaDuyet = CanBo::where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)->count();
+
+            $tongSoBiTraLai = CanBo::where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_TRA_LAI)->count();
+
+            $tongSoChoGuiDuyet = CanBo::where('trang_thai_duyet_ho_so', null)
+                ->count();
+
+            array_push($quanLyPiceCharts, array('Tổng số hồ sơ chờ duyệt', $tonghoSoChoDuyet));
+            array_push($quanLyCoLors, COLOR_GREEN);
+
+            array_push($quanLyPiceCharts, array('Tổng hồ sơ đã duyệt', $tongSoDaDuyet));
+            array_push($quanLyCoLors, COLOR_INFO);
+
+            array_push($quanLyPiceCharts, array('Tổng hồ sơ bị trả lại', $tongSoBiTraLai));
+            array_push($quanLyCoLors, COLOR_ORANGE);
+
+            array_push($quanLyPiceCharts, array('Tổng hồ sơ chờ gửi duyệt ', $tongSoChoGuiDuyet));
+            array_push($quanLyCoLors, COLOR_PURPLE);
+            //end quản lý
+
+        }
+
 
 //
-        if (auth::user()->hasRole([QUAN_TRI_HT])) {
-            return redirect()->route('nguoi-dung.index');
-        }
+//        if (auth::user()->hasRole([QUAN_TRI_HT])) {
+//            return redirect()->route('nguoi-dung.index');
+//        }
+
 
         return view('admin::index',
-                [
-                    'hoSoCanBoPiceCharts' => $hoSoCanBoPiceCharts,
-                    'hoSoCanBoCoLors' => $hoSoCanBoCoLors,
-                    'hoSocanBoChoGuiDuyet' => $hoSocanBoChoGuiDuyet,
-                    'hoSoGuiDuyetBiTraLai' => $hoSoGuiDuyetBiTraLai,
-                    'thongKeCanBoPiceCharts' => $thongKeCanBoPiceCharts,
-                    'thongKeCanBoCoLors' => $thongKeCanBoCoLors,
-                    'tongCanBoTrongDonVi' => $tongCanBoTrongDonVi,
-                    'tongSoNamTrongDonVi' => $tongSoNamTrongDonVi,
-                    'tongSoNuTrongDonVi' => $tongSoNuTrongDonVi,
-                    'tongSoHoSoVeHuu' => $tongSoHoSoVeHuu
-                ]
-            );
+            [
+                'hoSoCanBoPiceCharts' => $hoSoCanBoPiceCharts,
+                'hoSoCanBoCoLors' => $hoSoCanBoCoLors,
+                'hoSocanBoChoGuiDuyet' => $hoSocanBoChoGuiDuyet,
+                'hoSoGuiDuyetBiTraLai' => $hoSoGuiDuyetBiTraLai,
+                'thongKeCanBoPiceCharts' => $thongKeCanBoPiceCharts,
+                'thongKeCanBoCoLors' => $thongKeCanBoCoLors,
+                'tongCanBoTrongDonVi' => $tongCanBoTrongDonVi,
+                'tongSoNamTrongDonVi' => $tongSoNamTrongDonVi,
+                'tongSoNuTrongDonVi' => $tongSoNuTrongDonVi,
+                'tongSoHoSoVeHuu' => $tongSoHoSoVeHuu,
+                'tongSoCongChuc' => $tongSoCongChuc,
+                'tongSoVienChuc' => $tongSoVienChuc,
+                'tongSoNhanVien' => $tongSoNhanVien,
+                'viTriPiceCharts' => $viTriPiceCharts,
+                'viTriCoLors' => $viTriCoLors,
+                'thongKeDangPiceCharts' => $thongKeDangPiceCharts,
+                'thongKeDangCoLors' => $thongKeDangCoLors,
+                'tongSoDangVien' => $tongSoDangVien,
+                'tongSoDoanVien' => $tongSoDoanVien,
+                'tongSoDiBoDoi' => $tongSoDiBoDoi,
+                'tongSoGiaiNgu' => $tongSoGiaiNgu,
+                'quanLyPiceCharts' => $quanLyPiceCharts,
+                'quanLyCoLors' => $quanLyCoLors,
+                'tonghoSoChoDuyet' => $tonghoSoChoDuyet,
+                'tongSoDaDuyet' => $tongSoDaDuyet,
+                'tongSoBiTraLai' => $tongSoBiTraLai,
+                'tongSoChoGuiDuyet' => $tongSoChoGuiDuyet,
+            ]
+        );
     }
 
     /**

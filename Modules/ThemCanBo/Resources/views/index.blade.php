@@ -53,6 +53,7 @@
                                             @endforeach
 
                                         </select>
+                                        <input type="hidden" name="vi_tri" value="{{Request::get('vi_tri')}}">
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -120,6 +121,7 @@
                             <div class="col-md-6 text-right">
                                 {!! $danhSach->appends(['ho_ten' => Request::get('ho_ten'),
                                    'que_quan' => Request::get('que_quan'),
+                                   'vi_tri' => Request::get('vi_tri'),
                                    'gioi_tinh' => Request::get('gioi_tinh'),
                                    'don_vi_id' => Request::get('don_vi_id'),
                                    'thong_ke' => Request::get('thong_ke'),

@@ -85,6 +85,29 @@
     </ul>
 </li>
 
+<li class="{{  Route::is('/') ? 'active' : '' }} ">
+    <a href="/">
+        <i class="fa fa-pie-chart" ></i> <span>Thống kê nhắc việc</span>
+        <span class="pull-right-container">
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+            </span>
+    </a>
+</li>
+<li class="{{  Route::is('thongtinhs') ? 'active' : '' }} ">
+    <a href="{{route('thongtinhs') }}">
+        <i class="fa fa-users" ></i> <span>Quản lý hồ sơ cán bộ</span>
+        <span class="pull-right-container">
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+            </span>
+    </a>
+</li>
+<li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
+    <a href="{{route('don-vi-to-chuc.index')}}">
+        <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
+        <span class="pull-right-container"></span>
+    </a>
+</li>
+
 <li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('chi-tra-chinh-sach.index') || Route::is('chinh-sach.index') ? 'active menu-open' : '' }} }} ">
     <a href="#">
         <i class="fa fa-book"></i> <span>Chế độ chính sách</span>
