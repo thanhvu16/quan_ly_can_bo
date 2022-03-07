@@ -53,7 +53,8 @@
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Từ ngày</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Đến ngày</th>
-                        <th width=""  style="vertical-align: middle"class="text-center">Chức danh, cơ quan, công việc</th>
+                        <th width=""  style="vertical-align: middle"class="text-center">Chức danh</th>
+                        <th width=""  style="vertical-align: middle"class="text-center">Cơ quan</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,6 +64,7 @@
                             <td style="color: red;font-weight: bold">{{formatDMY($data1->tu_ngay)}}</td>
                             <td style="color: red;font-weight: bold"> {{formatDMY($data1->den_ngay)}}</td>
                             <td>{{$data1->chuc_danh}}</td>
+                            <td>{{$data1->co_quan}}</td>
                         </tr>
 
                     @empty

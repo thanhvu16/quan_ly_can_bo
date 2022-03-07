@@ -39,13 +39,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6" >
+                        <div class="col-md-3" >
                             <div class="form-group">
                                 <label for="exampleInputEmail6">Chức danh <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="chuc_danh" value=""
-                                           placeholder=" " required>
+                                           placeholder="Chức danh.. " required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail6">Cơ quan <span
+                                        style="color: red">*</span></label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="co_quan" value=""
+                                           placeholder="Cơ quan.. " required>
 
                                 </div>
                             </div>
