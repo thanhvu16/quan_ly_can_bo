@@ -53,6 +53,8 @@ use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
 use Modules\Admin\Http\Controllers\LyLuanChinhTri;
 use File, Auth;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\Style\Cell;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class CanBoController extends Controller
@@ -766,6 +768,28 @@ class CanBoController extends Controller
         $wordTemplate->setValue('banThan', $canBo->dac_diem_lich_su_ban_than ?? null);
         $wordTemplate->setValue('banThan1', $canBo->dac_diem_lich_su_ban_than_tai_san ?? null);
         $wordTemplate->setValue('nhanThanGD', $canBo->nhan_than_nuoc_ngoai ?? null);
+
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhCongTac = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhCongTac->addRow();
+        $tableQuaTrinhCongTac->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(3000)->addText('Chức danh, chức vụ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(3000)->addText('Cơ quan, đơn vị', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhCongTac = QuaTrinhCongTac::where('id', $canBo->id)->get();
+        if (count($quaTrinhCongTac) > 0) {
+            foreach ($quaTrinhCongTac as $quaTrinh) {
+                $tableQuaTrinhCongTac->addRow();
+                $tableQuaTrinhCongTac->addCell(2000)->addText( date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(3000)->addText($quaTrinh->chuc_danh, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(3000)->addText('', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_cong_tac', $tableQuaTrinhCongTac);
 
         $wordTemplate->saveAs($uploadPhieuChuyen . "/" . $fileDoc);
     }
