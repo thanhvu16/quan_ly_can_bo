@@ -214,6 +214,9 @@
         function showModal18() {
             $("#myModal18").modal('show');
         }
+        function showModal17() {
+            $("#myModal17").modal('show');
+        }
     </script>
 
 @endsection
