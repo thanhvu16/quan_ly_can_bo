@@ -148,6 +148,9 @@
         function showModal() {
         $("#myModal").modal('show');
         }
+        function showModal12() {
+        $("#myModal12").modal('show');
+        }
         function showModal2() {
             console.log(1);
             $("#myModal2").modal('show');
@@ -198,6 +201,18 @@
         }
         function showModal14() {
             $("#myModal14").modal('show');
+        }
+        function showModal15() {
+            $("#myModal15").modal('show');
+        }
+        function showModal16() {
+            $("#myModal16").modal('show');
+        }
+        function showModal19() {
+            $("#myModal19").modal('show');
+        }
+        function showModal18() {
+            $("#myModal18").modal('show');
         }
     </script>
 

@@ -1,13 +1,13 @@
-<div class="modal fade" id="myModal5">
+<div class="modal fade" id="myModal15">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="{{ route('quaTrinhChucVu',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('quaTrinhQuocHoi',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title"><i
-                            class="fa fa-refresh"></i> Cập nhật quá trình chức vụ</h4>
+                            class="fa fa-refresh"></i> Cập nhật quá trình</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -42,10 +42,10 @@
 
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Cơ quan <span
+                                <label for="exampleInputEmail6">Loại hình đại biểu<span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="co_quan" value=""
+                                    <input type="text" class="form-control" name="loai_hinh_dai_bieu" value=""
                                            placeholder=" " required>
 
                                 </div>
@@ -53,37 +53,27 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Chức vụ <span
+                                <label for="exampleInputEmail6">Nhiệm kỳ <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="chuc_vu" value=""
+                                    <input type="text" class="form-control" name="nhiem_ky" value=""
                                            placeholder=" " required>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3" >
+                        <div class="col-md-6" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Hệ số phụ cấp <span
+                                <label for="exampleInputEmail6">Thông tin chi tiết <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="he_so_phu_cap" value=""
+                                    <input type="text" class="form-control" name="thong_tin" value=""
                                            placeholder=" " required>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3" >
-                            <div class="form-group">
-                                <label for="exampleInputEmail6">Hình thức bổ nhiệm <span
-                                        style="color: red">*</span></label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="hinh_thuc_bo_nhiem" value=""
-                                           placeholder=" " required>
 
-                                </div>
-                            </div>
-                        </div>
 
 
                         <div class="form-group col-md-4 mt-4" >

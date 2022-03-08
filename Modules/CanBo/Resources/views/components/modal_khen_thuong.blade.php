@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Nội dung <span
+                                <label for="exampleInputEmail6">Hình thức <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="noi_dung" value=""

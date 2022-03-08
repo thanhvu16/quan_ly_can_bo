@@ -23,6 +23,11 @@ Route::post('qua-trinh-cong-tac/{id}', 'CanBoController@quaTrinhCongTac')->name(
 Route::post('qua-trinh-nuoc-ngoai/{id}', 'CanBoController@quaTrinhNuocNgoai')->name('quaTrinhNuocNgoai');
 Route::post('qua-trinh-luong/{id}', 'CanBoController@quaTrinhluong')->name('quaTrinhluong');
 Route::post('qua-trinh-chuc-vu/{id}', 'CanBoController@quaTrinhChucVu')->name('quaTrinhChucVu');
+Route::post('qua-trinh-quoc-hoi/{id}', 'CanBoController@quaTrinhQuocHoi')->name('quaTrinhQuocHoi');
+Route::post('qua-trinh-vk/{id}', 'CanBoController@quaTrinhPhuCapVK')->name('quaTrinhPhuCapVK');
+Route::post('qua-trinh-gd/{id}', 'CanBoController@quaTrinhGiaDinh')->name('quaTrinhGiaDinh');
+Route::post('qua-trinh-nghien-cuu/{id}', 'CanBoController@quaTrinhNghienCuu')->name('quaTrinhNghienCuu');
+Route::post('qua-trinh-pc-khac/{id}', 'CanBoController@quaTrinhPhuCapKhac')->name('quaTrinhPhuCapKhac');
 Route::post('qua-trinh-chuc-vu-dang/{id}', 'CanBoController@quaTrinhChucVuDang')->name('quaTrinhChucVuDang');
 Route::post('qua-trinh-can-bo/{id}', 'CanBoController@quaTrinhCanBo')->name('quaTrinhCanBo');
 Route::post('qua-trinh-kiem_nhiem/{id}', 'CanBoController@quaTrinhKiemNhiem')->name('quaTrinhKiemNhiem');

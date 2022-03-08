@@ -1,51 +1,23 @@
-<div class="modal fade" id="myModal5">
+<div class="modal fade" id="myModal18">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="{{ route('quaTrinhChucVu',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('quaTrinhGiaDinh',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title"><i
-                            class="fa fa-refresh"></i> Cập nhật quá trình chức vụ</h4>
+                            class="fa fa-refresh"></i> Cập nhật quá trình</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-3 " >
-                            <div class="form-group">
-                                <label for="exampleInputEmail4">Từ ngày <span
-                                        style="color: red">*</span></label>
-                                <div class="input-group date">
-                                    <input type="text" class="form-control  datepicker"
-                                           name="tu_ngay" id="tu_ngay" value=""
-                                           placeholder="dd/mm/yyyy" required>
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar-o"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 " >
-                            <div class="form-group">
-                                <label for="exampleInputEmail4">Đến ngày <span
-                                        style="color: red">*</span></label>
-                                <div class="input-group date">
-                                    <input type="text" class="form-control  datepicker"
-                                           name="den_ngay" id="den_ngay" value=""
-                                           placeholder="dd/mm/yyyy" required>
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar-o"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Cơ quan <span
+                                <label for="exampleInputEmail6">Quan hệ <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="co_quan" value=""
+                                    <input type="text" class="form-control" name="quan_he" value=""
                                            placeholder=" " required>
 
                                 </div>
@@ -53,10 +25,10 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Chức vụ <span
+                                <label for="exampleInputEmail6">Họ và tên <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="chuc_vu" value=""
+                                    <input type="text" class="form-control" name="ho_ten" value=""
                                            placeholder=" " required>
 
                                 </div>
@@ -64,10 +36,10 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Hệ số phụ cấp <span
+                                <label for="exampleInputEmail6">Năm sinh <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="he_so_phu_cap" value=""
+                                    <input type="text" class="form-control" name="nam_sinh" value=""
                                            placeholder=" " required>
 
                                 </div>
@@ -75,10 +47,32 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Hình thức bổ nhiệm <span
+                                <label for="exampleInputEmail6">Nghề nghiệp, chức vụ<span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="hinh_thuc_bo_nhiem" value=""
+                                    <input type="text" class="form-control" name="nghe_nghiep" value=""
+                                           placeholder=" " required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail6">Nơi làm việc <span
+                                        style="color: red">*</span></label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="noi_lam_viec" value=""
+                                           placeholder=" " required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail6">Nơi ở hiện nay <span
+                                        style="color: red">*</span></label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="noi_o" value=""
                                            placeholder=" " required>
 
                                 </div>

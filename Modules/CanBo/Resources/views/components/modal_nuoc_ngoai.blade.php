@@ -39,17 +39,28 @@
                                 </div>
                             </div>
                         </div>
+{{--                        <div class="col-md-3" >--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail6">Nơi đến</label>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <select class="form-control select2" name="noi_dao_tao" required>--}}
+{{--                                        <option value="">--Lựa chọn--</option>--}}
+{{--                                        <option value="Trong nước">Trong nước</option>--}}
+{{--                                        <option value="Nước ngoài">Nước ngoài</option>--}}
+{{--                                        <option value="Các nước tư bản">Các nước tư bản</option>--}}
+{{--                                        <option value="Các nước khác">Các nước khác</option>--}}
+{{--                                    </select>--}}
+
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Nơi đến</label>
+                                <label for="exampleInputEmail6">Tên nước <span
+                                        style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <select class="form-control select2" name="noi_dao_tao" required>
-                                        <option value="">--Lựa chọn--</option>
-                                        <option value="Trong nước">Trong nước</option>
-                                        <option value="Nước ngoài">Nước ngoài</option>
-                                        <option value="Các nước tư bản">Các nước tư bản</option>
-                                        <option value="Các nước khác">Các nước khác</option>
-                                    </select>
+                                    <input type="text" class="form-control" name="ten_nuoc" value=""
+                                           placeholder=" " required>
 
                                 </div>
                             </div>
@@ -67,10 +78,21 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Công việc <span
+                                <label for="exampleInputEmail6">Cơ quan quyết định<span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="cong_viec" value=""
+                                           placeholder=" " required>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="exampleInputEmail6">Nguồn kinh phí<span
+                                        style="color: red">*</span></label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="kinh_phi" value=""
                                            placeholder=" " required>
 
                                 </div>

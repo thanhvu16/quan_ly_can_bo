@@ -30,6 +30,7 @@ use Modules\Admin\Entities\NhiemKy;
 use Modules\Admin\Entities\PhoThong;
 use Modules\Admin\Entities\QuaChucVu;
 use Modules\Admin\Entities\QuanHam;
+use Modules\Admin\Entities\QuanHeGiaDinh;
 use Modules\Admin\Entities\QuanLyHanhChinh;
 use Modules\Admin\Entities\QuaTrinhBaoHiem;
 use Modules\Admin\Entities\QuaTrinhBienCheHopDong;
@@ -37,12 +38,18 @@ use Modules\Admin\Entities\QuaTrinhChucVuDang;
 use Modules\Admin\Entities\QuaTrinhChuyenDonVi;
 use Modules\Admin\Entities\QuaTrinhCongTac;
 use Modules\Admin\Entities\QuaTrinhDaoTao;
+use Modules\Admin\Entities\QuaTrinhDoan;
+use Modules\Admin\Entities\QuaTrinhGiaDinh;
 use Modules\Admin\Entities\QuaTrinhKhenThuong;
 use Modules\Admin\Entities\QuaTrinhKiemNhiemBietPhai;
 use Modules\Admin\Entities\QuaTrinhLuong;
+use Modules\Admin\Entities\QuaTrinhNghienCuu;
 use Modules\Admin\Entities\QuaTrinhNuocNgoai;
+use Modules\Admin\Entities\QuaTrinhPhuCapKhac;
+use Modules\Admin\Entities\QuaTrinhQuocHoi;
 use Modules\Admin\Entities\QuaTrinhQuyHoachCanBo;
 use Modules\Admin\Entities\QuaTrinhVeHuu;
+use Modules\Admin\Entities\QuaTrinhVuotKhung;
 use Modules\Admin\Entities\ThanhPhanXuatThan;
 use Modules\Admin\Entities\ThanhPho;
 use Modules\Admin\Entities\TiengAnh;
@@ -53,6 +60,8 @@ use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
 use Modules\Admin\Http\Controllers\LyLuanChinhTri;
 use File, Auth;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\Style\Cell;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 class CanBoController extends Controller
@@ -167,15 +176,20 @@ class CanBoController extends Controller
         $kiemNhiem = KiemNhiemBietPhai::orderBy('ten', 'asc')->get();
 
         $quaTrinhLuong = QuaTrinhLuong::where('users', $id)->get();
+        $quaTrinhQuocHoi = QuaTrinhQuocHoi::where('users', $id)->get();
         $quaTrinhChucVuDang = QuaTrinhChucVuDang::where('users', $id)->get();
         $quaTrinhChucVu = QuaChucVu::where('users', $id)->get();
-        $quaTrinhQuyHoachCanBo = QuaTrinhQuyHoachCanBo::where('users', $id)->get();
+        $quaTrinhQuyHoachCanBo = QuaTrinhDoan::where('users', $id)->get();
         $quaTrinhKiemNhiemBietphai = QuaTrinhKiemNhiemBietPhai::where('users', $id)->get();
+        $quaTrinhVuotKhung = QuaTrinhVuotKhung::where('users', $id)->get();
+        $quaTrinhPhuCapKhac = QuaTrinhPhuCapKhac::where('users', $id)->get();
         $quaTrinhBienCheHopDong = QuaTrinhBienCheHopDong::where('users', $id)->get();
         $quaTrinhKhenThuong = QuaTrinhKhenThuong::where('users', $id)->where('type', 2)->get();
         $quaTrinhKyLuat = QuaTrinhKhenThuong::where('users', $id)->where('type', 1)->get();
         $quaTrinhVeHuu = QuaTrinhVeHuu::where('users', $id)->get();
         $quaTrinhBaoHiem = QuaTrinhBaoHiem::where('users', $id)->get();
+        $quaTrinhGiaDinh = QuaTrinhGiaDinh::where('users', $id)->get();
+        $quaTrinhNghienCuu = QuaTrinhNghienCuu::where('users', $id)->get();
         $quaTrinhChuyenDonVi = QuaTrinhChuyenDonVi::where('users', $id)->get();
 
         $truongHoc = TruongHoc::orderBy('ten', 'asc')->get();
@@ -184,13 +198,77 @@ class CanBoController extends Controller
         //tao phieu can bo
         $this->taoPhieuCanBo($canBo);
 
-        return view('canbo::index', compact('canBo', 'danToc', 'tonGiao', 'thanhPho', 'chucVuHienTai'
-            , 'donVi', 'ngach', 'bacLuong', 'phuCap', 'chuyenNganhDT', 'congViecChuyenMon', 'phoThong', 'lyluanChinhTri', 'quanLyHanhChinh'
-            , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai'
-            , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc'
+        return view('canbo::index', compact('canBo', 'danToc', 'tonGiao', 'thanhPho', 'chucVuHienTai', 'quaTrinhVuotKhung', 'quaTrinhPhuCapKhac'
+            , 'donVi', 'ngach', 'bacLuong', 'phuCap', 'chuyenNganhDT', 'congViecChuyenMon', 'phoThong', 'lyluanChinhTri', 'quanLyHanhChinh','quaTrinhGiaDinh'
+            , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai','quaTrinhNghienCuu'
+            , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc', 'quaTrinhQuocHoi'
             , 'quaTrinhLuong', 'quaTrinhChucVu', 'quaTrinhChucVuDang', 'quaTrinhQuyHoachCanBo', 'nhiemKy', 'quaTrinhBienCheHopDong', 'quaTrinhKiemNhiemBietphai'
             , 'kiemNhiem', 'loaiCanBo', 'quaTrinhKhenThuong', 'quaTrinhKyLuat', 'quaTrinhBaoHiem', 'quaTrinhVeHuu', 'quaTrinhChuyenDonVi'
             , 'tinHoc', 'donViChuQuan'));
+
+    }
+
+    public function quaTrinhNghienCuu(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhNghienCuu();
+        $daoTao->thoi_gian = !empty($request->thoi_gian) ? formatYMD($request->thoi_gian) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->ten_de_tai = $request->ten_de_tai;
+        $daoTao->cap_de_tai = $request->cap_de_tai;
+        $daoTao->chu_nhiem = $request->chu_nhiem;
+        $daoTao->tu_cach_tham_gia = $request->tu_cach_tham_gia;
+        $daoTao->ket_qua = $request->ket_qua;
+        $daoTao->save();
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity8')->with('success', 'cập nhật thành công !');
+
+    }
+    public function quaTrinhGiaDinh(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhGiaDinh();
+        $daoTao->users = $canBo->id;
+        $daoTao->quan_he = $request->quan_he;
+        $daoTao->ho_ten = $request->ho_ten;
+        $daoTao->nam_sinh = $request->nam_sinh;
+        $daoTao->nghe_nghiep = $request->nghe_nghiep;
+        $daoTao->noi_lam_viec = $request->noi_lam_viec;
+        $daoTao->noi_o = $request->noi_o;
+        $daoTao->save();
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity8')->with('success', 'cập nhật thành công !');
+
+    }
+    public function quaTrinhPhuCapVK(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhVuotKhung();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->phan_tram = $request->phan_tram;
+        $daoTao->thanh_tien = $request->thanh_tien;
+        $daoTao->save();
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity6')->with('success', 'cập nhật thành công !');
+
+    }
+
+    public function quaTrinhPhuCapKhac(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhPhuCapKhac();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->loai_phu_cap = $request->loai_phu_cap;
+        $daoTao->muc_huong = $request->muc_huong;
+        $daoTao->thanh_tien = $request->thanh_tien;
+        $daoTao->cach_tinh = $request->cach_tinh;
+        $daoTao->save();
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity6')->with('success', 'cập nhật thành công !');
 
     }
 
@@ -206,6 +284,22 @@ class CanBoController extends Controller
         $daoTao->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity6')->with('success', 'cập nhật thành công !');
+
+    }
+
+    public function quaTrinhQuocHoi(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhQuocHoi();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->loai_hinh_dai_bieu = $request->loai_hinh_dai_bieu;
+        $daoTao->nhiem_ky = $request->nhiem_ky;
+        $daoTao->thong_tin = $request->thong_tin;
+        $daoTao->save();
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
 
     }
 
@@ -310,10 +404,12 @@ class CanBoController extends Controller
     {
         $canBo = CanBo::where('id', $id)->first();
         $daoTao = new QuaChucVu();
-        $daoTao->thoi_gian = !empty($request->thoi_gian) ? formatYMD($request->thoi_gian) : null;
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
-        $daoTao->cong_viec = $request->cong_viec;
-        $daoTao->phu_cap = $request->phu_cap;
+        $daoTao->chuc_vu = $request->cong_viec;
+        $daoTao->he_so_phu_cap = $request->he_so_phu_cap;
+        $daoTao->hinh_thuc_bo_nhiem = $request->hinh_thuc_bo_nhiem;
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
 
@@ -324,12 +420,11 @@ class CanBoController extends Controller
     {
         $canBo = CanBo::where('id', $id)->first();
         $daoTao = new QuaTrinhChucVuDang();
-        $daoTao->thoi_gian = !empty($request->thoi_gian) ? formatYMD($request->thoi_gian) : null;
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
-        $daoTao->cong_viec = $request->cong_viec;
-        $daoTao->phu_cap = $request->phu_cap;
         $daoTao->co_quan = $request->co_quan;
-        $daoTao->nhiem_ky = $request->nhiem_ky;
+        $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
@@ -339,10 +434,12 @@ class CanBoController extends Controller
     public function quaTrinhCanBo(Request $request, $id)
     {
         $canBo = CanBo::where('id', $id)->first();
-        $daoTao = new QuaTrinhQuyHoachCanBo();
-        $daoTao->ngay_quyet_dinh = !empty($request->ngay_quyet_dinh) ? formatYMD($request->ngay_quyet_dinh) : null;
+        $daoTao = new QuaTrinhDoan();
+        $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
+        $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
         $daoTao->chuc_vu = $request->chuc_vu;
+        $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
@@ -359,8 +456,11 @@ class CanBoController extends Controller
         $daoTao->loai_dao_tao = $request->loai_dao_tao;
         $daoTao->trinh_do = $request->trinh_do;
         $daoTao->hinh_thuc = $request->hinh_thuc;
-        $daoTao->noi_dao_tao = $request->noi_dao_tao;
+        $daoTao->ten_chuyen_nganh = $request->ten_chuyen_nganh;
         $daoTao->truong = $request->truong;
+        $daoTao->nuoc_dao_tao = $request->nuoc_dao_tao;
+        $daoTao->chung_chi = $request->chung_chi;
+        $daoTao->kinh_phi = $request->kinh_phi;
         $daoTao->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity4')->with('success', 'cập nhật thành công !');
@@ -389,8 +489,9 @@ class CanBoController extends Controller
         $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
         $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
-        $daoTao->noi_den = $request->noi_dao_tao;
         $daoTao->cong_viec = $request->cong_viec;
+        $daoTao->ten_nuoc = $request->ten_nuoc;
+        $daoTao->kinh_phi = $request->kinh_phi;
         $daoTao->ly_do = $request->ly_do;
         $daoTao->save();
 
@@ -668,6 +769,31 @@ class CanBoController extends Controller
         } else {
             $anh = $canBo->anh_dai_dien;
         }
+        $date = getdate();
+        $weekday = strtolower($date['weekday']);
+        switch($weekday) {
+            case 'monday':
+                $weekday = 'Thứ hai';
+                break;
+            case 'tuesday':
+                $weekday = 'Thứ ba';
+                break;
+            case 'wednesday':
+                $weekday = 'Thứ tư';
+                break;
+            case 'thursday':
+                $weekday = 'Thứ năm';
+                break;
+            case 'friday':
+                $weekday = 'Thứ sáu';
+                break;
+            case 'saturday':
+                $weekday = 'Thứ bảy';
+                break;
+            default:
+                $weekday = 'Chủ nhật';
+                break;
+        }
 
 
         $wordTemplate = new TemplateProcessor($file);
@@ -725,17 +851,17 @@ class CanBoController extends Controller
         $wordTemplate->setValue('huong', $canBo->phan_tram_huong ?? null);
         $wordTemplate->setValue('Khung', $canBo->khung ?? null);
         $wordTemplate->setValue('dateHuongk', $ngay_huong_vuot_khung ?? null);
-        $wordTemplate->setValue('chucVuHienNay', $canBo->chucVuHienTai->ten ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('tongMucHuongPhuCapKhac', $canBo->phu_cap_khac ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('soBaoHiem', $canBo->so_so_bao_hiem ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('chucVuHienNay', $canBo->chucVuHienTai->ten ?? null);
+        $wordTemplate->setValue('tongMucHuongPhuCapKhac', $canBo->phu_cap_khac ?? null);
+        $wordTemplate->setValue('soBaoHiem', $canBo->so_so_bao_hiem ?? null);
         $wordTemplate->setValue('bh', $ngayCapBH[2] ?? null);
         $wordTemplate->setValue('th', $ngayCapBH[1] ?? null);
         $wordTemplate->setValue('nh', $ngayCapBH[0] ?? null);
-        $wordTemplate->setValue('chucVuKiemNhiem', $canBo->chucVuKiemNhiem->ten ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('pccv', $canBo->he_so_phu_cap_chuc_vu_hien_tai ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('pccvkn', $canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('nbht', $ngayBoNhiemHienTai ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('nbhtkn', $ngayBoNhiemKiemNhiem ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('chucVuKiemNhiem', $canBo->chucVuKiemNhiem->ten ?? null);
+        $wordTemplate->setValue('pccv', $canBo->he_so_phu_cap_chuc_vu_hien_tai ?? null);
+        $wordTemplate->setValue('pccvkn', $canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem ?? null);
+        $wordTemplate->setValue('nbht', $ngayBoNhiemHienTai ?? null);
+        $wordTemplate->setValue('nbhtkn', $ngayBoNhiemKiemNhiem ?? null);
         $wordTemplate->setValue('mX', $mocXet[2] ?? null);
         $wordTemplate->setValue('tX', $mocXet[1] ?? null);
         $wordTemplate->setValue('nX', $mocXet[0] ?? null);
@@ -780,8 +906,367 @@ class CanBoController extends Controller
         $wordTemplate->setValue('banThan', $canBo->dac_diem_lich_su_ban_than ?? null);
         $wordTemplate->setValue('banThan1', $canBo->dac_diem_lich_su_ban_than_tai_san ?? null);
         $wordTemplate->setValue('nhanThanGD', $canBo->nhan_than_nuoc_ngoai ?? null);
+        $wordTemplate->setValue('thu', $weekday ?? null);
+        $wordTemplate->setValue('now', date('d'));
+        $wordTemplate->setValue('mon', date('m') ?? null);
+        $wordTemplate->setValue('nam', date('Y').'.....' ?? null);
+
 
         //QUÁ TRÌNH CÔNG TÁC
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhCongTac = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhCongTac->addRow();
+        $tableQuaTrinhCongTac->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(3000)->addText('Chức danh, chức vụ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhCongTac->addCell(3000)->addText('Cơ quan, đơn vị', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhCongTac = QuaTrinhCongTac::where('users', $canBo->id)->get();
+        if (count($quaTrinhCongTac) > 0) {
+            foreach ($quaTrinhCongTac as $quaTrinh) {
+                $tableQuaTrinhCongTac->addRow();
+                $tableQuaTrinhCongTac->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(3000)->addText($quaTrinh->chuc_danh, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhCongTac->addCell(3000)->addText($quaTrinh->co_quan, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_cong_tac', $tableQuaTrinhCongTac);
+        //QUÁ TRÌNH CÔNG TÁC NƯỚC NGOÀI
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhNuocNgoai = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addRow();
+        $tableQuaTrinhNuocNgoai->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addCell(3000)->addText('Tên nước', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addCell(3000)->addText('Lý do', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addCell(3000)->addText('Cơ quan quyết định', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNuocNgoai->addCell(3000)->addText('Nguồn kinh phí', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhNuocNgoai = QuaTrinhNuocNgoai::where('users', $canBo->id)->get();
+        if (count($quaTrinhNuocNgoai) > 0) {
+            foreach ($quaTrinhNuocNgoai as $quaTrinh) {
+                $tableQuaTrinhNuocNgoai->addRow();
+                $tableQuaTrinhNuocNgoai->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNuocNgoai->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNuocNgoai->addCell(3000)->addText($quaTrinh->ten_nuoc, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNuocNgoai->addCell(3000)->addText($quaTrinh->ly_do, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNuocNgoai->addCell(3000)->addText($quaTrinh->ly_do, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNuocNgoai->addCell(3000)->addText($quaTrinh->kinh_phi, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_nuoc_ngoai', $tableQuaTrinhNuocNgoai);
+        //QUÁ TRÌNH KHEN THƯỞNG
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhKhenThuong = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhKhenThuong->addRow();
+        $tableQuaTrinhKhenThuong->addCell(2000)->addText('Ngày KT', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKhenThuong->addCell(2000)->addText('Số ký hiệu quyết định', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKhenThuong->addCell(3000)->addText('Lý do ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKhenThuong->addCell(3000)->addText('Hình thức', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKhenThuong->addCell(3000)->addText('Cơ quan quyết định', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhKhenThuong = QuaTrinhKhenThuong::where('users', $canBo->id)->where('type', 2)->get();
+        if (count($quaTrinhKhenThuong) > 0) {
+            foreach ($quaTrinhKhenThuong as $quaTrinh) {
+                $tableQuaTrinhKhenThuong->addRow();
+                $tableQuaTrinhKhenThuong->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->ngay_quyet_dinh)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKhenThuong->addCell(2000)->addText($quaTrinh->so_quyet_dinh, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKhenThuong->addCell(3000)->addText($quaTrinh->ly_do, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKhenThuong->addCell(3000)->addText($quaTrinh->noi_dung, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKhenThuong->addCell(3000)->addText($quaTrinh->co_quan, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_khen_thuong', $tableQuaTrinhKhenThuong);
+
+        //QUÁ TRÌNH KỶ LUẬT
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhKyLuat = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhKyLuat->addRow();
+        $tableQuaTrinhKyLuat->addCell(2000)->addText('Ngày KT', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKyLuat->addCell(2000)->addText('Số ký hiệu quyết định', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKyLuat->addCell(3000)->addText('Lý do ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKyLuat->addCell(3000)->addText('Hình thức', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhKyLuat->addCell(3000)->addText('Cơ quan quyết định', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhKyLuat = QuaTrinhKhenThuong::where('users', $canBo->id)->where('type', 1)->get();
+        if (count($quaTrinhKyLuat) > 0) {
+            foreach ($quaTrinhKyLuat as $quaTrinh) {
+                $tableQuaTrinhKyLuat->addRow();
+                $tableQuaTrinhKyLuat->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->ngay_quyet_dinh)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKyLuat->addCell(2000)->addText($quaTrinh->so_quyet_dinh, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKyLuat->addCell(3000)->addText($quaTrinh->ly_do, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKyLuat->addCell(3000)->addText($quaTrinh->noi_dung, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhKyLuat->addCell(3000)->addText($quaTrinh->co_quan, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_ky_luat', $tableQuaTrinhKyLuat);
+        //QUÁ TRÌNH LƯƠNG
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhLuong = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhLuong->addRow();
+        $tableQuaTrinhLuong->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Mã ngạch', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Tên ngạch', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Nhóm ngạch', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Bậc lương', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Hệ số lương', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhLuong->addCell(3000)->addText('Hình thức hưởng', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhLuong = QuaTrinhLuong::where('users', $canBo->id)->get();
+        if (count($quaTrinhLuong) > 0) {
+            foreach ($quaTrinhLuong as $quaTrinh) {
+                $tableQuaTrinhLuong->addRow();
+                $tableQuaTrinhLuong->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(2000)->addText($quaTrinh->ngachCongChuc->ma_ngach ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(3000)->addText($quaTrinh->ngachCongChuc->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(3000)->addText($quaTrinh->ngachCongChuc->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(3000)->addText($quaTrinh->bac, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(3000)->addText($quaTrinh->he_so, $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhLuong->addCell(3000)->addText($quaTrinh->phan_tram, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_luong', $tableQuaTrinhLuong);
+        //QUÁ TRÌNH CHỨC VỤ HIỆN NAY
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhChucVuHN = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhChucVuHN->addRow();
+        $tableQuaTrinhChucVuHN->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuHN->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuHN->addCell(3000)->addText('Cơ quan đơn vị', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuHN->addCell(3000)->addText('Chức vụ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuHN->addCell(3000)->addText('Hệ số phụ cấp', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuHN->addCell(3000)->addText('Hình thức bổ nhiệm', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhChucVu = QuaChucVu::where('users', $canBo->id)->get();
+        if (count($quaTrinhChucVu) > 0) {
+            foreach ($quaTrinhChucVu as $quaTrinh) {
+                $tableQuaTrinhChucVuHN->addRow();
+                $tableQuaTrinhChucVuHN->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuHN->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuHN->addCell(2000)->addText($quaTrinh->cong_viec ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuHN->addCell(3000)->addText($quaTrinh->chuc_vu ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuHN->addCell(3000)->addText($quaTrinh->he_so_phu_cap ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuHN->addCell(3000)->addText($quaTrinh->hinh_thuc_bo_nhiem, $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_chuc_vu', $tableQuaTrinhChucVuHN);
+        //QUÁ TRÌNH CHỨC VỤ ĐẢNG
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhChucVuDang = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhChucVuDang->addRow();
+        $tableQuaTrinhChucVuDang->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuDang->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuDang->addCell(3000)->addText('Cơ quan đơn vị', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhChucVuDang->addCell(3000)->addText('Chức vụ', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhDang = QuaTrinhChucVuDang::where('users', $canBo->id)->get();
+        if (count($quaTrinhDang) > 0) {
+            foreach ($quaTrinhDang as $quaTrinh) {
+                $tableQuaTrinhChucVuDang->addRow();
+                $tableQuaTrinhChucVuDang->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuDang->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuDang->addCell(2000)->addText($quaTrinh->co_quan ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhChucVuDang->addCell(3000)->addText($quaTrinh->chuc_vu ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_chuc_vu_dang', $tableQuaTrinhChucVuDang);
+        //QUÁ TRÌNH VƯỢT KHUNG
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhVuotKhung = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhVuotKhung->addRow();
+        $tableQuaTrinhVuotKhung->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhVuotKhung->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhVuotKhung->addCell(3000)->addText('Phần trăm được hưởng', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhVuotKhung->addCell(3000)->addText('Thành tiền', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhVK = QuaTrinhVuotKhung::where('users', $canBo->id)->get();
+        if (count($quaTrinhVK) > 0) {
+            foreach ($quaTrinhVK as $quaTrinh) {
+                $tableQuaTrinhVuotKhung->addRow();
+                $tableQuaTrinhVuotKhung->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhVuotKhung->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhVuotKhung->addCell(2000)->addText($quaTrinh->phan_tram ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhVuotKhung->addCell(3000)->addText($quaTrinh->thanh_tien ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_vk', $tableQuaTrinhVuotKhung);
+        //QUÁ TRÌNH PC KHAC
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhPCKhac = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhPCKhac->addRow();
+        $tableQuaTrinhPCKhac->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhPCKhac->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhPCKhac->addCell(3000)->addText('Loại phụ cấp', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhPCKhac->addCell(3000)->addText('Mức hưởng', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhPCKhac->addCell(3000)->addText('Thành tiền', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhPCKhac->addCell(3000)->addText('Cách tính phụ cấp', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhPCK = QuaTrinhPhuCapKhac::where('users', $canBo->id)->get();
+        if (count($quaTrinhPCK) > 0) {
+            foreach ($quaTrinhPCK as $quaTrinh) {
+                $tableQuaTrinhPCKhac->addRow();
+                $tableQuaTrinhPCKhac->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhPCKhac->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhPCKhac->addCell(2000)->addText($quaTrinh->loai_phu_cap ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhPCKhac->addCell(3000)->addText($quaTrinh->muc_huong ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhPCKhac->addCell(3000)->addText($quaTrinh->thanh_tien ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhPCKhac->addCell(3000)->addText($quaTrinh->cach_tinh ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_pc_khac', $tableQuaTrinhPCKhac);
+        //QUÁ TRÌNH NGHIÊN CỨU
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhNghienCuu = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhNghienCuu->addRow();
+        $tableQuaTrinhNghienCuu->addCell(2000)->addText('Thời gian tham gia', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNghienCuu->addCell(2000)->addText('Tên đề tài', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNghienCuu->addCell(3000)->addText('Cấp đề tài', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNghienCuu->addCell(3000)->addText('Chủ nhiệm đề tài', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNghienCuu->addCell(3000)->addText('Tư cách tham gia', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNghienCuu->addCell(3000)->addText('Kết quả đánh giá', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhNK = QuaTrinhNghienCuu::where('users', $canBo->id)->get();
+        if (count($quaTrinhNK) > 0) {
+            foreach ($quaTrinhNK as $quaTrinh) {
+                $tableQuaTrinhNghienCuu->addRow();
+                $tableQuaTrinhNghienCuu->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->thoi_gian)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNghienCuu->addCell(2000)->addText($quaTrinh->ten_de_tai ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNghienCuu->addCell(3000)->addText($quaTrinh->cap_de_tai ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNghienCuu->addCell(3000)->addText($quaTrinh->chu_nhiem ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNghienCuu->addCell(3000)->addText($quaTrinh->tu_cach_tham_gia ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNghienCuu->addCell(3000)->addText($quaTrinh->ket_qua ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_nghien_cuu', $tableQuaTrinhNghienCuu);
+        //QUÁ TRÌNH NHÂN THÂN
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhNhanThan = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhNhanThan->addRow();
+        $tableQuaTrinhNhanThan->addCell(2000)->addText('Quan hệ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNhanThan->addCell(2000)->addText('Họ và tên', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNhanThan->addCell(3000)->addText('Năm sinh', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNhanThan->addCell(3000)->addText('Nghề nghiệp, chức vụ công tác', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNhanThan->addCell(3000)->addText('Nơi làm việc', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhNhanThan->addCell(3000)->addText('Nơi ở hiện nay', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhGD = QuaTrinhGiaDinh::where('users', $canBo->id)->get();
+        if (count($quaTrinhGD) > 0) {
+            foreach ($quaTrinhGD as $quaTrinh) {
+                $tableQuaTrinhNhanThan->addRow();
+                $tableQuaTrinhNhanThan->addCell(2000)->addText($quaTrinh->quan_he ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNhanThan->addCell(2000)->addText($quaTrinh->ho_ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNhanThan->addCell(3000)->addText($quaTrinh->nam_sinh ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNhanThan->addCell(3000)->addText($quaTrinh->nghe_nghiep ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNhanThan->addCell(3000)->addText($quaTrinh->noi_lam_viec ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhNhanThan->addCell(3000)->addText($quaTrinh->noi_o ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_gd', $tableQuaTrinhNhanThan);
+        //QUÁ TRÌNH ĐOÀN
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhDoan = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhDoan->addRow();
+        $tableQuaTrinhDoan->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhDoan->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhDoan->addCell(3000)->addText('Chức vụ Đoàn thể', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhDoan->addCell(3000)->addText('Cơ quan, đơn vị công tác', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhDoan = QuaTrinhDoan::where('users', $canBo->id)->get();
+        if (count($quaTrinhDoan) > 0) {
+            foreach ($quaTrinhDoan as $quaTrinh) {
+                $tableQuaTrinhDoan->addRow();
+                $tableQuaTrinhDoan->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhDoan->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhDoan->addCell(3000)->addText($quaTrinh->chuc_vu ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhDoan->addCell(3000)->addText($quaTrinh->co_quan ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_doan', $tableQuaTrinhDoan);
+        //QUÁ TRÌNH QUỐC HỘI
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhQuocHoi = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhQuocHoi->addRow();
+        $tableQuaTrinhQuocHoi->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhQuocHoi->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhQuocHoi->addCell(3000)->addText('Loại hình đại biểu', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhQuocHoi->addCell(3000)->addText('Nhiệm kỳ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhQuocHoi->addCell(3000)->addText('Thông tin chi tiết', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhQuocHoi = QuaTrinhQuocHoi::where('users', $canBo->id)->get();
+        if (count($quaTrinhQuocHoi) > 0) {
+            foreach ($quaTrinhQuocHoi as $quaTrinh) {
+                $tableQuaTrinhQuocHoi->addRow();
+                $tableQuaTrinhQuocHoi->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhQuocHoi->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhQuocHoi->addCell(3000)->addText($quaTrinh->loai_hinh_dai_bieu ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhQuocHoi->addCell(2000)->addText($quaTrinh->nhiem_ky ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhQuocHoi->addCell(2000)->addText($quaTrinh->thong_tin ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_quoc_hoi', $tableQuaTrinhQuocHoi);
+        //QUÁ TRÌNH BỒI DƯỠNG
+        $myFontStyle = array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'bold' => true);
+        $fontStyle = ['align' => Cell::TEXT_DIR_TBRLV];
+        $tableQuaTrinhBoiDuong = new Table(array('borderColor' => 'black', 'borderSize' => 1, 'cellMargin' => 50, 'valign' => 'center', 'align' => 'center'));
+        $tableQuaTrinhBoiDuong->addRow();
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Từ ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Đến ngày', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Loại hình kiến thức', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Tên chuyên ngành ĐT - BD', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Hình thức đào tạo, bồi dưỡng', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Tên trường đào tạo', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Nước đào tạo', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Trình độ tốt nghiệp', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Loại văn bằng, chứng chỉ', $myFontStyle, array('align' => 'center'));
+        $tableQuaTrinhBoiDuong->addCell(2000)->addText('Nguồn kinh phí', $myFontStyle, array('align' => 'center'));
+
+        $quaTrinhDoiDuong = QuaTrinhDaoTao::where('users', $canBo->id)->get();
+        if (count($quaTrinhDoiDuong) > 0) {
+            foreach ($quaTrinhDoiDuong as $quaTrinh) {
+                $tableQuaTrinhBoiDuong->addRow();
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->tu_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText(date('d/m/Y', strtotime($quaTrinh->den_ngay)), $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->loaiDaoTao->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->ten_chuyen_nganh ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->hinhThuc->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->truongHoc->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->nuoc_dao_tao ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->trinhDo->ten ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->chung_chi ?? '', $fontStyle, array('align' => 'center'));
+                $tableQuaTrinhBoiDuong->addCell(2000)->addText($quaTrinh->kinh_phi ?? '', $fontStyle, array('align' => 'center'));
+            }
+        }
+
+        $wordTemplate->setComplexBlock('table_qua_trinh_boi_duong', $tableQuaTrinhBoiDuong);
 
         $wordTemplate->saveAs($uploadPhieuChuyen . "/" . $fileDoc);
     }

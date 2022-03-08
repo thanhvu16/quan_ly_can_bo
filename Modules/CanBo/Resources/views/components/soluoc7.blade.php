@@ -14,7 +14,7 @@
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Số quyết định</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Ngày quyết định</th>
-                        <th width="20%"  style="vertical-align: middle"class="text-center">Nội dung</th>
+                        <th width="20%"  style="vertical-align: middle"class="text-center">Hình thức</th>
                         <th width="" style="vertical-align: middle" class="text-center">Cơ quan khen thưởng </th>
                         <th width="20%" style="vertical-align: middle" class="text-center">Lý do</th>
                     </tr>
@@ -49,7 +49,7 @@
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Số quyết định</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Ngày quyết định</th>
-                        <th width="20%"  style="vertical-align: middle"class="text-center">Nội dung</th>
+                        <th width="20%"  style="vertical-align: middle"class="text-center">Hình thức</th>
                         <th width="" style="vertical-align: middle" class="text-center">Cơ quan kỷ luật </th>
                         <th width="20%" style="vertical-align: middle" class="text-center">Lý do</th>
                     </tr>

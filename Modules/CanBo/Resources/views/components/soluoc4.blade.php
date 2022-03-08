@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình đào tạo (Đào tạo, Bồi dưỡng nghiệp vụ,Chính trị,Tin học..)</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
-                    <a style="cursor: pointer" onclick="showModal()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                    <a style="cursor: pointer" onclick="showModal12()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
@@ -15,10 +15,13 @@
                         <th width="13%" style="vertical-align: middle" class="text-center">Từ ngày</th>
                         <th width="13%" style="vertical-align: middle" class="text-center">Đến ngày</th>
                         <th width="15%"  style="vertical-align: middle"class="text-center">Loại đào tạo</th>
+                        <th width="15%"  style="vertical-align: middle"class="text-center">Tên chuyên ngành</th>
                         <th width="10%" style="vertical-align: middle" class="text-center">Trình độ </th>
                         <th width="10%" style="vertical-align: middle" class="text-center">Hình thức</th>
-                        <th width="10%" style="vertical-align: middle" class="text-center">Nơi đào tạo</th>
+                        <th width="10%" style="vertical-align: middle" class="text-center">Nước đào tạo</th>
                         <th width="" style="vertical-align: middle" class="text-center">Trường</th>
+                        <th width="" style="vertical-align: middle" class="text-center">Chứng chỉ</th>
+                        <th width="" style="vertical-align: middle" class="text-center">Kinh phí</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,10 +31,13 @@
                             <td style="color: red;font-weight: bold" class="text-center"> {{formatDMY($data1->tu_ngay)}}</td>
                             <td style="color: red;font-weight: bold" class="text-center">  {{formatDMY($data1->den_ngay)}}</td>
                             <td>{{$data1->loaiDaoTao->ten ?? ''   }}</td>
+                            <td>{{$data1->ten_chuyen_nganh ?? ''   }}</td>
                             <td>{{$data1->trinhDo->ten ?? ''   }}</td>
                             <td>{{$data1->hinhThuc->ten ?? ''   }}</td>
-                            <td>{{$data1->noi_dao_tao   }}</td>
+                            <td>{{$data1->nuoc_dao_tao   }}</td>
                             <td>{{$data1->truongHoc->ten ?? ''   }}</td>
+                            <td>{{$data1->chung_chi ?? ''   }}</td>
+                            <td>{{$data1->kinh_phi ?? ''   }}</td>
                         </tr>
 
                     @empty
