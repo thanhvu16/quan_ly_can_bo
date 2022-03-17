@@ -1,7 +1,10 @@
 <form class="" action="{{route('postSoLuoc1',$canBo->id)}}" method="POST">
     @csrf
+
     <div class="col-md-12" style="background: white">
         <div class="row">
+            <h4 style="color: blue;font-weight: bold">I. Thông tin hồ sơ</h4>
+
             <div class="col-md-3 " >
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Họ tên khai sinh <span style="color: red">(*)</span></label>
@@ -38,7 +41,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail4">Ngày sinh <span style="color: red">(*)</span></label>
                     <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
+                        <input type="text" class="form-control  datepicker" autocomplete="off"
                                name="ngay_sinh" id="ngay_sinh" value="{{ isset($canBo) && $canBo->ngay_sinh ? formatDMY($canBo->ngay_sinh) : ''}}"
                                placeholder="dd/mm/yyyy" required>
                         <div class="input-group-addon">
@@ -84,7 +87,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail4">Ngày cấp chứng minh thư </label>
                     <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
+                        <input type="text" class="form-control  datepicker" autocomplete="off"
                                name="ngay_cap_cmt" id="ngay_cap_cmt" value="{{ isset($canBo) && $canBo->ngay_cap_cmt ? formatDMY($canBo->ngay_cap_cmt) : ''}}"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
@@ -198,6 +201,7 @@
                            placeholder="Ví dụ: 23 Bạch Mai, Hà Nội " required>
                 </div>
             </div>
+            <h4 style="color: blue;font-weight: bold">II. Công tác</h4>
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Cơ quan tuyển</label>
@@ -209,7 +213,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail4">Ngày vào đơn vị </label>
                     <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
+                        <input type="text" class="form-control  datepicker" autocomplete="off"
                                name="ngay_vao_don_vi" id="ngay_vao_don_vi" value="{{ isset($canBo) && $canBo->ngay_vao_don_vi ? formatDMY($canBo->ngay_vao_don_vi) : ''}}"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
@@ -289,7 +293,7 @@
                     <label for="exampleInputEmail4">Ngày tuyển dụng đầu tiên<span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->tuyen_dung_dau_tien ? formatDMY($canBo->tuyen_dung_dau_tien) : ''}}"
-                               name="tuyen_dung_dau_tien" required
+                               name="tuyen_dung_dau_tien" required autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -302,7 +306,7 @@
                     <label for="exampleInputEmail4">Ngày tuyển dụng chính thức<span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->tuyen_dung_chinh_thuc ? formatDMY($canBo->tuyen_dung_chinh_thuc) : ''}}"
-                               name="tuyen_dung_chinh_thuc" required
+                               name="tuyen_dung_chinh_thuc" required autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -315,7 +319,7 @@
                     <label for="exampleInputEmail4">Ngày vào cơ quan hiện nay <span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->ngay_bat_dau_di_lam ? formatDMY($canBo->ngay_bat_dau_di_lam) : ''}}"
-                               name="ngay_bat_dau_di_lam" required
+                               name="ngay_bat_dau_di_lam" required autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -323,7 +327,7 @@
                     </div>
                 </div>
             </div>
-
+            <h4 style="color: blue;font-weight: bold">III. Lương, phụ cấp hiện hưởng</h4>
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Đơn vị <span style="color: red">(*)</span></label>
@@ -443,7 +447,7 @@
                     <label for="exampleInputEmail4">Ngày bổ nhiệm ngạch </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{isset($canBo->ngay_bo_nhiem_ngach) ? formatDMY($canBo->ngay_bo_nhiem_ngach) : ''}}"
-                               name="ngay_bo_nhiem_ngach" id="ngay_bo_nhiem_ngach"
+                               name="ngay_bo_nhiem_ngach" id="ngay_bo_nhiem_ngach" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -485,7 +489,7 @@
                     <label for="exampleInputEmail4">Ngày hưởng </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{isset($canBo->ngay_huong) ? formatDMY($canBo->ngay_huong) : ''}}"
-                               name="ngay_huong" id="ngay_huong"
+                               name="ngay_huong" id="ngay_huong" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -499,7 +503,7 @@
                     <label for="exampleInputEmail4">Mốc xét tăng lương </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{isset($canBo->moc_xet_tang_luong) ? formatDMY($canBo->moc_xet_tang_luong) : ''}}"
-                               name="moc_xet_tang_luong" id="moc_xet_tang_luong"
+                               name="moc_xet_tang_luong" id="moc_xet_tang_luong" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -560,7 +564,7 @@
                     <label for="exampleInputEmail4">Ngày hưởng phụ cấp V.khung </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{isset($canBo->ngay_huong_vuot_khung) ? formatDMY($canBo->ngay_huong_vuot_khung): ''}}"
-                               name="ngay_huong_vuot_khung" id="ngay_huong_vuot_khung"
+                               name="ngay_huong_vuot_khung" id="ngay_huong_vuot_khung" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -580,7 +584,7 @@
                     <label for="exampleInputEmail4">Ngày cấp sổ bảo hiểm</label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{isset($canBo->ngay_cap_bao_hiem) ? formatDMY($canBo->ngay_cap_bao_hiem): ''}}"
-                               name="ngay_cap_bao_hiem" id="ngay_cap_bao_hiem"
+                               name="ngay_cap_bao_hiem" id="ngay_cap_bao_hiem" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>

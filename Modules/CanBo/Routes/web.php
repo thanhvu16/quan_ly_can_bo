@@ -14,6 +14,9 @@
 Route::resource('can-bo', 'CanBoController');
 Route::get('danh-sach-don-vi/{id}', 'CanBoController@canBo')->name('canBoDs');
 Route::get('lay-du-lieu', 'CanBoController@getlistcb')->name('getlistcb');
+Route::get('lay-du-lieu2', 'CanBoController@getlistcb2')->name('getlistcb2');
+Route::get('lay-du-lieu3', 'CanBoController@getlistcb3')->name('getlistcb3');
+Route::get('lay-du-lieu4', 'CanBoController@getlistcb4')->name('getlistcb4');
 Route::post('post-so-luoc-hai/{id}', 'CanBoController@postSoLuoc1')->name('postSoLuoc1');
 Route::post('can-bo-danh-gia/{id}', 'CanBoController@canBoDanhGia')->name('canBoDanhGia');
 Route::post('can-bo-danh-gia-tt/{id}', 'CanBoController@canBoDanhGiatt')->name('canBoDanhGiatt');
@@ -39,4 +42,5 @@ Route::post('qua-trinh-di-chuyen/{id}', 'CanBoController@quaTrinhDiChuyen')->nam
 Route::post('upload-anh/{id}', 'CanBoController@uploadAnh')->name('uploadAnh');
 Route::get('chi-tiet-can-bo/{id}', 'CanBoController@canBoDetail')->name('canBoDetail');
 Route::get('dang-nhap-sso2', 'CanBoController@thongTindn2');
+Route::get('cap-nhap-qua-trinh', 'CanBoController@QuaTrinh')->name('quaTrinh');;
 Route::POST('dang-nhap-sso', 'CanBoController@thongTindn');

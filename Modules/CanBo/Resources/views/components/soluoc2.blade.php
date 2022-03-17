@@ -62,6 +62,7 @@
 
 {{--                </div>--}}
 {{--            </div>--}}
+            <h4 style="color: blue;font-weight: bold">IV. Đào tạo bồi dưỡng</h4>
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail1">Trình độ phổ thông</label>
@@ -191,6 +192,48 @@
                            placeholder="1998 " >
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Xuất thân</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="xuat_than">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($xuatThan as $dsxuatThan)
+                                <option value="{{$dsxuatThan->id}}"  {{$canBo->xuat_than == $dsxuatThan->id ? 'selected' : ''}}>{{$dsxuatThan->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Học hàm cao nhất</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="hoc_ham">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($chuyenNganhDT as $dschuyenNganhDT)
+                                <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->hoc_ham == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Phân loại cán bộ</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="phan_loai_cb">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($loaiCanBo as $dscb)
+                                <option value="{{$dscb->id}}" {{$canBo->phan_loai_cb == $dscb->id ? 'selected' : ''}}>{{$dscb->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
 {{--            <div class="col-md-3" >--}}
 {{--                <div class="form-group">--}}
 {{--                    <label for="exampleInputEmail1">Ngôn ngữ khác</label>--}}
@@ -214,13 +257,19 @@
 
 {{--                </div>--}}
 {{--            </div>--}}
-{{--                <div class="row"></div>--}}
+                <div class="row clearfix"></div>
+            <h4 style="color: blue;font-weight: bold">V. Thông tin khác</h4>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <input type="checkbox"  name="la_doan_vien" {{ isset($canBo) && $canBo->ngay_vao_doan ? 'checked' : ''}}  value="1" >&emsp;<label for="la_doan_vien"> Là đoàn viên	</label>
+                </div>
+            </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày vào đoàn </label>
+                    <label for="exampleInputEmail4">Ngày vào Đoàn TNCSHCM </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->ngay_vao_doan ? formatDMY($canBo->ngay_vao_doan) : ''}}"
-                               name="ngay_vao_doan" id="ngay_vao_doan"
+                               name="ngay_vao_doan" id="ngay_vao_doan" autocomplete="off"
                                placeholder="dd/mm/yyyy" required>
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -238,11 +287,12 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Chức vụ đoàn</label>
+                    <label for="exampleInputEmail1">Chức vụ Đoàn hiện nay</label>
                     <input type="text" class="form-control" name="chuc_vu_doan" value="{{$canBo->chuc_vu_doan}}"
                            placeholder="Chức vụ đoàn " >
                 </div>
             </div>
+            <div class="row clearfix"></div>
             <div class="col-md-3 mt-4" >
                 <div class="form-group">
                     <input type="checkbox" name="la_dang_vien"  value="1" {{$canBo->la_dang_vien == 1 ? 'checked' : ''}} >&emsp;<label for="exampleInputEmail1"> Là đảng viên	</label>
@@ -252,10 +302,10 @@
 
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày vào đảng </label>
+                    <label for="exampleInputEmail4">Ngày vào Đảng CSVN </label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" value="{{ isset($canBo) && $canBo->ngay_vao_dang ? formatDMY($canBo->ngay_vao_dang) : ''}}"
-                               name="ngay_vao_dang" id="ngay_vao_dang"
+                               name="ngay_vao_dang" id="ngay_vao_dang" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -268,7 +318,7 @@
                     <label for="exampleInputEmail4">Ngày vào đảng chính thức</label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker"  value="{{ isset($canBo) && $canBo->ngay_vao_dang_chinh_thuc ? formatDMY($canBo->ngay_vao_dang_chinh_thuc) : ''}}"
-                               name="ngay_vao_dang_chinh_thuc" id="ngay_vao_dang_chinh_thuc"
+                               name="ngay_vao_dang_chinh_thuc" id="ngay_vao_dang_chinh_thuc" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -279,7 +329,7 @@
 
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nơi vào đảng</label>
+                    <label for="exampleInputEmail1">Nơi kết nạp</label>
                     <input type="text" class="form-control" name="noi_vao_dang" value="{{$canBo->noi_vao_dang}}"
                            placeholder=" " >
 
@@ -301,34 +351,10 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Chức vụ đảng cao nhất</label>
-                    <select class="form-control select2" name="chuc_vu_cao_nhat">
-                        <option value="">--Lựa chọn--</option>
-                        @foreach($chucVuDang as $dschucVuDang)
-                            <option value="{{$dschucVuDang->id}}"  {{$canBo->chuc_vu_cao_nhat == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
-                        @endforeach
-
-                    </select>
-
-                </div>
-            </div>
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Đơn vị</label>--}}
-{{--                    <select class="form-control select2" name="nhom_don_vi">--}}
-{{--                        <option value="1">Văn phòng Quận ủy - Quận ủy Nam Từ Liêm</option>--}}
-{{--                        <option value="1">Phật giáo</option>--}}
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-
-            <div class="col-md-3" >
-                <div class="form-group">
                     <label for="exampleInputEmail4">Ngày tham gia LLVT</label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker"  value="{{ isset($canBo) && $canBo->ngay_tham_gia_to_chuc ? formatDMY($canBo->ngay_tham_gia_to_chuc) : ''}}"
-                               name="ngay_tham_gia_to_chuc" id="ngay_tham_gia_to_chuc"
+                               name="ngay_tham_gia_to_chuc" id="ngay_tham_gia_to_chuc" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -341,46 +367,7 @@
                     <label for="exampleInputEmail4">Ngày giải ngũ</label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker"  value="{{ isset($canBo) && $canBo->ngay_giai_ngu ? formatDMY($canBo->ngay_giai_ngu) : ''}}"
-                               name="ngay_giai_ngu" id="ngay_giai_ngu"
-                               placeholder="dd/mm/yyyy" >
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar-o"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Công việc chính</label>
-                    <input type="text" class="form-control" name="cong_viec_chinh" id="cong_viec_chinh" value="{{$canBo->cong_viec_chinh}}"
-                           placeholder=" Quản lý" required>
-
-                </div>
-            </div>
-            <div class="col-md-3 mt-4" >
-                <div class="form-group">
-                    <input type="checkbox" name="da_di_bo_doi" value="1" {{$canBo->da_di_bo_doi == 1 ? 'checked' : ''}}>&emsp;<label for="exampleInputEmail1"> Đã đi bộ đội	</label>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày nhập ngũ</label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
-                               name="nhap_ngu" id="nhap_ngu" value="{{ isset($canBo) && $canBo->nhap_ngu ? formatDMY($canBo->nhap_ngu) : ''}}"
-                               placeholder="dd/mm/yyyy" >
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar-o"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày xuất ngũ </label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
-                               name="xuat_ngu" id="xuat_ngu" value="{{ isset($canBo) && $canBo->xuat_ngu ? formatDMY($canBo->xuat_ngu) : ''}}"
+                               name="ngay_giai_ngu" id="ngay_giai_ngu" autocomplete="off"
                                placeholder="dd/mm/yyyy" >
                         <div class="input-group-addon">
                             <i class="fa fa-calendar-o"></i>
@@ -403,7 +390,20 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Danh hiệu phong tặng cao nhất</label>
+                    <label for="exampleInputEmail1">Chức vụ đảng cao nhất</label>
+                    <select class="form-control select2" name="chuc_vu_cao_nhat">
+                        <option value="">--Lựa chọn--</option>
+                        @foreach($chucVuDang as $dschucVuDang)
+                            <option value="{{$dschucVuDang->id}}"  {{$canBo->chuc_vu_cao_nhat == $dschucVuDang->id ? 'selected' : ''}}>{{$dschucVuDang->ten_chuc_vu}}</option>
+                        @endforeach
+
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Danh hiệu NN phong tặng</label>
                     <select class="form-control select2" name="danh_hieu_phong_tang_cao_nhat">
                         <option value="">--Lựa chọn--</option>
                         @foreach($danhHieu as $dsDanHieu)
@@ -414,15 +414,6 @@
 
                 </div>
             </div>
-
-
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail6">Sở trường công tác</label>--}}
-{{--                    <input type="text" class="form-control" name="ten_khac" id=""--}}
-{{--                           placeholder="Ví dụ: Quản lý" required>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Năm phong tặng</label>
@@ -430,13 +421,7 @@
                            placeholder="Ví dụ: 1992́" required>
                 </div>
             </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Sở trường công tác</label>
-                    <input type="text" class="form-control" name="so_truong_cong_tac" id=""  value="{{$canBo->so_truong_cong_tac}}"
-                           placeholder="Ví dụ: Quản lý" required>
-                </div>
-            </div>
+
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Sức khỏe</label>
@@ -497,6 +482,123 @@
 
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Năng lực sở trường </label>
+                    <select class="form-control select2" name="so_truong_cong_tac">
+                        <option value="">--Lựa chọn--</option>
+                        <option value="Lãnh đạo, chỉ huy">Lãnh đạo, chỉ huy </option>
+                        <option value="Tổ chức triển khai thực hiện">Tổ chức triển khai thực hiện</option>
+                        <option value="Phân tích, tổng hợp">Phân tích, tổng hợp  </option>
+                        <option value="Tuyên truyền, vận động">Tuyên truyền, vận động</option>
+                        <option value="Nghiên cứu chính sách ">Nghiên cứu chính sách </option>
+                        <option value="Thanh tra, kiểm tra">Thanh tra, kiểm tra  </option>
+                        <option value="Phát minh, sáng kiến trong chuyên môn ">Phát minh, sáng kiến trong chuyên môn</option>
+                    </select>
+
+                </div>
+            </div>
+
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Đơn vị</label>--}}
+{{--                    <select class="form-control select2" name="nhom_don_vi">--}}
+{{--                        <option value="1">Văn phòng Quận ủy - Quận ủy Nam Từ Liêm</option>--}}
+{{--                        <option value="1">Phật giáo</option>--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+
+
+
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Công việc chính</label>
+                    <input type="text" class="form-control" name="cong_viec_chinh" id="cong_viec_chinh" value="{{$canBo->cong_viec_chinh}}"
+                           placeholder=" Quản lý" required>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Khen thưởng cao nhất</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="khen_thuong_cao_nhat">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($khenThuong as $dschuyenNganhDT)
+                                <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->khen_thuong_cao_nhat == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Kỷ luật cao nhất</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="ky_luat_cao_nhat">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($kyLuat as $dskyLuat)
+                                <option value="{{$dskyLuat->id}}"  {{$canBo->ky_luat_cao_nhat == $dskyLuat->id ? 'selected' : ''}}>{{$dskyLuat->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row clearfix"></div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <input type="checkbox" name="da_di_bo_doi" value="1" {{$canBo->da_di_bo_doi == 1 ? 'checked' : ''}}>&emsp;<label for="exampleInputEmail1"> Đã đi bộ đội	</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail4">Ngày nhập ngũ</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control  datepicker"
+                               name="nhap_ngu" id="nhap_ngu" value="{{ isset($canBo) && $canBo->nhap_ngu ? formatDMY($canBo->nhap_ngu) : ''}}"
+                               placeholder="dd/mm/yyyy" >
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail4">Ngày xuất ngũ </label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control  datepicker" autocomplete="off"
+                               name="xuat_ngu" id="xuat_ngu" value="{{ isset($canBo) && $canBo->xuat_ngu ? formatDMY($canBo->xuat_ngu) : ''}}"
+                               placeholder="dd/mm/yyyy" >
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail6">Sở trường công tác</label>--}}
+{{--                    <input type="text" class="form-control" name="ten_khac" id=""--}}
+{{--                           placeholder="Ví dụ: Quản lý" required>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+
+
 
 
 

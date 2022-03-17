@@ -291,8 +291,13 @@
                         </div>
                     </div>
                     <div class="box-body" style=" width: 100%;overflow-x: auto;">
-                        Tổng số cán bộ: <b style="font-size: 16px">{{ $danhSach->total() }}</b>
-                        <table class="table table-bordered table-striped dataTable mb-0">
+                        <div class="col-md-3">
+                            <div class="row">
+                                <table id="table" style="font-size: 12px"></table>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                        <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                             <thead>
                             <tr>
                                 <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -331,7 +336,7 @@
                         </table>
                         <div class="row">
                             <div class="col-md-6" style="margin-top: 5px">
-
+                                Tổng số cán bộ: <b style="font-size: 16px">{{ $danhSach->total() }}</b>
                             </div>
                             <div class="col-md-6 text-right">
                                 {!! $danhSach->appends(['so_van_ban_id' => Request::get('so_van_ban_id'),'loai_van_ban_id' => Request::get('loai_van_ban_id'),'ngay_ban_hanh_date' => Request::get('ngay_ban_hanh_date'),'end_ngay_ban_hanh' => Request::get('end_ngay_ban_hanh'), 'vb_so_den' => Request::get('vb_so_den')
@@ -341,6 +346,7 @@
                        'vb_trich_yeu' => Request::get('vb_trich_yeu'), 'search' =>Request::get('search'), 'year' => Request::get('year'),
                        'don_vi_id' => Request::get('don_vi_id'), 'trinh_tu_nhan_van_ban' => Request::get('trinh_tu_nhan_van_ban')])->render() !!}
                             </div>
+                        </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -411,6 +417,38 @@
         }
 
 
+    </script>
+    <script>
+        var $table = $('#table')
+
+        $(function() {
+            $table.bootstrapTable({
+                url: 'lay-du-lieu3',
+                idField: 'id',
+                showColumns: false,
+                columns: [
+                    {
+                        field: 'permissionValue',
+                        align: 'left',
+                        title: 'Đơn vị'
+                    }
+
+                ],
+                treeShowField: 'permissionValue',
+                parentIdField: 'pid',
+                onPostBody: function() {
+                    var columns = $table.bootstrapTable('getOptions').columns
+                    if (columns && columns[0][0].visible) {
+                        $table.treegrid({
+                            treeColumn: 0,
+                            onChange: function() {
+                                $table.bootstrapTable('resetView')
+                            }
+                        })
+                    }
+                }
+            })
+        })
     </script>
 
 @endsection

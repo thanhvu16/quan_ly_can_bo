@@ -59,6 +59,9 @@
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
+{{--        <div class="col-md-12 mt-2">--}}
+{{--            <marquee width="100%"><b style="font-size: 16px"><i class="fa fa-warning" style="color: red"></i> Chào mừng bạn đã đến với phần mềm quản lý cán bộ  </b> </marquee>--}}
+{{--        </div>--}}
     @yield('content')
     <!-- /.content -->
     </div>

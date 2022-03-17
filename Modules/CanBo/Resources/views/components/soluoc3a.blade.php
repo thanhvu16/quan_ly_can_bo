@@ -3,84 +3,14 @@
     <div class="col-md-12" style="background: white">
         <div class="row">
 
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Xuất thân</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="xuat_than">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($xuatThan as $dsxuatThan)
-                                <option value="{{$dsxuatThan->id}}"  {{$canBo->xuat_than == $dsxuatThan->id ? 'selected' : ''}}>{{$dsxuatThan->ten}}</option>
-                            @endforeach
-                        </select>
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Khen thưởng cao nhất</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="khen_thuong_cao_nhat">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($khenThuong as $dschuyenNganhDT)
-                                <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->khen_thuong_cao_nhat == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
-                            @endforeach
-
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Học hàm cao nhất</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="hoc_ham">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($chuyenNganhDT as $dschuyenNganhDT)
-                                <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->hoc_ham == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Kỷ luật cao nhất</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="ky_luat_cao_nhat">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($kyLuat as $dskyLuat)
-                                <option value="{{$dskyLuat->id}}"  {{$canBo->ky_luat_cao_nhat == $dskyLuat->id ? 'selected' : ''}}>{{$dskyLuat->ten}}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Phân loại cán bộ</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="phan_loai_cb">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($loaiCanBo as $dscb)
-                                <option value="{{$dscb->id}}" {{$canBo->phan_loai_cb == $dscb->id ? 'selected' : ''}}>{{$dscb->ten}}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                </div>
-            </div>
+            <h4 style="color: blue;font-weight: bold">Đặc điểm lịch sử bản thân</h4>
 {{--            <div class="col-md-6 mt-4" >--}}
 {{--                    <label for="bi_dich_bat"><input type="checkbox" value="1"  {{$canBo->bi_dich_bat == 1 ? 'checked' : ''}} id="bi_dich_bat" name="bi_dich_bat"> Bị địch bắt, tù đày hoặc làm việc cho chế độ cũ</label>--}}
 {{--            </div>--}}
             <div class="col-md-12" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6">Đặc điểm lịch sử bản thân</label>
+                    <label for="exampleInputEmail6">Khai rõ: bị bắt, bị tù (từ ngày tháng năm nào đến ngày tháng năm nào, ở đâu), đã khai báo cho ai, những vấn đề gì? Bản thân có làm việc trong chế độ cũ (cơ quan, đơn vị nào, địa điểm, chức danh, chức vụ, thời gian làm việc….)</label>
                     <div class="form-group">
                         <textarea class="form-control" name="dac_diem_lich_su_ban_than" id="trich-yeu" rows="3" placeholder="Khai rõ: bị bắt, bị tù (từ ngày tháng năm nào đến ngày tháng năm nào, ở đâu), đã khai báo cho ai, những vấn đề gì? Bản thân có làm việc trong chế độ cũ (cơ quan, đơn vị nào, địa điểm, chức danh, chức vụ, thời gian làm việc….)" required>{{$canBo->dac_diem_lich_su_ban_than}}</textarea>
 
@@ -90,7 +20,7 @@
             </div>
             <div class="col-md-12" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6">Đặc điểm lịch sử bản thân(Tham gia hoặc có quan hệ với các tổ chức chính trị..)</label>
+                    <label for="exampleInputEmail6">Tham gia hoặc có quan hệ với các tổ chức chính trị, kinh tế, xã hội nào ở nước ngoài (thời gian, làm gì, tổ chức nào, đặt trụ sở ở đâu……?)</label>
                     <div class="form-group">
                         <textarea class="form-control" name="dac_diem_lich_su_ban_than_tai_san" id="trich-yeu" rows="3" placeholder="Tham gia hoặc có quan hệ với các tổ chức chính trị, kinh tế, xã hội nào ở nước ngoài (thời gian, làm gì, tổ chức nào, đặt trụ sở ở đâu……?) " required>{{$canBo->dac_diem_lich_su_ban_than_tai_san}}</textarea>
 
@@ -99,7 +29,7 @@
             </div>
             <div class="col-md-12" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6">Đặc điểm lịch sử bản thân(Có thân nhân..)</label>
+                    <label for="exampleInputEmail6">Có thân nhân (Cha, Mẹ, Vợ, Chồng, con, anh chị em ruột) ở nước ngoài (thời gian, làm gì, địa chỉ….)?</label>
                     <div class="form-group">
                         <textarea class="form-control" name="nhan_than_nuoc_ngoai"  rows="3" placeholder=" (Cha, Mẹ, Vợ, Chồng, con, anh chị em ruột) ở nước ngoài (thời gian, làm gì, địa chỉ….)? " required>{{$canBo->nhan_than_nuoc_ngoai}}</textarea>
 
@@ -124,34 +54,34 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-            <div class="col-md-3 " >
-                <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày khai <span
-                            style="color: red">*</span></label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
-                               name="ngay_khai" id="ngay_khai" value="{{ isset($canBo) && $canBo->ngay_khai ? formatDMY($canBo->ngay_khai) : ''}}"
-                               placeholder="dd/mm/yyyy" required>
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar-o"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày xác nhận <span
-                            style="color: red">*</span></label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control  datepicker"
-                               name="ngay_xac_nhan" id="ngay_xac_nhan" value="{{ isset($canBo) && $canBo->ngay_xac_nhan ? formatDMY($canBo->ngay_xac_nhan) : ''}}"
-                               placeholder="dd/mm/yyyy" required>
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar-o"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-md-3 " >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail4">Ngày khai <span--}}
+{{--                            style="color: red">*</span></label>--}}
+{{--                    <div class="input-group date">--}}
+{{--                        <input type="text" class="form-control  datepicker"--}}
+{{--                               name="ngay_khai" id="ngay_khai" value="{{ isset($canBo) && $canBo->ngay_khai ? formatDMY($canBo->ngay_khai) : ''}}"--}}
+{{--                               placeholder="dd/mm/yyyy" required>--}}
+{{--                        <div class="input-group-addon">--}}
+{{--                            <i class="fa fa-calendar-o"></i>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail4">Ngày xác nhận <span--}}
+{{--                            style="color: red">*</span></label>--}}
+{{--                    <div class="input-group date">--}}
+{{--                        <input type="text" class="form-control  datepicker"--}}
+{{--                               name="ngay_xac_nhan" id="ngay_xac_nhan" value="{{ isset($canBo) && $canBo->ngay_xac_nhan ? formatDMY($canBo->ngay_xac_nhan) : ''}}"--}}
+{{--                               placeholder="dd/mm/yyyy" required>--}}
+{{--                        <div class="input-group-addon">--}}
+{{--                            <i class="fa fa-calendar-o"></i>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
 
 

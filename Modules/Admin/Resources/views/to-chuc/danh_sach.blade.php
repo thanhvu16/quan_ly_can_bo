@@ -182,10 +182,10 @@
             idField: 'id',
             showColumns: true,
             columns: [
-                {
-                    field: 'STT',
-                    title: 'STT',
-                },
+                // {
+                //     field: 'STT',
+                //     title: 'STT',
+                // },
                 {
                     field: 'name',
                     sortable: true,
@@ -221,7 +221,7 @@
                 console.log(columns)
                 if (columns && columns[0][1].visible) {
                     $table.treegrid({
-                        treeColumn: 1,
+                        treeColumn: 0,
                         onChange: function() {
                             $table.bootstrapTable('resetView')
                         }

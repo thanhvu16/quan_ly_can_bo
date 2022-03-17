@@ -93,14 +93,46 @@
             </span>
     </a>
 </li>
-<li class="{{  Route::is('thongtinhs') ? 'active' : '' }} ">
-    <a href="{{route('thongtinhs') }}">
-        <i class="fa fa-users" ></i> <span>Quản lý hồ sơ cán bộ</span>
+
+
+<li class="treeview {{ Route::is('thongtinhs') || Route::is('quaTrinhCN') || Route::is('capNhatQuaTrinhDaoTao')|| Route::is('giaDinh')|| Route::is('capNhatGiaDinh')
+ || Route::is('nghienCuu')|| Route::is('capNhatNghienCuu')|| Route::is('daoTao')|| Route::is('capNhatDaoTao') || Route::is('nuocNgoai') ||  Route::is('capNhatnuocNgoai')
+ || Route::is('banThan') ||  Route::is('capNhatbanThan')|| Route::is('luong') ||  Route::is('capNhatLuong') || Route::is('quocHoi') || Route::is('phuCapCn') || Route::is('capNhatPhuCapCn')
+ ||  Route::is('capNhatQuocHoi')||  Route::is('chucVuQt')||  Route::is('capNhatChucVuQt') || Route::is('capNhatThamNien') ||  Route::is('thamNien') || Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')    ? 'active menu-open' : '' }}  ">
+    <a href="#">
+        <i class="fa  fa-users"></i> <span>Quản lý hồ sơ cán bộ</span>
         <span class="pull-right-container">
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
     </a>
+    <ul class="treeview-menu">
+        <li class="{{ Route::is('thongtinhs')  ? 'active' : '' }}"><a href="{{ route('thongtinhs') }}"><i class="fa fa-circle-o"></i>Hồ sơ cán bộ</a></li>
+        <li class="treeview {{ Route::is('quaTrinhCN') || Route::is('capNhatQuaTrinhDaoTao') || Route::is('giaDinh')|| Route::is('capNhatGiaDinh') || Route::is('nghienCuu')
+|| Route::is('capNhatNghienCuu')|| Route::is('daoTao')|| Route::is('capNhatDaoTao') || Route::is('banThan') ||  Route::is('capNhatbanThan')||  Route::is('chucVuQt')||  Route::is('capNhatChucVuQt')
+ || Route::is('nuocNgoai') ||  Route::is('capNhatnuocNgoai') || Route::is('luong') ||  Route::is('capNhatLuong')  || Route::is('quocHoi') || Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')
+ ||  Route::is('capNhatQuocHoi')|| Route::is('phuCapCn') || Route::is('capNhatPhuCapCn') || Route::is('capNhatThamNien') ||  Route::is('thamNien') ||  Route::is('doanThecn')     ? 'active menu-open ' : '' }}">
+            <a href="#"><i class="fa fa-circle-o"></i> Các quá trình
+                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            </a>
+            <ul class="treeview-menu {{ Route::is('quaTrinhCN') || Route::is('giaDinh') || Route::is('nghienCuu')|| Route::is('daoTao')|| Route::is('banThan')|| Route::is('luong')
+        || Route::is('nuocNgoai') || Route::is('quocHoi') || Route::is('chucVuQt') || Route::is('phuCapCn')|| Route::is('thamNien')  ? 'active menu-open' : '' }}" >
+                <li class="{{ Route::is('daoTao') ||   Route::is('capNhatDaoTao')   ? 'active' : '' }}"><a href="{{route('daoTao','dao_tao=1')}}"><i class="fa fa-circle-o"></i> Quá trình đào tạo</a></li>
+                <li class="{{ Route::is('banThan') ||  Route::is('capNhatbanThan')  ? 'active' : '' }}"><a href="{{route('banThan','ban_than=1')}}"><i class="fa fa-circle-o"></i> Bản thân và công tác</a></li>
+                <li class="{{ Route::is('nuocNgoai') || Route::is('capNhatnuocNgoai')  ? 'active' : '' }}"><a href="{{route('nuocNgoai','nuoc_ngoai=1')}}"><i class="fa fa-circle-o"></i> Hoạt động nước ngoài</a></li>
+                <li class="{{ Route::is('luong') || Route::is('capNhatLuong')  ? 'active' : '' }}"><a href="{{route('luong','luong=1')}}"><i class="fa fa-circle-o"></i> Quá Trình Lương</a></li>
+                <li class="{{ Route::is('quocHoi') ||  Route::is('capNhatQuocHoi')  ? 'active' : '' }}"><a href="{{route('quocHoi','quoc_hoi=1')}}"><i class="fa fa-circle-o"></i> Tham gia Quốc Hội </a></li>
+                <li class="{{ Route::is('chucVuQt') || Route::is('capNhatChucVuQt')  ? 'active' : '' }}"><a href="{{route('chucVuQt','chuc_vu=1')}}"><i class="fa fa-circle-o"></i> Chức vụ</a></li>
+                <li class="{{ Route::is('quaTrinhCN')  ? 'active' : '' }}"><a href="{{route('quaTrinhCN','dang=1')}}"><i class="fa fa-circle-o"></i> Chức vụ Đảng</a></li>
+                <li class="{{ Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')  ? 'active' : '' }}"><a href="{{route('doanThecn','doan_the=1')}}"><i class="fa fa-circle-o"></i> Chức vụ Đoàn thể</a></li>
+                <li class="{{ Route::is('capNhatThamNien') ||  Route::is('thamNien')  ? 'active' : '' }}"><a href="{{route('thamNien','tham_nien=1')}}"><i class="fa fa-circle-o"></i> PC thâm niên vượt khung</a></li>
+                <li class="{{ Route::is('phuCapCn') || Route::is('capNhatPhuCapCn')  ? 'active' : '' }}"><a href="{{route('phuCapCn','phu_cap_khac=1')}}"><i class="fa fa-circle-o"></i> Diễn biến phụ cấp khác</a></li>
+                <li class="{{ Route::is('nghienCuu') ||  Route::is('capNhatNghienCuu')  ? 'active' : '' }}"><a href="{{route('nghienCuu','nghien_cuu=1')}}"><i class="fa fa-circle-o"></i> Nghiên cứu khoa học</a></li>
+                <li class="{{ Route::is('giaDinh') || Route::is('capNhatGiaDinh')   ? 'active' : '' }}"><a href="{{route('giaDinh','gia_dinh=1')}}"><i class="fa fa-circle-o"></i> Quan hệ gia đình</a></li>
+            </ul>
+        </li>
+    </ul>
 </li>
+
 <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
     <a href="{{route('don-vi-to-chuc.index')}}">
         <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
@@ -121,6 +153,18 @@
         <li class="{{ Route::is('chi-tra-chinh-sach.index') ? 'active' : '' }}"><a href="{{route('chi-tra-chinh-sach.index')}}"><i class="fa fa-circle-o"></i>Quản lý chi trả chính sách</a></li>
         {{--                    <li class="{{ Route::is('danh-gia-can-bo.create') ? 'active' : '' }}"><a href="{{ route('danh-gia-can-bo.create') }}"><i class="fa fa-circle-o"></i>Thêm mới</a></li>--}}
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
+    </ul>
+</li>
+<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('chi-tra-chinh-sach.index') || Route::is('huyHieuDang')|| Route::is('allCanBo') || Route::is('chinh-sach.index') ? 'active menu-open' : '' }} }} ">
+    <a href="#">
+        <i class="fa fa-tags"></i> <span>Quản lý đảng viên</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Route::is('allCanBo') ? 'active' : '' }}"><a href="{{route('allCanBo','dang_vienC=1')}}"><i class="fa fa-circle-o"></i>Hồ sơ đảng viên</a></li>
+        <li class="{{ Route::is('huyHieuDang') ? 'active' : '' }}"><a href="{{route('huyHieuDang')}}"><i class="fa fa-circle-o"></i>Huy hiệu đảng</a></li>
     </ul>
 </li>
 

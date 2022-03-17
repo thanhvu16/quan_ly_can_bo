@@ -16,6 +16,7 @@ Route::resource('them-can-bo', 'ThemCanBoController');
 Route::get('tao-ho-so-can-bo', 'ThemCanBoController@create')->name('ho_so_can_bo.create');
 Route::post('them-can-bo', 'ThemCanBoController@postSoLuoc1')->name('themCanBoSL');
 Route::get('ho-so-can-bo', 'ThemCanBoController@index')->name('allCanBo');
+Route::get('dang-vien', 'ThemCanBoController@tuoiDang')->name('tuoiDang');
 Route::get('ho-so-can-bo-cho-gui-duyet', 'ThemCanBoController@choGuiDuyet')->name('ho_so_can_bo.cho_gui_duyet');
 Route::get('ho-so-can-bo-da-gui-duyet', 'ThemCanBoController@daGuiDuyet')->name('ho_so_can_bo.da_gui_duyet');
 Route::get('ho-so-can-bo-gui-duyet-tra-lai', 'ThemCanBoController@guiDuyetBiTraLai')->name('ho_so_can_bo.gui_duyet_bi_tra_lai');

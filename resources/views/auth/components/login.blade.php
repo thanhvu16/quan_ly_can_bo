@@ -171,32 +171,32 @@
 {{--<script src=" http://200.200.200.11/sso/js/sso.min.js "></script>--}}
 <script>
     var APP_URL = <?php echo json_encode(url('/')); ?>;
-    var urlHref='';
-    var urlSSO='';
-    $(document).ready(function(){
-        var host = window.location.host;
-        if(host == '14.177.182.250:6080')
-        {
-            urlHref = "http://14.177.182.250:6080/";
-            urlSSO = 'http://14.177.182.250:10603/sso/js/sso.min.js';
-        }else{
-            urlHref = "http://14.177.182.250:6080/";
-            urlSSO = 'http://200.200.200.11/sso/js/sso.min.js';
-        }
-        const script = document.createElement("script");
-        script.src = urlSSO;
-        script.type = 'text/javascript';
-        document.head.appendChild(script);
-        script.addEventListener('load', () => {
-            console.log(`jQuery ${$.fn.jquery} has been loaded successfully!`);
-            SSO.init();
-            if (!SSO.isAuthen(login)) {
-                $("#loginSSO").off('click').on('click', function () {
-                    SSO.login();
-                })
-            }
-        });
-    })
+    // var urlHref='';
+    // var urlSSO='';
+    // $(document).ready(function(){
+    //     var host = window.location.host;
+    //     if(host == '14.177.182.250:6080')
+    //     {
+    //         urlHref = "http://14.177.182.250:6080/";
+    //         urlSSO = 'http://14.177.182.250:10603/sso/js/sso.min.js';
+    //     }else{
+    //         urlHref = "http://14.177.182.250:6080/";
+    //         urlSSO = 'http://200.200.200.11/sso/js/sso.min.js';
+    //     }
+    //     const script = document.createElement("script");
+    //     script.src = urlSSO;
+    //     script.type = 'text/javascript';
+    //     document.head.appendChild(script);
+    //     script.addEventListener('load', () => {
+    //         console.log(`jQuery ${$.fn.jquery} has been loaded successfully!`);
+    //         SSO.init();
+    //         if (!SSO.isAuthen(login)) {
+    //             $("#loginSSO").off('click').on('click', function () {
+    //                 SSO.login();
+    //             })
+    //         }
+    //     });
+    // })
 
 
 

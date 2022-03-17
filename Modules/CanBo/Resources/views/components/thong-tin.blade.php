@@ -70,17 +70,17 @@
         <strong><i class="fa fa-map-marker margin-r-5"></i>Quê quán:</strong>&emsp;{{$canBo->queQuan->ten ?? ''}}
         <hr>
 
-        <strong><i class="fa fa-pencil margin-r-5"></i> Kỹ năng</strong>
-
-        <p>
-            ( đang cập nhật..)
-        </p>
+        <strong><i class="fa fa-pencil margin-r-5"></i> Nghiên cứu khoa học</strong>
+        <br>
+        <i>
+            @if($canBo->NghienCuu)- {{$canBo->NghienCuu->ten_de_tai ?? ''}}@else(Chờ cập nhật.. ).@endif
+        </i>
 
         <hr>
 
         <strong><i class="fa fa-file-text-o margin-r-5"></i> Khen thưởng</strong><br>
 
-        <i>( Chưa có khen thưởng nào được cập nhật ).</i>
+        <i>@if($canBo->khenThuongCaoNhat)- {{$canBo->khenThuongCaoNhat->ten ?? ''}},...@else( Chưa có khen thưởng nào được cập nhật ).@endif</i>
         <hr>
 
         <strong><i class="fa fa-files-o margin-r-5"></i> Phiếu cán bộ công chức, viên chức</strong><br>

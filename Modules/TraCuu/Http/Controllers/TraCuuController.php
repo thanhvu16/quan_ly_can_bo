@@ -25,7 +25,7 @@ use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
 use Auth;
 
-class TraCuuController extends Controller
+class TraCuuController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,8 +43,17 @@ class TraCuuController extends Controller
         $search = $request->search;
 
         $danhSachPhongBan = null;
-        if ($search && !empty($donViId)) {
-            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+        if ($search || !empty($donViId)) {
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi','parent_id')->get();
+            if(!empty($donViId))
+            {
+                $donViCha = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi','parent_id')->first();
+                if($donViCha->parent_id == 0)
+                {
+                    $donViId = null;
+                }
+            }
+
         }
 
         $cap2 = false;
@@ -61,10 +70,10 @@ class TraCuuController extends Controller
 
 
         $danhSach = CanBo::where(function ($query) use ($donViId) {
-                if (!empty($donViId)) {
-                    return $query->where('don_vi_tao_id', $donViId);
-                }
-            })
+            if (!empty($donViId)) {
+                return $query->where('don_vi_tao_id', $donViId);
+            }
+        })
             ->where(function ($query) use ($ten) {
                 if (!empty($ten)) {
                     return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
@@ -96,6 +105,89 @@ class TraCuuController extends Controller
         }
         return view('tracuu::index',
             compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2'));
+    }
+
+    public function huyHieuDang(Request $request)
+    {
+        $danhSach = CanBo::all();
+
+        $arrId30 = [];
+        $arrId40 = [];
+        $arrId50 = [];
+        $arrId60 = [];
+        $arrId65 = [];
+        $arrId70 = [];
+        $arrId75 = [];
+        $arrId80 = [];
+        $now = date('Y-m-d');
+        foreach ($danhSach as $data) {
+
+            $danhSachct = CanBo::where('id', $data->id)->where('la_dang_vien', 1)->wherenotNull('ngay_vao_dang')->first();
+            if ($danhSachct) {
+                $dang = $danhSachct->ngay_vao_dang;
+                $diff = abs(strtotime($now) - strtotime($dang));
+                $years = floor($diff / (365 * 60 * 60 * 24));
+                if ($years >= 30) {
+                    array_push($arrId30, $danhSachct->id);
+                }
+                if ($years >= 40) {
+                    array_push($arrId40, $danhSachct->id);
+                }
+                if ($years >= 50) {
+                    array_push($arrId50, $danhSachct->id);
+                }
+                if ($years >= 60) {
+                    array_push($arrId60, $danhSachct->id);
+                }
+                if ($years >= 65) {
+                    array_push($arrId65, $danhSachct->id);
+                }
+                if ($years >= 70) {
+                    array_push($arrId70, $danhSachct->id);
+                }
+                if ($years >= 75) {
+                    array_push($arrId75, $danhSachct->id);
+                }
+                if ($years >= 80) {
+                    array_push($arrId80, $danhSachct->id);
+                }
+            }
+            $id30 = null;
+            $id40 = null;
+            $id50 = null;
+            $id60 = null;
+            $id65 = null;
+            $id70 = null;
+            $id75 = null;
+            $id80 = null;
+            if (count($arrId30) > 0) {
+                $id30 = \GuzzleHttp\json_encode($arrId30);
+            }
+            if (count($arrId40) > 0) {
+                $id40 = \GuzzleHttp\json_encode($arrId40);
+            }
+            if (count($arrId50) > 0) {
+                $id50 = \GuzzleHttp\json_encode($arrId50);
+            }
+            if (count($arrId60) > 0) {
+                $id60 = \GuzzleHttp\json_encode($arrId60);
+            }
+            if (count($arrId65) > 0) {
+                $id65 = \GuzzleHttp\json_encode($arrId65);
+            }
+            if (count($arrId70) > 0) {
+                $id70 = \GuzzleHttp\json_encode($arrId70);
+            }
+            if (count($arrId80) > 0) {
+                $id80 = \GuzzleHttp\json_encode($arrId80);
+            }
+            if (count($arrId75) > 0) {
+                $id75 = \GuzzleHttp\json_encode($arrId75);
+            }
+
+
+        }
+        return view('tracuu::huy_hieu', compact('id30', 'id40', 'id50', 'id60', 'id65', 'id70', 'id75', 'id80'));
     }
 
     public function nangCao(Request $request)
@@ -169,10 +261,10 @@ class TraCuuController extends Controller
         }
 
         $danhSach = CanBo::where(function ($query) use ($donViId) {
-                if (!empty($donViId)) {
-                    return $query->where('don_vi_tao_id', $donViId);
-                }
-            })
+            if (!empty($donViId)) {
+                return $query->where('don_vi_tao_id', $donViId);
+            }
+        })
             ->where(function ($query) use ($ten) {
                 if (!empty($ten)) {
                     return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
@@ -250,7 +342,7 @@ class TraCuuController extends Controller
             })
             ->where(function ($query) use ($user) {
                 if (!empty($user)) {
-                    return $query->whereIN('id',$user);
+                    return $query->whereIN('id', $user);
                 }
             })
             ->where(function ($query) use ($phongBanId) {

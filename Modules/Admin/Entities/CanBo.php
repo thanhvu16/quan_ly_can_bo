@@ -22,6 +22,10 @@ class CanBo extends Model
     {
         return $this->belongsTo(KhenThuongKyLuat::class, 'khen_thuong_cao_nhat', 'id');
     }
+    public function NghienCuu()
+    {
+        return $this->belongsTo(QuaTrinhNghienCuu::class, 'id', 'users');
+    }
     public function kyLuatCaoNhat()
     {
         return $this->belongsTo(KyLuat::class, 'ky_luat_cao_nhat', 'id');

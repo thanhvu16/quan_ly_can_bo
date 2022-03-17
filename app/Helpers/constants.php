@@ -1,6 +1,6 @@
 <?php
 
-define('PER_PAGE', 20);
+define('PER_PAGE', 15);
 define('PER_PAGE_10', 10);
 define('UPLOAD_USER', 'uploads/nguoi-dung');
 

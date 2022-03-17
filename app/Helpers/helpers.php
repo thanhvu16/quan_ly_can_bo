@@ -48,6 +48,11 @@ function hoTen($id)
     $hoTen = User::where('id',$id)->first();
     return $hoTen->ho_ten;
 }
+function donViNow($id)
+{
+    $hoTen = \Modules\Admin\Entities\ToChuc::where('id',$id)->first();
+    return $hoTen->ten_don_vi;
+}
 if (!function_exists('getStatusLabel')) {
     function getStatusLabel($status)
     {

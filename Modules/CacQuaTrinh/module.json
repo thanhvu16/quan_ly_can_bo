@@ -1,0 +1,13 @@
+{
+    "name": "CacQuaTrinh",
+    "alias": "cacquatrinh",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\CacQuaTrinh\\Providers\\CacQuaTrinhServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

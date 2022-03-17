@@ -113,6 +113,7 @@
                                 <td>{{$data->donVi->ten_don_vi ?? ''}}</td>
                             </tr>
                             @empty
+                                <td class="text-center" colspan="8" style="vertical-align: middle">Không có dữ liệu !</td>
                             @endforelse
 
                             </tbody>

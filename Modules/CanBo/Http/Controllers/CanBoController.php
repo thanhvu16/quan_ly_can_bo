@@ -27,6 +27,7 @@ use Modules\Admin\Entities\LoaiPhuCap;
 use Modules\Admin\Entities\NgachChucDanh;
 use Modules\Admin\Entities\NgoaiNgu;
 use Modules\Admin\Entities\NhiemKy;
+use Modules\Admin\Entities\NhomDonVi;
 use Modules\Admin\Entities\PhoThong;
 use Modules\Admin\Entities\QuaChucVu;
 use Modules\Admin\Entities\QuanHam;
@@ -96,7 +97,7 @@ class CanBoController extends Controller
 
         foreach ($donVi as $key => $data) {
             $arayEcabinet[$key]['id'] = $data->id;
-            $arayEcabinet[$key]['STT'] = $key + 1;
+//            $arayEcabinet[$key]['STT'] = $key + 1;
             $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
             $arayEcabinet[$key]['Email'] = $data->email;
 //            $arayEcabinet[$key]['status'] = 1;
@@ -108,6 +109,200 @@ class CanBoController extends Controller
 
         return $arayEcabinet;
     }
+    public function getlistcb2()
+    {
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+        $arayEcabinet = array();
+
+        foreach ($donVi as $key => $data) {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
+            $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="cap-nhap-qua-trinh?don_vi=' . $data->id . '">'. $data->ten_don_vi. '</a>';
+        }
+
+
+        return $arayEcabinet;
+    }
+    public function getlistcb3()
+    {
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+        $arayEcabinet = array();
+
+        foreach ($donVi as $key => $data) {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
+            $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="thong-tin-ho-so?don_vi=' . $data->id . '">'. $data->ten_don_vi. '</a>';
+        }
+
+
+        return $arayEcabinet;
+    }
+    public function getlistcb4(Request $request)
+    {
+
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+        $arayEcabinet = array();
+        foreach ($donVi as $key => $data) {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
+            if($request->dao_tao == 1)
+            {
+                $url = 'dao_tao = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->ban_than == 1)
+            {
+                $url = 'ban_than = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="ban-than-cong-tac?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->chuc_vu == 1)
+            {
+                $url = 'chuc_vu = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->chuc_vu_dang == 1)
+            {
+                $url = 'chuc_vu_dang = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->chuc_vu_doan == 1)
+            {
+                $url = 'chuc_vu_doan = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->tham_nien == 1)
+            {
+                $url = 'tham_nien = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->quoc_hoi == 1)
+            {
+                $url = 'quoc_hoi = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->nuoc_ngoai == 1)
+            {
+                $url = 'nuoc_ngoai = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->gia_dinh == 1)
+            {
+                $url = 'gia_dinh = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }elseif($request->nghien_cuu == 1)
+            {
+                $url = 'nghien_cuu = 1';
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id.'&'. $url . '">'. $data->ten_don_vi. '</a>';
+
+            }else{
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="dao-tao?don_vi=' . $data->id . '">'. $data->ten_don_vi. '</a>';
+            }
+        }
+
+
+        return $arayEcabinet;
+    }
+
+    public function quaTrinh(Request $request)
+    {
+        $tendonvi = $request->get('ten_don_vi');
+        $tenviettat = $request->get('ten_viet_tat');
+        $mahanhchinh = $request->get('ma_hanh_chinh');
+//        $donVi = ToChuc::where('ten_don_vi', 'LIKE', "%$tendonvi%")->first();
+
+        $ds_donvi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id);
+            } else {
+                $query->where('parent_id', auth::user()->don_vi_id);
+            }
+        })->paginate(PER_PAGE);
+
+        $nhom_don_vi = NhomDonVi::wherenull('deleted_at')->get();
+
+        $donViCapXa = ToChuc::whereNotNull('cap_xa')->select('id', 'ten_don_vi')->get();
+
+
+        $ten = $request->ten_cb;
+        $cmt = $request->cmt;
+        $donViId = $request->don_vi;
+        $phongBanId = $request->phong_ban_id ?? null;
+        $chuc_vu_chinh = $request->chuc_vu_chinh;
+        $chucVuHienTai = ChucVuHienTai::orderBy('ten', 'asc')->get();
+        $page = $request->get('page');
+        $search = $request->search;
+
+        $danhSachPhongBan = null;
+        if ($search || !empty($donViId)) {
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi','parent_id')->get();
+            $donViCha = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi','parent_id')->first();
+            if($donViCha->parent_id == 0)
+            {
+                $donViId = null;
+            }
+        }
+
+        $cap2 = false;
+        if (auth::user()->hasRole(QUAN_TRI_HT) || auth::user()->donVi->parent_id == 0) {
+            $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+            $donVi = ToChuc::where('parent_id', $donViCap1->id)->select('id', 'ten_don_vi')->get();
+        } else {
+            $donVi = ToChuc::where('id', auth::user()->don_vi_id)->select('id', 'ten_don_vi')->get();
+            $donViId = auth::user()->don_vi_id;
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+            $cap2 = true;
+        }
+
+
+
+
+        $danhSach = CanBo::where(function ($query) use ($donViId) {
+            if (!empty($donViId)) {
+                return $query->where('don_vi_tao_id', $donViId);
+            }
+        })
+            ->where(function ($query) use ($ten) {
+                if (!empty($ten)) {
+                    return $query->where(DB::raw('lower(ho_ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");
+                }
+            })
+            ->where(function ($query) use ($cmt) {
+                if (!empty($cmt)) {
+                    return $query->where(DB::raw('lower(cmnd)'), 'LIKE', "%" . mb_strtolower($cmt) . "%");
+                }
+            })
+            ->where(function ($query) use ($chuc_vu_chinh) {
+                if (!empty($chuc_vu_chinh)) {
+                    return $query->where(DB::raw('lower(chuc_vu_hien_tai)'), 'LIKE', "%" . mb_strtolower($chuc_vu_chinh) . "%");
+                }
+            })
+            ->where(function ($query) use ($phongBanId) {
+                if (!empty($phongBanId)) {
+                    return $query->where('don_vi_id', $phongBanId);
+                }
+            })
+            ->paginate(PER_PAGE, ['*'], 'page', $page);
+
+        return view('canbo::don-vi', compact('ds_donvi', 'nhom_don_vi', 'donViCapXa','danhSach','danhSachPhongBan'));
+    }
+
 
     public function uploadAnh(Request $request, $id)
     {
@@ -199,8 +394,8 @@ class CanBoController extends Controller
         $this->taoPhieuCanBo($canBo);
 
         return view('canbo::index', compact('canBo', 'danToc', 'tonGiao', 'thanhPho', 'chucVuHienTai', 'quaTrinhVuotKhung', 'quaTrinhPhuCapKhac'
-            , 'donVi', 'ngach', 'bacLuong', 'phuCap', 'chuyenNganhDT', 'congViecChuyenMon', 'phoThong', 'lyluanChinhTri', 'quanLyHanhChinh','quaTrinhGiaDinh'
-            , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai','quaTrinhNghienCuu'
+            , 'donVi', 'ngach', 'bacLuong', 'phuCap', 'chuyenNganhDT', 'congViecChuyenMon', 'phoThong', 'lyluanChinhTri', 'quanLyHanhChinh', 'quaTrinhGiaDinh'
+            , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai', 'quaTrinhNghienCuu'
             , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc', 'quaTrinhQuocHoi'
             , 'quaTrinhLuong', 'quaTrinhChucVu', 'quaTrinhChucVuDang', 'quaTrinhQuyHoachCanBo', 'nhiemKy', 'quaTrinhBienCheHopDong', 'quaTrinhKiemNhiemBietphai'
             , 'kiemNhiem', 'loaiCanBo', 'quaTrinhKhenThuong', 'quaTrinhKyLuat', 'quaTrinhBaoHiem', 'quaTrinhVeHuu', 'quaTrinhChuyenDonVi'
@@ -221,9 +416,15 @@ class CanBoController extends Controller
         $daoTao->ket_qua = $request->ket_qua;
         $daoTao->save();
 
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatNghienCuu', $canBo->id . '?nghien_cuu=1')->with('success', 'cập nhật thành công !');
+        }
+
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity8')->with('success', 'cập nhật thành công !');
 
     }
+
     public function quaTrinhGiaDinh(Request $request, $id)
     {
         $canBo = CanBo::where('id', $id)->first();
@@ -236,10 +437,15 @@ class CanBoController extends Controller
         $daoTao->noi_lam_viec = $request->noi_lam_viec;
         $daoTao->noi_o = $request->noi_o;
         $daoTao->save();
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatGiaDinh', $canBo->id . '?gia_dinh=1')->with('success', 'cập nhật thành công !');
+        }
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity8')->with('success', 'cập nhật thành công !');
 
     }
+
     public function quaTrinhPhuCapVK(Request $request, $id)
     {
         $canBo = CanBo::where('id', $id)->first();
@@ -250,6 +456,11 @@ class CanBoController extends Controller
         $daoTao->phan_tram = $request->phan_tram;
         $daoTao->thanh_tien = $request->thanh_tien;
         $daoTao->save();
+
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatThamNien', $canBo->id . '?tham_nien=1')->with('success', 'cập nhật thành công !');
+        }
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity6')->with('success', 'cập nhật thành công !');
 
@@ -267,6 +478,12 @@ class CanBoController extends Controller
         $daoTao->thanh_tien = $request->thanh_tien;
         $daoTao->cach_tinh = $request->cach_tinh;
         $daoTao->save();
+
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatPhuCapCn', $canBo->id . '?phu_cap_khac=1')->with('success', 'cập nhật thành công !');
+        }
+
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity6')->with('success', 'cập nhật thành công !');
 
@@ -298,7 +515,10 @@ class CanBoController extends Controller
         $daoTao->nhiem_ky = $request->nhiem_ky;
         $daoTao->thong_tin = $request->thong_tin;
         $daoTao->save();
-
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatQuocHoi', $canBo->id . '?quoc_hoi=1')->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
 
     }
@@ -396,6 +616,10 @@ class CanBoController extends Controller
         $daoTao->phan_tram = $request->phan_tram_huong;
         $daoTao->tong_luong = $request->tong_luong;
         $daoTao->save();
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatLuong', $canBo->id . '?luong=1')->with('success', 'cập nhật thành công !');
+        }
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
     }
@@ -412,7 +636,10 @@ class CanBoController extends Controller
         $daoTao->hinh_thuc_bo_nhiem = $request->hinh_thuc_bo_nhiem;
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
-
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatChucVuQt', $canBo->id . '?chuc_vu=1')->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
     }
 
@@ -426,7 +653,10 @@ class CanBoController extends Controller
         $daoTao->co_quan = $request->co_quan;
         $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->save();
-
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatQuaTrinhDaoTao', $canBo->id . '?dang=1')->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
 
     }
@@ -441,6 +671,11 @@ class CanBoController extends Controller
         $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
+
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatDoanThecn', $canBo->id . '?doan_the=1')->with('success', 'cập nhật thành công !');
+        }
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
 
@@ -463,6 +698,10 @@ class CanBoController extends Controller
         $daoTao->kinh_phi = $request->kinh_phi;
         $daoTao->save();
 
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatDaoTao', $canBo->id . '?dao_tao=1')->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity4')->with('success', 'cập nhật thành công !');
 
     }
@@ -477,7 +716,10 @@ class CanBoController extends Controller
         $daoTao->chuc_danh = $request->chuc_danh;
         $daoTao->co_quan = $request->co_quan;
         $daoTao->save();
-
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatbanThan', $canBo->id . '?ban_than=1')->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity4')->with('success', 'cập nhật thành công !');
 
     }
@@ -494,6 +736,10 @@ class CanBoController extends Controller
         $daoTao->kinh_phi = $request->kinh_phi;
         $daoTao->ly_do = $request->ly_do;
         $daoTao->save();
+        if($request->cap_nhat_qua_trinh == 1)
+        {
+            return redirect()->route('capNhatnuocNgoai', $canBo->id . '?nuoc_ngoai=1')->with('success', 'cập nhật thành công !');
+        }
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity4')->with('success', 'cập nhật thành công !');
 
@@ -513,16 +759,13 @@ class CanBoController extends Controller
     public function canBoDanhGiac3(Request $request, $id)
     {
         $canBo = CanBo::where('id', $id)->first();
-        $canBo->khen_thuong_cao_nhat = $request->khen_thuong_cao_nhat;
-        $canBo->xuat_than = $request->xuat_than;
-        $canBo->hoc_ham = $request->hoc_ham;
-        $canBo->ky_luat_cao_nhat = $request->ky_luat_cao_nhat;
+
         $canBo->nhan_than_nuoc_ngoai = $request->nhan_than_nuoc_ngoai;
         $canBo->bi_dich_bat = $request->bi_dich_bat;
         $canBo->dac_diem_lich_su_ban_than = $request->dac_diem_lich_su_ban_than;
         $canBo->dac_diem_lich_su_ban_than_tai_san = $request->dac_diem_lich_su_ban_than_tai_san;
         $canBo->danh_gia_cua_can_bo = $request->danh_gia_cua_can_bo;
-        $canBo->phan_loai_cb = $request->phan_loai_cb;
+
         $canBo->tu_nhan_xet_ban_than = $request->tu_nhan_xet_ban_than;
         $canBo->ngay_khai = !empty($request->ngay_khai) ? formatYMD($request->ngay_khai) : null;
         $canBo->ngay_xac_nhan = !empty($request->ngay_xac_nhan) ? formatYMD($request->ngay_xac_nhan) : null;
@@ -580,6 +823,12 @@ class CanBoController extends Controller
         $canBo->doi_tuong_chinh_sach = $request->doi_tuong_chinh_sach;
         $canBo->nam_tot_nghiep = $request->nam_tot_nghiep;
         $canBo->ket_qua_xep_loai = $request->ket_qua_xep_loai;
+
+        $canBo->khen_thuong_cao_nhat = $request->khen_thuong_cao_nhat;
+        $canBo->xuat_than = $request->xuat_than;
+        $canBo->hoc_ham = $request->hoc_ham;
+        $canBo->ky_luat_cao_nhat = $request->ky_luat_cao_nhat;
+        $canBo->phan_loai_cb = $request->phan_loai_cb;
         $canBo->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity2')->with('success', 'cập nhật thành công !');
@@ -771,7 +1020,7 @@ class CanBoController extends Controller
         }
         $date = getdate();
         $weekday = strtolower($date['weekday']);
-        switch($weekday) {
+        switch ($weekday) {
             case 'monday':
                 $weekday = 'Thứ hai';
                 break;
@@ -833,16 +1082,15 @@ class CanBoController extends Controller
         $wordTemplate->setValue('ngayTuyen', $tuyenDungChinhThuc[2] ?? null);
         $wordTemplate->setValue('thangTuyen', $tuyenDungChinhThuc[1] ?? null);
         $wordTemplate->setValue('namTuyen', $tuyenDungChinhThuc[0] ?? null);
-        $wordTemplate->setValue('coQuanChinhThuc', $canBo->donVi->ten_don_vi ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('coQuanTuyenDungDauTien', $canBo->co_quan_tuyen ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('congViecHienNay', $canBo->nghe_nghiep_khi_duoc_tuyen ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('linhVucTheoDoi', $canBo->linh_vuc_theo_doi ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('hinhThucTuyen', $canBo->hinhThucTuyenDung->ten ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('coQuanChinhThuc', $canBo->donVi->ten_don_vi ?? null);
+        $wordTemplate->setValue('coQuanTuyenDungDauTien', $canBo->co_quan_tuyen ?? null);
+        $wordTemplate->setValue('congViecHienNay', $canBo->nghe_nghiep_khi_duoc_tuyen ?? null);
+        $wordTemplate->setValue('linhVucTheoDoi', $canBo->linh_vuc_theo_doi ?? null);
+        $wordTemplate->setValue('hinhThucTuyen', $canBo->hinhThucTuyenDung->ten ?? null);
         $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_truoc_khi_tuyen ?? '.............................................................................');
-        $wordTemplate->setValue('ngheNghiepTruocKhiTuyen', $canBo->nghe_nghiep_truoc_khi_tuyen ?? '.............................................................................');
-        $wordTemplate->setValue('congChuc', $canBo->vi_tri_cong_chuc ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('vienChuc', $canBo->vi_tri_vien_chuc ?? '………..………………………………………………………..');
-        $wordTemplate->setValue('nhanVienThuaHanh', $canBo->vi_tri_nhan_vien ?? '………..………………………………………………………..');
+        $wordTemplate->setValue('congChuc', $canBo->vi_tri_cong_chuc ?? null);
+        $wordTemplate->setValue('vienChuc', $canBo->vi_tri_vien_chuc ?? null);
+        $wordTemplate->setValue('nhanVienThuaHanh', $canBo->vi_tri_nhan_vien ?? null);
         $wordTemplate->setValue('ngach', $canBo->Ngach->ten ?? null);
         $wordTemplate->setValue('maNgach', $canBo->Ngach->ma_ngach ?? null);
         $wordTemplate->setValue('bac', $canBo->Bac->bac ?? null);
@@ -909,7 +1157,7 @@ class CanBoController extends Controller
         $wordTemplate->setValue('thu', $weekday ?? null);
         $wordTemplate->setValue('now', date('d'));
         $wordTemplate->setValue('mon', date('m') ?? null);
-        $wordTemplate->setValue('nam', date('Y').'.....' ?? null);
+        $wordTemplate->setValue('nam', date('Y') . '.....' ?? null);
 
 
         //QUÁ TRÌNH CÔNG TÁC
