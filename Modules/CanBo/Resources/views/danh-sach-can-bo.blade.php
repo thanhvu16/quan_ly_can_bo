@@ -104,7 +104,7 @@
                             @forelse($danhSach as $key=>$data)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td style="text-transform: uppercase;font-weight: bold"><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa   fa-venus"></i> @endif {{$data->ho_ten}}</a></td>
+                                    <td style="text-transform: uppercase;font-weight: bold"><a href="{{route('canBoDetail',$data->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa   fa-venus"></i> @endif {{$data->ho_ten}}</a></td>
                                 <td class="text-center">{{$data->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                                 <td class="text-center">{{date("d/m/Y", strtotime($data->ngay_sinh))}}</td>
                                 <td class="text-center">{{$data->danToc->ten ?? ''}}</td>

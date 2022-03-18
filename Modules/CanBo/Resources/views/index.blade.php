@@ -2,16 +2,17 @@
 @extends('admin::layouts.master')
 @section('page_title', 'Cán bộ')
 @section('content')
-    <section class="content">
+    <section class="content" style="font-size: 12px">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <!-- Profile Image -->
             @include('canbo::components.thong-tin')
                 <!-- /.box -->
+
             </div>
             <!-- /.col -->
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="{{ empty(Request::get('activity')) || Request::get('activity') == 'activity' ? 'active' : null }}"><a href="#activity" data-toggle="tab">Sơ lược (1)</a></li>

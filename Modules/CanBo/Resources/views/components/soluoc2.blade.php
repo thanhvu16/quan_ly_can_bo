@@ -1,6 +1,6 @@
 <form class="" action="{{route('canBoDanhGia',$canBo->id)}}" method="POST" id="form2" >
     @csrf
-    <div class="col-md-12" style="background: white">
+    <div class="col-md-12" style="background: white;font-size: 12px">
         <div class="row">
 
 

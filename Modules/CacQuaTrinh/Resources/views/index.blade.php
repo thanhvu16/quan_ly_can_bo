@@ -8,7 +8,7 @@
                     <div class="box-header with-border">
                         <div class="col-md-6">
                             <div class="row">
-                                <h3 class="box-title">Tìm kiếm nhanh &nbsp;
+                                <h3 class="box-title">Cập nhật quá trình cán bộ &nbsp;
                                     <a class=" btn btn-primary btn-sm" data-toggle="collapse"
                                        href="#collapseExample"
                                        aria-expanded="false" aria-controls="collapseExample"> <i class="fa  fa-search"></i>
@@ -19,7 +19,13 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            {{--                            <i>(STT mà đỏ: <span style="color: red">văn bản đang xử lý</span>; STT màu xanh: <span style="color: blue">Văn bản chưa được phân</span>; STT màu đen: <span style="color: black">Văn bản đã hoàn thành</span>)</i>--}}
+                            <a href="#"><i class="fa fa-users"></i> Quản lý hồ sơ cán bộ</a> &ensp;>&ensp; <a href="#">Các quá trình</a>
+{{--                            <ol class="breadcrumb" style="padding: 0px 0px; margin-bottom: 0px;background-color: white">--}}
+{{--                                <li><a href="#"><i class="fa fa-dashboard"></i> Quản lý hồ sơ cán bộ</a></li>--}}
+{{--                                <li><a href="#">Các quá trình</a></li>--}}
+{{--                                <li class="active">General</li>--}}
+{{--                            </ol>--}}
+
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -32,13 +38,52 @@
 
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <form method="GET" action="{{ route('quaTrinhCN') }}" class="form-export">
+                                    <form method="GET" action="@if(Request::get('dao_tao') == 1)
+                                    {{route('daoTao','dao_tao='.Request::get('dao_tao'))}}
+                                    @elseif(Request::get('ban_than') == 1)
+                                    {{route('banThan','ban_than='.Request::get('ban_than'))}}
+                                    @elseif(Request::get('nuoc_ngoai') == 1)
+                                    {{route('nuocNgoai','nuoc_ngoai='.Request::get('nuoc_ngoai'))}}
+                                    @elseif(Request::get('luong') == 1)
+                                    {{route('luong','luong='.Request::get('luong'))}}
+                                    @elseif(Request::get('quoc_hoi') == 1)
+                                    {{route('quocHoi','quoc_hoi='.Request::get('quoc_hoi'))}}
+                                    @elseif(Request::get('chuc_vu') == 1)
+                                    {{route('chucVuQt','chuc_vu='.Request::get('chuc_vu'))}}
+                                    @elseif(Request::get('dang') == 1)
+                                    {{route('quaTrinhCN',$data->id.'?dang='.Request::get('dang'))}}
+                                    @elseif(Request::get('doan_the') == 1)
+                                    {{route('doanThecn','doan_the='.Request::get('doan_the'))}}
+                                    @elseif(Request::get('tham_nien') == 1)
+                                    {{route('thamNien','tham_nien='.Request::get('tham_nien'))}}
+                                    @elseif(Request::get('phu_cap_khac') == 1)
+                                    {{route('phuCapCn','phu_cap_khac='.Request::get('phu_cap_khac'))}}
+                                    @elseif(Request::get('nghien_cuu') == 1)
+                                    {{route('nghienCuu','nghien_cuu='.Request::get('nghien_cuu'))}}
+                                    @elseif(Request::get('gia_dinh') == 1)
+                                    {{route('giaDinh','gia_dinh='.Request::get('gia_dinh'))}}@endif" class="form-export">
                                         <input type="hidden" name="type" value="">
                                         <input type="hidden" name="ten_cb" value="{{Request::get('ten_cb') }}">
                                         <input type="hidden" name="don_vi" value="{{Request::get('don_vi') }}">
                                         <input type="hidden" name="chuc_vu_chinh"
                                                value="{{Request::get('chuc_vu_chinh') }}">
                                         <input type="hidden" name="page" value="{{Request::get('page') }}">
+
+
+                                        <input type="hidden" name="dao_tao" value="{{Request::get('dao_tao')}}">
+                                        <input type="hidden" name="ban_than" value="{{Request::get('ban_than')}}">
+                                        <input type="hidden" name="chuc_vu" value="{{Request::get('chuc_vu')}}">
+                                        <input type="hidden" name="chuc_vu_dang" value="{{Request::get('chuc_vu_dang')}}">
+                                        <input type="hidden" name="chuc_vu_doan" value="{{Request::get('chuc_vu_doan')}}">
+                                        <input type="hidden" name="tham_nien" value="{{Request::get('tham_nien')}}">
+                                        <input type="hidden" name="quoc_hoi" value="{{Request::get('quoc_hoi')}}">
+                                        <input type="hidden" name="phu_cap_khac" value="{{Request::get('phu_cap_khac')}}">
+                                        <input type="hidden" name="nuoc_ngoai" value="{{Request::get('nuoc_ngoai')}}">
+                                        <input type="hidden" name="nghien_cuu" value="{{Request::get('nghien_cuu')}}">
+                                        <input type="hidden" name="luong" value="{{Request::get('luong')}}">
+                                        <input type="hidden" name="gia_dinh" value="{{Request::get('gia_dinh')}}">
+                                        <input type="hidden" name="luong" value="{{Request::get('luong')}}">
+                                        <input type="hidden" name="phu_cap_khac" value="{{Request::get('phu_cap_khac')}}">
 
                                         <button type="button" data-type="excel"
                                                 class="btn btn-success waves-effect waves-light btn-sm btn-export-data"><i
@@ -61,7 +106,30 @@
                             <div class="row">
 
                                 <div class="col-md-12 collapse in }} " id="collapseExample">
-                                    <form action="{{route('quaTrinhCN')}}" id="tim_kiem" method="get">
+                                    <form action="@if(Request::get('dao_tao') == 1)
+                                    {{route('daoTao','dao_tao='.Request::get('dao_tao'))}}
+                                    @elseif(Request::get('ban_than') == 1)
+                                    {{route('banThan','ban_than='.Request::get('ban_than'))}}
+                                    @elseif(Request::get('nuoc_ngoai') == 1)
+                                    {{route('nuocNgoai','nuoc_ngoai='.Request::get('nuoc_ngoai'))}}
+                                    @elseif(Request::get('luong') == 1)
+                                    {{route('luong','luong='.Request::get('luong'))}}
+                                    @elseif(Request::get('quoc_hoi') == 1)
+                                    {{route('quocHoi','quoc_hoi='.Request::get('quoc_hoi'))}}
+                                    @elseif(Request::get('chuc_vu') == 1)
+                                    {{route('chucVuQt','chuc_vu='.Request::get('chuc_vu'))}}
+                                    @elseif(Request::get('dang') == 1)
+                                    {{route('quaTrinhCN',$data->id.'?dang='.Request::get('dang'))}}
+                                    @elseif(Request::get('doan_the') == 1)
+                                    {{route('doanThecn','doan_the='.Request::get('doan_the'))}}
+                                    @elseif(Request::get('tham_nien') == 1)
+                                    {{route('thamNien','tham_nien='.Request::get('tham_nien'))}}
+                                    @elseif(Request::get('phu_cap_khac') == 1)
+                                    {{route('phuCapCn','phu_cap_khac='.Request::get('phu_cap_khac'))}}
+                                    @elseif(Request::get('nghien_cuu') == 1)
+                                    {{route('nghienCuu','nghien_cuu='.Request::get('nghien_cuu'))}}
+                                    @elseif(Request::get('gia_dinh') == 1)
+                                    {{route('giaDinh','gia_dinh='.Request::get('gia_dinh'))}}@endif" id="tim_kiem" method="get">
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 <label for="loai_van_ban_id" class="col-form-label">Tên cán bộ</label>
@@ -116,6 +184,20 @@
                                                     <a href="{{ route('quaTrinhCN') }}" class="btn btn-success"><i class="fa fa-refresh"></i></a>
                                                 @endif
                                             </div>
+                                            <input type="hidden" name="dao_tao" value="{{Request::get('dao_tao')}}">
+                                            <input type="hidden" name="ban_than" value="{{Request::get('ban_than')}}">
+                                            <input type="hidden" name="chuc_vu" value="{{Request::get('chuc_vu')}}">
+                                            <input type="hidden" name="chuc_vu_dang" value="{{Request::get('chuc_vu_dang')}}">
+                                            <input type="hidden" name="chuc_vu_doan" value="{{Request::get('chuc_vu_doan')}}">
+                                            <input type="hidden" name="tham_nien" value="{{Request::get('tham_nien')}}">
+                                            <input type="hidden" name="quoc_hoi" value="{{Request::get('quoc_hoi')}}">
+                                            <input type="hidden" name="phu_cap_khac" value="{{Request::get('phu_cap_khac')}}">
+                                            <input type="hidden" name="nuoc_ngoai" value="{{Request::get('nuoc_ngoai')}}">
+                                            <input type="hidden" name="nghien_cuu" value="{{Request::get('nghien_cuu')}}">
+                                            <input type="hidden" name="luong" value="{{Request::get('luong')}}">
+                                            <input type="hidden" name="gia_dinh" value="{{Request::get('gia_dinh')}}">
+                                            <input type="hidden" name="luong" value="{{Request::get('luong')}}">
+                                            <input type="hidden" name="phu_cap_khac" value="{{Request::get('phu_cap_khac')}}">
 
                                         </div>
                                     </form>
@@ -125,18 +207,7 @@
                         <div class="col-md-3">
                             <div class="row">
                                 <table id="table" style="font-size: 12px"></table>
-                                <input type="hidden" name="dao_tao" value=" {{Request::get('dao_tao')}}">
-                                <input type="hidden" name="ban_than" value=" {{Request::get('ban_than')}}">
-                                <input type="hidden" name="chuc_vu" value=" {{Request::get('chuc_vu')}}">
-                                <input type="hidden" name="chuc_vu_dang" value=" {{Request::get('chuc_vu_dang')}}">
-                                <input type="hidden" name="chuc_vu_doan" value=" {{Request::get('chuc_vu_doan')}}">
-                                <input type="hidden" name="tham_nien" value=" {{Request::get('tham_nien')}}">
-                                <input type="hidden" name="quoc_hoi" value=" {{Request::get('quoc_hoi')}}">
-                                <input type="hidden" name="phu_cap_khac" value=" {{Request::get('phu_cap_khac')}}">
-                                <input type="hidden" name="nuoc_ngoai" value=" {{Request::get('nuoc_ngoai')}}">
-                                <input type="hidden" name="nghien_cuu" value=" {{Request::get('nghien_cuu')}}">
-                                <input type="hidden" name="luong" value=" {{Request::get('luong')}}">
-                                <input type="hidden" name="gia_dinh" value=" {{Request::get('gia_dinh')}}">
+
                             </div>
                         </div>
                         <div class="col-md-9">
@@ -304,6 +375,8 @@
         var nuoc_ngoai = $('input[name="nuoc_ngoai"]').val();
         var nghien_cuu = $('input[name="nghien_cuu"]').val();
         var gia_dinh = $('input[name="gia_dinh"]').val();
+        var phu_cap_khac = $('input[name="phu_cap_khac"]').val();
+        var luong = $('input[name="luong"]').val();
         if(dao_tao == 1)
         {
             don_vi = 'dao_tao= 1';
@@ -311,6 +384,14 @@
         if(ban_than == 1)
         {
             don_vi = 'ban_than= 1';
+        }
+        if(phu_cap_khac == 1)
+        {
+            don_vi = 'phu_cap_khac= 1';
+        }
+        if(luong == 1)
+        {
+            don_vi = 'luong= 1';
         }
         if(chuc_vu == 1)
         {

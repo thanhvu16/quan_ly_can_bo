@@ -1,7 +1,7 @@
 <form class="" action="{{route('postSoLuoc1',$canBo->id)}}" method="POST">
     @csrf
 
-    <div class="col-md-12" style="background: white">
+    <div class="col-md-12" style="background: white;font-size: 12px">
         <div class="row">
             <h4 style="color: blue;font-weight: bold">I. Thông tin hồ sơ</h4>
 

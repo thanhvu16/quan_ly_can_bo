@@ -27,7 +27,7 @@ use Modules\Admin\Entities\QuaTrinhPhuCapKhac;
 use Modules\Admin\Entities\QuaTrinhQuocHoi;
 use Modules\Admin\Entities\QuaTrinhVuotKhung;
 use Modules\Admin\Entities\ToChuc;
-use auth, DB;
+use auth, DB, Excel;
 use Modules\Admin\Entities\TruongHoc;
 
 class CacQuaTrinhController extends Controller

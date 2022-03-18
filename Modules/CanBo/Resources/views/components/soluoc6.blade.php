@@ -1,5 +1,5 @@
 <form class="" >
-    <div class="col-md-12" style="background: white">
+    <div class="col-md-12" style="background: white;font-size: 12px">
         <div class="row">
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Diễn biến phụ cấp thâm niên vượt khung</h4>
