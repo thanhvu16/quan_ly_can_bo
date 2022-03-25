@@ -30,7 +30,7 @@ use Modules\Admin\Entities\ToChuc;
 use auth, DB, Excel;
 use Modules\Admin\Entities\TruongHoc;
 
-class CacQuaTrinhController extends Controller
+class CacQuaTrinhController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.

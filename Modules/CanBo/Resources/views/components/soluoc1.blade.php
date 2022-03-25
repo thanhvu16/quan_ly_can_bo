@@ -1,10 +1,17 @@
 <form class="" action="{{route('postSoLuoc1',$canBo->id)}}" method="POST">
     @csrf
 
-    <div class="col-md-12" style="background: white;font-size: 12px">
-        <div class="row">
-            <h4 style="color: blue;font-weight: bold">I. Thông tin hồ sơ</h4>
+    <div class="box box-danger" style="font-size: 12px;border-top-color: #119bea;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="color: #0a0a0a;font-weight: bold">I. Thông tin hồ sơ</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
 
+        <div class="box-body">
             <div class="col-md-3 " >
                 <div class="form-group" >
                     <label for="exampleInputEmail1">Họ tên khai sinh <span style="color: red">(*)</span></label>
@@ -56,7 +63,7 @@
                     <select class="form-control select2" name="dan_toc" required>
                         <option value="">--Lựa chọn--</option>
                         @foreach($danToc as $dsDanToc)
-                        <option value="{{$dsDanToc->id}}"  {{$canBo->dan_toc == $dsDanToc->id ? 'selected' : ''}}>{{$dsDanToc->ten}}</option>
+                            <option value="{{$dsDanToc->id}}"  {{$canBo->dan_toc == $dsDanToc->id ? 'selected' : ''}}>{{$dsDanToc->ten}}</option>
                         @endforeach
                     </select>
 
@@ -201,7 +208,20 @@
                            placeholder="Ví dụ: 23 Bạch Mai, Hà Nội " required>
                 </div>
             </div>
-            <h4 style="color: blue;font-weight: bold">II. Công tác</h4>
+        </div>
+
+    </div>
+    <div class="box box-danger" style="font-size: 12px;border-top-color: #119bea;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="color: #0a0a0a;font-weight: bold">II. Công tác</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Cơ quan tuyển</label>
@@ -327,7 +347,21 @@
                     </div>
                 </div>
             </div>
-            <h4 style="color: blue;font-weight: bold">III. Lương, phụ cấp hiện hưởng</h4>
+
+        </div>
+
+    </div>
+    <div class="box box-danger" style="font-size: 12px;border-top-color: #119bea;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="color: #0a0a0a;font-weight: bold">III. Lương, phụ cấp hiện hưởng</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Đơn vị <span style="color: red">(*)</span></label>
@@ -595,19 +629,24 @@
             <div class="col-md-3 mt-4" >
                 <div class="form-group">
                     <input type="checkbox"  name="bhyt"   {{$canBo->BHYT == 1 ? 'checked' : ''}}
-                           placeholder="3 " value="1" > BHYT &emsp;
+                    placeholder="3 " value="1" > BHYT &emsp;
                     <input type="checkbox"  name="bhxh" {{$canBo->BHXH == 1 ? 'checked' : ''}}
-                           placeholder="3 " value="1" > BHXH <br>
+                    placeholder="3 " value="1" > BHXH <br>
                 </div>
             </div>
+        </div>
 
-        </div>
     </div>
-    @can(\App\Common\AllPermission::suaCanBo())
-        <div class="form-group">
-            <div class="col-md-3 col-sm">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Cập nhật</button>
+    <div class="box-footer">
+        @can(\App\Common\AllPermission::suaCanBo())
+            <div class="form-group">
+                <div class="col-md-3 col-sm">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Cập nhật</button>
+                </div>
             </div>
-        </div>
-    @endcan
+        @endcan
+    </div>
+
+
+
 </form>

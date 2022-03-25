@@ -43,6 +43,10 @@ $('.btn-remove-item').on('click', function () {
 
     return confirm('Bạn muốn xóa dữ liệu này?');
 });
+$('.btn-update-item').on('click', function () {
+
+    return confirm('Bạn muốn cập nhật dữ liệu này?');
+});
 $('.btn-remove-item-duyet').on('click', function () {
 
     return confirm('Bạn có chắc chắc muốn duyệt?');
@@ -294,6 +298,56 @@ $('body').on('click', '.btn-add-van-ban-den', function () {
         return  toastr['warning']('Vui lòng chọn văn bản trước khi thêm.', 'Thông báo hệ thống');
     }
 });
+$('body').on('click', '.bat-thong-bao', function () {
+    $.ajax({
+        url: APP_URL + '/lay-thong-bao',
+        type: 'GET',
+
+    }).done(function (res) {
+        if(res.soThongBao > 0)
+        {
+            let selectAttributes = res.data.map((function (attribute) {
+                console.log(attribute);
+
+                return `<li>
+                        <a href="#" style="font-size: 12px;font-weight: bold">
+                            <i class="fa fa-bell-o text-aqua" style="color: black"></i> ${attribute.noi_dung}
+                        </a>
+                    </li>`;
+            }));
+            $('.them-thong-bao').html(selectAttributes);
+        }
+        else {
+            toastr['success'](res.message, 'Thông báo hệ thống');
+        }
+    }).fail(function (err) {
+        toastr['error'](err.message, 'Lỗi hệ thống')    ;
+    });
+
+
+
+});
+$(document).ready(function(){
+    setInterval(function () {
+        /*viewNoti.View();*/
+        $.ajax({
+            url: APP_URL + '/lay-thong-bao',
+            type: 'GET',
+
+        }).done(function (res) {
+            if(res.soThongBao > 0)
+            {
+                $('.so-thong-bao').html(res.soThongBao);
+            } else {
+                $('.so-thong-bao').html(0);
+            }
+        }).fail(function (err) {
+            toastr['error'](err.message, 'Lỗi hệ thống')    ;
+        });
+    }, 5000);
+
+});
+
 
 // remove van ban den
 $('body').on('click', '.rm-van-ban-den', function () {

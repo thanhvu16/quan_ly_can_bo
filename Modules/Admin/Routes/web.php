@@ -71,6 +71,7 @@ Route::get('update-passwword', 'NguoiDungController@password');
 
 // switch user
 Route::post('switch-user', 'NguoiDungController@switchOtherUser')->name('user.switch_user');
+Route::get('lay-thong-bao', 'NguoiDungController@layThongBao')->name('layThongBao');
 Route::get('stop-switch-user', 'NguoiDungController@stopSwitchUser')->name('user.stop_switch_user');
 
 Route::resource('email-don-vi-ngoai-he-thong', 'EmailDonViNgoaiHeThongController');

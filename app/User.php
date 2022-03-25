@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Modules\Admin\Entities\ChucVu;
 use Modules\Admin\Entities\DonVi;
+use Modules\Admin\Entities\ThongBao;
 use Modules\Admin\Entities\ToChuc;
 use Modules\DieuHanhVanBanDen\Entities\XuLyVanBanDen;
 use Spatie\Permission\Models\Role;
@@ -78,6 +79,10 @@ class User extends Authenticatable
 
     }
 
+    public function thongBao()
+    {
+        return $this->hasMany(ThongBao::class, 'id', 'id_ho_so');
+    }
     public function chucVu()
     {
         return $this->belongsTo(ChucVu::class, 'chuc_vu_id', 'id')->select('id', 'ten_chuc_vu', 'ten_viet_tat');

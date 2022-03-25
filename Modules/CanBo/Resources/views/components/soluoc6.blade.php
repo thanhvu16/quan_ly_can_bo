@@ -8,7 +8,7 @@
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -41,7 +41,7 @@
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -78,7 +78,7 @@
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -111,7 +111,7 @@
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -140,7 +140,7 @@
                 <a style="cursor: pointer" onclick="showModal14()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>

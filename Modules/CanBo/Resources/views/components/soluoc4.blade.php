@@ -2,13 +2,13 @@
     <div class="col-md-12" style="background: white;font-size: 12px">
         <div class="row">
             <div class="col-md-12">
-                <h4 style="color: #0a0a0a;font-weight: bold">Quá trình đào tạo (Đào tạo, Bồi dưỡng nghiệp vụ,Chính trị,Tin học..)</h4>
+                <h4 style="color: #119bea;font-weight: bold">Quá trình đào tạo (Đào tạo, Bồi dưỡng nghiệp vụ,Chính trị,Tin học..)</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
                     <a style="cursor: pointer" onclick="showModal12()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -47,13 +47,13 @@
                 </table>
             </div>
             <div class="col-md-12" style="margin-bottom: 10px">
-                <h4 style="color: #0a0a0a;font-weight: bold">Lịch sử bản thân và Quá trình công tác</h4>
+                <h4 style="color: #119bea;font-weight: bold">Lịch sử bản thân và Quá trình công tác</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
                     <a style="cursor: pointer" onclick="showModal3()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>
@@ -80,13 +80,13 @@
                 </table>
             </div>
             <div class="col-md-12" style="margin-bottom: 10px" >
-                <h4 style="color: #0a0a0a;font-weight: bold">Quá trình hoạt động tại nước ngoài</h4>
+                <h4 style="color: #119bea;font-weight: bold">Quá trình hoạt động tại nước ngoài</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
                     <a style="cursor: pointer" onclick="showModal2()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12">
-                <table class="table table-bordered table-striped dataTable mb-0">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
                     <thead>
                     <tr>
                         <th width="2%" style="vertical-align: middle" class="text-center">STT</th>

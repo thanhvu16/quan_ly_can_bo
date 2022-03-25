@@ -13,6 +13,7 @@ use Modules\Admin\Entities\ChucVu;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\NhomDonVi;
 use Modules\Admin\Entities\NhomDonVi_chucVu;
+use Modules\Admin\Entities\ThongBao;
 use Modules\Admin\Entities\ToChuc;
 use Modules\VanBanDen\Entities\VanBanDenDonVi;
 use Spatie\Permission\Models\Permission;
@@ -119,6 +120,17 @@ class NguoiDungController extends Controller
 
         return view('admin::nguoi-dung.create',
             compact('roles', 'danhSachDonVi', 'danhSachChucVu'));
+    }
+    public function layThongBao()
+    {
+        $danhSachThongBao= ThongBao::where('nguoi_nhan', auth::user()->id)->whereNull('trang_thai')->orderBy('created_at','desc')->get();
+        $soThongBao = count($danhSachThongBao);
+
+
+        return response()->json([
+            'data' =>  $danhSachThongBao ,
+            'soThongBao' => $soThongBao
+        ]);
     }
 
     /**

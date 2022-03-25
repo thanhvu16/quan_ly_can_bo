@@ -678,7 +678,10 @@ class ThemCanBoController extends Controller
         $canBo->don_vi_tao_id = auth::user()->don_vi_id;
         $canBo->user_id = auth::user()->id;
 
+
         $canBo->save();
+
+
         UserLogs::saveUserLogs('Tạo hồ sơ cán bộ', $canBo);
 
 

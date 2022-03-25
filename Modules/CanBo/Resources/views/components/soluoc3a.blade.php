@@ -4,7 +4,7 @@
         <div class="row">
 
 
-            <h4 style="color: blue;font-weight: bold">Đặc điểm lịch sử bản thân</h4>
+            <h4 style="color: #0a0a0a;font-weight: bold">Đặc điểm lịch sử bản thân</h4>
 {{--            <div class="col-md-6 mt-4" >--}}
 {{--                    <label for="bi_dich_bat"><input type="checkbox" value="1"  {{$canBo->bi_dich_bat == 1 ? 'checked' : ''}} id="bi_dich_bat" name="bi_dich_bat"> Bị địch bắt, tù đày hoặc làm việc cho chế độ cũ</label>--}}
 {{--            </div>--}}

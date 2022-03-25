@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\CanBo;
 use Auth;
+use Modules\Admin\Entities\ThongBao;
 
 class DuyetHoSoCanBoConTroller extends Controller
 {
@@ -48,6 +49,13 @@ class DuyetHoSoCanBoConTroller extends Controller
                 $trinhTuGuiDuyetHoSo->can_bo_chuyen_id = auth::user()->id;
                 $trinhTuGuiDuyetHoSo->can_bo_nhan_id = $lanhDaoDuyetId;
                 $trinhTuGuiDuyetHoSo->save();
+
+                $thongBao = new ThongBao();
+                $thongBao->nguoi_gui = auth::user()->id;
+                $thongBao->nguoi_nhan = $lanhDaoDuyetId;
+                $thongBao->noi_dung = 'Hồ sơ chờ duyệt';
+                $thongBao->id_ho_so = $canBoId;
+                $thongBao->save();
 
                 //update trang thai gui canBo
                 CanBo::updateTrangThaiGuiDuyet($canBoId, CanBo::TRANG_THAI_DA_GUI_DUYET);

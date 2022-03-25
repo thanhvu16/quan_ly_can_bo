@@ -329,7 +329,7 @@ class CanBoController extends Controller
         canPermission(AllPermission::xemCanBo());
 
         $canBo = CanBo::with('hinhThucTuyen')->where('id', $id)->first();
-        $canBoDV = CanBo::where('don_vi_id', $canBo->don_vi_id)->orderBy('ho_ten','desc')->paginate(10);
+        $canBoDV = CanBo::where('don_vi_id', $canBo->don_vi_id)->orderBy('ho_ten','desc')->get();
 
 
         $donViChuQuan = ToChuc::where('id', $canBo->donVi->parent_id)->select('id', 'ten_don_vi')->first();
@@ -736,12 +736,28 @@ class CanBoController extends Controller
 
     public function canBoDanhGiatt(Request $request, $id)
     {
+        $multiFiles = !empty($request['anh_dai_dien']) ? $request['anh_dai_dien'] : null;
+        $uploadPath = UPLOAD_ANH;
         $canBo = CanBo::where('id', $id)->first();
         $canBo->hinh_thuc_tuyen = $request->hinh_thuc_tuyen;
         $canBo->trang_thai_cb = $request->trang_thai_cb;
         $canBo->trung_uong_quan_ly = $request->trung_uong_quan_ly;
         $canBo->lam_cong_tac_quan_ly = $request->lam_cong_tac_quan_ly;
         $canBo->save();
+        if($multiFiles)
+        {
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0777, true, true);
+            }
+
+            $fileName = date('Y_m_d') . '_' . Time() . '_' . $multiFiles->getClientOriginalName();
+            $urlFile = UPLOAD_ANH . '/' . $fileName;
+
+            $multiFiles->move($uploadPath, $fileName);
+            $canBo->anh_dai_dien = $urlFile;
+            $canBo->save();
+        }
+
         return redirect()->back()->with('success', 'cập nhật thành công !');
     }
 
@@ -783,6 +799,9 @@ class CanBoController extends Controller
         $canBo->cong_viec_chinh = $request->cong_viec_chinh;
         $canBo->da_di_bo_doi = $request->da_di_bo_doi;
         $canBo->benh_binh = $request->benh_binh;
+        $canBo->so_the_dang = $request->so_the_dang;
+        $canBo->hinh_thuc_tuyen = $request->hinh_thuc_tuyen;
+        $canBo->trang_thai_cb = $request->trang_thai_cb;
 
         $canBo->nhap_ngu = !empty($request->nhap_ngu) ? formatYMD($request->nhap_ngu) : null;
         $canBo->xuat_ngu = !empty($request->xuat_ngu) ? formatYMD($request->xuat_ngu) : null;

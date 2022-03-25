@@ -1,68 +1,17 @@
 <form class="" action="{{route('canBoDanhGia',$canBo->id)}}" method="POST" id="form2" >
     @csrf
-    <div class="col-md-12" style="background: white;font-size: 12px">
-        <div class="row">
 
+    <div class="box box-danger" style="font-size: 12px;border-top-color: #119bea;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="color: #0a0a0a;font-weight: bold">IV. Đào tạo bồi dưỡng</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
 
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Trình độ</label>--}}
-{{--                    <select class="form-control select2" name="trinh_do_1">--}}
-{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
-{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->trinh_do_1 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Bằng</label>--}}
-{{--                    <select class="form-control select2" name="bang1">--}}
-{{--                        @foreach($hinhThucDaoTao as $dshinhDT)--}}
-{{--                            <option value="{{$dshinhDT->id}}"  {{$canBo->bang1 == $dshinhDT->id ? 'selected' : ''}}>{{$dshinhDT->ten}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Ngành CM thứ 2</label>--}}
-{{--                    <select class="form-control select2" name="chuyen_nganh_id_2">--}}
-{{--                        @foreach($chuyenNganhDT as $dschuyenNganhDT)--}}
-{{--                            <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->chuyen_nganh_id_2 == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>--}}
-{{--                        @endforeach--}}
-
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Trình độ</label>--}}
-{{--                    <select class="form-control select2" name="trinh_do_2">--}}
-{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
-{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->trinh_do_2 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
-{{--                        @endforeach--}}
-
-
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Bằng</label>--}}
-{{--                    <select class="form-control select2" name="bang2">--}}
-{{--                        @foreach($hinhThucDaoTao as $dshinhDT)--}}
-{{--                            <option value="{{$dshinhDT->id}}"  {{$canBo->bang2 == $dshinhDT->id ? 'selected' : ''}}>{{$dshinhDT->ten}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-            <h4 style="color: blue;font-weight: bold">IV. Đào tạo bồi dưỡng</h4>
+        <div class="box-body">
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail1">Trình độ phổ thông</label>
@@ -234,31 +183,21 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Ngôn ngữ khác</label>--}}
-{{--                    <select class="form-control select2" name="ngon_ngu">--}}
-{{--                        @foreach($ngoaiNgu as $dsngoaiNgu)--}}
-{{--                            <option value="{{$dsngoaiNgu->id}}"  {{$canBo->ngon_ngu == $dsngoaiNgu->id ? 'selected' : ''}}>{{$dsngoaiNgu->ten}}</option>--}}
-{{--                        @endforeach--}}
+        </div>
 
-{{--                    </select>--}}
 
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Trình độ:	</label>--}}
-{{--                    <select class="form-control select2" name="nhom_don_vi">--}}
-{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
-{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->chuyen_nganh_id_2 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
+    </div>
+    <div class="box box-danger" style="font-size: 12px;border-top-color: #119bea;">
+        <div class="box-header with-border">
+            <h3 class="box-title" style="color: #0a0a0a;font-weight: bold">V. Thông tin khác</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
 
-{{--                </div>--}}
-{{--            </div>--}}
-                <div class="row clearfix"></div>
-            <h4 style="color: blue;font-weight: bold">V. Thông tin khác</h4>
+        <div class="box-body">
             <div class="col-md-3 mt-4" >
                 <div class="form-group">
                     <input type="checkbox"  name="la_doan_vien" {{ isset($canBo) && $canBo->ngay_vao_doan ? 'checked' : ''}}  value="1" >&emsp;<label for="la_doan_vien"> Là đoàn viên	</label>
@@ -333,6 +272,13 @@
                     <input type="text" class="form-control" name="noi_vao_dang" value="{{$canBo->noi_vao_dang}}"
                            placeholder=" " >
 
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Số thẻ đảng</label>
+                    <input type="text" class="form-control" name="so_the_dang" value="{{$canBo->so_the_dang}}"
+                           placeholder="Số thẻ đảng " >
                 </div>
             </div>
 
@@ -499,16 +445,16 @@
                 </div>
             </div>
 
-{{--            <div class="col-md-3" >--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="exampleInputEmail1">Đơn vị</label>--}}
-{{--                    <select class="form-control select2" name="nhom_don_vi">--}}
-{{--                        <option value="1">Văn phòng Quận ủy - Quận ủy Nam Từ Liêm</option>--}}
-{{--                        <option value="1">Phật giáo</option>--}}
-{{--                    </select>--}}
+            {{--            <div class="col-md-3" >--}}
+            {{--                <div class="form-group">--}}
+            {{--                    <label for="exampleInputEmail1">Đơn vị</label>--}}
+            {{--                    <select class="form-control select2" name="nhom_don_vi">--}}
+            {{--                        <option value="1">Văn phòng Quận ủy - Quận ủy Nam Từ Liêm</option>--}}
+            {{--                        <option value="1">Phật giáo</option>--}}
+            {{--                    </select>--}}
 
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
 
 
@@ -551,6 +497,21 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Hình thức tuyển</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="hinh_thuc_tuyen">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($hinhThucTuyen as $dshinhThucTuyen)
+                                <option value="{{$dshinhThucTuyen->id}}"  {{$canBo->hinh_thuc_tuyen == $dshinhThucTuyen->id ? 'selected' : ''}}>{{$dshinhThucTuyen->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
 
 
             <div class="row clearfix"></div>
@@ -585,8 +546,111 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Trạng thái cán bộ</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="trang_thai_cb">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($trangThai as $dstrangThai)
+                                <option value="{{$dstrangThai->id}}"  {{$canBo->trang_thai_cb == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
+    </div>
+    <div class="col-md-12" style="background: white;font-size: 12px">
+        <div class="row">
+
+
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Trình độ</label>--}}
+{{--                    <select class="form-control select2" name="trinh_do_1">--}}
+{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
+{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->trinh_do_1 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Bằng</label>--}}
+{{--                    <select class="form-control select2" name="bang1">--}}
+{{--                        @foreach($hinhThucDaoTao as $dshinhDT)--}}
+{{--                            <option value="{{$dshinhDT->id}}"  {{$canBo->bang1 == $dshinhDT->id ? 'selected' : ''}}>{{$dshinhDT->ten}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Ngành CM thứ 2</label>--}}
+{{--                    <select class="form-control select2" name="chuyen_nganh_id_2">--}}
+{{--                        @foreach($chuyenNganhDT as $dschuyenNganhDT)--}}
+{{--                            <option value="{{$dschuyenNganhDT->id}}"  {{$canBo->chuyen_nganh_id_2 == $dschuyenNganhDT->id ? 'selected' : ''}}>{{$dschuyenNganhDT->ten}}</option>--}}
+{{--                        @endforeach--}}
+
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Trình độ</label>--}}
+{{--                    <select class="form-control select2" name="trinh_do_2">--}}
+{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
+{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->trinh_do_2 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
+{{--                        @endforeach--}}
+
+
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Bằng</label>--}}
+{{--                    <select class="form-control select2" name="bang2">--}}
+{{--                        @foreach($hinhThucDaoTao as $dshinhDT)--}}
+{{--                            <option value="{{$dshinhDT->id}}"  {{$canBo->bang2 == $dshinhDT->id ? 'selected' : ''}}>{{$dshinhDT->ten}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Ngôn ngữ khác</label>--}}
+{{--                    <select class="form-control select2" name="ngon_ngu">--}}
+{{--                        @foreach($ngoaiNgu as $dsngoaiNgu)--}}
+{{--                            <option value="{{$dsngoaiNgu->id}}"  {{$canBo->ngon_ngu == $dsngoaiNgu->id ? 'selected' : ''}}>{{$dsngoaiNgu->ten}}</option>--}}
+{{--                        @endforeach--}}
+
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3" >--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="exampleInputEmail1">Trình độ:	</label>--}}
+{{--                    <select class="form-control select2" name="nhom_don_vi">--}}
+{{--                        @foreach($congViecChuyenMon as $dscongViecChuyenMon)--}}
+{{--                            <option value="{{$dscongViecChuyenMon->id}}"  {{$canBo->chuyen_nganh_id_2 == $dscongViecChuyenMon->id ? 'selected' : ''}}>{{$dscongViecChuyenMon->ten}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
 
 
 {{--            <div class="col-md-3" >--}}
@@ -605,11 +669,13 @@
 
         </div>
     </div>
-    @can(\App\Common\AllPermission::suaCanBo())
-        <div class="form-group">
-            <div class="col-md-3 col-sm">
-                <button type="submit" form="form2" class="btn btn-primary"><i class="fa fa-check-square-o" ></i> Cập nhật</button>
+    <div class="box-footer">
+        @can(\App\Common\AllPermission::suaCanBo())
+            <div class="form-group">
+                <div class="col-md-3 col-sm">
+                    <button type="submit" form="form2" class="btn btn-primary"><i class="fa fa-check-square-o" ></i> Cập nhật</button>
+                </div>
             </div>
-        </div>
-    @endcan
+        @endcan
+    </div>
 </form>
