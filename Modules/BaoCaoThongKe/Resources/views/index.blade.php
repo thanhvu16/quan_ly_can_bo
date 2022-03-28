@@ -124,6 +124,46 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td class="text-center">9</td>
+                                        <td>08-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=8') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">10</td>
+                                        <td>09-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=10') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">11</td>
+                                        <td>10-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=5') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">12</td>
+                                        <td>11-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=7') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">13</td>
+                                        <td>12-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=9') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
