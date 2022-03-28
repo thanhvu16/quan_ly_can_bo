@@ -12,6 +12,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
+                            <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -23,7 +24,6 @@
                                         style="font-size: 14px">{{isset($chinhSachfisst) ? 'Sửa chi trả chính sách' : 'Thêm chi trả chính sách'}}</span></a>
                             </div>
                             <div class="col-md-6 text-right">
-
                             </div>
                         </div>
                     </div>

@@ -34,8 +34,9 @@ class CoCauToChucController extends Controller
         $nhom_don_vi = NhomDonVi::wherenull('deleted_at')->get();
 
         $donViCapXa = ToChuc::whereNotNull('cap_xa')->select('id', 'ten_don_vi')->get();
+        $title = 'Nghiệp vụ quản lý cán bộ';
 
-        return view('admin::to-chuc.danh_sach', compact('ds_donvi','nhom_don_vi', 'donViCapXa'));
+        return view('admin::to-chuc.danh_sach', compact('ds_donvi','nhom_don_vi', 'donViCapXa','title'));
     }
 
 

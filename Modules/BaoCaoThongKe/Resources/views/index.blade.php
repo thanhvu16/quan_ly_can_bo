@@ -4,13 +4,23 @@
     <section class="content">
 
         <div class="nav-tabs-custom">
+            <div class="box-header with-border">
+                <div class="col-md-6">
+                    <div class="row">
+                        <h4 class="text-uppercase">Thống kê cán bộ tại {{ auth::user()->donVi->ten_don_vi ?? TITLE_APP }}</h4>
+                    </div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
+                </div>
+            </div>
             <div class="tab-content">
                 <div
                     class="tab-pane {{ Request::get('tab') == 'tab_1' || empty(Request::get('tab')) ? 'active' : null }}"
                     id="tab_1">
                     <div class="row">
                         <div class="col-md-6 table-responsive">
-                            <h4 class="text-uppercase">Đơn vị</h4>
+{{--                            <h4 class="text-uppercase">Đơn vị</h4>--}}
                             <table class="table table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>

@@ -11,7 +11,8 @@
                                 <h4 style="color: #0a0a0a;font-weight: bold">Quá trình đào tạo (Đào tạo, Bồi dưỡng nghiệp vụ,Chính trị,Tin học..)</h4>
                             </div>
                         </div>
-                        <div class="col-md-6 text-right">
+                        <div class="col-md-6 text-right mt-4">
+                            <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
                         </div>
                     </div>
                     <!-- /.box-header -->

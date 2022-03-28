@@ -91,7 +91,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Route::is('tra-cuu.index') ? 'active' : '' }}"><a href="{{route('tra-cuu.index')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nhanh</a></li>
+                    <li class="{{ Route::is('tra-cuu.index') ? 'active' : '' }}"><a href="{{route('tra-cuu.index','tracuu=5')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nhanh</a></li>
                     <li class="{{ Route::is('nangCao') ? 'active' : '' }}"><a href="{{route('nangCao')}}"><i class="fa fa-circle-o"></i>Tìm kiếm nâng cao</a></li>
                 </ul>
             </li>

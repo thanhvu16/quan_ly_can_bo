@@ -23,7 +23,8 @@ class VanBanController extends Controller
         {
             $vanBanfisst = VanBan::where('id',$id)->first();
         }
-        return view('chinhsach::van-ban-quy-dinh.index',compact('vanBan','vanBanfisst'));
+        $title = 'Chế độ chính sách > Văn bản quy định';
+        return view('chinhsach::van-ban-quy-dinh.index',compact('vanBan','vanBanfisst','title'));
     }
 
     /**

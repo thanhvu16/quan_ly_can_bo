@@ -40,8 +40,9 @@ class BaoCaoThongKeController extends Controller
         if ($id) {
             $donViBaoCao = ToChuc::with('parentToChuc')->where('id', $id)->first();
         }
+        $title = 'Tổng hợp, báo cáo > Báo cáo thống kê ';
 
-        return view('baocaothongke::index', compact('danhSachToChuc', 'donViBaoCao'));
+        return view('baocaothongke::index', compact('danhSachToChuc', 'donViBaoCao','title'));
     }
 
     /**

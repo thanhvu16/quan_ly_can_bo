@@ -175,6 +175,14 @@ class ThemCanBoController extends Controller
         $chuyenCongTac = $request->get('chuyen_cong_tac') ?? null;
         $veHuu = $request->get('ve_huu') ?? null;
         $tuoiDang = $request->get('tuoidang') ?? null;
+        $title = null;
+        if($all == 1)
+        {
+            $title = 'Quản lý đảng viên  > hồ sơ đảng viên';
+
+        }elseif($dangVienC == 1){
+            $title = 'Quản lý đảng viên  > hồ sơ đảng viên';
+        }
 
 
 
@@ -311,7 +319,7 @@ class ThemCanBoController extends Controller
         $danhSachToChuc = ToChuc::all();
 
         return view('themcanbo::index',
-            compact('danhSach', 'danhSachToChuc', 'tenDonVi'));
+            compact('danhSach', 'danhSachToChuc', 'tenDonVi','title'));
     }
     public function tuoiDang(Request $request)
     {

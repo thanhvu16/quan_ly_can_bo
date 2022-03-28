@@ -25,7 +25,8 @@ class ChinhSachController extends Controller
         {
             $chinhSachfisst = ChinhSach::where('id',$id)->first();
         }
-        return view('chinhsach::chinh-sach.index',compact('chinhSach','chinhSachfisst'));
+        $title = 'Chế độ chính sách > Các chính sách';
+        return view('chinhsach::chinh-sach.index',compact('chinhSach','chinhSachfisst','title'));
     }
 
     /**

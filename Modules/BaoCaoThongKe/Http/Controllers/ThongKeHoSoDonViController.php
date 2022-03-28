@@ -46,8 +46,9 @@ class ThongKeHoSoDonViController extends Controller
                 $toChuc->ve_huu = $data['ve_huu'];
             }
         }
+        $title = 'Tổng hợp, báo cáo > Thống kê chung ';
 
-        return view('baocaothongke::don-vi.index', compact('danhSachToChuc'));
+        return view('baocaothongke::don-vi.index', compact('danhSachToChuc','title'));
     }
 
     public function getDachSachCon($id)

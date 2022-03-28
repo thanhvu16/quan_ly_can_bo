@@ -26,7 +26,8 @@ class ChitraChinhSachController extends Controller
         {
             $chinhSachfisst = ChiTra::where('id',$id)->first();
         }
-        return view('chinhsach::chi-tra.index',compact('doiTuongChinhSach','chinhSachfisst','chinhSach'));
+        $title = 'Chế độ chính sách > Quản lý chi trả chính sách';
+        return view('chinhsach::chi-tra.index',compact('doiTuongChinhSach','chinhSachfisst','chinhSach','title'));
     }
 
     /**

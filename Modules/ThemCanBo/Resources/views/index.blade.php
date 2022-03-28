@@ -17,6 +17,9 @@
                                     </a>
                                 </h4>
                             </div>
+                            <div class="col-md-6 text-right mt-4">
+                                <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 collapse {{ Request::get('search') ? 'in' : null }}" id="collapse-tim-kiem-can-bo">

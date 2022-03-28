@@ -347,6 +347,24 @@ $(document).ready(function(){
     }, 5000);
 
 });
+$(document).ready(function(){
+
+    $.ajax({
+        url: APP_URL + '/lay-thong-bao',
+        type: 'GET',
+
+    }).done(function (res) {
+        if(res.soThongBao > 0)
+        {
+            $('.so-thong-bao').html(res.soThongBao);
+        } else {
+            $('.so-thong-bao').html(0);
+        }
+    }).fail(function (err) {
+        toastr['error'](err.message, 'Lỗi hệ thống')    ;
+    });
+
+});
 
 
 // remove van ban den

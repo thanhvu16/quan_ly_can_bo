@@ -4,19 +4,28 @@
     <section class="content">
 
         <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li class="{{ Request::get('tab') == 'tab_1' || empty(Request::get('tab')) ? 'active' : null }}">
-                    <a href="{{ route('don-vi-to-chuc.index') }}">
-                        <i class="fa fa-tasks"></i> Danh sách
-                    </a>
-                </li>
-                @can('thêm người dùng')
-                    <li class="{{ Request::get('tab') == 'tab_2' ? 'active' : null }}">
-                        <a href="{{ route('don-vi-to-chuc.create') }}">
-                            <i class="fa fa-plus"></i> Thêm đơn vị trực thuộc đơn vị</a>
-                    </li>
-                @endcan
-            </ul>
+
+                <div class="col-md-6">
+                        <ul class="nav nav-tabs">
+                        <li class="{{ Request::get('tab') == 'tab_1' || empty(Request::get('tab')) ? 'active' : null }}">
+                            <a href="{{ route('don-vi-to-chuc.index') }}">
+                                <i class="fa fa-tasks"></i> Danh sách
+                            </a>
+                        </li>
+                        @can('thêm người dùng')
+                            <li class="{{ Request::get('tab') == 'tab_2' ? 'active' : null }}">
+                                <a href="{{ route('don-vi-to-chuc.create') }}">
+                                    <i class="fa fa-plus"></i> Thêm đơn vị trực thuộc đơn vị</a>
+                            </li>
+                        @endcan
+                        </ul>
+
+                </div>
+                <div class="col-md-6 text-right mt-4">
+
+                    <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
+                </div>
+
             <div class="tab-content">
                 <div
                     class="tab-pane {{ Request::get('tab') == 'tab_1' || empty(Request::get('tab')) ? 'active' : null }}"

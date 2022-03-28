@@ -18,9 +18,10 @@
                                 </h3>
                             </div>
                         </div>
-                        <div class="col-md-6 text-right">
-                            {{--                            <i>(STT mà đỏ: <span style="color: red">văn bản đang xử lý</span>; STT màu xanh: <span style="color: blue">Văn bản chưa được phân</span>; STT màu đen: <span style="color: black">Văn bản đã hoàn thành</span>)</i>--}}
+                        <div class="col-md-6 text-right mt-4">
+                            <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
                         </div>
+
                     </div>
                     <!-- /.box-header -->
 

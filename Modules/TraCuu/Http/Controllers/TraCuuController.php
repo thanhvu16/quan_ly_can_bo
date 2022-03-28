@@ -103,8 +103,15 @@ class TraCuuController extends \App\Http\Controllers\Controller
             return Excel::download(new CanBoExort($danhSach, $totalRecord),
                 $fileName);
         }
+        if($request->tracuu==5)
+        {
+            $title = 'Tìm kiếm > Tìm kiếm nhanh ';
+        }else{
+            $title = 'Quản lý hồ sơ cán bộ > Hồ sơ cán bộ';
+        }
+
         return view('tracuu::index',
-            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2'));
+            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2','title'));
     }
 
     public function huyHieuDang(Request $request)
@@ -359,8 +366,9 @@ class TraCuuController extends \App\Http\Controllers\Controller
             return Excel::download(new CanBoExort($danhSach, $totalRecord),
                 $fileName);
         }
+        $title = 'Tìm kiếm > Tìm kiếm nâng cao';
         return view('tracuu::tim-kiem-nang-cao', compact('danhSach', 'chucVuDang', 'congViecChuyenMon', 'chucVuHienTai', 'phuCap',
-            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachPhongBan', 'donVi',
+            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachPhongBan', 'donVi','title',
             'trangThai', 'tonGiao', 'chuyenNganhDT', 'hinhThucDaoTao', 'bacLuong', 'cap2'));
     }
 

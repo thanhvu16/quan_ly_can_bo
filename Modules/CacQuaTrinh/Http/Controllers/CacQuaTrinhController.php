@@ -106,8 +106,35 @@ class CacQuaTrinhController extends \App\Http\Controllers\Controller
             return Excel::download(new CanBoExort($danhSach, $totalRecord),
                 $fileName);
         }
+        if ($request->dao_tao == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
+        } elseif ($request->ban_than == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Bản thân và công tác';
+        } elseif ($request->nuoc_ngoai == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Hoạt động nước ngoài';
+        } elseif ($request->luong == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình lương';
+        } elseif ($request->quoc_hoi == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Tham gia Quốc hội';
+        } elseif ($request->chuc_vu == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ';
+        } elseif ($request->dang == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ Đảng';
+        } elseif ($request->doan_the == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ đoàn thể';
+        } elseif ($request->tham_nien == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Phụ cấp thâm niên vượt khung';
+        } elseif ($request->phu_cap_khac == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Diễn biến phụ cấp khác';
+        } elseif ($request->nghien_cuu == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Nghiên cứu khoa học';
+        } elseif ($request->gia_dinh == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quan hệ gia đình';
+        } else {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
+        }
         return view('cacquatrinh::index',
-            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2'));
+            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2', 'title'));
     }
 
     public function capNhatQuaTrinhDaoTao($id, Request $request)
@@ -132,32 +159,58 @@ class CacQuaTrinhController extends \App\Http\Controllers\Controller
         $quaTrinhNghienCuu = QuaTrinhNghienCuu::where('users', $id)->get();
         $quaTrinhGiaDinh = QuaTrinhGiaDinh::where('users', $id)->get();
         $canBo = CanBo::where('id', $id)->first();
-
         if ($request->dao_tao == 1) {
-            return view('cacquatrinh::components.quaTrinhDaoTao', compact('quaTrinhDaoTao', 'canBo', 'chuyenNganhDT', 'hinhThucDaoTao', 'truongHoc', 'congViecChuyenMon'));
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
+        } elseif ($request->ban_than == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Bản thân và công tác';
+        } elseif ($request->nuoc_ngoai == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Hoạt động nước ngoài';
+        } elseif ($request->luong == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình lương';
+        } elseif ($request->quoc_hoi == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Tham gia Quốc hội';
+        } elseif ($request->chuc_vu == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ';
+        } elseif ($request->dang == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ Đảng';
+        } elseif ($request->doan_the == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Chức vụ đoàn thể';
+        } elseif ($request->tham_nien == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Phụ cấp thâm niên vượt khung';
+        } elseif ($request->phu_cap_khac == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Diễn biến phụ cấp khác';
+        } elseif ($request->nghien_cuu == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Nghiên cứu khoa học';
+        } elseif ($request->gia_dinh == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quan hệ gia đình';
+        } else {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
+        }
+        if ($request->dao_tao == 1) {
+            return view('cacquatrinh::components.quaTrinhDaoTao', compact('quaTrinhDaoTao', 'canBo', 'title', 'chuyenNganhDT', 'hinhThucDaoTao', 'truongHoc', 'congViecChuyenMon'));
 
         } elseif ($request->ban_than == 1) {
-            return view('cacquatrinh::components.banThan', compact('quaTrinhCongTac', 'canBo'));
+            return view('cacquatrinh::components.banThan', compact('quaTrinhCongTac', 'title', 'canBo'));
         } elseif ($request->nuoc_ngoai == 1) {
-            return view('cacquatrinh::components.nuocNgoai', compact('quaTrinhCongTac', 'canBo','quaTrinhNuocNgoai'));
+            return view('cacquatrinh::components.nuocNgoai', compact('quaTrinhCongTac', 'canBo', 'title', 'quaTrinhNuocNgoai'));
         } elseif ($request->luong == 1) {
-            return view('cacquatrinh::components.luong', compact('quaTrinhLuong', 'canBo','ngach','bacLuong','phuCap'));
+            return view('cacquatrinh::components.luong', compact('quaTrinhLuong', 'canBo', 'ngach', 'title', 'bacLuong', 'phuCap'));
         } elseif ($request->quoc_hoi == 1) {
-            return view('cacquatrinh::components.quocHoi', compact('quaTrinhQuocHoi', 'canBo'));
+            return view('cacquatrinh::components.quocHoi', compact('quaTrinhQuocHoi', 'title', 'canBo'));
         } elseif ($request->chuc_vu == 1) {
-            return view('cacquatrinh::components.chucVu', compact('quaTrinhChucVu', 'canBo'));
+            return view('cacquatrinh::components.chucVu', compact('quaTrinhChucVu', 'title', 'canBo'));
         } elseif ($request->dang == 1) {
-            return view('cacquatrinh::components.chucVuDang', compact('quaTrinhChucVuDang', 'canBo'));
+            return view('cacquatrinh::components.chucVuDang', compact('quaTrinhChucVuDang', 'title', 'canBo'));
         } elseif ($request->doan_the == 1) {
-            return view('cacquatrinh::components.chucVuDoan', compact('quaTrinhQuyHoachCanBo', 'canBo'));
+            return view('cacquatrinh::components.chucVuDoan', compact('quaTrinhQuyHoachCanBo', 'title', 'canBo'));
         } elseif ($request->tham_nien == 1) {
-            return view('cacquatrinh::components.thamNien', compact('quaTrinhVuotKhung', 'canBo'));
+            return view('cacquatrinh::components.thamNien', compact('quaTrinhVuotKhung', 'title', 'canBo'));
         } elseif ($request->phu_cap_khac == 1) {
-            return view('cacquatrinh::components.phuCapKhac', compact('quaTrinhPhuCapKhac', 'canBo'));
+            return view('cacquatrinh::components.phuCapKhac', compact('quaTrinhPhuCapKhac', 'title', 'canBo'));
         } elseif ($request->nghien_cuu == 1) {
-            return view('cacquatrinh::components.nghienCuu', compact('quaTrinhNghienCuu', 'canBo'));
+            return view('cacquatrinh::components.nghienCuu', compact('quaTrinhNghienCuu', 'title', 'canBo'));
         } elseif ($request->gia_dinh == 1) {
-            return view('cacquatrinh::components.giaDinh', compact('quaTrinhGiaDinh', 'canBo'));
+            return view('cacquatrinh::components.giaDinh', compact('quaTrinhGiaDinh', 'title', 'canBo'));
         } else {
             return redirect()->back();
         }

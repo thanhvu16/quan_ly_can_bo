@@ -18,14 +18,8 @@
                                 </h3>
                             </div>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <a href="#"><i class="fa fa-users"></i> Quản lý hồ sơ cán bộ</a> &ensp;>&ensp; <a href="#">Các quá trình</a>
-{{--                            <ol class="breadcrumb" style="padding: 0px 0px; margin-bottom: 0px;background-color: white">--}}
-{{--                                <li><a href="#"><i class="fa fa-dashboard"></i> Quản lý hồ sơ cán bộ</a></li>--}}
-{{--                                <li><a href="#">Các quá trình</a></li>--}}
-{{--                                <li class="active">General</li>--}}
-{{--                            </ol>--}}
-
+                        <div class="col-md-6 text-right mt-4">
+                            <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -51,7 +45,7 @@
                                     @elseif(Request::get('chuc_vu') == 1)
                                     {{route('chucVuQt','chuc_vu='.Request::get('chuc_vu'))}}
                                     @elseif(Request::get('dang') == 1)
-                                    {{route('quaTrinhCN',$data->id.'?dang='.Request::get('dang'))}}
+                                    {{route('quaTrinhCN','?dang='.Request::get('dang'))}}
                                     @elseif(Request::get('doan_the') == 1)
                                     {{route('doanThecn','doan_the='.Request::get('doan_the'))}}
                                     @elseif(Request::get('tham_nien') == 1)
@@ -119,7 +113,7 @@
                                     @elseif(Request::get('chuc_vu') == 1)
                                     {{route('chucVuQt','chuc_vu='.Request::get('chuc_vu'))}}
                                     @elseif(Request::get('dang') == 1)
-                                    {{route('quaTrinhCN',$data->id.'?dang='.Request::get('dang'))}}
+                                    {{route('quaTrinhCN','?dang='.Request::get('dang'))}}
                                     @elseif(Request::get('doan_the') == 1)
                                     {{route('doanThecn','doan_the='.Request::get('doan_the'))}}
                                     @elseif(Request::get('tham_nien') == 1)
