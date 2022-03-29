@@ -180,5 +180,26 @@ class CanBo extends Model
             ->orderBy('id', 'DESC')
             ->whereYear('created_at', date('Y'));
     }
+
+    public static function soDangVien($donViId = null, $laDangVien, $startDate, $endDate, $whereColumnName = null)
+    {
+        return  CanBo::whereNotNull($laDangVien)
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where(function ($query) use ($whereColumnName) {
+                if (!empty($whereColumnName)) {
+                    return $query->whereNotNull($whereColumnName);
+                }
+            })
+            ->where(function ($query) use ($startDate, $endDate) {
+                if (!empty($startDate)) {
+                    return $query->whereBetween('updated_at', [$startDate, $endDate]);
+                }
+            })
+            ->count();
+    }
 }
 

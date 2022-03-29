@@ -837,6 +837,15 @@ class CanBoController extends Controller
         $canBo->hoc_ham = $request->hoc_ham;
         $canBo->ky_luat_cao_nhat = $request->ky_luat_cao_nhat;
         $canBo->phan_loai_cb = $request->phan_loai_cb;
+        $canBo->dang_vien_tinh_khac_chuyen_den = $request->dang_vien_tinh_khac_chuyen_den ?? null;
+        $canBo->dang_vien_huyen_khac_trong_tinh = $request->dang_vien_huyen_khac_trong_tinh ?? null;
+        $canBo->phuc_hoi_dang_tich = $request->phuc_hoi_dang_tich ?? null;
+        $canBo->tu_tran = $request->tu_tran ?? null;
+        $canBo->khai_tru = $request->khai_tru ?? null;
+        $canBo->xoa_ten = $request->xoa_ten ?? null;
+        $canBo->xin_ra_khoi_dang = $request->xin_ra_khoi_dang ?? null;
+        $canBo->chuyen_di_tinh_khac = $request->chuyen_di_tinh_khac ?? null;
+        $canBo->chuyen_di_huyen_khac_trong_tinh = $request->chuyen_di_huyen_khac_trong_tinh ?? null;
         $canBo->save();
 
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity2')->with('success', 'cập nhật thành công !');

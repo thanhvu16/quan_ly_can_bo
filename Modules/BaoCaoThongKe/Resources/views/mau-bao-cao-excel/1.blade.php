@@ -22,7 +22,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
             THỐNG KÊ
             TĂNG, GIẢM ĐẢNG VIÊN
-            .....NĂM 20.....
+            .....NĂM {{ date('Y') }}.
         </th>
         <th
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
@@ -108,9 +108,9 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             1. Kết nạp
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['ket_nap']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['ket_nap']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['ket_nap']['ky_truoc'] > 0 ? ($data['ket_nap']['ky_nay'] * 100)/$data['ket_nap']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
@@ -126,27 +126,27 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             a. Tỉnh khác chuyển đến
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tinh_khac_chuyen_den']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tinh_khac_chuyen_den']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tinh_khac_chuyen_den']['ky_truoc'] > 0 ? ($data['tinh_khac_chuyen_den']['ky_nay'] * 100)/$data['tinh_khac_chuyen_den']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             b. Huyện khác trong tỉnh chuyển đến
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['huyen_khac_trong_tinh_chuyen_den']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['huyen_khac_trong_tinh_chuyen_den']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['huyen_khac_trong_tinh_chuyen_den']['ky_truoc'] > 0 ? ($data['huyen_khac_trong_tinh_chuyen_den']['ky_nay'] * 100)/$data['huyen_khac_trong_tinh_chuyen_den']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             3. Phục hồi đảng tịch
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['phuc_hoi_dang_tich']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['phuc_hoi_dang_tich']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['phuc_hoi_dang_tich']['ky_truoc'] > 0 ? ($data['phuc_hoi_dang_tich']['ky_nay'] * 100)/$data['phuc_hoi_dang_tich']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
@@ -162,27 +162,27 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             1. Từ trần
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tu_tran']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tu_tran']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['tu_tran']['ky_truoc'] > 0 ? ($data['tu_tran']['ky_nay'] * 100)/$data['tu_tran']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             2. Khai trừ
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['khai_tru']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['khai_tru']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['khai_tru']['ky_truoc'] > 0 ? ($data['khai_tru']['ky_nay'] * 100)/$data['khai_tru']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             3. Xóa tên
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xoa_ten']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xoa_ten']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xoa_ten']['ky_truoc'] > 0 ? ($data['xoa_ten']['ky_nay'] * 100)/$data['xoa_ten']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
@@ -198,9 +198,9 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             4. Xin ra khỏi Đảng
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xin_ra_khoi_dang']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xin_ra_khoi_dang']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['xin_ra_khoi_dang']['ky_truoc'] > 0 ? ($data['xin_ra_khoi_dang']['ky_nay'] * 100)/$data['xin_ra_khoi_dang']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
@@ -216,18 +216,18 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             <i>a. Chuyển đi tỉnh khác</i>
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_tinh_khac']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_tinh_khac']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_tinh_khac']['ky_truoc'] > 0 ? ($data['chuyen_di_tinh_khac']['ky_nay'] * 100)/$data['chuyen_di_tinh_khac']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             <i>b. Chuyển đi huyện khác trong tỉnh</i>
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_huyen_khac_trong_tinh']['ky_nay'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_huyen_khac_trong_tinh']['ky_truoc'] }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $data['chuyen_di_huyen_khac_trong_tinh']['ky_truoc'] > 0 ? ($data['chuyen_di_huyen_khac_trong_tinh']['ky_nay'] * 100)/$data['chuyen_di_huyen_khac_trong_tinh']['ky_truoc'] : 0 }}</td>
     </tr>
     <tr>
         <td
