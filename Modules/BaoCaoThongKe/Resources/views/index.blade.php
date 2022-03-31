@@ -126,9 +126,9 @@
                                     </tr>
                                     <tr>
                                         <td class="text-center">9</td>
-                                        <td>08-TINH (gửi in)</td>
+                                        <td>08B-TINH (gửi in)</td>
                                         <td class="text-center">
-                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=8') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=18') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
                                             </a>
                                         </td>
                                     </tr>
@@ -136,7 +136,7 @@
                                         <td class="text-center">10</td>
                                         <td>09-TINH (gửi in)</td>
                                         <td class="text-center">
-                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=10') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=9') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
                                             </a>
                                         </td>
                                     </tr>
@@ -144,23 +144,63 @@
                                         <td class="text-center">11</td>
                                         <td>10-TINH (gửi in)</td>
                                         <td class="text-center">
-                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=5') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=10') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="text-center">12</td>
-                                        <td>11-TINH (gửi in)</td>
+                                        <td>11A-TINH (gửi in)</td>
                                         <td class="text-center">
-                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=7') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=11') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="text-center">13</td>
-                                        <td>12-TINH (gửi in)</td>
+                                        <td>12A-TINH (gửi in)</td>
                                         <td class="text-center">
-                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=9') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=12') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">14</td>
+                                        <td>13-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=13') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">15</td>
+                                        <td>12B2-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=14') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">16</td>
+                                        <td>12C-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=15') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">17</td>
+                                        <td>9B-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=16') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">18</td>
+                                        <td>9C-TINH (gửi in)</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('xuat-bao-cao-thong-ke', Request::get('id').'&type=17') }}" class="btn-export-data"><i class="fa fa-file-excel-o"></i> Xuất Excel
                                             </a>
                                         </td>
                                     </tr>

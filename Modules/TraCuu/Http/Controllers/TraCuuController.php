@@ -44,12 +44,10 @@ class TraCuuController extends \App\Http\Controllers\Controller
 
         $danhSachPhongBan = null;
         if ($search || !empty($donViId)) {
-            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi','parent_id')->get();
-            if(!empty($donViId))
-            {
-                $donViCha = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi','parent_id')->first();
-                if($donViCha->parent_id == 0)
-                {
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi', 'parent_id')->get();
+            if (!empty($donViId)) {
+                $donViCha = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi', 'parent_id')->first();
+                if ($donViCha->parent_id == 0) {
                     $donViId = null;
                 }
             }
@@ -103,15 +101,14 @@ class TraCuuController extends \App\Http\Controllers\Controller
             return Excel::download(new CanBoExort($danhSach, $totalRecord),
                 $fileName);
         }
-        if($request->tracuu==5)
-        {
+        if ($request->tracuu == 5) {
             $title = 'Tìm kiếm > Tìm kiếm nhanh ';
-        }else{
+        } else {
             $title = 'Quản lý hồ sơ cán bộ > Hồ sơ cán bộ';
         }
 
         return view('tracuu::index',
-            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2','title'));
+            compact('danhSach', 'donVi', 'chucVuHienTai', 'danhSachPhongBan', 'cap2', 'title'));
     }
 
     public function huyHieuDang(Request $request)
@@ -368,8 +365,151 @@ class TraCuuController extends \App\Http\Controllers\Controller
         }
         $title = 'Tìm kiếm > Tìm kiếm nâng cao';
         return view('tracuu::tim-kiem-nang-cao', compact('danhSach', 'chucVuDang', 'congViecChuyenMon', 'chucVuHienTai', 'phuCap',
-            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachPhongBan', 'donVi','title',
+            'hopDongBienChe', 'kiemNhiemBietPhai', 'danhSachPhongBan', 'donVi', 'title',
             'trangThai', 'tonGiao', 'chuyenNganhDT', 'hinhThucDaoTao', 'bacLuong', 'cap2'));
+    }
+
+    public function quanLy(Request $request)
+    {
+        $hoTen = $request->get('ho_ten') ?? null;
+        $queQuan = $request->get('que_quan') ?? null;
+        $gioiTinh = $request->get('gioi_tinh') ?? null;
+        $donViId = $request->get('don_vi_id') ?? null;
+        $type = $request->get('type') ?? null;
+        if (empty($type)) {
+            return redirect()->back();
+        }
+        if ($type == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Cán bộ trung ương';
+        }
+        if ($type == 2) {
+            $title = 'Quản lý hồ sơ cán bộ  > cán bộ BTV thành ủy';
+        }
+        if ($type == 3) {
+            $title = 'Quản lý hồ sơ cán bộ  > cán bộ BTV thành ủy';
+        }
+
+        $cap2 = false;
+        if (auth::user()->hasRole(QUAN_TRI_HT) || auth::user()->donVi->parent_id == 0) {
+            $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+            $donVi = ToChuc::where('parent_id', $donViCap1->id)->select('id', 'ten_don_vi')->get();
+        } else {
+            $donVi = ToChuc::where('id', auth::user()->don_vi_id)->select('id', 'ten_don_vi')->get();
+            $donViId = auth::user()->don_vi_id;
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+            $cap2 = true;
+        }
+        $tenDonVi = auth::user()->donVi->ten_don_vi;
+        if (!empty($donViId)) {
+            $tenDonVi = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi')->first()->ten_don_vi;
+        }
+
+        $danhSach = CanBo::where(function ($query) use ($hoTen) {
+            if (!empty($hoTen)) {
+                return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+            }
+        })
+            ->where(function ($query) use ($queQuan) {
+                if (!empty($queQuan)) {
+                    return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($type) {
+                if ($type == 1) {
+                    return $query->where('trung_uong', 1);
+                }
+                if ($type == 2) {
+                    return $query->where('cb_btv_thanh_uy', 1);
+                }
+                if ($type == 3) {
+                    return $query->where('cb_btv_quan_uy', 1);
+                }
+
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
+                }
+            })
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->paginate(20);
+
+
+        $danhSachToChuc = ToChuc::all();
+
+        return view('tracuu::quanLy',
+            compact('danhSach', 'danhSachToChuc', 'tenDonVi', 'donVi', 'cap2', 'title'));
+    }
+
+    public function khenThuong(Request $request)
+    {
+        $hoTen = $request->get('ho_ten') ?? null;
+        $queQuan = $request->get('que_quan') ?? null;
+        $gioiTinh = $request->get('gioi_tinh') ?? null;
+        $donViId = $request->get('don_vi_id') ?? null;
+        $type = $request->get('type') ?? null;
+        $title = 'Khen thưởng';
+
+        $cap2 = false;
+        if (auth::user()->hasRole(QUAN_TRI_HT) || auth::user()->donVi->parent_id == 0) {
+            $donViCap1 = ToChuc::where('parent_id', 0)->select('id', 'ten_don_vi')->first();
+
+            $donVi = ToChuc::where('parent_id', $donViCap1->id)->select('id', 'ten_don_vi')->get();
+        } else {
+            $donVi = ToChuc::where('id', auth::user()->don_vi_id)->select('id', 'ten_don_vi')->get();
+            $donViId = auth::user()->don_vi_id;
+            $danhSachPhongBan = ToChuc::where('parent_id', $donViId)->select('id', 'ten_don_vi')->get();
+            $cap2 = true;
+        }
+        $tenDonVi = auth::user()->donVi->ten_don_vi;
+        if (!empty($donViId)) {
+            $tenDonVi = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi')->first()->ten_don_vi;
+        }
+
+        $danhSach = CanBo::where(function ($query) use ($hoTen) {
+            if (!empty($hoTen)) {
+                return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+            }
+        })
+            ->where(function ($query) use ($queQuan) {
+                if (!empty($queQuan)) {
+                    return $query->where('que_quan', 'LIKE', "%$queQuan%");
+                }
+            })
+            ->where(function ($query) use ($type) {
+                if ($type == 1) {
+                    return $query->where('trung_uong', 1);
+                }
+                if ($type == 2) {
+                    return $query->where('cb_btv_thanh_uy', 1);
+                }
+                if ($type == 3) {
+                    return $query->where('cb_btv_quan_uy', 1);
+                }
+
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
+                }
+            })
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->paginate(20);
+
+
+        $danhSachToChuc = ToChuc::all();
+
+        return view('tracuu::khenThuong',
+            compact('danhSach', 'danhSachToChuc', 'tenDonVi', 'donVi', 'cap2', 'title'));
     }
 
     /**

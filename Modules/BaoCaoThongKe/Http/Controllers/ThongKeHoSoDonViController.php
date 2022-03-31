@@ -9,7 +9,7 @@ use Modules\Admin\Entities\CanBo;
 use Modules\Admin\Entities\ToChuc;
 use Auth;
 
-class ThongKeHoSoDonViController extends Controller
+class ThongKeHoSoDonViController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.

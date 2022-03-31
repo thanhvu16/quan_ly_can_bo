@@ -666,6 +666,10 @@ class ThemCanBoController extends Controller
         $canBo->noi_o_hien_nay = $request->noi_o_hien_nay;
         $canBo->nghe_nghiep_khi_duoc_tuyen = $request->nghe_nghiep_khi_tuyen;
         $canBo->ngay_bat_dau_di_lam = !empty($request->ngay_bat_dau_di_lam) ? formatYMD($request->ngay_bat_dau_di_lam) : null;
+        $canBo->cb_btv_thanh_uy = $request->cb_btv_thanh_uy;
+        $canBo->cb_btv_quan_uy = $request->cb_btv_quan_uy;
+        $canBo->trung_uong = $request->trung_uong;
+
 
         $canBo->chuc_danh = $request->chuc_danh;
         $canBo->chuc_vu_hien_tai = $request->chuc_vu_hien_tai;

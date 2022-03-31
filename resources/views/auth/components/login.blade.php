@@ -32,7 +32,8 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
         .login-page {
-            background-color: #b1d5f4;;
+            background:url("hn2.jpg");
+            /*background-color: #b1d5f4;;*/
             /*background: url('hanoi-3609871.jpg');*/
             background-repeat: no-repeat;
             background-attachment: fixed;

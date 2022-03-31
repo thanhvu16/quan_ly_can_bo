@@ -183,6 +183,50 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Trạng thái cán bộ</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="trang_thai_cb">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($trangThai as $dstrangThai)
+                                <option value="{{$dstrangThai->id}}"  {{$canBo->trang_thai_cb == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Kiêm nhiệm biệt phái</label>
+                    <div class="form-group">
+                        <select class="form-control  select2"
+                                name="kiem_nhiem" id="kiem_nhiem">
+                            <option value="">--không--</option>
+                            @foreach($kiemNhiemBietPhai as $kiemnhiem)
+                                <option value="{{$kiemnhiem->id}}"  {{$canBo->kiem_nhiem_biet_phai == $kiemnhiem->id ? 'selected' : ''}}>{{$kiemnhiem->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail6">Hình thức tuyển</label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="hinh_thuc_tuyen">
+                            <option value="">--Lựa chọn--</option>
+                            @foreach($hinhThucTuyen as $dshinhThucTuyen)
+                                <option value="{{$dshinhThucTuyen->id}}"  {{$canBo->hinh_thuc_tuyen == $dshinhThucTuyen->id ? 'selected' : ''}}>{{$dshinhThucTuyen->ten}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -497,20 +541,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Hình thức tuyển</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="hinh_thuc_tuyen">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($hinhThucTuyen as $dshinhThucTuyen)
-                                <option value="{{$dshinhThucTuyen->id}}"  {{$canBo->hinh_thuc_tuyen == $dshinhThucTuyen->id ? 'selected' : ''}}>{{$dshinhThucTuyen->ten}}</option>
-                            @endforeach
-                        </select>
 
-                    </div>
-                </div>
-            </div>
 
 
 
@@ -546,20 +577,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3" >
-                <div class="form-group">
-                    <label for="exampleInputEmail6">Trạng thái cán bộ</label>
-                    <div class="form-group">
-                        <select class="form-control select2" name="trang_thai_cb">
-                            <option value="">--Lựa chọn--</option>
-                            @foreach($trangThai as $dstrangThai)
-                                <option value="{{$dstrangThai->id}}"  {{$canBo->trang_thai_cb == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>
-                            @endforeach
-                        </select>
 
-                    </div>
-                </div>
-            </div>
 
         </div>
 

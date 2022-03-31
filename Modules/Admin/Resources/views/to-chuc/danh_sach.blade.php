@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-6 text-right mt-4">
 
-                    <a href="/"><i class="fa fa-home"> Trang chủ > </i></a>  <span style="font-size: 12px">{{isset($title) ? $title : '' }}</span>
+                    <a href="/"><i class="fa fa-home"> Trang chủ > </i></a> >  <a style="font-size: 12px" href="{{route('don-vi-to-chuc.index')}}">Nghiệp vụ quản lý cán bộ </a>
                 </div>
 
             <div class="tab-content">

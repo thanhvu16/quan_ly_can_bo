@@ -555,6 +555,9 @@
     function showModal17() {
         $("#myModal17").modal('show');
     }
+    function showModal18() {
+        $("#myModal18").modal('show');
+    }
 </script>
 </body>
 </html>

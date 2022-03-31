@@ -150,6 +150,56 @@ class CanBoController extends Controller
 
         return $arayEcabinet;
     }
+    public function quanLY(Request $request)
+    {
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+        $arayEcabinet = array();
+
+        foreach ($donVi as $key => $data) {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
+            if($request->type == 1 )
+            {
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="can-bo-thuoc-dien-trung-uong-quan-ly?don_vi=' . $data->id .  '&type=' . $request->type . '">' . $data->ten_don_vi . '</a>';
+
+            }elseif ($request->type == 2)
+            {
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="can-bo-thuoc-dien-thanh-uy-quan-ly?don_vi=' . $data->id .'&type=' . $request->type .  '">' . $data->ten_don_vi . '</a>';
+
+            }else{
+                $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="can-bo-thuoc-dien-quan-uy-quan-ly?don_vi=' . $data->id .'&type=' . $request->type .  '">' . $data->ten_don_vi . '</a>';
+
+            }
+
+        }
+
+
+        return $arayEcabinet;
+    }
+    public function khenThuong(Request $request)
+    {
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+        $arayEcabinet = array();
+
+        foreach ($donVi as $key => $data) {
+            $arayEcabinet[$key]['id'] = $data->id;
+            $arayEcabinet[$key]['pid'] = (auth::user()->donVi->parent_id != 0 && $data->parent_id != auth::user()->don_vi_id) ? 0 : $data->parent_id;
+            $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="khen-thuong-can-bo?don_vi=' . $data->id .'">' . $data->ten_don_vi . '</a>';
+        }
+
+
+        return $arayEcabinet;
+    }
 
     public function getlistcb4(Request $request)
     {
@@ -204,7 +254,7 @@ class CanBoController extends Controller
                 $url = 'nghien_cuu=1';
                 $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="nghien-cuu?don_vi=' . $data->id . '&' . $url . '">' . $data->ten_don_vi . '</a>';
 
-            }  elseif ($request->luong == 1) {
+            } elseif ($request->luong == 1) {
                 $url = 'luong=1';
                 $arayEcabinet[$key]['permissionValue'] = '<a style="font-weight: bold" href="qua-trinh-luong?don_vi=' . $data->id . '&' . $url . '">' . $data->ten_don_vi . '</a>';
 
@@ -329,7 +379,7 @@ class CanBoController extends Controller
         canPermission(AllPermission::xemCanBo());
 
         $canBo = CanBo::with('hinhThucTuyen')->where('id', $id)->first();
-        $canBoDV = CanBo::where('don_vi_id', $canBo->don_vi_id)->orderBy('ho_ten','desc')->get();
+        $canBoDV = CanBo::where('don_vi_id', $canBo->don_vi_id)->orderBy('ho_ten', 'desc')->get();
 
 
         $donViChuQuan = ToChuc::where('id', $canBo->donVi->parent_id)->select('id', 'ten_don_vi')->first();
@@ -375,7 +425,8 @@ class CanBoController extends Controller
         $quaTrinhQuocHoi = QuaTrinhQuocHoi::where('users', $id)->get();
         $quaTrinhChucVuDang = QuaTrinhChucVuDang::where('users', $id)->get();
         $quaTrinhChucVu = QuaChucVu::where('users', $id)->get();
-        $quaTrinhQuyHoachCanBo = QuaTrinhDoan::where('users', $id)->get();
+        $quaTrinhDoan = QuaTrinhDoan::where('users', $id)->get();
+        $quaTrinhQuyHoachCanBo = QuaTrinhQuyHoachCanBo::where('users', $id)->get();
         $quaTrinhKiemNhiemBietphai = QuaTrinhKiemNhiemBietPhai::where('users', $id)->get();
         $quaTrinhVuotKhung = QuaTrinhVuotKhung::where('users', $id)->get();
         $quaTrinhPhuCapKhac = QuaTrinhPhuCapKhac::where('users', $id)->get();
@@ -387,6 +438,7 @@ class CanBoController extends Controller
         $quaTrinhGiaDinh = QuaTrinhGiaDinh::where('users', $id)->get();
         $quaTrinhNghienCuu = QuaTrinhNghienCuu::where('users', $id)->get();
         $quaTrinhChuyenDonVi = QuaTrinhChuyenDonVi::where('users', $id)->get();
+        $kiemNhiemBietPhai = KiemNhiemBietPhai::orderBy('ten', 'asc')->get();
 
         $truongHoc = TruongHoc::orderBy('ten', 'asc')->get();
         $nhiemKy = NhiemKy::orderBy('ten', 'asc')->get();
@@ -399,8 +451,8 @@ class CanBoController extends Controller
             , 'tiengAnh', 'ngoaiNgu', 'chucVuDang', 'quanHam', 'danhHieu', 'doiTuongQuanLy', 'hinhThucDaoTao', 'hinhThucTuyen', 'trangThai', 'quaTrinhNghienCuu'
             , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc', 'quaTrinhQuocHoi'
             , 'quaTrinhLuong', 'quaTrinhChucVu', 'quaTrinhChucVuDang', 'quaTrinhQuyHoachCanBo', 'nhiemKy', 'quaTrinhBienCheHopDong', 'quaTrinhKiemNhiemBietphai'
-            , 'kiemNhiem', 'loaiCanBo', 'quaTrinhKhenThuong', 'quaTrinhKyLuat', 'quaTrinhBaoHiem', 'quaTrinhVeHuu', 'quaTrinhChuyenDonVi'
-            , 'tinHoc', 'donViChuQuan','canBoDV'));
+            , 'kiemNhiem', 'loaiCanBo', 'quaTrinhKhenThuong', 'quaTrinhKyLuat', 'quaTrinhBaoHiem', 'quaTrinhVeHuu', 'quaTrinhChuyenDonVi', 'kiemNhiemBietPhai'
+            , 'tinHoc', 'donViChuQuan', 'canBoDV', 'quaTrinhDoan'));
 
     }
 
@@ -580,7 +632,9 @@ class CanBoController extends Controller
         $daoTao->noi_dung = $request->noi_dung;
         $daoTao->type = $request->type;
         $daoTao->save();
-
+        if ($request->cap_nhat_qua_trinh == 1) {
+            return redirect()->route('CNkhenThuong', $canBo->id )->with('success', 'cập nhật thành công !');
+        }
         return redirect()->route('canBoDetail', $canBo->id . '?activity=activity7')->with('success', 'cập nhật thành công !');
     }
 
@@ -673,6 +727,23 @@ class CanBoController extends Controller
 
     }
 
+    public function quaTrinhQuyHoachCanBo(Request $request, $id)
+    {
+        $canBo = CanBo::where('id', $id)->first();
+        $daoTao = new QuaTrinhQuyHoachCanBo();
+        $daoTao->ngay_quyet_dinh = !empty($request->ngay_quyet_dinh) ? formatYMD($request->ngay_quyet_dinh) : null;
+        $daoTao->users = $canBo->id;
+        $daoTao->chuc_vu = $request->chuc_vu;
+        $daoTao->save();
+
+        if ($request->cap_nhat_qua_trinh == 1) {
+            return redirect()->route('capNhatQHCB', $canBo->id . '?quy_hoachcb=1')->with('success', 'cập nhật thành công !');
+        }
+
+        return redirect()->route('canBoDetail', $canBo->id . '?activity=activity5')->with('success', 'cập nhật thành công !');
+
+    }
+
     public function quaTrinhDaoTao(Request $request, $id)
     {
         $canBo = CanBo::where('id', $id)->first();
@@ -744,8 +815,7 @@ class CanBoController extends Controller
         $canBo->trung_uong_quan_ly = $request->trung_uong_quan_ly;
         $canBo->lam_cong_tac_quan_ly = $request->lam_cong_tac_quan_ly;
         $canBo->save();
-        if($multiFiles)
-        {
+        if ($multiFiles) {
             if (!File::exists($uploadPath)) {
                 File::makeDirectory($uploadPath, 0777, true, true);
             }
@@ -863,6 +933,10 @@ class CanBoController extends Controller
         $canBo->nghe_nghiep_truoc_khi_tuyen = $request->nghe_nghiep_truoc_khi_tuyen;
         $canBo->dan_toc = $request->dan_toc;
         $canBo->ton_giao = $request->ton_giao;
+        $canBo->kiem_nhiem_biet_phai = $request->kiem_nhiem;
+        $canBo->cb_btv_thanh_uy = $request->cb_btv_thanh_uy;
+        $canBo->cb_btv_quan_uy = $request->cb_btv_quan_uy;
+        $canBo->trung_uong = $request->trung_uong;
 
         $canBo->ngay_vao_don_vi = !empty($request->ngay_vao_don_vi) ? formatYMD($request->ngay_vao_don_vi) : null;
         $canBo->ngay_bo_nhiem_ngach = !empty($request->ngay_bo_nhiem_ngach) ? formatYMD($request->ngay_bo_nhiem_ngach) : null;

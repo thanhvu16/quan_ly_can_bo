@@ -95,10 +95,11 @@
 </li>
 
 
-<li class="treeview {{ Route::is('thongtinhs') || Route::is('quaTrinhCN') || Route::is('capNhatQuaTrinhDaoTao')|| Route::is('giaDinh')|| Route::is('capNhatGiaDinh')
+<li class="treeview {{ Route::is('thongtinhs') || Route::is('quaTrinhCN') || Route::is('capNhatQuaTrinhDaoTao')|| Route::is('giaDinh')|| Route::is('capNhatGiaDinh')|| Route::is('quyhoachcbb')|| Route::is('capNhatQHCB') ||  Route::is('capNhatDaoTao')
  || Route::is('nghienCuu')|| Route::is('capNhatNghienCuu')|| Route::is('daoTao')|| Route::is('capNhatDaoTao') || Route::is('nuocNgoai') ||  Route::is('capNhatnuocNgoai')
  || Route::is('banThan') ||  Route::is('capNhatbanThan')|| Route::is('luong') ||  Route::is('capNhatLuong') || Route::is('quocHoi') || Route::is('phuCapCn') || Route::is('capNhatPhuCapCn')
- ||  Route::is('capNhatQuocHoi')||  Route::is('chucVuQt')||  Route::is('capNhatChucVuQt') || Route::is('capNhatThamNien') ||  Route::is('thamNien') || Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')    ? 'active menu-open' : '' }}  ">
+ ||  Route::is('capNhatQuocHoi')||  Route::is('chucVuQt')||  Route::is('capNhatChucVuQt') || Route::is('capNhatThamNien')
+ ||  Route::is('thamNien') || Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')||  Route::is('quanUyQuanLy')||  Route::is('thanhUyQuanLy')||  Route::is('trungUongQuanLy')    ? 'active menu-open' : '' }}  ">
     <a href="#">
         <i class="fa  fa-users"></i> <span>Quản lý hồ sơ cán bộ</span>
         <span class="pull-right-container">
@@ -107,16 +108,20 @@
     </a>
     <ul class="treeview-menu">
         <li class="{{ Route::is('thongtinhs')  ? 'active' : '' }}"><a href="{{ route('thongtinhs') }}"><i class="fa fa-circle-o"></i>Hồ sơ cán bộ</a></li>
+        <li class="{{ Route::is('trungUongQuanLy')  ? 'active' : '' }}"><a href="{{ route('trungUongQuanLy','type=1') }}"><i class="fa fa-circle-o"></i>Cán bộ trung ương</a></li>
+        <li class="{{ Route::is('thanhUyQuanLy')  ? 'active' : '' }}"><a href="{{ route('thanhUyQuanLy','type=2') }}"><i class="fa fa-circle-o"></i>Cán bộ BTV thành ủy</a></li>
+        <li class="{{ Route::is('quanUyQuanLy')  ? 'active' : '' }}"><a href="{{ route('quanUyQuanLy','type=3') }}"><i class="fa fa-circle-o"></i>Cán bộ BTV quận ủy</a></li>
         <li class="treeview {{ Route::is('quaTrinhCN') || Route::is('capNhatQuaTrinhDaoTao') || Route::is('giaDinh')|| Route::is('capNhatGiaDinh') || Route::is('nghienCuu')
 || Route::is('capNhatNghienCuu')|| Route::is('daoTao')|| Route::is('capNhatDaoTao') || Route::is('banThan') ||  Route::is('capNhatbanThan')||  Route::is('chucVuQt')||  Route::is('capNhatChucVuQt')
  || Route::is('nuocNgoai') ||  Route::is('capNhatnuocNgoai') || Route::is('luong') ||  Route::is('capNhatLuong')  || Route::is('quocHoi') || Route::is('capNhatDoanThecn') ||  Route::is('doanThecn')
- ||  Route::is('capNhatQuocHoi')|| Route::is('phuCapCn') || Route::is('capNhatPhuCapCn') || Route::is('capNhatThamNien') ||  Route::is('thamNien') ||  Route::is('doanThecn')     ? 'active menu-open ' : '' }}">
+ ||  Route::is('capNhatQuocHoi')|| Route::is('phuCapCn') || Route::is('capNhatPhuCapCn') || Route::is('quyhoachcbb')|| Route::is('capNhatQHCB') ||  Route::is('capNhatDaoTao') || Route::is('capNhatThamNien') ||  Route::is('thamNien') ||  Route::is('doanThecn')     ? 'active menu-open ' : '' }}">
             <a href="#"><i class="fa fa-circle-o"></i> Các quá trình
                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu {{ Route::is('quaTrinhCN') || Route::is('giaDinh') || Route::is('nghienCuu')|| Route::is('daoTao')|| Route::is('banThan')|| Route::is('luong')
-        || Route::is('nuocNgoai') || Route::is('quocHoi') || Route::is('chucVuQt') || Route::is('phuCapCn')|| Route::is('thamNien')  ? 'active menu-open' : '' }}" >
-                <li class="{{ Route::is('daoTao') ||   Route::is('capNhatDaoTao')   ? 'active' : '' }}"><a href="{{route('daoTao','dao_tao=1')}}"><i class="fa fa-circle-o"></i> Quá trình đào tạo</a></li>
+        || Route::is('nuocNgoai') || Route::is('quocHoi') || Route::is('chucVuQt') || Route::is('phuCapCn')|| Route::is('thamNien')|| Route::is('quyhoachcbb')  ? 'active menu-open' : '' }}" >
+                <li class="{{ Route::is('banThan') ||  Route::is('capNhatDaoTao')  ? 'active' : '' }}"><a href="{{route('banThan','ban_than=1')}}"><i class="fa fa-circle-o"></i>Quá trình đào tạo</a></li>
+                <li class="{{ Route::is('quyhoachcbb') ||   Route::is('capNhatQHCB')   ? 'active' : '' }}"><a href="{{route('quyhoachcbb','quy_hoachcb=1')}}"><i class="fa fa-circle-o"></i> Quá trình quy hoạch CB</a></li>
                 <li class="{{ Route::is('banThan') ||  Route::is('capNhatbanThan')  ? 'active' : '' }}"><a href="{{route('banThan','ban_than=1')}}"><i class="fa fa-circle-o"></i> Bản thân và công tác</a></li>
                 <li class="{{ Route::is('nuocNgoai') || Route::is('capNhatnuocNgoai')  ? 'active' : '' }}"><a href="{{route('nuocNgoai','nuoc_ngoai=1')}}"><i class="fa fa-circle-o"></i> Hoạt động nước ngoài</a></li>
                 <li class="{{ Route::is('luong') || Route::is('capNhatLuong')  ? 'active' : '' }}"><a href="{{route('luong','luong=1')}}"><i class="fa fa-circle-o"></i> Quá Trình Lương</a></li>
@@ -133,7 +138,7 @@
     </ul>
 </li>
 
-<li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
+<li class="{{  Route::is('don-vi-to-chuc.index') || Route::is('ho_so_can_bo.create') ? 'active' : '' }} ">
     <a href="{{route('don-vi-to-chuc.index')}}">
         <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
         <span class="pull-right-container"></span>
@@ -167,6 +172,11 @@
         <li class="{{ Route::is('huyHieuDang') ? 'active' : '' }}"><a href="{{route('huyHieuDang')}}"><i class="fa fa-circle-o"></i>Huy hiệu đảng</a></li>
     </ul>
 </li>
-
+<li class="{{  Route::is('khenThuong') ||  Route::is('CNkhenThuong')  ? 'active' : '' }} ">
+    <a href="{{route('khenThuong')}}">
+        <i class="fa fa-shirtsinbulk" ></i> <span>Khen Thưởng</span>
+        <span class="pull-right-container"></span>
+    </a>
+</li>
 
 

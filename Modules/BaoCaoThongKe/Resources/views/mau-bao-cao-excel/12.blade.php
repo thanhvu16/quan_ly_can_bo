@@ -16,20 +16,20 @@
     <tr role="row" class="text-center">
         <th class="text-center" rowspan="4" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;word-wrap: break-word">
-            TỈNH ỦY/HUYỆN ỦY… <br>
+            TỈNH ỦY/HUYỆN ỦY…
             BAN TỔ CHỨC
         </th>
         <th class="text-center" rowspan="4" colspan="12" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;word-wrap: break-word">
-            THỐNG KÊ <br>
-            CÁN BỘ LÃNH ĐẠO, QUẢN LÝ CẤP TỈNH <br>
+            THỐNG KÊ
+            CÁN BỘ LÃNH ĐẠO, QUẢN LÝ CẤP TỈNH
             NĂM 20...
         </th>
         <th valign="center" rowspan="4" colspan="3"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;word-wrap: break-word">
-            Biểu số 9A - BTCTW
+            Biểu số 12B-BTCTW
             <br>
-            Đvt: Người
+            Đvt: Lượt người
         </th>
     </tr>
     <tr></tr>
@@ -51,15 +51,27 @@
         </th>
         <th rowspan="2"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Ban chấp hành
+            Uỷ viên BCH
         </th>
         <th  valign="center" rowspan="2"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Ban thường vụ
+            Uỷ viên <br> BTV
         </th>
-        <th  valign="center" colspan="2"
+        <th  valign="center" rowspan="2"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Lãnh đạo cấp ủy
+            Ủy ban <br> Kiểm tra
+        </th>
+        <th  rowspan="2" valign="center"
+            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            Bí thư
+        </th>
+        <th  rowspan="2" valign="center"
+            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            Phó bí <br> thư
+        </th>
+        <th colspan="2" valign="center"
+            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            Lãnh đạo UBND
         </th>
         <th  colspan="2" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
@@ -67,91 +79,71 @@
         </th>
         <th  colspan="2" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Lãnh đạo UBND
+            Lãnh đạo Đoàn ĐBQH
         </th>
         <th colspan="2" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Lãnh đạo
-            Đoàn Đại biểu
-            Quốc Hội
-        </th>
-        <th  colspan="2" valign="center"
-            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Các ban, cơ quan Đảng, Mặt trận Tổ quốc, đoàn thể
-            CT-XH
-        </th>
-        <th  colspan="2" valign="center"
-            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Các sở, ngành (tương đương)
+            Lãnh đạo các ban,<br> cơ quan đảng,<br> MTTQ, đoàn thể <br> CT- XH
         </th>
         <th colspan="2" valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Các đơn vị sự nghiệp công lập trực thuộc tỉnh
+            Lãnh đạo các sở,<br> ngành (tương<br> đương)
+        </th>
+        <th colspan="2" valign="center"
+            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            Lãnh đạo các đơn <br> vị sự nghiệp công <br> lập trực thuộc <br> tỉnh
         </th>
     </tr>
     <tr>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Bí thư
+            <i>Chủ tịch</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Phó bí thư
+            <i>Phó chủ tịch</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Chủ tịch
+            <i>Chủ tịch</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Phó chủ tịch
+            <i>Phó chủ tịch</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Chủ tịch
+            <i>Trưởng đoàn</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Phó chủ tịch
+            <i>Phó Trưởng đoàn</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Trưởng đoàn
+            <i>Cấp trưởng</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Phó Trưởng đoàn
+            <i>Cấp phó</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            trưởng
+            <i>Cấp trưởng</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            phó
+            <i>Cấp phó</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            trưởng
+            <i>Cấp trưởng</i>
         </th>
         <th valign="center"
             style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            phó
+            <i>Cấp phó</i>
         </th>
-        <th valign="center"
-            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            trưởng
-        </th>
-        <th valign="center"
-            style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            Cấp
-            phó
-        </th>
+
     </tr>
 
     </thead>
@@ -207,10 +199,13 @@
         </td>
 
         <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            18
+            16
         </td>
         <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
-            19
+            17
+        </td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            18
         </td>
     </tr>
     <tr>
@@ -218,19 +213,20 @@
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
             TỔNG SỐ
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
         @endfor
 
     </tr>
+
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
             *Trong đó:- Nữ
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -242,7 +238,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: right;border: 1px solid #000000;word-wrap: break-word">
             - Dân tộc thiểu số
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -251,10 +247,23 @@
     </tr>
     <tr>
         <td
+            style="font-family:Times New Roman;font-size: 12px;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+            *Phân tích tổng số theo:
+
+        </td>
+        @for($i=0;$i<17;++$i)
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+
+            </td>
+        @endfor
+
+    </tr>
+    <tr>
+        <td
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             1. Tuổi đời
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -266,7 +275,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Từ 40 tuổi trở xuống
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -278,7 +287,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Từ trên 40 tuổi đến 50 tuổi
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -290,7 +299,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Từ trên 50 tuổi
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -302,7 +311,19 @@
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             2. Trình độ chuyên môn nghiệp vụ
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
+
+        </td>
+        @endfor
+
+    </tr>
+    <tr>
+        <td
+            style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
+            - Cao đẳng
+        </td>
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -314,7 +335,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Đại học
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -326,7 +347,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Trên đại học
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -338,7 +359,7 @@
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             3. Chức danh khoa học
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -350,7 +371,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Phó Giáo sư
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -362,7 +383,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Giáo sư
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -374,7 +395,7 @@
             style="font-family:Times New Roman;font-size: 12px;font-weight: bold;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             4. Trình độ lý luận chính trị
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -386,7 +407,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Trung cấp
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>
@@ -398,7 +419,7 @@
             style="font-family:Times New Roman;font-size: 12px;text-align: left;border: 1px solid #000000;word-wrap: break-word">
             - Cao cấp, cử nhân
         </td>
-        @for($i=0;$i<16;++$i)
+        @for($i=0;$i<17;++$i)
         <td style="font-family:Times New Roman;font-size: 12px;text-align: left;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">
 
         </td>

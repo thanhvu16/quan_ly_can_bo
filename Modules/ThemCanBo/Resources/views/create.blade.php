@@ -3,22 +3,13 @@
 @section('content')
     <section class="content">
         <div class="row">
-        {{--            <div class="col-md-3">--}}
-
-        {{--                <!-- Profile Image -->--}}
-        {{--            @include('themcanbo::components.thong-tin')--}}
-        {{--                <!-- /.box -->--}}
-        {{--            </div>--}}
-        <!-- /.col -->
+            <div class="col-md-12 text-right">
+                <a href="/"><i class="fa fa-home"> Trang chủ </i></a>  <span style="font-size: 12px"> >  <a href="{{route('don-vi-to-chuc.index')}}">Nghiệp vụ quản lý cán bộ </a> > <a
+                        href="{{route('ho_so_can_bo.create')}}">tạo cán bộ</a></span>
+            </div>
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Thêm mới cán bộ</a></li>
-                        {{--                        <li><a href="#activity2" data-toggle="tab">Sơ lược (2)</a></li>--}}
-                        {{--                        <li><a href="#activity3" data-toggle="tab">Sơ lược (3)</a></li>--}}
-                        {{--                        <li><a href="#activity4" data-toggle="tab">Đào tạo - Công tác - Nước ngoài (4)</a></li>--}}
-                        {{--                        <li><a href="#activity5" data-toggle="tab">Lương - Chức vụ - Quy hoạch(5)</a></li>--}}
-                    </ul>
+
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <!-- Post -->

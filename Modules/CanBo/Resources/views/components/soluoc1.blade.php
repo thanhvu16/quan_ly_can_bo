@@ -347,6 +347,41 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <label class="">
+                        <div class="icheckbox_flat-green checked" aria-checked="false" aria-disabled="false" style="position: relative;">
+                            <input type="checkbox" {{$canBo->cb_btv_thanh_uy == 1 ? 'checked' : ''}} class="flat-red" id="cb_btv_thanh_uy" value="1"  name="cb_btv_thanh_uy" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div>
+                    </label>&emsp; <label  style="font-weight: bold;font-size: 12px" for="cb_btv_thanh_uy">Ban thường vụ thành ủy quản lý</label>
+
+                </div>
+            </div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <label class="">
+                        <div class="icheckbox_flat-green checked" aria-checked="false" aria-disabled="false" style="position: relative;">
+                            <input type="checkbox" {{$canBo->cb_btv_quan_uy == 1 ? 'checked' : ''}} class="flat-red" id="cb_btv_quan_uy" value="1"  name="cb_btv_quan_uy" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div>
+                    </label>&emsp; <label  style="font-weight: bold;font-size: 12px" for="cb_btv_quan_uy">Ban thường vụ quận ủy quản lý</label>
+
+                </div>
+            </div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <label class="">
+                        <div class="icheckbox_flat-green checked" aria-checked="false" aria-disabled="false" style="position: relative;">
+                            <input type="checkbox" {{$canBo->trung_uong == 1 ? 'checked' : ''}} value="1" class="flat-red" id="trung_uong"  name="trung_uong" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                        </div>
+                    </label>&emsp; <label  style="font-weight: bold;font-size: 12px" for="trung_uong">Trung ương quản lý</label>
+
+                </div>
+            </div>
+
+
+
+
+
 
         </div>
 
@@ -443,7 +478,7 @@
 
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6">Hệ số phụ cấp chức vụ</label>
+                    <label for="exampleInputEmail6">Hệ số phụ cấp chức vụ kiêm nhiệm</label>
                     <input type="text" class="form-control" name="he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem" value="{{$canBo->he_so_phu_cap_chuc_vu_chuc_vu_kiem_nhiem}}"
                            placeholder="Hệ số phụ cấp chức vụ " >
                 </div>

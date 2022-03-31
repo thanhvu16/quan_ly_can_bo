@@ -54,6 +54,8 @@
                                     {{route('phuCapCn','phu_cap_khac='.Request::get('phu_cap_khac'))}}
                                     @elseif(Request::get('nghien_cuu') == 1)
                                     {{route('nghienCuu','nghien_cuu='.Request::get('nghien_cuu'))}}
+                                    @elseif(Request::get('quy_hoachcb') == 1)
+                                    {{route('quyhoachcbb','quy_hoachcb='.Request::get('quy_hoachcb'))}}
                                     @elseif(Request::get('gia_dinh') == 1)
                                     {{route('giaDinh','gia_dinh='.Request::get('gia_dinh'))}}@endif" class="form-export">
                                         <input type="hidden" name="type" value="">
@@ -77,6 +79,7 @@
                                         <input type="hidden" name="luong" value="{{Request::get('luong')}}">
                                         <input type="hidden" name="gia_dinh" value="{{Request::get('gia_dinh')}}">
                                         <input type="hidden" name="luong" value="{{Request::get('luong')}}">
+                                        <input type="hidden" name="quy_hoachcb" value="{{Request::get('quy_hoachcb')}}">
                                         <input type="hidden" name="phu_cap_khac" value="{{Request::get('phu_cap_khac')}}">
 
                                         <button type="button" data-type="excel"
@@ -122,6 +125,8 @@
                                     {{route('phuCapCn','phu_cap_khac='.Request::get('phu_cap_khac'))}}
                                     @elseif(Request::get('nghien_cuu') == 1)
                                     {{route('nghienCuu','nghien_cuu='.Request::get('nghien_cuu'))}}
+                                    @elseif(Request::get('quy_hoachcb') == 1)
+                                    {{route('quyhoachcbb','quy_hoachcb='.Request::get('quy_hoachcb'))}}
                                     @elseif(Request::get('gia_dinh') == 1)
                                     {{route('giaDinh','gia_dinh='.Request::get('gia_dinh'))}}@endif" id="tim_kiem" method="get">
                                         <div class="row">
@@ -180,6 +185,7 @@
                                             </div>
                                             <input type="hidden" name="dao_tao" value="{{Request::get('dao_tao')}}">
                                             <input type="hidden" name="ban_than" value="{{Request::get('ban_than')}}">
+                                            <input type="hidden" name="ban_than" value="{{Request::get('quy_hoachcb')}}">
                                             <input type="hidden" name="chuc_vu" value="{{Request::get('chuc_vu')}}">
                                             <input type="hidden" name="chuc_vu_dang" value="{{Request::get('chuc_vu_dang')}}">
                                             <input type="hidden" name="chuc_vu_doan" value="{{Request::get('chuc_vu_doan')}}">
@@ -250,6 +256,8 @@
                                                 {{route('capNhatPhuCapCn',$data->id.'?phu_cap_khac='.Request::get('phu_cap_khac'))}}
                                                 @elseif(Request::get('nghien_cuu') == 1)
                                                 {{route('capNhatNghienCuu',$data->id.'?nghien_cuu='.Request::get('nghien_cuu'))}}
+                                                @elseif(Request::get('quy_hoachcb') == 1)
+                                                {{route('capNhatQHCB',$data->id.'?quy_hoachcb='.Request::get('quy_hoachcb'))}}
                                                 @elseif(Request::get('gia_dinh') == 1)
                                                 {{route('capNhatGiaDinh',$data->id.'?gia_dinh='.Request::get('gia_dinh'))}}@endif">@if($data->gioi_tinh == 1) <i
                                                     style="color: brown;" class="fa fa-user-secret"></i>  @else <i
@@ -281,7 +289,7 @@
 
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    {!! $danhSach->appends(['ten_cb' => Request::get('ten_cb'),'don_vi' => Request::get('don_vi'),'dao_tao' => Request::get('dao_tao'),'chuc_vu_chinh' => Request::get('chuc_vu_chinh')])->render() !!}
+                                    {!! $danhSach->appends(['ten_cb' => Request::get('ten_cb'),'quy_hoachcb' => Request::get('quy_hoachcb'),'don_vi' => Request::get('don_vi'),'dao_tao' => Request::get('dao_tao'),'chuc_vu_chinh' => Request::get('chuc_vu_chinh')])->render() !!}
                                 </div>
                             </div>
                         </div>

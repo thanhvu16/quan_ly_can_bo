@@ -20,11 +20,13 @@ use Modules\Admin\Entities\QuaTrinhCongTac;
 use Modules\Admin\Entities\QuaTrinhDaoTao;
 use Modules\Admin\Entities\QuaTrinhDoan;
 use Modules\Admin\Entities\QuaTrinhGiaDinh;
+use Modules\Admin\Entities\QuaTrinhKhenThuong;
 use Modules\Admin\Entities\QuaTrinhLuong;
 use Modules\Admin\Entities\QuaTrinhNghienCuu;
 use Modules\Admin\Entities\QuaTrinhNuocNgoai;
 use Modules\Admin\Entities\QuaTrinhPhuCapKhac;
 use Modules\Admin\Entities\QuaTrinhQuocHoi;
+use Modules\Admin\Entities\QuaTrinhQuyHoachCanBo;
 use Modules\Admin\Entities\QuaTrinhVuotKhung;
 use Modules\Admin\Entities\ToChuc;
 use auth, DB, Excel;
@@ -158,6 +160,8 @@ class CacQuaTrinhController extends \App\Http\Controllers\Controller
         $quaTrinhPhuCapKhac = QuaTrinhPhuCapKhac::where('users', $id)->get();
         $quaTrinhNghienCuu = QuaTrinhNghienCuu::where('users', $id)->get();
         $quaTrinhGiaDinh = QuaTrinhGiaDinh::where('users', $id)->get();
+        $quaTrinhQuyHoachCanBo2 = QuaTrinhQuyHoachCanBo::where('users', $id)->get();
+        $chucVuHienTai = ChucVuHienTai::orderBy('ten', 'asc')->get();
         $canBo = CanBo::where('id', $id)->first();
         if ($request->dao_tao == 1) {
             $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
@@ -183,6 +187,8 @@ class CacQuaTrinhController extends \App\Http\Controllers\Controller
             $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Nghiên cứu khoa học';
         } elseif ($request->gia_dinh == 1) {
             $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quan hệ gia đình';
+        } elseif ($request->quy_hoachcb == 1) {
+            $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình quy hoạch cán bộ';
         } else {
             $title = 'Quản lý hồ sơ cán bộ  > Các quá trình > Quá trình đào tạo';
         }
@@ -211,9 +217,23 @@ class CacQuaTrinhController extends \App\Http\Controllers\Controller
             return view('cacquatrinh::components.nghienCuu', compact('quaTrinhNghienCuu', 'title', 'canBo'));
         } elseif ($request->gia_dinh == 1) {
             return view('cacquatrinh::components.giaDinh', compact('quaTrinhGiaDinh', 'title', 'canBo'));
+        } elseif ($request->quy_hoachcb == 1) {
+            return view('cacquatrinh::components.QuyHoach', compact('quaTrinhQuyHoachCanBo2', 'title', 'canBo','chucVuHienTai'));
         } else {
             return redirect()->back();
         }
+
+
+    }
+    public function khenThuong($id, Request $request)
+    {
+
+        $canBo = CanBo::where('id', $id)->first();
+        $title = 'khen thưởng';
+        $quaTrinhKhenThuong = QuaTrinhKhenThuong::where('users', $id)->where('type', 2)->get();
+        return view('cacquatrinh::components.khenThuong', compact( 'canBo', 'title','quaTrinhKhenThuong'));
+
+
 
 
     }

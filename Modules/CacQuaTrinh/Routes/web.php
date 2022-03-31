@@ -51,3 +51,8 @@ Route::get('cap-nhat-tham-nien/{id}', 'CacQuaTrinhController@capNhatQuaTrinhDaoT
 Route::get('doan-the-cn', 'CacQuaTrinhController@index')->name('doanThecn');
 Route::get('cap-nhat-doan-the/{id}', 'CacQuaTrinhController@capNhatQuaTrinhDaoTao')->name('capNhatDoanThecn');
 
+Route::get('quy-hoach-canbo', 'CacQuaTrinhController@index')->name('quyhoachcbb');
+Route::get('cap-nhat-quy-hoachcb/{id}', 'CacQuaTrinhController@capNhatQuaTrinhDaoTao')->name('capNhatQHCB');
+
+Route::get('cap-nhat-khen-thuong-can-bo-ct/{id}', 'CacQuaTrinhController@khenThuong')->name('CNkhenThuong');
+

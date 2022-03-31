@@ -163,13 +163,43 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse ($quaTrinhQuyHoachCanBo as $key=>$data1)
+                    @forelse ($quaTrinhDoan as $key=>$data1)
                         <tr >
                             <td class="text-center">{{$key+1}} </td>
                             <td style="color: red;font-weight: bold" class="text-center">{{formatDMY($data1->tu_ngay)}}</td>
                             <td style="color: red;font-weight: bold" class="text-center">{{formatDMY($data1->den_ngay)}}</td>
                             <td>{{$data1->chuc_vu ?? ''}}</td>
                             <td>{{$data1->co_quan ?? ''}}</td>
+                        </tr>
+
+                    @empty
+                        <td colspan="6" class="text-center">Không tìm thấy dữ liệu.</td>
+                    @endforelse
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-md-12 mt-4" style="margin-bottom: 10px" >
+                <h4 style="color: #0a0a0a;font-weight: bold">Quá trình quy hoạch cán bộ</h4>
+                @can(\App\Common\AllPermission::suaCanBo())
+                    <a style="cursor: pointer" onclick="showModal18()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                @endcan
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped dataTable mb-0" style="font-size: 12px">
+                    <thead>
+                    <tr>
+                        <td width="5%" class="text-center">STT </td>
+                        <th width="13%" style="vertical-align: middle" class="text-center">Ngày quyết định</th>
+                        <th width=""  style="vertical-align: middle"class="text-center">Chức vụ quy hoạch</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($quaTrinhQuyHoachCanBo as $key=>$data1)
+                        <tr >
+                            <td class="text-center">{{$key+1}} </td>
+                            <td style="color: red;font-weight: bold" class="text-center">{{formatDMY($data1->ngay_quyet_dinh)}}</td>
+                            <td>{{$data1->chucVu->ten ?? ''}}</td>
                         </tr>
 
                     @empty
@@ -191,3 +221,4 @@
 @include('canbo::components.modal_chuc_vu_dang')
 @include('canbo::components.modal_qua_trinh_can_bo')
 @include('canbo::components.modal_quoc_hoi')
+@include('canbo::components.modal_qua_trinh_quy_hoach_can_bo')

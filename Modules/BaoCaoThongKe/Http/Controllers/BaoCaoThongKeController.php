@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\ToChuc;
 use Auth, Excel;
 
-class BaoCaoThongKeController extends Controller
+class BaoCaoThongKeController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
