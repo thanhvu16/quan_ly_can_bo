@@ -12,11 +12,12 @@ use Maatwebsite\Excel\Events\BeforeSheet;
 class ExportBaoCaoTheoMau implements FromView, ShouldAutoSize, WithEvents
 {
     protected $type;
+    protected $data;
 
-
-    public function __construct($type)
+    public function __construct($type, $data)
     {
         $this->type = $type;
+        $this->data = $data;
     }
 
     /**
@@ -24,7 +25,9 @@ class ExportBaoCaoTheoMau implements FromView, ShouldAutoSize, WithEvents
      */
     public function view(): View
     {
-        return view('baocaothongke::mau-bao-cao-excel.'.$this->type);
+        return view('baocaothongke::mau-bao-cao-excel.'.$this->type, [
+            'data' => $this->data
+        ]);
     }
 
     public function registerEvents(): array

@@ -280,8 +280,16 @@
                 <div class="form-group">
                     <input type="checkbox" name="la_dang_vien"  value="1" {{$canBo->la_dang_vien == 1 ? 'checked' : ''}} >&emsp;<label for="exampleInputEmail1"> Là đảng viên	</label>
                 </div>
+                <div class="form-group">
+                    <input type="checkbox" id="dang-vien-tinh-khac-chuyen-den" name="dang_vien_tinh_khac_chuyen_den"  value="1" {{$canBo->dang_vien_tinh_khac_chuyen_den == 1 ? 'checked' : ''}} >&emsp;<label for="dang-vien-tinh-khac-chuyen-den"> Đảng viên tỉnh khác chuyển đến</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="dang-vien-huyen-khac" name="dang_vien_huyen_khac_trong_tinh"  value="1" {{$canBo->dang_vien_huyen_khac_trong_tinh == 1 ? 'checked' : ''}} >&emsp;<label for="dang-vien-huyen-khac"> Đảng viên huyện khác trong tỉnh chuyển đến</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="phuc-hoi-dang-tich" name="phuc_hoi_dang_tich"  value="1" {{$canBo->phuc_hoi_dang_tich == 1 ? 'checked' : ''}} >&emsp;<label for="phuc-hoi-dang-tich"> Phục hồi đảng tịch</label>
+                </div>
             </div>
-
 
             <div class="col-md-3" >
                 <div class="form-group">
@@ -575,6 +583,38 @@
                             <i class="fa fa-calendar-o"></i>
                         </div>
                     </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="tu_tran" name="tu_tran"  value="1" {{$canBo->tu_tran == 1 ? 'checked' : ''}} >&emsp;<label for="tu_tran">Đảng viên từ trần</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="khai_tru" name="khai_tru"  value="1" {{$canBo->khai_tru == 1 ? 'checked' : ''}} >&emsp;<label for="khai_tru">Đảng viên khai trừ</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="xoa_ten" name="xoa_ten"  value="1" {{$canBo->xoa_ten == 1 ? 'checked' : ''}} >&emsp;<label for="xoa_ten">Đảng viên xoá tên</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="xin_ra_khoi_dang" name="xin_ra_khoi_dang"  value="1" {{$canBo->xin_ra_khoi_dang == 1 ? 'checked' : ''}} >&emsp;<label for="xin_ra_khoi_dang">Xin ra khỏi Đảng</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="chuyen_di_tinh_khac" name="chuyen_di_tinh_khac"  value="1" {{$canBo->chuyen_di_tinh_khac == 1 ? 'checked' : ''}} >&emsp;<label for="chuyen_di_tinh_khac">Chuyển đi tỉnh khác</label>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <input type="checkbox" id="chuyen_di_huyen_khac_trong_tinh" name="chuyen_di_huyen_khac_trong_tinh"  value="1" {{$canBo->chuyen_di_huyen_khac_trong_tinh == 1 ? 'checked' : ''}} >&emsp;<label for="chuyen_di_huyen_khac_trong_tinh">Chuyển đi huyện khác trong tỉnh</label>
                 </div>
             </div>
 
