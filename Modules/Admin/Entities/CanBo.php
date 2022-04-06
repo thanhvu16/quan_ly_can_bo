@@ -181,7 +181,7 @@ class CanBo extends Model
             ->whereYear('created_at', date('Y'));
     }
 
-    public static function soDangVien($donViId = null, $laDangVien, $startDate, $endDate, $whereColumnName = null)
+    public static function soDangVien($donViId = null, $laDangVien, $startDate, $endDate, $whereColumnName = null, $danToc = null)
     {
         return  CanBo::whereNotNull($laDangVien)
             ->where(function ($query) use ($donViId) {
@@ -197,6 +197,60 @@ class CanBo extends Model
             ->where(function ($query) use ($startDate, $endDate) {
                 if (!empty($startDate)) {
                     return $query->whereBetween('updated_at', [$startDate, $endDate]);
+                }
+            })
+            ->where(function ($query) use ($danToc) {
+                if (!empty($danToc)) {
+                    return $query->whereHas('danToc', function ($q) {
+                        return $q->where('ten', 'NOT LIKE', 'Kinh');
+                    });
+                }
+            })
+            ->count();
+    }
+
+    public static function getTrinhDoChuyenMonDangVien($donViId, $startDate, $endDate, $chuyenMonId)
+    {
+        return  CanBo::whereNotNull('la_dang_vien')
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where(function ($query) use ($chuyenMonId) {
+                if (!empty($chuyenMonId)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', $chuyenMonId);
+                }
+            })
+            ->where(function ($query) use ($startDate, $endDate) {
+                if (!empty($startDate)) {
+                    return $query->whereBetween('updated_at', [$startDate, $endDate]);
+                }
+            })
+            ->count();
+    }
+
+    public static function soDangVienTheoDanTocTonGiao($donViId = null, $laDangVien, $danTocId = null, $tonGiao = null, $gioiTinh = null)
+    {
+        return  CanBo::whereNotNull($laDangVien)
+            ->where(function ($query) use ($donViId) {
+                if (!empty($donViId)) {
+                    return $query->where('don_vi_id', $donViId);
+                }
+            })
+            ->where(function ($query) use ($danTocId) {
+                if (!empty($danTocId)) {
+                    return $query->where('dan_toc', $danTocId);
+                }
+            })
+            ->where(function ($query) use ($tonGiao) {
+                if (!empty($tonGiao)) {
+                    return $query->where('ton_giao', $tonGiao);
+                }
+            })
+            ->where(function ($query) use ($gioiTinh) {
+                if (!empty($gioiTinh)) {
+                    return $query->where('gioi_tinh', $gioiTinh);
                 }
             })
             ->count();

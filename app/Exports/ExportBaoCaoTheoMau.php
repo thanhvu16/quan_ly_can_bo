@@ -13,11 +13,13 @@ class ExportBaoCaoTheoMau implements FromView, ShouldAutoSize, WithEvents
 {
     protected $type;
     protected $data;
+    protected $donVi;
 
-    public function __construct($type, $data)
+    public function __construct($type, $data, $donVi)
     {
         $this->type = $type;
         $this->data = $data;
+        $this->donVi = $donVi;
     }
 
     /**
@@ -26,7 +28,8 @@ class ExportBaoCaoTheoMau implements FromView, ShouldAutoSize, WithEvents
     public function view(): View
     {
         return view('baocaothongke::mau-bao-cao-excel.'.$this->type, [
-            'data' => $this->data
+            'data' => $this->data,
+            'donVi' => $this->donVi
         ]);
     }
 

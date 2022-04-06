@@ -97,9 +97,9 @@
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
             &nbsp;&nbsp;&nbsp;&nbsp;- Dân tộc thiểu số
         </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word"></td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">{{ $data['dan_toc']['ky_nay']  }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">{{ $data['dan_toc']['ky_truoc']  }}</td>
+        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;font-weight: bold;border: 1px solid #000000;word-wrap: break-word">{{ $data['dan_toc']['ky_truoc'] > 0 ? ($data['dan_toc']['ky_nay'] * 100)/$data['dan_toc']['ky_truoc'] : 0  }}</td>
     </tr>
     <tr>
         <td
@@ -455,51 +455,65 @@
         <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
         <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
     </tr>
-    <tr>
-        <td
-            style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
-            - Trung cấp
-        </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-    </tr>
-    <tr>
-        <td
-            style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
-            - Cao đẳng
-        </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-    </tr>
-    <tr>
-        <td
-            style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
-            - Đại học
-        </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-    </tr>
-    <tr>
-        <td
-            style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
-            - Thạc sỹ
-        </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-    </tr>
-    <tr>
-        <td
-            style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
-            - Tiến sỹ
-        </td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-        <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
-    </tr>
+    @if (count($data['trinh_do_chuyen_mon_nghiep_vu']) > 0)
+        @foreach($data['trinh_do_chuyen_mon_nghiep_vu'] as $item)
+            <tr>
+                <td
+                    style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                    - {{ $item->ten }}
+                </td>
+                <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $item->ky_nay }}</td>
+                <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $item->ky_truoc }}</td>
+                <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word">{{ $item->ky_truoc > 0 ? ($item->ky_nay * 100)/$item->ky_truoc : 0  }}</td>
+            </tr>
+        @endforeach
+    @else
+        <tr>
+            <td
+                style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                - Trung cấp
+            </td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        </tr>
+        <tr>
+            <td
+                style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                - Cao đẳng
+            </td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        </tr>
+        <tr>
+            <td
+                style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                - Đại học
+            </td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        </tr>
+        <tr>
+            <td
+                style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                - Thạc sỹ
+            </td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        </tr>
+        <tr>
+            <td
+                style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
+                - Tiến sỹ
+            </td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+            <td style="font-family:Times New Roman;font-size: 12px;text-align: center;border: 1px solid #000000;word-wrap: break-word"></td>
+        </tr>
+    @endif
     <tr>
         <td
             style="font-family:Times New Roman;font-size: 12px;border: 1px solid #000000;word-wrap: break-word">
