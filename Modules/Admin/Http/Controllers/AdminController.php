@@ -12,8 +12,11 @@ use Auth, DB, File;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Modules\Admin\Entities\BinhBauPhanLoaiCanBo;
 use Modules\Admin\Entities\CanBo;
 use Modules\Admin\Entities\CauHinh;
+use Modules\Admin\Entities\CongViecChuyenMon;
+use Modules\Admin\Entities\DoiTuongQuanLy;
 use Modules\Admin\Entities\DonVi;
 use Modules\Admin\Entities\LoaiVanBan;
 use Modules\Admin\Entities\LuuVetDangNhap;
@@ -185,6 +188,9 @@ class AdminController extends Controller
         $quanLyPiceCharts = [];
         $quanLyCoLors = [];
 
+        $chuyenMonPiceCharts = [];
+        $chuyenMonCoLors = [];
+
         $thongKeCanBoPiceCharts = [];
         $thongKeCanBoCoLors = [];
 
@@ -215,11 +221,33 @@ class AdminController extends Controller
         $tongSoBiTraLai = 0;
         $tongSoChoGuiDuyet = 0;
 
+        //chuyên môn
+        $trenDaiHoc = 0;
+        $daiHoc = 0;
+        $caoDang = 0;
+        $trungCap = 0;
+        $soCap = 0;
+
+        $trenDaiHocID = CongViecChuyenMon::where('ten','like','%Trên đại học%')->first();
+        $daiHocID = CongViecChuyenMon::where('ten','like','%Đại học%')->first();
+        $caoDangID = CongViecChuyenMon::where('ten','like','%Cao đẳng%')->first();
+        $trungCapID = CongViecChuyenMon::where('ten','like','%Trung cấp%')->first();
+        $soCapID = CongViecChuyenMon::where('ten','like','%Sơ cấp%')->first();
+
+
+
+
+
+
+//        trinh_do_chuyen_mon_cao_nhat_id
+
+
         array_push($hoSoCanBoPiceCharts, array('Task', 'Danh sách'));
         array_push($viTriPiceCharts, array('Task', 'Danh sách'));
         array_push($thongKeCanBoPiceCharts, array('Task', 'Danh sách'));
         array_push($thongKeDangPiceCharts, array('Task', 'Danh sách'));
         array_push($quanLyPiceCharts, array('Task', 'Danh sách'));
+        array_push($chuyenMonPiceCharts, array('Task', 'Danh sách'));
 
 
 
@@ -260,6 +288,45 @@ class AdminController extends Controller
             array_push($thongKeCanBoPiceCharts, array('Tổng hồ về hưu', $tongSoHoSoVeHuu));
             array_push($thongKeCanBoCoLors, COLOR_PURPLE);
             //end cán bộ đơn vị
+
+            //Trình độ
+            $trenDaiHoc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$trenDaiHocID->id)
+                ->count();
+            $daiHoc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$daiHocID->id)
+                ->count();
+            $caoDang = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$caoDangID->id)
+                ->count();
+            $trungCap = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$trungCapID->id)
+                ->count();
+            $soCap = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$soCapID->id)
+                ->count();
+
+            array_push($chuyenMonPiceCharts, array('Trên đại học', $trenDaiHoc));
+            array_push($chuyenMonCoLors, COLOR_GREEN);
+
+            array_push($chuyenMonPiceCharts, array('Đại học', $daiHoc));
+            array_push($chuyenMonCoLors, COLOR_INFO);
+
+            array_push($chuyenMonPiceCharts, array('Cao đẳng', $caoDang));
+            array_push($chuyenMonCoLors, COLOR_ORANGE);
+
+            array_push($chuyenMonPiceCharts, array('Trung cấp', $trungCap));
+            array_push($chuyenMonCoLors, COLOR_PURPLE);
+
+            array_push($chuyenMonPiceCharts, array('Sơ cấp', $soCap));
+            array_push($chuyenMonCoLors, COLOR_RED);
+
+            //kết thúc
 
 
             //start vị trí
@@ -323,6 +390,23 @@ class AdminController extends Controller
 
             array_push($thongKeDangPiceCharts, array('Hồ sơ gửi duyệt bị trả lại', $hoSoGuiDuyetBiTraLai));
             array_push($thongKeDangCoLors, COLOR_RED);
+
+            //đối tượng cán bộ
+            $doiTuongPiceCharts=[];
+            $doiTuongCoLors=[];
+
+            array_push($doiTuongPiceCharts, array('Task', 'Số lượng'));
+            $doiTuongCanBo = BinhBauPhanLoaiCanBo::all();
+            foreach ($doiTuongCanBo as $cb)
+            {
+                $canBoDT = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                    ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                    ->where('phan_loai_cb',$cb->id)
+                    ->count();
+                array_push($doiTuongPiceCharts, array($cb->ten, $canBoDT));
+
+            }
+            //kết thúc
 
 
 //             return redirect()->route('ho_so_can_bo.cho_gui_duyet');
@@ -428,6 +512,62 @@ class AdminController extends Controller
             //end đảng viên
 
 
+            //Trình độ
+            $trenDaiHoc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$trenDaiHocID->id)
+                ->count();
+            $daiHoc = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$daiHocID->id)
+                ->count();
+            $caoDang = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$caoDangID->id)
+                ->count();
+            $trungCap = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$trungCapID->id)
+                ->count();
+            $soCap = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                ->where('trinh_do_chuyen_mon_cao_nhat_id',$soCapID->id)
+                ->count();
+
+            array_push($chuyenMonPiceCharts, array('Trên đại học', $trenDaiHoc));
+            array_push($chuyenMonCoLors, COLOR_GREEN);
+
+            array_push($chuyenMonPiceCharts, array('Đại học', $daiHoc));
+            array_push($chuyenMonCoLors, COLOR_INFO);
+
+            array_push($chuyenMonPiceCharts, array('Cao đẳng', $caoDang));
+            array_push($chuyenMonCoLors, COLOR_ORANGE);
+
+            array_push($chuyenMonPiceCharts, array('Trung cấp', $trungCap));
+            array_push($chuyenMonCoLors, COLOR_PURPLE);
+
+            array_push($chuyenMonPiceCharts, array('Sơ cấp', $soCap));
+            array_push($chuyenMonCoLors, COLOR_RED);
+
+            //kết thúc
+            //đối tượng cán bộ
+            $doiTuongPiceCharts=[];
+            $doiTuongCoLors=[];
+
+            array_push($doiTuongPiceCharts, array('Task', 'Số lượng'));
+            $doiTuongCanBo = BinhBauPhanLoaiCanBo::all();
+            foreach ($doiTuongCanBo as $cb)
+            {
+                $canBoDT = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+                    ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
+                    ->where('phan_loai_cb',$cb->id)
+                    ->count();
+                array_push($doiTuongPiceCharts, array($cb->ten, $canBoDT));
+
+            }
+            //kết thúc
+
+
 
 //            return redirect()->route('ho_so_can_bo.lanh_dao_cho_duyet');
         }
@@ -514,7 +654,52 @@ class AdminController extends Controller
             array_push($quanLyCoLors, COLOR_PURPLE);
             //end quản lý
 
+            //Trình độ
+            $trenDaiHoc = CanBo::where('trinh_do_chuyen_mon_cao_nhat_id',$trenDaiHocID->id)
+                ->count();
+            $daiHoc = CanBo::where('trinh_do_chuyen_mon_cao_nhat_id',$daiHocID->id)
+                ->count();
+            $caoDang = CanBo::where('trinh_do_chuyen_mon_cao_nhat_id',$caoDangID->id)
+                ->count();
+            $trungCap = CanBo::where('trinh_do_chuyen_mon_cao_nhat_id',$trungCapID->id)
+                ->count();
+            $soCap = CanBo::where('trinh_do_chuyen_mon_cao_nhat_id',$soCapID->id)
+                ->count();
+
+            array_push($chuyenMonPiceCharts, array('Trên đại học', $trenDaiHoc));
+            array_push($chuyenMonCoLors, COLOR_GREEN);
+
+            array_push($chuyenMonPiceCharts, array('Đại học', $daiHoc));
+            array_push($chuyenMonCoLors, COLOR_INFO);
+
+            array_push($chuyenMonPiceCharts, array('Cao đẳng', $caoDang));
+            array_push($chuyenMonCoLors, COLOR_ORANGE);
+
+            array_push($chuyenMonPiceCharts, array('Trung cấp', $trungCap));
+            array_push($chuyenMonCoLors, COLOR_PURPLE);
+
+            array_push($chuyenMonPiceCharts, array('Sơ cấp', $soCap));
+            array_push($chuyenMonCoLors, COLOR_RED);
+
+            //kết thúc
+
+            //đối tượng cán bộ
+            $doiTuongPiceCharts=[];
+            $doiTuongCoLors=[];
+
+            array_push($doiTuongPiceCharts, array('Task', 'Số lượng'));
+            $doiTuongCanBo = BinhBauPhanLoaiCanBo::all();
+            foreach ($doiTuongCanBo as $cb)
+            {
+                $canBoDT = CanBo::where('phan_loai_cb',$cb->id)
+                    ->count();
+                array_push($doiTuongPiceCharts, array($cb->ten, $canBoDT));
+
+            }
+            //kết thúc
+
         }
+
 
 
 //
@@ -525,6 +710,8 @@ class AdminController extends Controller
 
         return view('admin::index',
             [
+                'doiTuongCoLors' => $doiTuongCoLors,
+                'doiTuongPiceCharts' => $doiTuongPiceCharts,
                 'hoSoCanBoPiceCharts' => $hoSoCanBoPiceCharts,
                 'hoSoCanBoCoLors' => $hoSoCanBoCoLors,
                 'hoSocanBoChoGuiDuyet' => $hoSocanBoChoGuiDuyet,
@@ -552,6 +739,18 @@ class AdminController extends Controller
                 'tongSoDaDuyet' => $tongSoDaDuyet,
                 'tongSoBiTraLai' => $tongSoBiTraLai,
                 'tongSoChoGuiDuyet' => $tongSoChoGuiDuyet,
+                'trenDaiHoc' => $trenDaiHoc,
+                'daiHoc' => $daiHoc,
+                'caoDang' => $caoDang,
+                'trungCap' => $trungCap,
+                'soCap' => $soCap,
+                'trenDaiHocID' => $trenDaiHocID,
+                'daiHocID' => $daiHocID,
+                'caoDangID' => $caoDangID,
+                'trungCapID' => $trungCapID,
+                'soCapID' => $soCapID,
+                'chuyenMonPiceCharts' => $chuyenMonPiceCharts,
+                'chuyenMonCoLors' => $chuyenMonCoLors,
             ]
         );
     }

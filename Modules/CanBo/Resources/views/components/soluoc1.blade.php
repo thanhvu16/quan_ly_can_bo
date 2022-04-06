@@ -447,6 +447,7 @@
                            placeholder="Hệ số phụ cấp chức vụ " >
                 </div>
             </div>
+            <div class="row clearfix"></div>
             <div class="col-md-3" >
                 <div class="form-group">
                     <label for="exampleInputEmail6">Chức vụ, chức danh kiêm nhiệm </label>

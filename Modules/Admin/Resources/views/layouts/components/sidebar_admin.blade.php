@@ -160,7 +160,7 @@
         {{--                    <li class="{{ Route::is('vanbandichoso') ? 'active' : '' }}"><a href="{{ route('vanbandichoso') }}"><i class="fa fa-circle-o"></i> Danh sách chờ số</a></li>--}}
     </ul>
 </li>
-<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('chi-tra-chinh-sach.index') || Route::is('huyHieuDang')|| Route::is('allCanBo') || Route::is('chinh-sach.index') ? 'active menu-open' : '' }} }} ">
+<li class="treeview {{ Route::is('van-ban-quy-dinh.index') || Route::is('chi-tra-chinh-sach.index') || Route::is('huyHieuDang')|| Route::is('hsdangVien          ') || Route::is('chinh-sach.index') ? 'active menu-open' : '' }} }} ">
     <a href="#">
         <i class="fa fa-tags"></i> <span>Quản lý đảng viên</span>
         <span class="pull-right-container">
@@ -168,7 +168,7 @@
             </span>
     </a>
     <ul class="treeview-menu">
-        <li class="{{ Route::is('allCanBo') ? 'active' : '' }}"><a href="{{route('allCanBo','dang_vienC=1')}}"><i class="fa fa-circle-o"></i>Hồ sơ đảng viên</a></li>
+        <li class="{{ Route::is('hsdangVien') ? 'active' : '' }}"><a href="{{route('hsdangVien','dang_vienC=1')}}"><i class="fa fa-circle-o"></i>Hồ sơ đảng viên</a></li>
         <li class="{{ Route::is('huyHieuDang') ? 'active' : '' }}"><a href="{{route('huyHieuDang')}}"><i class="fa fa-circle-o"></i>Huy hiệu đảng</a></li>
     </ul>
 </li>

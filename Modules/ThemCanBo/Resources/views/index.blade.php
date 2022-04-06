@@ -57,6 +57,17 @@
 
                                         </select>
                                         <input type="hidden" name="vi_tri" value="{{Request::get('vi_tri')}}">
+                                        <input type="hidden" name="cho_duyet" value="{{Request::get('cho_duyet')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('da_duyet')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('tra_lai')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('gui_duyet')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('all')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('gioi_tinh')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('ve_huu')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('dang_vienC')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('doan_vien')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('bo_doi')}}">
+                                        <input type="hidden" name="da_duyet" value="{{Request::get('giai_ngu')}}">
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -133,6 +144,16 @@
                                    'ky_luat' => Request::get('ky_luat'),
                                    'chuyen_cong_tac' => Request::get('chuyen_cong_tac'),
                                    've_huu' => Request::get('ve_huu'),
+                                   'cho_duyet' => Request::get('cho_duyet'),
+                                   'da_duyet' => Request::get('da_duyet'),
+                                   'tra_lai' => Request::get('tra_lai'),
+                                   'gui_duyet' => Request::get('gui_duyet'),
+                                   'all' => Request::get('all'),
+                                   'gioi_tinh' => Request::get('gioi_tinh'),
+                                   'dang_vienC' => Request::get('dang_vienC'),
+                                   'doan_vien' => Request::get('doan_vien'),
+                                   'bo_doi' => Request::get('bo_doi'),
+                                   'giai_ngu' => Request::get('giai_ngu'),
                                    'search' =>Request::get('search') ])->render() !!}
                             </div>
                         </div>

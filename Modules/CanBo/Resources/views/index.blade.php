@@ -63,6 +63,11 @@
     <link href="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css" rel="stylesheet">
     <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+       label * {
+            font-size: 12px;
+        }
+    </style>
 @yield('css')
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

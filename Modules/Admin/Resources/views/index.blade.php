@@ -13,6 +13,8 @@
                     @include('admin::dashboard.don_vi')
                     @include('admin::dashboard.thong-tin')
                     @include('admin::dashboard.thong-tin-dang')
+                    @include('admin::dashboard.trinh_do_chuyen_mon')
+                    @include('admin::dashboard.doi_tuong')
             </div>
         </div>
     </section>
@@ -28,6 +30,7 @@
         google.charts.setOnLoadCallback(drawChartThongKeViTriCanBoTrongDonVi);
         google.charts.setOnLoadCallback(drawChartThongKeDangCanBoTrongDonVi);
         google.charts.setOnLoadCallback(drawChartQuanLyCanBoTrongDonVi);
+        google.charts.setOnLoadCallback(drawChartThongKeChuyenMon);
 
         function drawChartQuanLyHoSoCanBo() {
 
@@ -136,6 +139,51 @@
                 chart.draw(data, options);
             }
         };
+        function drawChartThongKeChuyenMon() {
+
+            let data = google.visualization.arrayToDataTable(<?php echo json_encode($chuyenMonPiceCharts,
+                JSON_NUMERIC_CHECK); ?>);
+
+            // Optional; add a title and set the width and height of the chart
+            let options = {
+                'title': '',
+                titleTextStyle: {
+                    bold: true,
+                    fontSize: 14,
+                },
+                legend: {position: 'none'},
+                colors: <?php echo json_encode($chuyenMonCoLors); ?>
+            };
+
+            if (document.getElementById('pie-chart-thong-ke-chuyen-mon') != undefined) {
+                let chart = new google.visualization.PieChart(document.getElementById('pie-chart-thong-ke-chuyen-mon'));
+                chart.draw(data, options);
+            }
+        };
+
 
     </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+
+        function drawVisualization() {
+            // Some raw data (not necessarily accurate)
+
+            var data = google.visualization.arrayToDataTable(<?php echo json_encode($doiTuongPiceCharts,
+                JSON_NUMERIC_CHECK); ?>);
+
+            var options = {
+                title : 'Đối tượng quản lý',
+                vAxis: {title: 'Số lượng người'},
+                hAxis: {title: 'Biểu đồ thống kê đối tượng quản lý'},
+                seriesType: 'bars',
+                series: {5: {type: 'line'}}
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
 @endsection

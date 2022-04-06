@@ -162,7 +162,7 @@ class ThemCanBoController extends Controller
         $dangVienC = $request->get('dang_vienC') == 1 ?? null;
         $doanVien = $request->get('doan_vien') == 1 ?? null;
         $boDoi = $request->get('bo_doi') == 1 ?? null;
-        $giaiNgu = $request->get('cho_duyet') == 1 ?? null;
+        $giaiNgu = $request->get('giai_ngu') == 1 ?? null;
         $choDuyet = $request->get('cho_duyet') == 1 ?? null;
         $daDuyet = $request->get('da_duyet') == 1 ?? null;
         $traLai = $request->get('tra_lai') == 1 ?? null;
@@ -175,11 +175,58 @@ class ThemCanBoController extends Controller
         $chuyenCongTac = $request->get('chuyen_cong_tac') ?? null;
         $veHuu = $request->get('ve_huu') ?? null;
         $tuoiDang = $request->get('tuoidang') ?? null;
+        $trenDaiHoc = $request->get('tren_dai_hoc') ?? null;
+        $daiHoc = $request->get('dai_hoc') ?? null;
+        $CaoDang = $request->get('cao_dang') ?? null;
+        $trungCap = $request->get('trung_cap') ?? null;
+        $soCap = $request->get('so_cap') ?? null;
         $title = null;
+        $trenDaiHocID = CongViecChuyenMon::where('ten','like','%Trên đại học%')->first();
+        $daiHocID = CongViecChuyenMon::where('ten','like','%Đại học%')->first();
+        $caoDangID = CongViecChuyenMon::where('ten','like','%Cao đẳng%')->first();
+        $trungCapID = CongViecChuyenMon::where('ten','like','%Trung cấp%')->first();
+        $soCapID = CongViecChuyenMon::where('ten','like','%Sơ cấp%')->first();
+
         if($all == 1)
         {
-            $title = 'Quản lý đảng viên  > hồ sơ đảng viên';
+            $title = 'tổng số hồ sơ cán bộ';
 
+        }elseif($gioiTinh == 1){
+            $title = 'tổng số hồ sơ nam';
+        }elseif($gioiTinh == 2){
+            $title = 'tổng số hồ sơ nữ';
+        }elseif($veHuu == 1){
+            $title = 'tổng số hồ sơ về hưu';
+        }elseif($choDuyet == 1){
+            $title = 'hồ sơ cán bộ chờ duyệt';
+        }elseif($daDuyet == 1){
+            $title = 'hồ sơ cán bộ đã duyệt';
+        }elseif($traLai == 1){
+            $title = 'hồ sơ cán bộ bị trả lại';
+        }elseif($traLai == 1){
+            $title = 'hồ sơ cán bộ chờ gửi duyệt';
+        }elseif($viTri == 1){
+            $title = 'tổng số hồ sơ công chức';
+        }elseif($viTri == 2){
+            $title = 'tổng số hồ sơ viên chức';
+        }elseif($viTri == 3){
+            $title = 'tổng số hồ sơ nhân viên';
+        }elseif($doanVien == 1){
+            $title = 'tổng số hồ sơ là đoàn viên';
+        }elseif($boDoi == 1){
+            $title = 'tổng số hồ sơ đã đi bộ đội';
+        }elseif($giaiNgu == 1){
+            $title = 'tổng số hồ sơ đã giải ngũ';
+        }elseif($trenDaiHocID->id == $trenDaiHoc){
+            $title = 'trên đại học';
+        }elseif($daiHocID->id == $daiHoc){
+            $title = 'đại học';
+        }elseif($caoDangID->id == $CaoDang){
+            $title = 'cao đẳng';
+        }elseif($trungCapID->id == $trungCap){
+            $title = 'trung cấp';
+        }elseif($soCapID->id == $soCap){
+            $title = 'sơ cấp';
         }elseif($dangVienC == 1){
             $title = 'Quản lý đảng viên  > hồ sơ đảng viên';
         }
@@ -204,6 +251,31 @@ class ThemCanBoController extends Controller
             ->where(function ($query) use ($hoTen) {
                 if (!empty($hoTen)) {
                     return $query->where('ho_ten', 'LIKE', "%$hoTen%");
+                }
+            })
+            ->where(function ($query) use ($trenDaiHoc) {
+                if (!empty($trenDaiHoc)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', 'LIKE', "%$trenDaiHoc%");
+                }
+            })
+            ->where(function ($query) use ($daiHoc) {
+                if (!empty($daiHoc)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', 'LIKE', "%$daiHoc%");
+                }
+            })
+            ->where(function ($query) use ($CaoDang) {
+                if (!empty($CaoDang)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', 'LIKE', "%$CaoDang%");
+                }
+            })
+            ->where(function ($query) use ($trungCap) {
+                if (!empty($trungCap)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', 'LIKE', "%$trungCap%");
+                }
+            })
+            ->where(function ($query) use ($soCap) {
+                if (!empty($soCap)) {
+                    return $query->where('trinh_do_chuyen_mon_cao_nhat_id', 'LIKE', "%$soCap%");
                 }
             })
 
