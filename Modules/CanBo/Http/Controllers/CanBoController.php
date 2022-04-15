@@ -864,6 +864,9 @@ class CanBoController extends Controller
         $canBo->ngay_vao_dang = !empty($request->ngay_vao_dang) ? formatYMD($request->ngay_vao_dang) : null;
         $canBo->ngay_vao_dang_chinh_thuc = !empty($request->ngay_vao_dang_chinh_thuc) ? formatYMD($request->ngay_vao_dang_chinh_thuc) : null;
         $canBo->ngay_tham_gia_to_chuc = !empty($request->ngay_tham_gia_to_chuc) ? formatYMD($request->ngay_tham_gia_to_chuc) : null;
+        $canBo->ngay_ve_huu = !empty($request->ngay_ve_huu) ? formatYMD($request->ngay_ve_huu) : null;
+        $canBo->can_bo_bo_nhiem = $request->can_bo_bo_nhiem;
+        $canBo->can_bo_bo_nhiem_lai = $request->can_bo_bo_nhiem_lai;
         $canBo->noi_vao_dang = $request->noi_vao_dang;
         $canBo->chuc_vu_cao_nhat = $request->chuc_vu_cao_nhat;
         $canBo->cong_viec_chinh = $request->cong_viec_chinh;

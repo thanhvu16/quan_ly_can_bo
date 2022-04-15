@@ -4,6 +4,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12 mt-2">
+                @include('admin::dashboard.canh_bao')
                 @if (!auth::user()->hasRole([QUAN_TRI_HT]))
                     @include('admin::dashboard.can_bo')
                 @endif
@@ -14,6 +15,7 @@
                     @include('admin::dashboard.thong-tin')
                     @include('admin::dashboard.thong-tin-dang')
                     @include('admin::dashboard.trinh_do_chuyen_mon')
+                <div class="row clearfix"></div>
                     @include('admin::dashboard.doi_tuong')
             </div>
         </div>
@@ -31,6 +33,7 @@
         google.charts.setOnLoadCallback(drawChartThongKeDangCanBoTrongDonVi);
         google.charts.setOnLoadCallback(drawChartQuanLyCanBoTrongDonVi);
         google.charts.setOnLoadCallback(drawChartThongKeChuyenMon);
+        google.charts.setOnLoadCallback(drawChartCanhBao);
 
         function drawChartQuanLyHoSoCanBo() {
 
@@ -157,6 +160,27 @@
 
             if (document.getElementById('pie-chart-thong-ke-chuyen-mon') != undefined) {
                 let chart = new google.visualization.PieChart(document.getElementById('pie-chart-thong-ke-chuyen-mon'));
+                chart.draw(data, options);
+            }
+        };
+        function drawChartCanhBao() {
+
+            let data = google.visualization.arrayToDataTable(<?php echo json_encode($canhBaoPiceCharts,
+                JSON_NUMERIC_CHECK); ?>);
+
+            // Optional; add a title and set the width and height of the chart
+            let options = {
+                'title': '',
+                titleTextStyle: {
+                    bold: true,
+                    fontSize: 14,
+                },
+                legend: {position: 'none'},
+                colors: <?php echo json_encode($CanhBaoCoLors); ?>
+            };
+
+            if (document.getElementById('pie-chart-thong-ke-canh-bao') != undefined) {
+                let chart = new google.visualization.PieChart(document.getElementById('pie-chart-thong-ke-canh-bao'));
                 chart.draw(data, options);
             }
         };

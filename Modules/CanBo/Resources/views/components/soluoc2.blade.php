@@ -227,6 +227,30 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3" >
+                <div class="form-group">
+                    <label for="exampleInputEmail4">Ngày quyết định về hưu</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control  datepicker"  value="{{ isset($canBo) && $canBo->ngay_ve_huu ? formatDMY($canBo->ngay_ve_huu) : ''}}"
+                               name="ngay_ve_huu" id="ngay_ve_huu" autocomplete="off"
+                               placeholder="dd/mm/yyyy" >
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <input type="checkbox"  name="can_bo_bo_nhiem" {{ isset($canBo) && $canBo->can_bo_bo_nhiem ? 'checked' : ''}}  value="1" >&emsp;<label for="can_bo_bo_nhiem"> Cán bộ được bổ nhiệm	</label>
+                </div>
+            </div>
+            <div class="col-md-3 mt-4" >
+                <div class="form-group">
+                    <input type="checkbox"  name="can_bo_bo_nhiem_lai" {{ isset($canBo) && $canBo->can_bo_bo_nhiem_lai ? 'checked' : ''}}  value="1" >&emsp;<label for="can_bo_bo_nhiem_lai"> Cán bộ được bổ nhiệm lại	</label>
+                </div>
+            </div>
+
         </div>
 
 
@@ -549,6 +573,7 @@
                     </div>
                 </div>
             </div>
+
 
 
 

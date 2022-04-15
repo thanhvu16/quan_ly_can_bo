@@ -62,20 +62,29 @@
                         </li>
                 </ul>
             </li>
-                <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
-                    <a href="{{route('don-vi-to-chuc.index')}}">
-                        <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
-                        <span class="pull-right-container"></span>
-                    </a>
-                </li>
+
+            <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">
+                <a href="{{route('don-vi-to-chuc.index')}}">
+                    <i class="fa fa-android" ></i> <span>Nghiệp vụ quản lý cán bộ</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
 
 
-{{--            <li class="{{  Route::is('allCanBo') ? 'active' : '' }} ">--}}
+
+                {{--            <li class="{{  Route::is('allCanBo') ? 'active' : '' }} ">--}}
 {{--                <a href="{{route('allCanBo')}}">--}}
 {{--                    <i class="fa  fa-user" ></i> <span>Thông tin hồ sơ cán bộ</span>--}}
 {{--                    <span class="pull-right-container"></span>--}}
 {{--                </a>--}}
 {{--            </li>--}}
+            @endif
+            @if(auth::user()->hasRole([CAN_BO]))
+                @include('admin::layouts.components.sidebar_can_bo')
+
+            @endif
+            @if(auth::user()->hasRole([LANH_DAO]))
+                @include('admin::layouts.components.sidebar_lanh_dao_c')
             @endif
 {{--            <li class="{{  Route::is('don-vi-to-chuc.index') ? 'active' : '' }} ">--}}
 {{--                <a href="{{route('don-vi-to-chuc.index')}}">--}}

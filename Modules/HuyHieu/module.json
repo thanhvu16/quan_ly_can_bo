@@ -1,0 +1,13 @@
+{
+    "name": "HuyHieu",
+    "alias": "huyhieu",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\HuyHieu\\Providers\\HuyHieuServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

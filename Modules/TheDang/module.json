@@ -1,0 +1,13 @@
+{
+    "name": "TheDang",
+    "alias": "thedang",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\TheDang\\Providers\\TheDangServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -88,6 +88,7 @@
                            placeholder="Nhập số chứng minh thư.. " required>
                 </div>
             </div>
+            <div class="row clearfix"></div>
 
 
             <div class="col-md-3" >

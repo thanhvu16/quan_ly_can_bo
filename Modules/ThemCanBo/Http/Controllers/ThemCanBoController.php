@@ -180,12 +180,22 @@ class ThemCanBoController extends Controller
         $CaoDang = $request->get('cao_dang') ?? null;
         $trungCap = $request->get('trung_cap') ?? null;
         $soCap = $request->get('so_cap') ?? null;
+        $canBoSapNhanQDVeHuu = $request->get('sap_nhan_ve_huu') ?? null;
+        $canBoSapNangLuong = $request->get('sap_nang_luong') ?? null;
+        $CanBoBoNhiem = $request->get('bo_nhiem') ?? null;
+        $CanBoBoNhiemLai = $request->get('bo_nhiem_lai') ?? null;
+        $canBoSinhNhat = $request->get('sinh_nhat') ?? null;
         $title = null;
         $trenDaiHocID = CongViecChuyenMon::where('ten','like','%Trên đại học%')->first();
         $daiHocID = CongViecChuyenMon::where('ten','like','%Đại học%')->first();
         $caoDangID = CongViecChuyenMon::where('ten','like','%Cao đẳng%')->first();
         $trungCapID = CongViecChuyenMon::where('ten','like','%Trung cấp%')->first();
         $soCapID = CongViecChuyenMon::where('ten','like','%Sơ cấp%')->first();
+
+        $ngay = 2;
+        $date = date('Y-m-d');
+        $newdate = strtotime("+$ngay day", strtotime($date));
+        $newdate = date('Y-m-j', $newdate);
 
         if($all == 1)
         {
@@ -217,6 +227,16 @@ class ThemCanBoController extends Controller
             $title = 'tổng số hồ sơ đã đi bộ đội';
         }elseif($giaiNgu == 1){
             $title = 'tổng số hồ sơ đã giải ngũ';
+        }elseif($canBoSapNhanQDVeHuu == 1){
+            $title = 'Cán bộ sắp nhận quyết định về hưu';
+        }elseif($canBoSapNangLuong == 1){
+            $title = 'Cán bộ sắp nâng lương';
+        }elseif($CanBoBoNhiem == 1){
+            $title = 'Cán bộ bổ được nhiệm';
+        }elseif($CanBoBoNhiemLai == 1){
+            $title = 'Cán bộ được bổ nhiệm lại';
+        }elseif($canBoSinhNhat == 1){
+            $title = 'Cán bộ sinh nhật hôm nay';
         }elseif($trenDaiHocID->id == $trenDaiHoc){
             $title = 'trên đại học';
         }elseif($daiHocID->id == $daiHoc){
@@ -235,6 +255,8 @@ class ThemCanBoController extends Controller
 
 
 
+
+
         $tenDonVi = auth::user()->donVi->ten_don_vi;
         if (!empty($donViId)) {
             $tenDonVi = ToChuc::where('id', $donViId)->select('id', 'ten_don_vi')->first()->ten_don_vi;
@@ -248,6 +270,16 @@ class ThemCanBoController extends Controller
             }
         })
 
+            ->where(function ($query) use ($canBoSapNhanQDVeHuu,$newdate) {
+                if (!empty($canBoSapNhanQDVeHuu)) {
+                    return $query->where('ngay_ve_huu', $newdate);
+                }
+            })
+            ->where(function ($query) use ($canBoSapNangLuong,$newdate) {
+                if (!empty($canBoSapNangLuong)) {
+                    return $query->where('moc_xet_tang_luong', $newdate);
+                }
+            })
             ->where(function ($query) use ($hoTen) {
                 if (!empty($hoTen)) {
                     return $query->where('ho_ten', 'LIKE', "%$hoTen%");
@@ -317,6 +349,21 @@ class ThemCanBoController extends Controller
             ->where(function ($query) use ($boDoi) {
                 if (!empty($boDoi)) {
                     return $query->where('da_di_bo_doi',1);
+                }
+            })
+            ->where(function ($query) use ($CanBoBoNhiemLai) {
+                if (!empty($CanBoBoNhiemLai)) {
+                    return $query->where('can_bo_bo_nhiem_lai',1);
+                }
+            })
+            ->where(function ($query) use ($CanBoBoNhiem) {
+                if (!empty($CanBoBoNhiem)) {
+                    return $query->where('can_bo_bo_nhiem',1);
+                }
+            })
+            ->where(function ($query) use ($canBoSinhNhat) {
+                if (!empty($canBoSinhNhat)) {
+                    return $query->where('ngay_sinh',date('Y-m-d'));
                 }
             })
             ->where(function ($query) use ($giaiNgu) {
