@@ -22,7 +22,7 @@
                                 <div class="form-group col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputEmail4">Chọn loại huy hiệu</label>
-                                        <select class="form-control select2" name="dot_cap" >
+                                        <select class="form-control select2" name="loai_huy_hieu" required>
                                             <option value="">--Lựa chọn--</option>
                                             @foreach($huyHieu as $ds)
                                                 <option value="{{$ds->id}}" >{{$ds->ten}}</option>
@@ -64,7 +64,7 @@
                                     @forelse($danhSach as $key=>$data)
                                         <tr>
                                             <td class="text-center" style="vertical-align: middle">
-                                                <input type="checkbox" value="{{ $data->id }}" form="can-bo" class="sub-check" name="can_bo[{{ $data->id }}]" id="can-bo-{{ $data->id .'.3' }}">
+                                                <input type="checkbox" value="{{ $data->canBo->id }}" form="can-bo" class="sub-check" name="can_bo[{{ $data->id }}]" id="can-bo-{{ $data->id .'.3' }}">
                                             </td>
                                             <td style="text-transform: uppercase;font-weight: bold"><a href="{{route('canBoDetail',$data->canBo->id)}}">@if($data->gioi_tinh == 1) <i style="color: brown" class="fa fa-user-secret"></i>  @else <i style="color: hotpink" class="fa   fa-venus"></i> @endif {{$data->canBo->ho_ten}}</a></td>
                                             <td class="text-center">{{$data->canBo->gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>

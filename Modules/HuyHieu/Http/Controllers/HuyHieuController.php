@@ -34,6 +34,39 @@ class HuyHieuController extends \App\Http\Controllers\Controller
 
         return view('huyhieu::index', compact('dotCapThe', 'danhSach', 'danhSachTheoDot'));
     }
+    public function danhSachCBDaDuyetHH(Request $request)
+    {
+        $dotCap = $request->get('dot_cap');
+        $donVi = $request->get('don_vi');
+        $danhSachTheoDot = [];
+        $dotCapThe = DotCapHuyHieu::where(function ($query) use ($donVi) {
+                if (!empty($donVi)) {
+                    return $query->where(DB::raw('lower(don_vi_id)'), 'LIKE', "%" . mb_strtolower($donVi) . "%");
+                }
+            })
+            ->get();
+
+        if (!empty($dotCap)) {
+            $danhSachTheoDot = DanhSachHuyHieu::whereHas('canBoDaDuyet')->where('dot_cap_the_id', $dotCap)->paginate(10);
+        }
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
+
+        return view('huyhieu::cb_da_duyet', compact('dotCapThe', 'danhSachTheoDot','donVi'));
+    }
+
+    public function cacDot($id)
+    {
+        $dotCapThe = DotCapHuyHieu::where('don_vi_id',$id)->get();
+        return response()->json([
+            'success' => true,
+            'data' => $dotCapThe
+        ]);
+    }
 
 
     /**
@@ -87,7 +120,31 @@ class HuyHieuController extends \App\Http\Controllers\Controller
      */
     public function capSo(Request $request,$id)
     {
-        dd($request->all());
+        $data = $request->all();
+
+
+        $danhSach = $data['can_bo'] ?? null;
+        if (!empty($danhSach)) {
+            foreach ($danhSach as $dataf) {
+                $soHuyHieu = DanhSachHuyHieu::wherenotNull('ma_huy_hieu')->max('ma_huy_hieu');
+                $soHuyHieu = $soHuyHieu + 1;
+                $huyHieu = HuyHieuDang::where('id',$request->loai_huy_hieu)->first();
+                if($huyHieu->ten == 'Huy hiệu 30 năm tuổi đảng')
+                {
+                    $sp = sprintf("%07d", $soHuyHieu);
+                }
+                $lapDS = DanhSachHuyHieu::where(['can_bo_id'=>$dataf,'dot_cap_the_id'=>$id])->first();
+                $lapDS->ma_huy_hieu = $sp;
+                $lapDS->loai_huy_hieu = $request->loai_huy_hieu;
+                $lapDS->save();
+                $canBo = CanBo::where('id', $dataf)->first();
+                $canBo->trang_thai_huy_hieu_can_bo = 2;
+                $canBo->save();
+            }
+            return redirect()->back()->with('success', 'Duyệt thành công !');
+        } else {
+            return redirect()->back()->with('error', 'Bạn chưa chọn cán bộ nào !');
+        }
     }
     public function edit($id)
     {
@@ -151,6 +208,7 @@ class HuyHieuController extends \App\Http\Controllers\Controller
     }
     public function huyHieuCanBo(Request $request,$id)
     {
+//        dd(sprintf("%04d", 100));
         $danhSach = DanhSachHuyHieu::where('dot_cap_the_id',$id)->paginate(10);
         $dotCap = DotCapHuyHieu::where('id',$id)->first();
         $huyHieu = HuyHieuDang::all();

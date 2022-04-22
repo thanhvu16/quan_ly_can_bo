@@ -32,7 +32,7 @@
                                                     <label for="exampleInputEmail4">Đợt cấp huy hiệu</label>
                                                     <div class="input-group date">
                                                         <input type="text" class="form-control  datepicker"
-                                                               name="dot_cap_the" id="dot_cap_the" value="{{isset($first) ? date("d/m/Y", strtotime($first->dot_cap_the)) : ''}}"
+                                                               name="dot_cap_the" id="dot_cap_the" autocomplete="off" value="{{isset($first) ? date("d/m/Y", strtotime($first->dot_cap_the)) : ''}}"
                                                                placeholder="dd/mm/yyyy" >
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar-o"></i>

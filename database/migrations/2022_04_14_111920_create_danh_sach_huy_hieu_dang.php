@@ -17,6 +17,8 @@ class CreateDanhSachHuyHieuDang extends Migration
             $table->id();
             $table->integer('can_bo_id')->nullable();
             $table->integer('dot_cap_the_id')->nullable();
+            $table->string('ma_huy_hieu')->nullable();
+            $table->string('loai_huy_hieu')->nullable();
             $table->tinyInteger('trang_thai')->nullable();
             $table->timestamps();
         });

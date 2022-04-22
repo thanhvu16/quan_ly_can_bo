@@ -28,5 +28,7 @@ Route::post('gui-duyet-huy-hieu-dang/{id}', 'HuyHieuController@guiDuyet')->name(
 Route::get('danh-sach-cap-so-huy-hieu/{id}', 'HuyHieuController@capSoHuyHieu')->name('capSoHuyHieu');
 Route::get('danh-sach-huy-hieu-can-bo/{id}', 'HuyHieuController@huyHieuCanBo')->name('huyHieuCanBo');
 Route::post('cap-so-hh/{id}', 'HuyHieuController@capSo')->name('capSo');
+Route::get('tim-kiem-cac-dot-cap-huy-hieu/{id}', 'HuyHieuController@cacDot')->name('cacDot');
+Route::get('danh-sach-can-bo-da-duyet-huy-hieu', 'HuyHieuController@danhSachCBDaDuyetHH')->name('danhSachCBDaDuyetHH');
 
 

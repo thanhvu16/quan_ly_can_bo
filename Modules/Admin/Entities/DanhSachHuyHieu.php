@@ -14,6 +14,10 @@ class DanhSachHuyHieu extends Model
     {
         return $this->belongsTo(CanBo::class, 'can_bo_id', 'id');
     }
+    public function canBoDaDuyet()
+    {
+        return $this->belongsTo(CanBo::class, 'can_bo_id', 'id')->where('trang_thai_huy_hieu_can_bo',2);
+    }
     public function dotCapThe()
     {
         return $this->belongsTo(DotCapHuyHieu::class, 'dot_cap_the_id', 'id');

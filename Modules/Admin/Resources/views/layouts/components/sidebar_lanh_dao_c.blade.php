@@ -17,7 +17,7 @@
         </li>
     </ul>
 </li>
-<li class="treeview {{ Route::is('DSDotCapHuyHieuDangChoDuyet') || Route::is('DSDotCapHuyHieuDangDaDuyet')|| Route::is('capSoHuyHieu') ? 'active menu-open' : '' }}  ">
+<li class="treeview {{ Route::is('DSDotCapHuyHieuDangChoDuyet') || Route::is('DSDotCapHuyHieuDangDaDuyet')|| Route::is('danhSachCBDaDuyetHH')|| Route::is('huyHieuCanBo')|| Route::is('capSoHuyHieu') ? 'active menu-open' : '' }}  ">
     <a href="#">
         <i class="fa fa-shirtsinbulk" ></i> <span>Huy hiệu đảng</span>
         <span class="pull-right-container">
@@ -28,11 +28,11 @@
         <li class="{{ Route::is('DSDotCapHuyHieuDangChoDuyet') ? 'active' : '' }}">
             <a href="{{ route('DSDotCapHuyHieuDangChoDuyet') }}"><i class="fa fa-circle-o"></i>Duyệt và cấp số huy hiệu</a>
         </li>
-        <li class="{{ Route::is('DSDotCapHuyHieuDangDaDuyet') ? 'active' : '' }}">
-            <a href="{{ route('DSDotCapHuyHieuDangDaDuyet') }}"><i class="fa fa-circle-o"></i>D/s cấp huy hiệu đã duyệt</a>
-        </li>
-        <li class="{{ Route::is('bao_cao_thong_ke.index') ? 'active' : '' }}">
-            <a href="{{ route('bao_cao_thong_ke.index') }}"><i class="fa fa-circle-o"></i>In huy hiệu đảng</a>
+{{--        <li class="{{ Route::is('DSDotCapHuyHieuDangDaDuyet') ? 'active' : '' }}">--}}
+{{--            <a href="{{ route('DSDotCapHuyHieuDangDaDuyet') }}"><i class="fa fa-circle-o"></i>D/s cấp huy hiệu đã duyệt</a>--}}
+{{--        </li>--}}
+        <li class="{{ Route::is('danhSachCBDaDuyetHH') ? 'active' : '' }}">
+            <a href="{{ route('danhSachCBDaDuyetHH') }}"><i class="fa fa-circle-o"></i>In quyết định huy hiệu đảng</a>
         </li>
     </ul>
 </li>

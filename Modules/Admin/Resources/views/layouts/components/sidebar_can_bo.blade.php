@@ -41,7 +41,7 @@
             <a href="{{ route('cap-huy-hieu-dang.index') }}"><i class="fa fa-circle-o"></i>Lập danh sách cấp huy hiệu</a>
         </li>
         <li class="{{ Route::is('DSDotCapHuyHieuDangChoGui') ? 'active' : '' }}">
-            <a href="{{ route('DSDotCapHuyHieuDangChoGui') }}"><i class="fa fa-circle-o"></i>D/scấp huy hiệu chờ gửi</a>
+            <a href="{{ route('DSDotCapHuyHieuDangChoGui') }}"><i class="fa fa-circle-o"></i>D/s cấp huy hiệu chờ gửi</a>
         </li>
         <li class="{{ Route::is('DSDotCapHuyHieuDangDaGui') ? 'active' : '' }}">
             <a href="{{ route('DSDotCapHuyHieuDangDaGui') }}"><i class="fa fa-circle-o"></i>D/s cấp huy hiệu đã gửi</a>
