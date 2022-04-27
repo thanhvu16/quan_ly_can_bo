@@ -10,6 +10,11 @@
                 <p>{{ auth::user()->ho_ten ?? 'N/A' }}</p>
                 <a href="#"><i class="fa fa-user"></i> {{auth::user()->chucVu->ten_chuc_vu ?? ''}}</a><br>
             </div>
+
+        </div>
+        <div class="text-center" style="padding-left: 5px;font-size: 12px;">
+            <a href="#" style="color: #fff">Đơn vị: {{auth::user()->donVi->ten_don_vi     ?? ''}}</a><br>
+
         </div>
 
 

@@ -24,12 +24,12 @@
                             class="btn br-10 btn-primary btn-circle waves-effect waves-light btn-sm pull-right count-item">{{  $canBoSapNangLuong }}</button>
                     </p>
                 </a>
-{{--                <a class="text-title-item" href="{{ route('allCanBo', 'bo_nhiem=1') }}">--}}
-{{--                    <p>Cán bộ được bổ nhiệm--}}
-{{--                        <button--}}
-{{--                            class="btn br-10 btn-warning btn-circle waves-effect waves-light btn-sm pull-right count-item">{{  $CanBoBoNhiem }}</button>--}}
-{{--                    </p>--}}
-{{--                </a>--}}
+                <a class="text-title-item" href="{{ route('allCanBo', 'bo_nhiem=1') }}">
+                    <p>Cán bộ sắp được cấp huy hiệu đảng
+                        <button
+                            class="btn br-10 btn-warning btn-circle waves-effect waves-light btn-sm pull-right count-item">{{  $CanBoBoNhiem }}</button>
+                    </p>
+                </a>
 {{--                <a class="text-title-item" href="{{ route('allCanBo', 'bo_nhiem_lai=1') }}">--}}
 {{--                    <p>Cán bộ được bổ nhiệm lại--}}
 {{--                        <button--}}

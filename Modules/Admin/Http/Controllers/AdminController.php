@@ -5,6 +5,7 @@ namespace Modules\Admin\Http\Controllers;
 use App\Common\AllPermission;
 use App\Models\LichCongTac;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,6 +23,7 @@ use Modules\Admin\Entities\LoaiVanBan;
 use Modules\Admin\Entities\LuuVetDangNhap;
 use Modules\Admin\Entities\SoVanBan;
 use Modules\Admin\Entities\TaiLieuHuongDan;
+use Modules\Admin\Entities\ToChuc;
 use Modules\CongViecDonVi\Entities\ChuyenNhanCongViecDonVi;
 use Modules\CongViecDonVi\Entities\CongViecDonViGiaHan;
 use Modules\CongViecDonVi\Entities\CongViecDonViPhoiHop;
@@ -232,6 +234,8 @@ class AdminController extends Controller
         $date = date('Y-m-d');
         $newdate = strtotime("+$ngay day", strtotime($date));
         $newdate = date('Y-m-j', $newdate);
+        //end
+
         $CanhBaoCoLors = [];
         $canhBaoPiceCharts = [];
         $canBoSapNhanQDVeHuu = 0;
@@ -398,6 +402,7 @@ class AdminController extends Controller
             array_push($thongKeDangPiceCharts, array('Hồ sơ gửi duyệt bị trả lại', $hoSoGuiDuyetBiTraLai));
             array_push($thongKeDangCoLors, COLOR_RED);
             //cảnh báo
+
             $canBoSapNhanQDVeHuu = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
                 ->where('ngay_ve_huu', $newdate)->count();
@@ -409,10 +414,22 @@ class AdminController extends Controller
                 ->where('ngay_sinh', $date)->count();
             $CanBoBoNhiem = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
-                ->where('can_bo_bo_nhiem', 1)->count();
-            $CanBoBoNhiemLai = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
-                ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
-                ->where('can_bo_bo_nhiem_lai', 1)->count();
+                ->where('ngay_vao_dang', 1)->count();
+
+
+
+            array_push($canhBaoPiceCharts, array('Task', 'Danh sách'));
+            array_push($canhBaoPiceCharts, array('Cán bộ sắp nhận quyết định về hưu', $canBoSapNhanQDVeHuu));
+            array_push($CanhBaoCoLors, COLOR_GREEN);
+
+            array_push($canhBaoPiceCharts, array('Cán bộ sắp được nâng lương', $canBoSapNangLuong));
+            array_push($CanhBaoCoLors, COLOR_INFO);
+
+            array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm', $CanBoBoNhiem));
+            array_push($CanhBaoCoLors, COLOR_ORANGE);
+
+            array_push($canhBaoPiceCharts, array('Cán bộ sinh nhật hôm nay', $canBoSinhNhat));
+            array_push($CanhBaoCoLors, COLOR_RED);
 
             //đối tượng cán bộ
             $doiTuongPiceCharts = [];
@@ -776,7 +793,12 @@ class AdminController extends Controller
 
         }
 
-
+        $donVi = ToChuc::where(function ($query) {
+            if (auth::user()->donVi && auth::user()->donVi->parent_id != 0) {
+                return $query->where('id', auth::user()->don_vi_id)
+                    ->orwhere('parent_id', auth::user()->don_vi_id);
+            }
+        })->get();
 //
 //        if (auth::user()->hasRole([QUAN_TRI_HT])) {
 //            return redirect()->route('nguoi-dung.index');
@@ -785,6 +807,7 @@ class AdminController extends Controller
 
         return view('admin::index',
             [
+                'donVi' => $donVi,
                 'canhBaoPiceCharts' => $canhBaoPiceCharts,
                 'CanhBaoCoLors' => $CanhBaoCoLors,
                 'canBoSapNhanQDVeHuu' => $canBoSapNhanQDVeHuu,

@@ -3,7 +3,21 @@
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-md-12 mt-2">
+            <div class="col-md-12 mb-1">
+                <div class="col-md-10"></div>
+                <div class="col-md-2 ">
+                    <form action="">
+                        <select class="form-control select2" name="don_vi_loc" onchange="this.form.submit()">
+                            <option value="">--Lọc theo đơn vị nhỏ hơn--</option>
+                            @foreach($donVi as $dsDV)
+                                <option value="{{$dsDV->id}}" {{Request::get('don_vi_loc') == $dsDV->id ? 'selected' : ''}} >{{$dsDV->ten_don_vi}}</option>
+                            @endforeach
+
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12 ">
                 @include('admin::dashboard.canh_bao')
                 @if (!auth::user()->hasRole([QUAN_TRI_HT]))
                     @include('admin::dashboard.can_bo')
