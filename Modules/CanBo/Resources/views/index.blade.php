@@ -186,44 +186,48 @@
                             @endcan</li>
                         <li class="treeview active menu-open ">
                             <a href="#">
-                                <i class="fa fa-home"></i> <span>Đơn vị : {{ $canBo->donVi->ten_don_vi }}</span>
+                                <i class="fa fa-user"></i> <span>Họ tên : {{ $canBo->ho_ten }}</span>
                                 <span class="pull-right-container"></span>
                             </a>
                         </li>
                         <li class="treeview active menu-open ">
                             <a href="#">
-                                <i class="fa fa-tags"></i> <span>Số thẻ Đảng : {{ $canBo->so_the_dang  ?? ''}}</span>
+                                <i class="fa fa-user"></i> <span>Quê quán : {{ $canBo->que_quan }}</span>
                                 <span class="pull-right-container"></span>
                             </a>
                         </li>
-                        <li class=" active menu-open ">
+                        <li class="treeview active menu-open ">
                             <a href="#">
-                                <i class="fa  fa-bank"></i> <span>Trung ương quản lý :&emsp; <input  {{$canBo->trung_uong_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="trung_uong_quan_ly"></span>
+                                <i class="fa fa-home"></i> <span>Đơn vị : {{ $canBo->donVi->ten_don_vi }}</span>
                                 <span class="pull-right-container"></span>
                             </a>
                         </li>
-                        <li class=" active menu-open ">
-                            <a href="#">
-                                <i class="fa  fa-archive"></i> <span>Làm công tác quản lý :&emsp; <input {{$canBo->lam_cong_tac_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="lam_cong_tac_quan_ly"></span>
-                                <span class="pull-right-container"></span>
+                        <li class="treeview  " >
+                            <a href="#" style="color: white">
+                                <i class="fa  fa-info-circle"></i> <span>Thông tin thêm</span>
+                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
+                            <ul class="treeview-menu">
+                                <li class="active"><a href="">Số thẻ Đảng : {{ $canBo->so_the_dang  ?? ''}}</a></li>
+                                <li class="active"><a href="">Trung ương quản lý :&emsp; <input  {{$canBo->trung_uong_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="trung_uong_quan_ly"></a></li>
+                                <li class="active"><a href="">Làm công tác quản lý :&emsp; <input {{$canBo->lam_cong_tac_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="lam_cong_tac_quan_ly"></a></li>
+                            </ul>
                         </li>
+{{--                        <li class="treeview active">--}}
+{{--                            <a href="#"><i class="fa fa-cogs"></i> <span>Thông tin thêm</span>--}}
+{{--                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>--}}
+{{--                            </a>--}}
+{{--                            <ul class="treeview-menu">--}}
+{{--                                <li class="active"><a href="">Số thẻ Đảng : {{ $canBo->so_the_dang  ?? ''}}</a></li>--}}
+{{--                                <li class="active"><a href="">Trung ương quản lý :&emsp; <input  {{$canBo->trung_uong_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="trung_uong_quan_ly"></li>--}}
+{{--                                <li class="active"><a href="">Làm công tác quản lý :&emsp; <input {{$canBo->lam_cong_tac_quan_ly == 1 ? 'checked' : ''}} type="checkbox" value="1" form="form3" name="lam_cong_tac_quan_ly"></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
                         <li class=" active menu-open ">
                             <a href="{{ asset('uploads/phieu-can-bo/'.$canBo->id.'_phieu_can_bo.docx') }}"><i class="fa fa-file-word-o"></i> <span> In lý lịch.docx</span>
                                 <span class="pull-right-container"></span>
                             </a>
                         </li>
-{{--                        <li class=" active menu-open ">--}}
-{{--                            <a ><i class="fa fa-file-word-o"></i> <span> Trạng thái: </span>--}}
-{{--                                <span class="pull-right-container"></span>--}}
-{{--                                <select name="trang_thai_cb" id="" style="text-align: center;color: black">--}}
-{{--                                    @foreach($trangThai as $dstrangThai)--}}
-{{--                                        <option value="{{$dstrangThai->id}}"  {{$canBo->trang_thai_cb == $dstrangThai->id ? 'selected' : ''}}>{{$dstrangThai->ten}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </a>--}}
-
-{{--                        </li>--}}
                     </ul>
                 </div>
             </div>

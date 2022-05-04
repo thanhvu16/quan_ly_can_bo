@@ -110,7 +110,7 @@ Route::resource('ngoai-ngu', 'NgoaiNguController');
 Route::resource('tin-hoc', 'TinHocController');
 Route::resource('chinh-tri', 'LyLuanChinhTri');
 Route::resource('chuc-vu-hien-tai', 'ChucVuHienTaiController');
-Route::resource('nhiem-ky-dang', 'NhiemKyDang');
+Route::resource('nhiem-ky-dang', 'NhiemKyDangController');
 Route::resource('pho-thong', 'PhoThongController');
 Route::resource('trang-thai', 'TrangThaiController');
 Route::resource('quan-ly-hc', 'QuanLyHanhChinhController');
@@ -121,7 +121,7 @@ Route::get('xoa-ngoai-ngu/{id}', array('as' => 'xoann', 'uses' => 'NgoaiNguContr
 Route::get('xoa-tin-hoc/{id}', array('as' => 'xoatinhoc', 'uses' => 'TinHocController@destroy'));
 Route::get('xoa-chinh-tri/{id}', array('as' => 'xoatpchinhtri', 'uses' => 'LyLuanChinhTri@destroy'));
 Route::get('xoa-chuc-vu-hien-tai/{id}', array('as' => 'xoacvht', 'uses' => 'ChucVuHienTaiController@destroy'));
-Route::get('xoa-nhiem-ky-dang/{id}', array('as' => 'xoankdang', 'uses' => 'NhiemKyDang@destroy'));
+Route::get('xoa-nhiem-ky-dang/{id}', array('as' => 'xoankdang', 'uses' => 'NhiemKyDangController@destroy'));
 Route::get('xoa-pho-thong/{id}', array('as' => 'xoaphothong', 'uses' => 'PhoThongController@destroy'));
 Route::get('xoa-trang-thai/{id}', array('as' => 'xoatrangthai', 'uses' => 'TrangThaiController@destroy'));
 Route::get('xoa-quan-ly-hc/{id}', array('as' => 'xoahcql', 'uses' => 'QuanLyHanhChinhController@destroy'));

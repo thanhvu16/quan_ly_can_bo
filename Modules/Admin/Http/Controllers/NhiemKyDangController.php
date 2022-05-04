@@ -8,8 +8,9 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\KhenThuongKyLuat;
 use Modules\Admin\Entities\KyLuat;
 use DB;
+use Modules\Admin\Entities\NhiemKyDang;
 
-class NhiemKyDang extends Controller
+class NhiemKyDangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +20,7 @@ class NhiemKyDang extends Controller
     {
         $ten = $request->get('ten');
         $mo_ta = $request->get('mo_ta');
-        $danh_sach = NhiemKyDang::orderBy('ten')
+        $danh_sach = NhiemKyDang::orderBy('ten','asc')
             ->where(function ($query) use ($ten) {
                 if (!empty($ten)) {
                     return $query->where(DB::raw('lower(ten)'), 'LIKE', "%" . mb_strtolower($ten) . "%");

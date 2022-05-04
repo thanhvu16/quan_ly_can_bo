@@ -425,7 +425,7 @@ class AdminController extends Controller
             array_push($canhBaoPiceCharts, array('Cán bộ sắp được nâng lương', $canBoSapNangLuong));
             array_push($CanhBaoCoLors, COLOR_INFO);
 
-            array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm', $CanBoBoNhiem));
+            array_push($canhBaoPiceCharts, array('Cán bộ sắp được cấp huy hiệu đảng', $CanBoBoNhiem));
             array_push($CanhBaoCoLors, COLOR_ORANGE);
 
             array_push($canhBaoPiceCharts, array('Cán bộ sinh nhật hôm nay', $canBoSinhNhat));
@@ -612,7 +612,7 @@ class AdminController extends Controller
             array_push($canhBaoPiceCharts, array('Cán bộ sắp được nâng lương', $canBoSapNangLuong));
             array_push($CanhBaoCoLors, COLOR_INFO);
 
-            array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm', $CanBoBoNhiem));
+            array_push($canhBaoPiceCharts, array('Cán bộ sắp được cấp huy hiệu đảng', $CanBoBoNhiem));
             array_push($CanhBaoCoLors, COLOR_ORANGE);
 
             array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm lại', $CanBoBoNhiemLai));
@@ -766,7 +766,7 @@ class AdminController extends Controller
             array_push($canhBaoPiceCharts, array('Cán bộ sắp được nâng lương', $canBoSapNangLuong));
             array_push($CanhBaoCoLors, COLOR_INFO);
 
-            array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm', $CanBoBoNhiem));
+            array_push($canhBaoPiceCharts, array('Cán bộ sắp được cấp huy hiệu đảng', $CanBoBoNhiem));
             array_push($CanhBaoCoLors, COLOR_ORANGE);
 
             array_push($canhBaoPiceCharts, array('Cán bộ được bổ nhiệm lại', $CanBoBoNhiemLai));
