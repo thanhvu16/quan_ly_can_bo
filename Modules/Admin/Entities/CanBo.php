@@ -18,6 +18,10 @@ class CanBo extends Model
     const GIOI_TINH_NAM = 1;
     const GIOI_TINH_NU = 2;
 
+    public function searchHV()
+    {
+        return $this->belongsTo(HocVienDaoTao::class, 'id', 'ten_hoc_vien');
+    }
     public function khenThuongCaoNhat()
     {
         return $this->belongsTo(KhenThuongKyLuat::class, 'khen_thuong_cao_nhat', 'id');

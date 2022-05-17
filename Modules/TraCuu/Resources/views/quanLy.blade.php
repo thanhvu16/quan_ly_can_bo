@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="max-height:680px;  overflow:auto;border-style:double;">
                             <div class="row">
                                 <table id="table" style="font-size: 12px"></table>
                             </div>

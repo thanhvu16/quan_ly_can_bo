@@ -178,5 +178,16 @@
         <span class="pull-right-container"></span>
     </a>
 </li>
-
+<li class="treeview {{ Route::is('quan-ly-dao-tao.index') || Route::is('quan-ly-lop-dao-tao.index')  ? 'active menu-open' : '' }} }} ">
+    <a href="#">
+        <i class="fa fa-book"></i> <span>Quản lý đào tạo</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="{{ Route::is('quan-ly-lop-dao-tao.index') ? 'active' : '' }}"><a href="{{route('quan-ly-lop-dao-tao.index')}}"><i class="fa fa-circle-o"></i>Quản lý lớp đào tạo</a></li>
+        <li class="{{ Route::is('quan-ly-dao-tao.index') ? 'active' : '' }}"><a href="{{route('quan-ly-dao-tao.index')}}"><i class="fa fa-circle-o"></i>Quản lý học viên đăng lý</a></li>
+    </ul>
+</li>
 

@@ -234,6 +234,11 @@ class AdminController extends Controller
         $date = date('Y-m-d');
         $newdate = strtotime("+$ngay day", strtotime($date));
         $newdate = date('Y-m-j', $newdate);
+
+        $soNgayTru = strtotime("-$ngay day", strtotime($date));
+        $ngayTru = date('Y-m-j', $soNgayTru);
+        $namHH = strtotime ( '-20 year' , strtotime ( $ngayTru ) ) ;
+        $newHH = date('Y-m-j', $namHH);
         //end
 
         $CanhBaoCoLors = [];
@@ -414,7 +419,8 @@ class AdminController extends Controller
                 ->where('ngay_sinh', $date)->count();
             $CanBoBoNhiem = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
-                ->where('ngay_vao_dang', 1)->count();
+                ->where('ngay_vao_dang', $newHH)
+                ->count();
 
 
 
@@ -600,7 +606,7 @@ class AdminController extends Controller
                 ->where('ngay_sinh', $date)->count();
             $CanBoBoNhiem = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
-                ->where('can_bo_bo_nhiem', 1)->count();
+                ->where('ngay_vao_dang', $newHH)->count();
             $CanBoBoNhiemLai = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
                 ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET_DA_DUYET)
                 ->where('can_bo_bo_nhiem_lai', 1)->count();
@@ -756,7 +762,7 @@ class AdminController extends Controller
             $canBoSapNhanQDVeHuu = CanBo::where('ngay_ve_huu', $newdate)->count();
             $canBoSapNangLuong = CanBo::where('moc_xet_tang_luong', $newdate)->count();
             $canBoSinhNhat = CanBo::where('ngay_sinh', $date)->count();
-            $CanBoBoNhiem = CanBo::where('can_bo_bo_nhiem', 1)->count();
+            $CanBoBoNhiem = CanBo::where('ngay_vao_dang', $newHH)->count();
             $CanBoBoNhiemLai = CanBo::where('can_bo_bo_nhiem_lai', 1)->count();
 
             array_push($canhBaoPiceCharts, array('Task', 'Danh sách'));

@@ -1,0 +1,13 @@
+{
+    "name": "QuanLyDaoTao",
+    "alias": "quanlydaotao",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\QuanLyDaoTao\\Providers\\QuanLyDaoTaoServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

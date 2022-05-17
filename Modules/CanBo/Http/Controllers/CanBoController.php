@@ -32,6 +32,7 @@ use Modules\Admin\Entities\PhoThong;
 use Modules\Admin\Entities\QuaChucVu;
 use Modules\Admin\Entities\QuanHam;
 use Modules\Admin\Entities\QuanHeGiaDinh;
+use Modules\Admin\Entities\QuanHuyen;
 use Modules\Admin\Entities\QuanLyHanhChinh;
 use Modules\Admin\Entities\QuaTrinhBaoHiem;
 use Modules\Admin\Entities\QuaTrinhBienCheHopDong;
@@ -59,6 +60,7 @@ use Modules\Admin\Entities\ToChuc;
 use Modules\Admin\Entities\TonGiao;
 use Modules\Admin\Entities\TrangThai;
 use Modules\Admin\Entities\TruongHoc;
+use Modules\Admin\Entities\XaPhuong;
 use Modules\Admin\Http\Controllers\LyLuanChinhTri;
 use File, Auth;
 use PhpOffice\PhpWord\Element\Table;
@@ -384,9 +386,11 @@ class CanBoController extends Controller
 
         $donViChuQuan = ToChuc::where('id', $canBo->donVi->parent_id)->select('id', 'ten_don_vi')->first();
 
-        $danToc = DanToc::orderBy('ten', 'asc')->get();
-        $tonGiao = TonGiao::orderBy('ten', 'asc')->get();
-        $thanhPho = ThanhPho::orderBy('ten', 'asc')->get();
+        $danToc = DanToc::orderBy('id', 'asc')->get();
+        $tonGiao = TonGiao::orderBy('id', 'asc')->get();
+        $thanhPho = ThanhPho::orderBy('id', 'asc')->get();
+        $quanHuyen = QuanHuyen::orderBy('id', 'asc')->get();
+        $xaPhuong = XaPhuong::orderBy('id', 'asc')->get();
         $chucVuHienTai = ChucVuHienTai::orderBy('ten', 'asc')->get();
         $donVi = ToChuc::where('parent_id', auth::user()->don_vi_id)->orderBy('ten_don_vi', 'asc')->get();
         $ngach = NgachChucDanh::orderBy('ten', 'asc')->get();
@@ -443,6 +447,8 @@ class CanBoController extends Controller
         $truongHoc = TruongHoc::orderBy('ten', 'asc')->get();
         $nhiemKy = NhiemKy::orderBy('ten', 'asc')->get();
 
+
+
         //tao phieu can bo
         $this->taoPhieuCanBo($canBo);
 
@@ -452,7 +458,7 @@ class CanBoController extends Controller
             , 'kyLuat', 'khenThuong', 'xuatThan', 'quaTrinhCongTac', 'quaTrinhDaoTao', 'quaTrinhNuocNgoai', 'truongHoc', 'quaTrinhQuocHoi'
             , 'quaTrinhLuong', 'quaTrinhChucVu', 'quaTrinhChucVuDang', 'quaTrinhQuyHoachCanBo', 'nhiemKy', 'quaTrinhBienCheHopDong', 'quaTrinhKiemNhiemBietphai'
             , 'kiemNhiem', 'loaiCanBo', 'quaTrinhKhenThuong', 'quaTrinhKyLuat', 'quaTrinhBaoHiem', 'quaTrinhVeHuu', 'quaTrinhChuyenDonVi', 'kiemNhiemBietPhai'
-            , 'tinHoc', 'donViChuQuan', 'canBoDV', 'quaTrinhDoan'));
+            , 'tinHoc', 'donViChuQuan', 'canBoDV', 'quaTrinhDoan','quanHuyen','xaPhuong'));
 
     }
 

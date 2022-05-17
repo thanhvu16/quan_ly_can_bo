@@ -24,3 +24,5 @@ Route::post('them-moi-dot-cap', 'TheDangController@themMoiDotCap')->name('themMo
 Route::post('xoa-dot-cap/{id}', 'TheDangController@xoaDotCap')->name('xoaDotCap');
 Route::post('cap-nhat-dot-cap/{id}', 'TheDangController@capNhatCT')->name('capNhatCT');
 Route::post('gui-duyet-the-dang/{id}', 'TheDangController@guiDuyet')->name('guiDuyet');
+Route::post('gui-duyet-the-dang/{id}', 'TheDangController@guiDuyet')->name('guiDuyet');
+
