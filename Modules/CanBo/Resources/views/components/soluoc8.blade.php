@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Quan hệ gia đình</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
-                    <a style="cursor: pointer" onclick="showModal18()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                    <a style="cursor: pointer" onclick="showModal28()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">
@@ -79,7 +79,7 @@
             <div class="col-md-12">
                 <h4 style="color: #0a0a0a;font-weight: bold">Bảo hiểm xã hội</h4>
                 @can(\App\Common\AllPermission::suaCanBo())
-                    <a style="cursor: pointer" onclick="showModal12()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
+                    <a style="cursor: pointer" onclick="showModal29()"><i class="fa fa-plus-square" style="color: red"></i> Cập nhật quá trình</a>
                 @endcan
             </div>
             <div class="col-md-12" style="margin-bottom: 30px;margin-top: 10px">

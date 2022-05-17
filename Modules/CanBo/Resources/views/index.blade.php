@@ -564,8 +564,11 @@
     function showModal17() {
         $("#myModal17").modal('show');
     }
-    function showModal18() {
-        $("#myModal18").modal('show');
+    function showModal28() {
+        $("#myModal28").modal('show');
+    }
+    function showModal29() {
+        $("#myModal29").modal('show');
     }
 </script>
 </body>

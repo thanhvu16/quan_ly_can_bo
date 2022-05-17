@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal18">
+<div class="modal fade" id="myModal28">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form action="{{ route('quaTrinhGiaDinh',$canBo->id ) }}" method="POST" enctype="multipart/form-data">
