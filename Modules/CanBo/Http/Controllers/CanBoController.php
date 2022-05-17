@@ -392,7 +392,7 @@ class CanBoController extends Controller
         $quanHuyen = QuanHuyen::orderBy('id', 'asc')->get();
         $xaPhuong = XaPhuong::orderBy('id', 'asc')->get();
         $chucVuHienTai = ChucVuHienTai::orderBy('ten', 'asc')->get();
-        $donVi = ToChuc::where('parent_id', auth::user()->don_vi_id)->orderBy('ten_don_vi', 'asc')->get();
+        $donVi = ToChuc::where('parent_id', auth::user()->don_vi_id)->orwhere('id',auth::user()->don_vi_id)->orderBy('ten_don_vi', 'asc')->get();
         $ngach = NgachChucDanh::orderBy('ten', 'asc')->get();
         $bacLuong = BacHeSoLuong::orderBy('ten', 'asc')->get();
         $phuCap = LoaiPhuCap::orderBy('ten', 'asc')->get();
