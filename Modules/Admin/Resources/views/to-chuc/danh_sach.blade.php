@@ -93,7 +93,7 @@
 
 {{--                                </div>--}}
 {{--                            </div>--}}
-                            <div class="box-body" style="margin: 50px 0px">
+                            <div class="box-body"  style="max-height:680px;  overflow:auto;border-style:double;margin: 50px 0px">
 
                                 <table id="table"></table>
 
