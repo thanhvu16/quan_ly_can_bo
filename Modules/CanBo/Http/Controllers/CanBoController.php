@@ -84,6 +84,7 @@ class CanBoController extends Controller
         $donVi = ToChuc::where('id', $id)->first();
         $danhSach = CanBo::where('don_vi', $id)->paginate(20);
 
+
         return view('canbo::danh-sach-can-bo', compact('danhSach', 'donVi'));
 
     }
@@ -449,7 +450,7 @@ class CanBoController extends Controller
         $nhiemKy = NhiemKy::orderBy('ten', 'asc')->get();
 
 
-
+//        dd($bacLuong);
         //tao phieu can bo
         $this->taoPhieuCanBo($canBo);
 
@@ -706,7 +707,7 @@ class CanBoController extends Controller
         $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
         $daoTao->co_quan = $request->co_quan;
-        $daoTao->chuc_vu = $request->chuc_vu;
+        $daoTao->chuc_vu = $request->cong_viec;
         $daoTao->save();
         if ($request->cap_nhat_qua_trinh == 1) {
             return redirect()->route('capNhatQuaTrinhDaoTao', $canBo->id . '?dang=1')->with('success', 'cập nhật thành công !');

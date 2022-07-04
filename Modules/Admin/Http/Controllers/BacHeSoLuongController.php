@@ -52,6 +52,7 @@ class BacHeSoLuongController extends Controller
         $data = new BacHeSoLuong();
         $data->ten = $request->ten;
         $data->mo_ta = $request->mo_ta;
+        $data->bac = $request->bac;
         $data->he_so_luong = $request->he_so_luong;
         $data->save();
 
@@ -90,6 +91,7 @@ class BacHeSoLuongController extends Controller
         $data = BacHeSoLuong::where('id', $id)->first();
         $data->ten = $request->ten;
         $data->mo_ta = $request->mo_ta;
+        $data->bac = $request->bac;
         $data->he_so_luong = $request->he_so_luong;
         $data->save();
         return redirect()->route('bac-he-so-luong.index')->with('success', 'Cập nhật thành công !');

@@ -55,11 +55,11 @@
                         </div>
                         <div class="col-md-3" >
                             <div class="form-group">
-                                <label for="exampleInputEmail6">Bậc lương</label>
+                                <label for="exampleInputEmail6">Bậc lương </label>
                                 <div class="form-group">
                                     <select class="form-control select2" name="bac_luong">
-                                        @foreach($bacLuong as $dsbacLuong)
-                                            <option value="{{$dsbacLuong->id}}" >{{$dsbacLuong->bac_luong}}</option>
+                                        @foreach($bacLuong as $dsbacLuong2)
+                                            <option value="{{$dsbacLuong2->id}}" >{{$dsbacLuong2->ten}} - Bậc {{$dsbacLuong2->bac}}</option>
                                         @endforeach
                                     </select>
 

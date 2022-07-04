@@ -36,6 +36,13 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
+                                                    <label for="exampleInputEmail2">Bậc</label>
+                                                    <input type="number" class="form-control" name="bac" id="exampleInputEmail11"
+                                                           placeholder="Bậc.." >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
                                                     <label for="exampleInputEmail2">Hệ số lương</label>
                                                     <input type="text" class="form-control" name="he_so_luong" id="exampleInputEmail2"
                                                            placeholder="hệ số.." >
@@ -93,6 +100,7 @@
                                 <th width="5%" class="text-center">STT</th>
                                 <th width="" class="text-center">Tên cấp bậc hệ số lương</th>
                                 <th width="20%" class="text-center">Hệ số lương</th>
+                                <th width="20%" class="text-center">Bậc</th>
                                 <th width="20%" class="text-center">Mô tả</th>
                                 <th width="10%" class="text-center">Tác Vụ</th>
                             </tr>
@@ -103,6 +111,7 @@
                                     <td class="text-center" style="vertical-align: middle">{{$key+1}}</td>
                                     <td class="text-left" style="vertical-align: middle">{{$data->ten}}</td>
                                     <td class="text-center" style="vertical-align: middle">{{$data->he_so_luong}}</td>
+                                    <td class="text-center" style="vertical-align: middle">{{$data->bac}}</td>
                                     <td class="text-center" style="vertical-align: middle">{{$data->mo_ta}}</td>
                                     <td class="text-center">
                                         <form method="POST" action="{{route('xoaheso',$data->id)}}">

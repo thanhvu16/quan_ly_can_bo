@@ -30,6 +30,13 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label for="exampleInputEmail2">Bậc</label>
+                                    <input type="number" class="form-control" name="bac" value="{{$data->bac}}" id="exampleInputEmail11"
+                                           placeholder="Bậc.." >
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label for="exampleInputEmail2">Mô tả</label>
                                     <input type="text" class="form-control" value="{{$data->mo_ta}}"
                                            name="mo_ta" id="exampleInputEmail2"
