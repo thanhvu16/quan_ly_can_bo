@@ -105,7 +105,7 @@
                         <div class="col-md-3" >
                             <div class="form-group">
                                 <label for="exampleInputEmail6"> Tổng lương</label>
-                                <input type="text" class="form-control" name="tong_luong" id="" value=""
+                                <input type="number" class="form-control" name="tong_luong" id="" value=""
                                        placeholder="100 " required>
                             </div>
                         </div>

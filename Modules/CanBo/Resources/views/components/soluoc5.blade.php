@@ -32,7 +32,8 @@
                             <td class="text-center">{{$data1->HeSo->he_so_luong ?? ''   }}</td>
                             <td>{{$data1->phuCap->ten ?? ''   }}</td>
                             <td class="text-center">{{$data1->phan_tram ?? ''   }}</td>
-                            <td class="text-center">{{number_format($data1->tong_luong) ?? ''   }}đ</td>
+                            <td class="text-center">{{$data1->tong_luong   }}đ</td>
+{{--                            <td class="text-center">{{number_format($data1->tong_luong) ?? ''   }}đ</td>--}}
                         </tr>
 
                     @empty
