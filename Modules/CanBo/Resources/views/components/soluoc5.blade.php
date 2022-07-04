@@ -100,7 +100,7 @@
                             <td class="text-center">{{$key+1}} </td>
                             <td style="color: red;font-weight: bold" class="text-center">{{formatDMY($data1->tu_ngay)}}</td>
                             <td style="color: red;font-weight: bold" class="text-center">{{formatDMY($data1->den_ngay)}}</td>
-                            <td>{{$data1->cong_viec}}</td>
+                            <td>{{$data1->co_quan}}</td>
                             <td>{{$data1->chuc_vu ?? ''}}</td>
                             <td>{{$data1->he_so_phu_cap}}</td>
                             <td>{{$data1->hinh_thuc_bo_nhiem}}</td>

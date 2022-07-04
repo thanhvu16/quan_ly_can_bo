@@ -56,7 +56,7 @@
                                 <label for="exampleInputEmail6">Chức vụ <span
                                         style="color: red">*</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="chuc_vu" value=""
+                                        <input type="text" class="form-control" name="chuc_vu" value=""
                                            placeholder=" " required>
 
                                 </div>

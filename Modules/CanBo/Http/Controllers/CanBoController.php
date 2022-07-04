@@ -688,7 +688,7 @@ class CanBoController extends Controller
         $daoTao->tu_ngay = !empty($request->tu_ngay) ? formatYMD($request->tu_ngay) : null;
         $daoTao->den_ngay = !empty($request->den_ngay) ? formatYMD($request->den_ngay) : null;
         $daoTao->users = $canBo->id;
-        $daoTao->chuc_vu = $request->cong_viec;
+        $daoTao->chuc_vu = $request->chuc_vu;
         $daoTao->he_so_phu_cap = $request->he_so_phu_cap;
         $daoTao->hinh_thuc_bo_nhiem = $request->hinh_thuc_bo_nhiem;
         $daoTao->co_quan = $request->co_quan;
