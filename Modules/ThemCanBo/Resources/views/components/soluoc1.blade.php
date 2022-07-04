@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6"> Số chứng minh thư</label>
+                    <label for="exampleInputEmail6"> Số chứng minh thư <span style="color: red">(*)</span></label>
                     <input type="text" class="form-control" name="cmnd" value=""
                            placeholder="Nhập số chứng minh thư.. " required>
                 </div>
@@ -93,7 +93,7 @@
 
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail4">Ngày cấp chứng minh thư </label>
+                    <label for="exampleInputEmail4">Ngày cấp chứng minh thư <span style="color: red">(*)</span></label>
                     <div class="input-group date">
                         <input type="text" class="form-control  datepicker" autocomplete="off"
                                name="ngay_cap_cmt" id="ngay_cap_cmt" value=""
@@ -106,7 +106,7 @@
             </div>
             <div class="col-md-3" >
                 <div class="form-group">
-                    <label for="exampleInputEmail6"> Nơi cấp</label>
+                    <label for="exampleInputEmail6"> Nơi cấp <span style="color: red">(*)</span></label>
                     <input type="text" class="form-control" name="noi_cap" value=""
                            placeholder="Nơi cấp chứng minh thư.. " required>
                 </div>

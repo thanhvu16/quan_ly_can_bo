@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-md-4" >
                         <div class="form-group">
-                            <label for="exampleInputEmail6"> Số CMT</label>
+                            <label for="exampleInputEmail6"> Số CMT <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" name="cmnd" value="{{$canBo->cmnd}}"
                                    placeholder="Nhập số chứng minh thư.. " required>
                         </div>
@@ -95,7 +95,7 @@
 
                     <div class="col-md-4" >
                         <div class="form-group">
-                            <label for="exampleInputEmail4">Ngày cấp CMT </label>
+                            <label for="exampleInputEmail4">Ngày cấp CMT <span style="color: red">(*)</span></label>
                             <div class="input-group date">
                                 <input type="text" class="form-control  datepicker" autocomplete="off"
                                        name="ngay_cap_cmt" id="ngay_cap_cmt" value="{{ isset($canBo) && $canBo->ngay_cap_cmt ? formatDMY($canBo->ngay_cap_cmt) : ''}}"
@@ -109,7 +109,7 @@
                     <div class="row clearfix"></div>
                     <div class="col-md-4" >
                         <div class="form-group">
-                            <label for="exampleInputEmail6"> Nơi cấp</label>
+                            <label for="exampleInputEmail6"> Nơi cấp <span style="color: red">(*)</span></label>
                             <input type="text" class="form-control" name="noi_cap" value="{{$canBo->noi_cap}}"
                                    placeholder="Nơi cấp chứng minh thư.. " required>
                         </div>
