@@ -64,7 +64,7 @@ class ThemCanBoController extends Controller
     public function choGuiDuyet()
     {
         $danhSach = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
-            ->where('nguoi_tao',auth::user()->id)
+            ->where('user_id',auth::user()->id)
             ->whereNull('trang_thai_duyet_ho_so')
             ->paginate(20);
 
