@@ -552,3 +552,15 @@ table tbody td a:hover{
     background: #ddd;
     color: black !important;
 }
+
+ button{
+     font-size: 12px !important;
+ }
+input{
+
+    font-size: 12px !important;
+}
+label{
+
+    font-size: 12px !important;
+}

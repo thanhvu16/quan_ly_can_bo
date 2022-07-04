@@ -64,6 +64,7 @@ class ThemCanBoController extends Controller
     public function choGuiDuyet()
     {
         $danhSach = CanBo::where('don_vi_tao_id', auth::user()->don_vi_id)
+            ->where('nguoi_tao',auth::user()->id)
             ->whereNull('trang_thai_duyet_ho_so')
             ->paginate(20);
 
@@ -744,6 +745,7 @@ class ThemCanBoController extends Controller
         $canBo = new CanBo();
         $canBo->ho_ten = $request->ten;
         $canBo->ten_khac = $request->ten_khac;
+        $canBo->nguoi_tao = $request->nguoi_tao;
         $canBo->gioi_tinh = $request->gioi_tinh;
         $canBo->ngay_sinh = !empty($request->ngay_sinh) ? formatYMD($request->ngay_sinh) : null;
         $canBo->ngay_cap_cmt = !empty($request->ngay_cap_cmt) ? formatYMD($request->ngay_cap_cmt) : null;
