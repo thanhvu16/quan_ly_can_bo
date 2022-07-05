@@ -103,6 +103,7 @@ class ThemCanBoController extends Controller
                     return $query->where('don_vi_id', $donViId);
                 }
             })
+            ->where('user_id',auth::user()->id)
             ->where('trang_thai_duyet_ho_so', CanBo::TRANG_THAI_DA_GUI_DUYET)
             ->paginate(20);
 
