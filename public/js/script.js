@@ -480,3 +480,4 @@ $('.check-all-cv').on('click', function () {
 });
 
 
+$('input').attr('autocomplete','off');

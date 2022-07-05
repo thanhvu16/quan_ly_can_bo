@@ -163,7 +163,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    $('input').attr('autocomplete','off');
+
 </script>
 <script src="{{ url('js/script.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js"></script>
